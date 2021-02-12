@@ -1,0 +1,196 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetics Monte Carlo Simulator                
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2020-04-19
+  Current time (HH:MM:SS)   : 11:58:54
+  Python interpreter version: 3.6.9
+ -------------------------------------------------------------
+
+
+   -----------------------------
+    Analysis of STRUC: CH3CH2OD 
+   -----------------------------
+   
+       Pilgrim output file: 3-PLG_OUTPUT/pfn.CH3CH2OD.slevel.txt
+   
+       Number of conformers: 3
+       
+          V0 = electronic energy
+          V1 = electronic energy + zero-point energy (ZPE)
+       
+          ZPE is calculated using scaled frequencies
+          Frequency scale factor: 1.00000
+       
+          min(V0) = -152.13306610 hartree
+          min(V1) = -152.04207584 hartree
+       
+          Relative energies (in kcal/mol):
+          ------------------------------------------------------------------------
+           name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  
+          ------------------------------------------------------------------------
+            001 |      0.00  |      0.00  |   57.10 |     47.05  |    2   |   C1  
+            002 |      0.25  |      0.19  |   57.04 |     47.05  |    1   |   Cs  
+          ------------------------------------------------------------------------
+          weight: equals 2 if the structure has a conformational enantiomer,
+                  equals 1 otherwise
+          PGS   : point group of symmetry
+       
+       ------------------
+       Conformation: 001
+       ------------------
+        | Molecular formula     : C(2)H(6)O
+        | Number of atoms       : 9
+        | Number of electrons   : 26
+        | Vibrational DOFs      : 21
+        | Charge                : 0
+        | Multiplicity          : 1
+        | Electronic energy (V0): -152.13306610 hartree
+        | Total mass [root]     : 46.0419 amu
+        | Total mass            : 47.0481 amu
+        | Point group symmetry  : C1
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    H    -0.998257   +0.009261   -1.982896  [  1.008 amu]
+        |    C    -0.998257   +0.009261   -0.897306  [ 12.000 amu]
+        |    C    +0.454535   +0.009261   -0.366254  [ 12.000 amu]
+        |    H    -1.529113   +0.890130   -0.549728  [  1.008 amu]
+        |    H    -1.533022   -0.872376   -0.555052  [  1.008 amu]
+        |    O    +0.532179   +0.076889   +1.064445  [ 15.995 amu]
+        |    H    +0.980035   -0.874471   -0.749747  [  1.008 amu]
+        |    H    +0.978767   +0.890836   -0.745800  [  1.008 amu]
+        |    H    +0.064812   -0.742666   +1.368413  [  2.014 amu]
+        | Moments and product of inertia (au):
+        |         +1.040E+05  +3.782E+05  +4.272E+05  [ 1.680E+16]
+        | Vibrational frequencies [1/cm] (scaled by 1.000):
+        |     229.80    284.25    448.98    921.43   1065.16   1105.84
+        |    1268.75   1340.84   1448.75   1540.95   1673.47   1734.92
+        |    1814.25   1825.72   1840.41   3077.51   3559.80   3568.02
+        |    3683.18   3749.48   3758.61
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.33      0.41      0.64      1.32      1.52      1.58
+        |       1.81      1.92      2.07      2.20      2.39      2.48
+        |       2.59      2.61      2.63      4.40      5.09      5.10
+        |       5.27      5.36      5.37
+        | Vibrational zero-point energy:    +0.09099026 hartree  = 
+        |                                        +57.10 kcal/mol = 
+        |                                         +2.48 eV       = 
+        |                                     +19970.05 cm^-1 
+        | V0 + zero-point energy (V1)  :  -152.04207584 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      298.15 |  4.627E+01 |  1.885E+04 |  2.324E+00 |  1.000E+00 |  2.027E+06 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   298.15 |  -152.10976792 |  -152.06762256 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+       ------------------
+       Conformation: 002
+       ------------------
+        | Molecular formula     : C(2)H(6)O
+        | Number of atoms       : 9
+        | Number of electrons   : 26
+        | Vibrational DOFs      : 21
+        | Charge                : 0
+        | Multiplicity          : 1
+        | Electronic energy (V0): -152.13267490 hartree
+        | Total mass [root]     : 46.0419 amu
+        | Total mass            : 47.0481 amu
+        | Point group symmetry  : Cs
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    H    -1.008773   +0.000001   -1.984073  [  1.008 amu]
+        |    C    -1.008773   +0.000001   -0.898313  [ 12.000 amu]
+        |    C    +0.438201   +0.000001   -0.366265  [ 12.000 amu]
+        |    H    -1.538123   +0.881095   -0.549138  [  1.008 amu]
+        |    H    -1.538123   -0.881094   -0.549137  [  1.008 amu]
+        |    O    +0.393892   -0.000001   +1.068581  [ 15.995 amu]
+        |    H    +0.966951   -0.883487   -0.746005  [  1.008 amu]
+        |    H    +0.966949   +0.883492   -0.746001  [  1.008 amu]
+        |    H    +1.347766   -0.000001   +1.337181  [  2.014 amu]
+        | Moments and product of inertia (au):
+        |         +9.455E+04  +3.837E+05  +4.374E+05  [ 1.587E+16]
+        | Vibrational frequencies [1/cm] (scaled by 1.000):
+        |     224.12    263.99    429.24    951.70   1040.56   1122.81
+        |    1297.94   1345.38   1427.86   1510.90   1681.26   1744.24
+        |    1819.90   1825.31   1850.82   3079.81   3539.89   3574.11
+        |    3650.76   3758.76   3761.11
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.32      0.38      0.61      1.36      1.49      1.61
+        |       1.86      1.92      2.04      2.16      2.40      2.49
+        |       2.60      2.61      2.65      4.40      5.06      5.11
+        |       5.22      5.37      5.38
+        | Vibrational zero-point energy:    +0.09089989 hartree  = 
+        |                                        +57.04 kcal/mol = 
+        |                                         +2.47 eV       = 
+        |                                     +19950.22 cm^-1 
+        | V0 + zero-point energy (V1)  :  -152.04177501 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      298.15 |  4.627E+01 |  1.832E+04 |  2.470E+00 |  1.000E+00 |  2.094E+06 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   298.15 |  -152.10949757 |  -152.06735221 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+   
+       Total multi-structural HO pfn (QMS_HO) and Gibbs free energies (GFE):
+             ---------------------------------------------------------------------------
+                    T (K)      |      QMS_HO      | GFE [V = 1 cm^3] | GFE [V = kbT/p0] 
+             ---------------------------------------------------------------------------
+                     298.15    |     5.577E+06    |   -152.11072341  |   -152.06857805  
+             ---------------------------------------------------------------------------
+                QMS_HO is calculated with regard to min(V1)
+             
+       Individual contributions to the partition function:
+             -------------------------
+               T (K)  |   001 |   002 
+             -------------------------
+               298.15 | 0.727 | 0.273 
+             -------------------------
+             
+   
+                                                            ----------------------------
+                                                            | Current date: 2020-04-19 |
+                                                            | Current time:   11:58:54 |
+                                                            | Elapsed time: 52.7 msecs |
+                                                            ----------------------------

@@ -1,0 +1,18 @@
+
+start_mep TSod     
+  sbw      -2.0000  
+  sfw      +2.0000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  --
+end_mep
+
+start_mep TSoh     
+  sbw      -2.0000  
+  sfw      +2.0000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  --
+  paral    yes
+end_mep
+

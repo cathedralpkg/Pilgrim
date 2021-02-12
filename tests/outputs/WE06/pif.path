@@ -1,0 +1,21 @@
+
+start_mep nd3_planar     
+  sbw      -1.5000  
+  sfw      +1.5000  
+  ds       0.00500   
+  hsteps   10     
+  fwdir    2_3_4_1  ++ 
+  scterr   0.01
+  qrc      1  1000  auto
+end_mep
+
+start_mep nh3_planar     
+  sbw      -0.9000  
+  sfw      +0.9000  
+  ds       0.00500   
+  hsteps   10     
+  fwdir    2_3_4_1  ++ 
+  scterr   0.010
+  qrc      1  1000  auto
+end_mep
+

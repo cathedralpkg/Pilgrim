@@ -1,0 +1,2 @@
+nd3_planar.001  50.000000 yes  0.010000  yes
+nh3_planar.001  50.000000 yes  0.010000  yes

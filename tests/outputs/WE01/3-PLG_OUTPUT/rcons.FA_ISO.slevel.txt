@@ -1,0 +1,196 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-04
+  Current time (HH:MM:SS)   : 17:40:31
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   -------------------------------
+   | Reaction to analyze: FA_ISO |
+   -------------------------------
+   
+     Pilgrim output file: 3-PLG_OUTPUT/rcons.FA_ISO.slevel.txt
+   
+     Chemical equation: Z --> ZE_TS --> E
+   
+        reactant(s)      ==> Z
+        transition state ==> ZE_TS
+        product(s)       ==> E
+   
+   
+     Conservation of charge and mass:
+     
+        ----------------------------------------
+                          | charge | mass (amu) 
+        ----------------------------------------
+         reactant(s)      |    0   |     46.005 
+         transition state |    0   |     46.005 
+         product(s)       |    0   |     46.005 
+        ----------------------------------------
+     
+     Relative energies (kcal/mol):
+     
+        V0(i) is the electronic energy of the i-th conformer
+        V1(i) = V0(i)+ZPE(i)
+        ZPE(i) is the harmonic oscillator ZPE of the i-th conformer
+     
+        min{V0(i)} of reactants ==> V0 = -186.21788420 hartree
+        min{V1(i)} of reactants ==> V1 = -186.17975074 hartree
+     
+        ------------------------------------------
+         SP        | V0(i)-V0 | V1(i)-V1 | weight 
+        ------------------------------------------
+         Z.001     |     0.00 |     0.00 |  1 
+        ------------------------------------------
+         ZE_TS.001 |     9.52 |     8.33 |  1 
+        ------------------------------------------
+         E.001     |     4.44 |     4.06 |  1 
+        ------------------------------------------
+        SP: stationary point
+     
+     ----------------------
+      EQUILIBRIUM CONSTANT 
+     ----------------------
+     
+       - Keq  : the equilibrium constant
+       - GFER : the Gibbs free energy of reaction (kcal/mol)
+       - R2P  : from reactant(s) to product(s)
+       - P2R  : from product(s) to reactant(s)
+     
+         Keq(P2R)  = 1/Keq(R2P)
+         GFER(P2R) = - GFER(R2P)
+     
+     
+        --------------------------------------------------
+                 |       for V=1cm^3 per molecule         
+        --------------------------------------------------
+          T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
+        --------------------------------------------------
+          300.00 |  +1.214E-03 |  +8.235E+02 |      4.002 
+          400.00 |  +7.049E-03 |  +1.419E+02 |      3.938 
+          500.00 |  +2.044E-02 |  +4.893E+01 |      3.866 
+        --------------------------------------------------
+     
+        --------------------------------------------------
+                 |  for V=kB*T/p0 per molecule, p0=1bar   
+        --------------------------------------------------
+          T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
+        --------------------------------------------------
+          300.00 |  +1.214E-03 |  +8.235E+02 |      4.002 
+          400.00 |  +7.049E-03 |  +1.419E+02 |      3.938 
+          500.00 |  +2.044E-02 |  +4.893E+01 |      3.866 
+        --------------------------------------------------
+     
+     
+     -----------------------
+     FORWARD  RATE CONSTANTS
+     -----------------------
+     
+         - units: sec^-1
+     
+         
+         ------------------------
+           T (K)   |      MS-TST 
+         ------------------------
+            300.00 |   5.144E+06
+            400.00 |   2.110E+08
+            500.00 |   1.996E+09
+         ------------------------
+         
+         
+     
+     -------------------------------------------------
+     FORWARD  GIBBS FREE ENERGIES OF ACTIVATION (GFEA)
+     -------------------------------------------------
+     
+             * GFEA = -R T ln(h k / kB T)
+             - units: kcal/mol
+             - reference volume: 1 cm^3 per molecule
+         
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            300.00 |       8.352
+            400.00 |       8.413
+            500.00 |       8.506
+         -----------------------
+         
+         
+             * GFEA = -R T ln(h k / kB T)
+             - units: kcal/mol
+             - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+         
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            300.00 |       8.352
+            400.00 |       8.413
+            500.00 |       8.506
+         -----------------------
+         
+         
+     
+     -----------------------
+     BACKWARD RATE CONSTANTS
+     -----------------------
+     
+         - units: sec^-1
+     
+         
+         ------------------------
+           T (K)   |      MS-TST 
+         ------------------------
+            300.00 |   4.236E+09
+            400.00 |   2.993E+10
+            500.00 |   9.764E+10
+         ------------------------
+         
+         
+     
+     -------------------------------------------------
+     BACKWARD GIBBS FREE ENERGIES OF ACTIVATION (GFEA)
+     -------------------------------------------------
+     
+             * GFEA = -R T ln(h k / kB T)
+             - units: kcal/mol
+             - reference volume: 1 cm^3 per molecule
+         
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            300.00 |       4.350
+            400.00 |       4.475
+            500.00 |       4.640
+         -----------------------
+         
+         
+             * GFEA = -R T ln(h k / kB T)
+             - units: kcal/mol
+             - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+         
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            300.00 |       4.350
+            400.00 |       4.475
+            500.00 |       4.640
+         -----------------------
+         
+         
+     
+   Updating plot file: 6-PLOTFILES/plots.slevel.txt
+
+
+
+                                                            ----------------------------
+                                                            | Current date: 2021-02-04 |
+                                                            | Current time:   17:40:31 |
+                                                            | Elapsed time:  3.0 msecs |
+                                                            ----------------------------

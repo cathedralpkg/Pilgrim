@@ -1,0 +1,183 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-11
+  Current time (HH:MM:SS)   : 11:12:00
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   ---------------------------
+   | Reaction to analyze: Rc |
+   ---------------------------
+   
+     Pilgrim output file: 3-PLG_OUTPUT/rcons.Rc.slevel.txt
+   
+     Chemical equation: EtOH + H --> TSC --> H2 + PC
+   
+        reactant(s)      ==> EtOH + H
+        transition state ==> TSC
+        product(s)       ==> H2 + PC
+   
+   
+     Conservation of charge and mass:
+     
+        ----------------------------------------
+                          | charge | mass (amu) 
+        ----------------------------------------
+         reactant(s)      |    0   |     47.050 
+         transition state |    0   |     47.050 
+        ----------------------------------------
+     
+     Relative energies (kcal/mol):
+     
+        V0(i) is the electronic energy of the i-th conformer
+        V1(i) = V0(i)+ZPE(i)
+        ZPE(i) is the harmonic oscillator ZPE of the i-th conformer
+     
+        min{V0(i)} of reactants ==> V0 = -152.59964796 hartree
+        min{V1(i)} of reactants ==> V1 = -152.50486035 hartree
+     
+        -----------------------------------------------
+         SP             | V0(i)-V0 | V1(i)-V1 | weight 
+        -----------------------------------------------
+         EtOH.001+H.001 |     0.00 |     0.00 |  2 
+         EtOH.002+H.001 |     0.25 |     0.19 |  1 
+        -----------------------------------------------
+         TSC.001        |     8.78 |     7.04 |  2 
+         TSC.002        |     8.83 |     7.02 |  1 
+        -----------------------------------------------
+        SP: stationary point
+     
+     ----------------------------------
+     TRANSITION STRUCTURE CONTRIBUTIONS
+     ----------------------------------
+     
+       The contribution of the j-th transition state conformer
+       to the MS-TST rate constant is calculated as:
+     
+          chi_j^TST = w_j * (Q^{RR-HO}_j / Q^{MS-HO}) * exp(-U_j/kB/T)
+     
+       where
+     
+         w_j        : weight of j-th conformer (1 or 2)
+         Q^{RR-HO}_j: rigid-rotor harmonic-oscillator partition function
+         Q^{MS-HO}  : multi-structural harmonic-oscillator partition function
+         U_j        : relative energy with regard to the most stable conformer
+                      (considering the ZPE)
+     
+         ---------------------------
+           T  (K)  | Conf |  chi_j  
+                   |      |   TST   
+         ---------------------------
+            250.00 |  001 | 0.64024 
+                   |  002 | 0.35976 
+         ---------------------------
+            500.00 |  001 | 0.62712 
+                   |  002 | 0.37288 
+         ---------------------------
+           1000.00 |  001 | 0.62013 
+                   |  002 | 0.37988 
+         ---------------------------
+           1500.00 |  001 | 0.61803 
+                   |  002 | 0.38197 
+         ---------------------------
+           2000.00 |  001 | 0.61702 
+                   |  002 | 0.38298 
+         ---------------------------
+           2500.00 |  001 | 0.61641 
+                   |  002 | 0.38359 
+         ---------------------------
+         
+     
+     -----------------------
+     FORWARD  RATE CONSTANTS
+     -----------------------
+     
+         - units: cm^3/molecule/s
+         - the rate constants listed below do not include torsional anharmonicity
+     
+         
+         ---------------------------------
+           T (K)   |   TS   |      MS-TST 
+         ---------------------------------
+            250.00 | total  |   1.100E-17
+                   | 001    |   7.041E-18
+                   | 002    |   3.956E-18
+         ---------------------------------
+            500.00 | total  |   1.487E-14
+                   | 001    |   9.325E-15
+                   | 002    |   5.544E-15
+         ---------------------------------
+           1000.00 | total  |   8.346E-13
+                   | 001    |   5.176E-13
+                   | 002    |   3.171E-13
+         ---------------------------------
+           1500.00 | total  |   4.339E-12
+                   | 001    |   2.682E-12
+                   | 002    |   1.657E-12
+         ---------------------------------
+           2000.00 | total  |   1.162E-11
+                   | 001    |   7.170E-12
+                   | 002    |   4.450E-12
+         ---------------------------------
+           2500.00 | total  |   2.302E-11
+                   | 001    |   1.419E-11
+                   | 002    |   8.832E-12
+         ---------------------------------
+         
+         
+     
+     -------------------------------------------------
+     FORWARD  GIBBS FREE ENERGIES OF ACTIVATION (GFEA)
+     -------------------------------------------------
+     
+             * GFEA = -R T ln(h k V^-1 / kB T)
+             - units: kcal/mol
+             - reference volume: 1 cm^3 per molecule
+         
+             - the free energies listed below do not include torsional anharmonicity
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            250.00 |      33.947
+            500.00 |      61.419
+           1000.00 |     116.211
+           1500.00 |     170.611
+           2000.00 |     224.710
+           2500.00 |     278.599
+         -----------------------
+         
+         
+             * GFEA = -R T ln(h k V^-1 / kB T)
+             - units: kcal/mol
+             - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+             - the free energies listed below do not include torsional anharmonicity
+         
+         -----------------------
+           T (K)   |      MS-TST
+         -----------------------
+            250.00 |      11.684
+            500.00 |      17.581
+           1000.00 |      29.913
+           1500.00 |      42.374
+           2000.00 |      54.870
+           2500.00 |      67.407
+         -----------------------
+         
+         
+     
+   Updating plot file: 6-PLOTFILES/plots.slevel.txt
+
+
+
+                                                            -----------------------------
+                                                            | Current date:  2021-02-11 |
+                                                            | Current time:    11:12:00 |
+                                                            | Elapsed time: 135.8 msecs |
+                                                            -----------------------------

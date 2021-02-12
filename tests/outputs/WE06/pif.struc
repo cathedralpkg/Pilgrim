@@ -1,0 +1,120 @@
+#------------------------------------------#
+#    Definition of the isotopic masses     #
+#------------------------------------------#
+start_isomass
+   D     =    2.0141018
+   T     =    3.0160493
+   C13   =   13.0033550
+   C14   =   14.0032420
+   N15   =   15.0001090
+   O17   =   16.9991320
+   O18   =   17.9991600
+   Cl37  =   36.9659030
+end_isomass
+
+#------------------------------------------#
+# Cluster of torsional conformers:  MINIMA #
+#------------------------------------------#
+start_ctc nd3_pyram
+   root      nh3_pyram
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, C3v
+   # basic data
+   mformu    H(3)N
+   ch        0
+   mtp       1
+   type      0
+   freqscal  1.078
+   elestate  1  0.0000000000E+00
+   # isotopic modifications
+   iso       D(all_H)
+end_ctc
+
+start_ctc nh3_pyram
+   root      nh3_pyram
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, C3v
+   # basic data
+   mformu    H(3)N
+   ch        0
+   mtp       1
+   type      0
+   freqscal  1.078
+   elestate  1  0.0000000000E+00
+end_ctc
+
+#------------------------------------------#
+# Cluster of torsional conformers: SADDLES #
+#------------------------------------------#
+start_ctc nd3_planar
+   root      nh3_planar
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, D3h
+   # basic data
+   mformu    H(3)N
+   ch        0
+   mtp       1
+   type      1
+   freqscal  1.078
+   elestate  1  0.0000000000E+00
+   # isotopic modifications
+   iso       D(all_H)
+   # internal coordinates
+   ics         1-2  1-3  1-4
+   ics         2-1-3  2-1-4  3-1-4
+   ics         2_3_4_1
+end_ctc
+
+start_ctc nh3_planar
+   root      nh3_planar
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, D3h
+   # basic data
+   mformu    H(3)N
+   ch        0
+   mtp       1
+   type      1
+   freqscal  1.078
+   elestate  1  0.0000000000E+00
+   # internal coordinates
+   ics         1-2  1-3  1-4
+   ics         2-1-3  2-1-4  3-1-4
+   ics         2_3_4_1
+end_ctc
+
+
+#----------------------------------------------------------------#
+# Info about variables                                           #
+#                                                                #
+#     * root     : points towards the spname file of the root    #
+#                  species defined by the user                   #
+#     * conformer idx * weight : the index of the conformer and  # 
+#                                its weight                      #
+#                                it may content, as comment,     #
+#                                the relative energy (kcal/mol)  #
+#                                and the point group symmetry    #
+#     * anharfile: anharmonicity file (Q2DTor/MSTor)             #
+#     * mformu   : the molecular formula                         #
+#     * ch       : the charge of the system                      #
+#     * mtp      : the multiplicity of the system                #
+#     * type     : 0 for minima, 1 for 1st order saddle points,  #
+#                  et cetera                                     #
+#     * freqcal  : scale factor for the vibrational frequencies  #
+#     * elestate : each line like this adds a electronic state   #
+#                  for the calculation of the eleectronic        #
+#                  partition function; this keyword is followed  #
+#                  by the multiplicity and the relative energy   #
+#                  of the state (with regards to the             #
+#                  ground-state). It is given in hartree.        #
+#     * ics      : each line with this keyword contains one (or  #
+#                  more) internal coordinates.                   #
+#                  Stretching, angular bendings and proper       #
+#                  torsions are indicated with '-':              #
+#                      example:   1-2-3                          #
+#                  linear bendings with '=':                     #
+#                      example:   1=2=3                          #
+#                  and improper torsions with '_' OR '-':        #
+#                      example:   1_2_3_4                        #
+#     * iso      : the isotopic modification                     #
+#                                                                #
+#----------------------------------------------------------------#

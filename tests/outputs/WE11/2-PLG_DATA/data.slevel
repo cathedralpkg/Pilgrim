@@ -1,0 +1,314 @@
+#-------------------------#
+# Adding data for: gibbs1cm3 #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 molec/cc)
+start_gibbs1cm3 EtOH_6W.001
+    250.00  -602.94075232
+end_gibbs1cm3
+
+start_gibbs1cm3 EtOH_6W.002
+    250.00  -602.94066692
+end_gibbs1cm3
+
+start_gibbs1cm3 EtOH_6W.003
+    250.00  -602.93998602
+end_gibbs1cm3
+
+start_gibbs1cm3 EtOH_6W.msho
+    250.00  -602.94140400
+end_gibbs1cm3
+
+start_gibbs1cm3 H.001
+    250.00  -0.54027246
+end_gibbs1cm3
+
+start_gibbs1cm3 H.msho
+    250.00  -0.54027246
+end_gibbs1cm3
+
+start_gibbs1cm3 TS_6W.001
+    250.00  -603.41085409
+end_gibbs1cm3
+
+start_gibbs1cm3 TS_6W.002
+    250.00  -603.41032806
+end_gibbs1cm3
+
+start_gibbs1cm3 TS_6W.msho
+    250.00  -603.41118275
+end_gibbs1cm3
+
+#-------------------------#
+# Adding data for: gibbs1bar #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 bar)
+start_gibbs1bar EtOH_6W.001
+    250.00  -602.90527382
+end_gibbs1bar
+
+start_gibbs1bar EtOH_6W.002
+    250.00  -602.90518841
+end_gibbs1bar
+
+start_gibbs1bar EtOH_6W.003
+    250.00  -602.90450751
+end_gibbs1bar
+
+start_gibbs1bar EtOH_6W.msho
+    250.00  -602.90592549
+end_gibbs1bar
+
+start_gibbs1bar H.001
+    250.00  -0.50479396
+end_gibbs1bar
+
+start_gibbs1bar H.msho
+    250.00  -0.50479396
+end_gibbs1bar
+
+start_gibbs1bar TS_6W.001
+    250.00  -603.37537558
+end_gibbs1bar
+
+start_gibbs1bar TS_6W.002
+    250.00  -603.37484956
+end_gibbs1bar
+
+start_gibbs1bar TS_6W.msho
+    250.00  -603.37570424
+end_gibbs1bar
+
+#-------------------------#
+# Adding data for:    pfn #
+#-------------------------#
+# V0, V0+zpe and partition functions
+start_pfn EtOH_6W.001
+   -603.14928575
+   -602.87287549
+    250.00  2.54159E+12
+end_pfn
+
+start_pfn EtOH_6W.002
+   -603.14922180
+   -602.87280469
+    250.00  2.49511E+12
+end_pfn
+
+start_pfn EtOH_6W.003
+   -603.14869910
+   -602.87220556
+    250.00  2.25028E+12
+end_pfn
+
+start_pfn EtOH_6W.msho
+   -603.14928575
+   -602.87287549
+    250.00  5.78876E+12
+end_pfn
+
+start_pfn H.001
+   -0.49619860
+   -0.49619860
+    250.00  2.22752E-01
+end_pfn
+
+start_pfn H.msho
+   -0.49619860
+   -0.49619860
+    250.00  2.22752E-01
+end_pfn
+
+start_pfn TS_6W.001
+   -603.61467422
+   -603.34186231
+    250.00  1.03923E+13
+end_pfn
+
+start_pfn TS_6W.002
+   -603.61443569
+   -603.34151886
+    250.00  8.25209E+12
+end_pfn
+
+start_pfn TS_6W.msho
+   -603.61467422
+   -603.34186231
+    250.00  1.57399E+13
+end_pfn
+
+#-------------------------#
+# Adding data for:    ctr #
+#-------------------------#
+# transl, rovib and elec partition functions
+start_ctr EtOH_6W
+    250.00  2.10591E+02  2.74881E+10  1.00000E+00
+end_ctr
+
+start_ctr EtOH_6W.001
+    250.00  2.10591E+02  1.20688E+10  1.00000E+00
+end_ctr
+
+start_ctr EtOH_6W.002
+    250.00  2.10591E+02  1.18481E+10  1.00000E+00
+end_ctr
+
+start_ctr EtOH_6W.003
+    250.00  2.10591E+02  1.06855E+10  1.00000E+00
+end_ctr
+
+start_ctr H
+    250.00  1.11376E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr H.001
+    250.00  1.11376E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr TS_6W
+    250.00  2.12661E+02  3.70071E+10  2.00000E+00
+end_ctr
+
+start_ctr TS_6W.001
+    250.00  2.12661E+02  2.44340E+10  2.00000E+00
+end_ctr
+
+start_ctr TS_6W.002
+    250.00  2.12661E+02  1.94020E+10  2.00000E+00
+end_ctr
+
+#-------------------------#
+# Adding data for:    anh #
+#-------------------------#
+# anharmonicity
+#-------------------------#
+# Adding data for:    zct #
+#-------------------------#
+# ZCT transmission coefficient
+start_zct TS_6W.001
+    250.00  3.51230E+02
+end_zct
+
+start_zct TS_6W.002
+    250.00  3.33931E+02
+end_zct
+
+#-------------------------#
+# Adding data for:    sct #
+#-------------------------#
+# SCT transmission coefficient
+start_sct TS_6W.001
+    250.00  1.90575E+04
+end_sct
+
+start_sct TS_6W.002
+    250.00  1.83390E+04
+end_sct
+
+#-------------------------#
+# Adding data for:    cvt #
+#-------------------------#
+# CVT coefficient
+start_cvt TS_6W.001
+    250.00  9.96120E-01
+end_cvt
+
+start_cvt TS_6W.002
+    250.00  9.95357E-01
+end_cvt
+
+#-------------------------#
+# Adding data for: cagtst #
+#-------------------------#
+# CAG/TST coefficient
+start_cagtst TS_6W.001
+    250.00  9.96215E-01
+end_cagtst
+
+start_cagtst TS_6W.002
+    250.00  9.97306E-01
+end_cagtst
+
+#-------------------------#
+# Adding data for: cagcvt #
+#-------------------------#
+# CAG/CVT coefficient
+start_cagcvt TS_6W.001
+    250.00  1.00000E+00
+end_cagcvt
+
+start_cagcvt TS_6W.002
+    250.00  9.99743E-01
+end_cagcvt
+
+#-------------------------#
+# Adding data for:    cfs #
+#-------------------------#
+# TST correction factors/coefficients
+start_cfs cvt.HA
+    250.00  9.95863E-01
+end_cfs
+
+start_cfs cvtsct.HA
+    250.00  1.87341E+04
+end_cfs
+
+start_cfs cvtzct.HA
+    250.00  3.43898E+02
+end_cfs
+
+start_cfs tstsct.HA
+    250.00  1.87490E+04
+end_cfs
+
+start_cfs tstzct.HA
+    250.00  3.44170E+02
+end_cfs
+
+#-------------------------#
+# Adding data for:  rcons #
+#-------------------------#
+# Rate constants (in au)
+start_rcons mpcvt.HA.fw
+    250.00  1.81121E-18
+end_rcons
+
+start_rcons mpcvtsct.HA.fw
+    250.00  3.40724E-14
+end_rcons
+
+start_rcons mpcvtzct.HA.fw
+    250.00  6.25460E-16
+end_rcons
+
+start_rcons mptstsct.HA.fw
+    250.00  3.40995E-14
+end_rcons
+
+start_rcons mptstzct.HA.fw
+    250.00  6.25955E-16
+end_rcons
+
+start_rcons mscvt.HA.fw
+    250.00  1.81168E-18
+end_rcons
+
+start_rcons mscvtsct.HA.fw
+    250.00  3.45261E-14
+end_rcons
+
+start_rcons mscvtzct.HA.fw
+    250.00  6.36316E-16
+end_rcons
+
+start_rcons mststsct.HA.fw
+    250.00  3.45294E-14
+end_rcons
+
+start_rcons mststzct.HA.fw
+    250.00  6.36377E-16
+end_rcons
+
+start_rcons tst.HA.fw
+    250.00  1.81874E-18
+end_rcons
+

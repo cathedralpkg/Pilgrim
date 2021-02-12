@@ -1,0 +1,73 @@
+start_kmc anaC1
+   # KMC Parameters
+   psteps     100000     # print data each nstp steps
+   volume     1.00E+00   # simulation volume (mL)
+   timeunits  mcs        # units for time variable
+
+   # Initial (non-zero) populations (number of molecules)
+   pop0(nPrOH_C1)          1.00e+6
+
+   # Selection of the rate constant to use
+   k(R01.fw ) analytic4 2.7907E+14 1.1039E+04 -4.6290E-01 3.0000E+02 1.3069E-03
+   k(R02.fw ) analytic4 1.8157E+14 1.8536E+04 -1.5344E-01 3.0000E+02 6.0718E-04
+   k(R03.fw ) analytic4 3.4606E+11 1.3679E+04  1.8392E+00 3.0000E+02 2.7228E+02
+   k(R04c.fw) analytic4 9.9386E+12 2.0063E+04  2.6351E-01 3.0000E+02 2.2796E-04
+   k(R04t.fw) analytic4 1.6480E+11 1.4952E+04  1.5887E+00 3.0000E+02 2.6362E+02
+   k(R05.fw ) analytic4 1.1141E+14 1.4336E+04  1.2825E-01 3.0000E+02 2.2361E-03
+   k(R06.fw ) analytic4 5.9878E+13 1.5920E+04 -1.7397E-01 3.0000E+02 1.3011E-03
+   k(R07.fw ) analytic4 5.1626E+10 7.8391E+03  1.0266E+00 3.0000E+02 3.1045E+02
+   k(R07.bw ) analytic4 2.9239E+09 7.0115E+03  1.0734E+00 3.0000E+02 3.0432E+02
+   k(R08c.fw) analytic4 1.6456E+11 1.3598E+04  1.3993E+00 3.0000E+02 2.6161E+02
+   k(R08t.fw) analytic4 1.1678E+11 1.3729E+04  1.4190E+00 3.0000E+02 2.7046E+02
+   k(R09.fw ) analytic4 9.3869E+11 1.0982E+04  1.2633E+00 3.0000E+02 2.9350E+02
+   k(R09.bw ) analytic4 4.2903E+10 1.2873E+04  1.5918E+00 3.0000E+02 2.8268E+02
+   k(R10.fw ) analytic4 1.1287E+11 1.0276E+04  1.2021E+00 3.0000E+02 2.9799E+02
+   k(R10.bw ) analytic4 3.2542E+09 1.0535E+04  1.3153E+00 3.0000E+02 2.8842E+02
+   k(R11.fw ) analytic4 3.6605E+11 1.5715E+04  1.5974E+00 3.0000E+02 2.6251E+02
+   k(R12.fw ) analytic4 6.1314E+10 1.5812E+04  1.8912E+00 3.0000E+02 2.8341E+02
+   k(R12.bw ) analytic4 3.8787E+10 1.4182E+04  1.6750E+00 3.0000E+02 2.8492E+02
+   k(R13.fw ) analytic4 7.9356E+10 1.4553E+04  1.6498E+00 3.0000E+02 2.8167E+02
+   k(R13.bw ) analytic4 1.5612E+11 1.3469E+04  1.5830E+00 3.0000E+02 2.8375E+02
+   k(R14.fw ) analytic4 9.6042E+09 1.5416E+04  1.8818E+00 3.0000E+02 2.8823E+02
+   k(R14.bw ) analytic4 1.1990E+10 1.2705E+04  1.5978E+00 3.0000E+02 2.9317E+02
+   k(R15.fw ) analytic4 1.9013E+13 2.0541E+04  4.1213E-01 3.0000E+02 1.0255E-03
+   k(R16.fw ) analytic4 9.9840E+12 1.4452E+04 -2.3272E-03 3.0000E+02 6.6047E-03
+end_kmc
+
+
+start_kmc anaC2
+   # KMC Parameters
+   psteps     100000     # print data each nstp steps
+   volume     1.00E+00   # simulation volume (mL)
+   timeunits  mcs        # units for time variable
+
+   # Initial (non-zero) populations (number of molecules)
+   pop0(nPrOH_C2)          1.00e+6
+
+   # Selection of the rate constant to use
+   k(R01.fw ) analytic4 2.7907E+14 1.1039E+04 -4.6290E-01 3.0000E+02 1.3069E-03
+   k(R02.fw ) analytic4 1.8157E+14 1.8536E+04 -1.5344E-01 3.0000E+02 6.0718E-04
+   k(R03.fw ) analytic4 3.4606E+11 1.3679E+04  1.8392E+00 3.0000E+02 2.7228E+02
+   k(R04c.fw) analytic4 9.9386E+12 2.0063E+04  2.6351E-01 3.0000E+02 2.2796E-04
+   k(R04t.fw) analytic4 1.6480E+11 1.4952E+04  1.5887E+00 3.0000E+02 2.6362E+02
+   k(R05.fw ) analytic4 1.1141E+14 1.4336E+04  1.2825E-01 3.0000E+02 2.2361E-03
+   k(R06.fw ) analytic4 5.9878E+13 1.5920E+04 -1.7397E-01 3.0000E+02 1.3011E-03
+   k(R07.fw ) analytic4 5.1626E+10 7.8391E+03  1.0266E+00 3.0000E+02 3.1045E+02
+   k(R07.bw ) analytic4 2.9239E+09 7.0115E+03  1.0734E+00 3.0000E+02 3.0432E+02
+   k(R08c.fw) analytic4 1.6456E+11 1.3598E+04  1.3993E+00 3.0000E+02 2.6161E+02
+   k(R08t.fw) analytic4 1.1678E+11 1.3729E+04  1.4190E+00 3.0000E+02 2.7046E+02
+   k(R09.fw ) analytic4 9.3869E+11 1.0982E+04  1.2633E+00 3.0000E+02 2.9350E+02
+   k(R09.bw ) analytic4 4.2903E+10 1.2873E+04  1.5918E+00 3.0000E+02 2.8268E+02
+   k(R10.fw ) analytic4 1.1287E+11 1.0276E+04  1.2021E+00 3.0000E+02 2.9799E+02
+   k(R10.bw ) analytic4 3.2542E+09 1.0535E+04  1.3153E+00 3.0000E+02 2.8842E+02
+   k(R11.fw ) analytic4 3.6605E+11 1.5715E+04  1.5974E+00 3.0000E+02 2.6251E+02
+   k(R12.fw ) analytic4 6.1314E+10 1.5812E+04  1.8912E+00 3.0000E+02 2.8341E+02
+   k(R12.bw ) analytic4 3.8787E+10 1.4182E+04  1.6750E+00 3.0000E+02 2.8492E+02
+   k(R13.fw ) analytic4 7.9356E+10 1.4553E+04  1.6498E+00 3.0000E+02 2.8167E+02
+   k(R13.bw ) analytic4 1.5612E+11 1.3469E+04  1.5830E+00 3.0000E+02 2.8375E+02
+   k(R14.fw ) analytic4 9.6042E+09 1.5416E+04  1.8818E+00 3.0000E+02 2.8823E+02
+   k(R14.bw ) analytic4 1.1990E+10 1.2705E+04  1.5978E+00 3.0000E+02 2.9317E+02
+   k(R15.fw ) analytic4 1.9013E+13 2.0541E+04  4.1213E-01 3.0000E+02 1.0255E-03
+   k(R16.fw ) analytic4 9.9840E+12 1.4452E+04 -2.3272E-03 3.0000E+02 6.6047E-03
+end_kmc
+

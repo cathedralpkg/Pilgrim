@@ -1,0 +1,20 @@
+start_plot FA_ISO_fw-tst
+   title ='TST Rate Constant for FA_ISO - fw'
+   xlabel='$1/T$ (K$^{-1}$)'
+   ylabel='$ln(k)$ ($k$ in $s^{-1}$)'
+   data  3  'ko'  'calculated'
+            3.33333E-03      1.54534E+01
+            2.50000E-03      1.91672E+01
+            2.00000E-03      2.14142E+01
+end_plot
+
+start_plot FA_ISO_bw-tst
+   title ='TST Rate Constant for FA_ISO - bw'
+   xlabel='$1/T$ (K$^{-1}$)'
+   ylabel='$ln(k)$ ($k$ in $s^{-1}$)'
+   data  3  'ko'  'calculated'
+            3.33333E-03      2.21669E+01
+            2.50000E-03      2.41220E+01
+            2.00000E-03      2.53046E+01
+end_plot
+

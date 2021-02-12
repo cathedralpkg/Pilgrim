@@ -1,0 +1,597 @@
+
+ *******************************************************************************
+
+   MSTor program version 2017 (2017)
+
+   Jingjing Zheng, Steven L. Mielke, Junwei Lucas Bao,
+   Rubén Meana-Pañeda, Kenneth L. Clarkson and Donald G. Truhlar
+
+   Department of Chemistry and Supercomputing Institute
+   University of Minnesota, Minneapolis, Minnesota, USA
+
+   Copyright 2013
+   Donald G. Truhlar and Regents of the University of Minnesota
+
+   Citations: 
+   MS-T(U) method
+     J. Zheng, T. Yu, E. Papajak, I. M. Alecu, S. L. Mielke, and D. G. Truhlar,
+     Phys. Chem. Chem. Phys. 13, 10885-10907 (2011).
+   MS-T(C) method
+     J. Zheng and D. G. Truhlar, J. Chem. Theory Comput., DOI: 10.1021/ct3010722.
+   Dual-level MS-T method
+     J. L. Bao, L. Xing, and D. G. Truhlar, J. Chem. Theory Comput., DOI:10.1021/acs.jctc.7b00232.
+   MSTor program
+     J. Zheng, S. L. Mielke, J. L. Bao, R. Meana-Pañeda, K. L. Clarkson, and D. G. Truhlar,
+     MSTor computer program, version 2017, University of Minnesota, Minneapolis, MN, 2017.
+     J. Zheng, S. L. Mielke, K. L Clarkson, and D. G. Truhlar,
+     Comp. Phys. Comm. 183, 1803-1812 (2012).
+
+ *******************************************************************************
+
+                    Naming conventions for the MS methods
+   -----------------------------------------------------------------------------
+   Common name        Original or other names
+   -----------------------------------------------------------------------------
+   MS-LH         =    MS-HO (ref. 1)   =   MS-AS-HO (ref. 2)
+   MS-T          =    MS-AS (ref. 1)   =   MS-AS-T  (ref. 2)
+   -----------------------------------------------------------------------------
+   Ref. 1: J. Zheng, T. Yu, E. Papajak, I. M. Alecu, S. L. Mielke, and
+           D. G. Truhlar, Phys. Chem. Chem. Phys. 13, 10885 (2011).
+   Ref. 2: T. Yu, J. Zheng, and D. G. Truhlar, Chem. Sci. 2, 2199 (2011)
+
+   Calculation run on 02/04/2019 at 23:11:19  
+
+   Number of structures:             5
+   Number of frames:                 3
+   Number of torsions:               2
+   Method:                           MS-T(C)
+   Frequency scaling factor:         1.000
+   Delta T for finite difference:    0.5 K
+
+The framechain input is missing or incomplete.  We will calculate det(D) from
+ det(inverse(G_tor)). If the torsional coordinates have not been chosen very carefully
+ your results may be incorrect.
+   Internal coordinates
+     Bonds:         01-02  01-04  01-05  01-06  02-03  02-07  02-08  03-09  04-10
+     Angles:        01-02-08  02-01-04  02-03-09  03-02-08  04-01-05  05-01-06
+     Angles:        07-02-08
+     Linear Angles: 01=04=10
+     Dihedrals:     01-03-08-02  02-04-05-01  02-05-06-01  03-07-08-02
+     Dihedrals:     01-02-03-09  03-02-01-04
+
+   All moment output uses units of amu for masses and Angstroms for distances 
+
+                           ==========================
+                                Structure   1
+                           ==========================
+
+   Normal-mode Frequencies (cm-1) 
+   (Overall translation and rotation projected out)
+    2764.7730i      0.0001i      0.0000i      0.0000i      0.0000       0.0000 
+       0.0000     143.3445     333.1287     372.0786     519.9328     713.9297 
+     954.8026    1135.8177    1246.4370    1266.8764    1334.2500    1508.0762 
+    1569.2608    1593.9805    1627.3248    1731.0150    1781.9587    1785.0613 
+    1816.8038    3561.5174    3615.6110    3684.3744    3759.8668    4223.2823 
+   Torsion-projected frequencies/non-torsional frequencies (cm-1)
+    2764.7699i    338.4376     519.9294     711.6948     953.4540    1135.7668 
+    1246.4069    1266.8621    1334.2212    1507.9872    1569.2489    1593.9770 
+    1627.2840    1731.0072    1781.9545    1785.0600    1816.8028    3561.5053 
+    3615.6098    3684.3687    3759.8651    4223.2814 
+   Product of consistently coupled torsional frequencies (in cm-1^ntor)  5.2750E+04
+   Primitively coupled torsional frequencies (cm-1) (Not used)
+     151.3224     373.1405 
+   Product of primitively coupled torsional frequencies (in cm-1^ntor)   5.6465E+04
+   Effective coupled torsional barrier (kcal/mol)
+        2.145        2.345 
+
+   D matrix: 
+ Columns are ordered to be consistent with the order of the torsion angles
+   m-n        1             2
+    1   8.396441E-01  2.723431E-01
+    2   2.723431E-01  5.370669E+00
+
+   Eigenvalues of D matrix:
+     8.2333E-01    5.3870E+00
+   Determinant of D matrix  1.879477E+008
+
+          Uncoupled force constants (au), Pitzer moment of inertia (amu A^2),
+   uncoupled torsional frequencies (cm-1), and uncoupled torsional barrier (kcal/mol)
+   --------------------------------------------------------------------------------
+   Torsion               1             2
+   Force constant   1.54466E-02  1.67262E-02
+   Moment           0.840        5.371
+   Tor. Freq.       368.956      151.806
+   Rot. barrier       2.156        2.334
+   M_j,tau            2.999        2.999
+   --------------------------------------------------------------------------------
+   Potential Energy =   0.000 kcal/mol
+   Weight =  2
+   Overall rotational symmetry number =   1
+
+                           ==========================
+                                Structure   2
+                           ==========================
+
+   Normal-mode Frequencies (cm-1) 
+   (Overall translation and rotation projected out)
+    2758.0169i      0.0000i      0.0000i      0.0000i      0.0000       0.0000 
+       0.0000     159.7786     342.6829     397.1297     488.6605     727.0305 
+    1003.0148    1071.5496    1253.1783    1270.3265    1347.2371    1457.9664 
+    1582.1909    1600.5978    1665.4589    1728.4998    1758.2775    1778.4552 
+    1815.1890    3552.8510    3619.7739    3667.3768    3764.0302    4228.2124 
+   Torsion-projected frequencies/non-torsional frequencies (cm-1)
+    2758.0047i    369.0422     487.4251     726.3855    1001.9920    1071.5238 
+    1253.1553    1270.2886    1347.1660    1457.8973    1582.1894    1600.5770 
+    1665.4452    1728.4981    1758.2478    1778.4423    1815.1844    3552.8407 
+    3619.7737    3667.3691    3764.0293    4228.2120 
+   Product of consistently coupled torsional frequencies (in cm-1^ntor)  5.9196E+04
+   Primitively coupled torsional frequencies (cm-1) (Not used)
+     164.4276     377.6297 
+   Product of primitively coupled torsional frequencies (in cm-1^ntor)   6.2093E+04
+   Effective coupled torsional barrier (kcal/mol)
+        2.195        2.560 
+
+   D matrix: 
+ Columns are ordered to be consistent with the order of the torsion angles
+   m-n        1             2
+    1   8.488651E-01  2.865707E-01
+    2   2.865707E-01  5.027148E+00
+
+   Eigenvalues of D matrix:
+     8.2930E-01    5.0467E+00
+   Determinant of D matrix  1.773525E+008
+
+          Uncoupled force constants (au), Pitzer moment of inertia (amu A^2),
+   uncoupled torsional frequencies (cm-1), and uncoupled torsional barrier (kcal/mol)
+   --------------------------------------------------------------------------------
+   Torsion               1             2
+   Force constant   1.59282E-02  1.85071E-02
+   Moment           0.849        5.027
+   Tor. Freq.       372.623      165.049
+   Rot. barrier       2.200        2.556
+   M_j,tau            3.015        3.015
+   --------------------------------------------------------------------------------
+   Potential Energy =   0.058 kcal/mol
+   Weight =  2
+   Overall rotational symmetry number =   1
+
+                           ==========================
+                                Structure   3
+                           ==========================
+
+   Normal-mode Frequencies (cm-1) 
+   (Overall translation and rotation projected out)
+    2765.6186i      0.0000i      0.0000i      0.0000       0.0000       0.0000 
+       0.0000     149.6723     344.0172     373.9596     506.6849     722.0775 
+    1005.2086    1072.5753    1248.6625    1266.9894    1336.5850    1470.1089 
+    1566.2780    1592.4957    1660.6756    1735.8536    1764.5405    1792.2315 
+    1815.1345    3543.9985    3613.5820    3675.3267    3756.9045    4224.6499 
+   Torsion-projected frequencies/non-torsional frequencies (cm-1)
+    2765.6106i    350.2062     505.0088     721.4721    1003.8700    1072.5147 
+    1248.6245    1266.9697    1336.5426    1470.0893    1566.2690    1592.4826 
+    1660.6614    1735.8522    1764.5218    1792.2285    1815.1314    3543.9838 
+    3613.5810    3675.3232    3756.9025    4224.6498 
+   Product of consistently coupled torsional frequencies (in cm-1^ntor)  5.5295E+04
+   Primitively coupled torsional frequencies (cm-1) (Not used)
+     155.3799     373.9399 
+   Product of primitively coupled torsional frequencies (in cm-1^ntor)   5.8103E+04
+   Effective coupled torsional barrier (kcal/mol)
+        2.175        2.385 
+
+   D matrix: 
+ Columns are ordered to be consistent with the order of the torsion angles
+   m-n        1             2
+    1   8.536867E-01  3.855851E-01
+    2   3.855851E-01  5.005873E+00
+
+   Eigenvalues of D matrix:
+     8.1818E-01    5.0414E+00
+   Determinant of D matrix  1.747897E+008
+
+          Uncoupled force constants (au), Pitzer moment of inertia (amu A^2),
+   uncoupled torsional frequencies (cm-1), and uncoupled torsional barrier (kcal/mol)
+   --------------------------------------------------------------------------------
+   Torsion               1             2
+   Force constant   1.53690E-02  1.65593E-02
+   Moment           0.854        5.006
+   Tor. Freq.       364.988      156.454
+   Rot. barrier       2.195        2.365
+   M_j,tau            2.965        2.965
+   --------------------------------------------------------------------------------
+   Potential Energy =   0.265 kcal/mol
+   Weight =  2
+   Overall rotational symmetry number =   1
+
+                           ==========================
+                                Structure   4
+                           ==========================
+
+   Normal-mode Frequencies (cm-1) 
+   (Overall translation and rotation projected out)
+    2763.1029i      0.0000i      0.0000i      0.0000i      0.0000       0.0000 
+       0.0000     136.0048     334.9330     340.8615     507.3926     710.3616 
+     970.2382    1141.4760    1229.1049    1337.1454    1343.7120    1507.5831 
+    1529.5839    1574.4105    1591.1933    1734.5146    1783.7121    1803.4307 
+    1839.9491    3540.9058    3624.4256    3652.3368    3767.4270    4227.3533 
+   Torsion-projected frequencies/non-torsional frequencies (cm-1)
+    2763.1029i    334.9330     507.3926     709.0561     969.5932    1141.4760 
+    1229.1049    1337.1454    1343.6681    1507.2536    1529.5839    1574.4105 
+    1591.1806    1734.5146    1783.7121    1803.4307    1839.9491    3540.9058 
+    3624.4256    3652.3075    3767.4263    4227.3533 
+   Product of consistently coupled torsional frequencies (in cm-1^ntor)  4.6487E+04
+   Primitively coupled torsional frequencies (cm-1) (Not used)
+     144.1398     344.0662 
+   Product of primitively coupled torsional frequencies (in cm-1^ntor)   4.9594E+04
+   Effective coupled torsional barrier (kcal/mol)
+        1.814        2.052 
+
+   D matrix: 
+ Columns are ordered to be consistent with the order of the torsion angles
+   m-n        1             2
+    1   8.483933E-01 -1.020956E-01
+    2  -1.020956E-01  5.329730E+00
+
+   Eigenvalues of D matrix:
+     8.4607E-01    5.3321E+00
+   Determinant of D matrix  1.911684E+008
+
+          Uncoupled force constants (au), Pitzer moment of inertia (amu A^2),
+   uncoupled torsional frequencies (cm-1), and uncoupled torsional barrier (kcal/mol)
+   --------------------------------------------------------------------------------
+   Torsion               1             2
+   Force constant   1.35553E-02  1.49695E-02
+   Moment           0.848        5.330
+   Tor. Freq.       343.843      144.164
+   Rot. barrier       1.837        2.029
+   M_j,tau            3.043        3.043
+   --------------------------------------------------------------------------------
+   Potential Energy =   0.371 kcal/mol
+   Weight =  1
+   Overall rotational symmetry number =   1
+
+                           ==========================
+                                Structure   5
+                           ==========================
+
+   Normal-mode Frequencies (cm-1) 
+   (Overall translation and rotation projected out)
+    2766.8683i      0.0000i      0.0000i      0.0000i      0.0000       0.0000 
+       0.0000     145.6724     335.1947     370.2846     484.4689     720.8597 
+    1026.3895    1081.3323    1235.2855    1320.4149    1348.9614    1462.8213 
+    1562.3116    1570.8111    1598.8643    1739.6674    1782.3576    1797.2964 
+    1838.5713    3528.4223    3621.4544    3639.6998    3766.0570    4228.6365 
+   Torsion-projected frequencies/non-torsional frequencies (cm-1)
+    2766.8474i    355.2187     483.4510     720.3177    1025.8774    1081.3294 
+    1235.2823    1320.4045    1348.9577    1462.5492    1562.2940    1570.7999 
+    1598.8641    1739.6602    1782.3560    1797.2912    1838.5690    3528.4220 
+    3621.4537    3639.6695    3766.0570    4228.6364 
+   Product of consistently coupled torsional frequencies (in cm-1^ntor)  5.1083E+04
+   Primitively coupled torsional frequencies (cm-1) (Not used)
+     151.3957     354.2754 
+   Product of primitively coupled torsional frequencies (in cm-1^ntor)   5.3636E+04
+   Effective coupled torsional barrier (kcal/mol)
+        1.907        2.274 
+
+   D matrix: 
+ Columns are ordered to be consistent with the order of the torsion angles
+   m-n        1             2
+    1   8.511786E-01 -7.617176E-03
+    2  -7.617176E-03  4.999523E+00
+
+   Eigenvalues of D matrix:
+     8.5116E-01    4.9995E+00
+   Determinant of D matrix  1.803264E+008
+
+          Uncoupled force constants (au), Pitzer moment of inertia (amu A^2),
+   uncoupled torsional frequencies (cm-1), and uncoupled torsional barrier (kcal/mol)
+   --------------------------------------------------------------------------------
+   Torsion               1             2
+   Force constant   1.44216E-02  1.55995E-02
+   Moment           0.851        5.000
+   Tor. Freq.       354.080      151.949
+   Rot. barrier       2.009        2.173
+   M_j,tau            3.002        3.002
+   --------------------------------------------------------------------------------
+   Potential Energy =   0.447 kcal/mol
+   Weight =  2
+   Overall rotational symmetry number =   1
+
+       List of zero-point inclusive energy (kcal/mol) for each structure
+      ------------------------------------------------------------------
+        Structure            Energy (T = 0 K)
+      ------------------------------------------------------------------
+          1                     57.58
+          2                     57.64
+          3                     57.79
+          4                     57.88
+          5                     57.92
+      ZPE of the system =       57.58
+
+
+     Note: The following SS-HO and SS-T include the Rot. P.F. and Boltzmann factor,
+           but are calculated with weight = 1 for each structure. Weights are
+           counted in MS partition functions. Zero of energy is set to the potential
+           energy of global minimum.
+
+            Partition function of structure    1
+     ================================================================
+          T(K)      Rot.          SS-HO           SS-T     SS-T/SS-HO
+        250.00    1.6448E+004   1.9352E-046   2.1105E-046    1.091
+        300.00    2.1621E+004   8.5471E-038   9.6754E-038    1.132
+        350.00    2.7246E+004   1.4700E-031   1.7205E-031    1.170
+        400.00    3.3288E+004   7.8727E-027   9.4770E-027    1.204
+        450.00    3.9721E+004   4.1707E-023   5.1357E-023    1.231
+        500.00    4.6522E+004   4.3738E-020   5.4808E-020    1.253
+        700.00    7.7063E+004   5.0090E-012   6.4585E-012    1.289
+       1000.00    1.3158E+005   2.1080E-005   2.6390E-005    1.252
+       1500.00    2.4173E+005   2.3738E+001   2.6485E+001    1.116
+       2000.00    3.7217E+005   1.2638E+005   1.2381E+005    0.980
+       2500.00    5.2013E+005   6.2651E+007   5.4195E+007    0.865
+
+            Partition function of structure    2
+     ================================================================
+          T(K)      Rot.          SS-HO           SS-T     SS-T/SS-HO
+        250.00    1.7195E+004   1.6490E-046   1.8170E-046    1.102
+        300.00    2.2603E+004   7.3565E-038   8.4011E-038    1.142
+        350.00    2.8483E+004   1.2735E-031   1.5029E-031    1.180
+        400.00    3.4799E+004   6.8517E-027   8.3194E-027    1.214
+        450.00    4.1524E+004   3.6422E-023   4.5281E-023    1.243
+        500.00    4.8634E+004   3.8296E-020   4.8516E-020    1.267
+        700.00    8.0562E+004   4.4151E-012   5.7966E-012    1.313
+       1000.00    1.3756E+005   1.8681E-005   2.4057E-005    1.288
+       1500.00    2.5271E+005   2.1140E+001   2.4548E+001    1.161
+       2000.00    3.8907E+005   1.1288E+005   1.1594E+005    1.027
+       2500.00    5.4374E+005   5.6067E+007   5.1097E+007    0.911
+
+            Partition function of structure    3
+     ================================================================
+          T(K)      Rot.          SS-HO           SS-T     SS-T/SS-HO
+        250.00    1.7195E+004   1.2856E-046   1.4242E-046    1.108
+        300.00    2.2604E+004   6.0620E-038   6.9681E-038    1.149
+        350.00    2.8484E+004   1.0922E-031   1.2980E-031    1.188
+        400.00    3.4800E+004   6.0567E-027   7.4042E-027    1.222
+        450.00    4.1525E+004   3.2967E-023   4.1240E-023    1.251
+        500.00    4.8635E+004   3.5332E-020   4.4996E-020    1.274
+        700.00    8.0564E+004   4.2809E-012   5.6217E-012    1.313
+       1000.00    1.3756E+005   1.8815E-005   2.4058E-005    1.279
+       1500.00    2.5272E+005   2.1947E+001   2.5088E+001    1.143
+       2000.00    3.8908E+005   1.1902E+005   1.1970E+005    1.006
+       2500.00    5.4376E+005   5.9679E+007   5.3066E+007    0.889
+
+            Partition function of structure    4
+     ================================================================
+          T(K)      Rot.          SS-HO           SS-T     SS-T/SS-HO
+        250.00    1.6151E+004   1.1088E-046   1.2511E-046    1.128
+        300.00    2.1231E+004   5.4683E-038   6.4166E-038    1.173
+        350.00    2.6755E+004   1.0184E-031   1.2342E-031    1.212
+        400.00    3.2688E+004   5.7920E-027   7.1961E-027    1.242
+        450.00    3.9005E+004   3.2157E-023   4.0682E-023    1.265
+        500.00    4.5683E+004   3.5015E-020   4.4836E-020    1.280
+        700.00    7.5674E+004   4.4173E-012   5.6878E-012    1.288
+       1000.00    1.2921E+005   1.9989E-005   2.4286E-005    1.215
+       1500.00    2.3737E+005   2.3823E+001   2.5017E+001    1.050
+       2000.00    3.6546E+005   1.3053E+005   1.1816E+005    0.905
+       2500.00    5.1075E+005   6.5842E+007   5.2000E+007    0.790
+
+            Partition function of structure    5
+     ================================================================
+          T(K)      Rot.          SS-HO           SS-T     SS-T/SS-HO
+        250.00    1.6873E+004   9.9472E-047   1.1227E-046    1.129
+        300.00    2.2180E+004   4.9412E-038   5.7946E-038    1.173
+        350.00    2.7950E+004   9.2450E-032   1.1204E-031    1.212
+        400.00    3.4149E+004   5.2744E-027   6.5640E-027    1.245
+        450.00    4.0748E+004   2.9352E-023   3.7283E-023    1.270
+        500.00    4.7724E+004   3.2018E-020   4.1279E-020    1.289
+        700.00    7.9055E+004   4.0585E-012   5.3235E-012    1.312
+       1000.00    1.3498E+005   1.8442E-005   2.3160E-005    1.256
+       1500.00    2.4798E+005   2.2077E+001   2.4337E+001    1.102
+       2000.00    3.8179E+005   1.2131E+005   1.1637E+005    0.959
+       2500.00    5.3357E+005   6.1323E+007   5.1631E+007    0.842
+
+     ================================================================
+              Partition Functions Including All Structures
+        -----------------------------------------------------------
+        Zero of energy is set to potential energy of global minimum
+        -----------------------------------------------------------
+        T(K)    Elec.        Trans.              Con-rovib
+                                            MS-LH    or     MS-T
+        250.00  2.0000E+000  8.2754E+006  1.2838E-045  1.4200E-045
+        300.00  2.0000E+000  1.3054E+007  5.9282E-037  6.8095E-037
+        350.00  2.0000E+000  1.9191E+007  1.0539E-030  1.2518E-030
+        400.00  2.0000E+000  2.6797E+007  5.7903E-026  7.0725E-026
+        450.00  2.0000E+000  3.5972E+007  3.1305E-022  3.9100E-022
+        500.00  2.0000E+000  4.6813E+007  3.3378E-019  4.2403E-019
+        700.00  2.0000E+000  1.0856E+008  3.9944E-011  5.2088E-011
+       1000.00  2.0000E+000  2.6481E+008  1.7402E-004  2.1962E-004
+       1500.00  2.0000E+000  7.2974E+008  2.0163E+002  2.2593E+002
+       2000.00  2.0000E+000  1.4980E+009  1.0897E+006  1.0698E+006
+       2500.00  2.0000E+000  2.6169E+009  5.4528E+008  4.7198E+008
+
+             Total Partition Function (E + T + Con-rovib)
+             ---------------------------------------------
+                T(K)     E + T + MS-LH     E + T + MS-T
+                250.00     2.1248E-038       2.3502E-038
+                300.00     1.5477E-029       1.7778E-029
+                350.00     4.0452E-023       4.8047E-023
+                400.00     3.1033E-018       3.7905E-018
+                450.00     2.2522E-014       2.8131E-014
+                500.00     3.1250E-011       3.9700E-011
+                700.00     8.6730E-003       1.1310E-002
+               1000.00     9.2167E+004       1.1631E+005
+               1500.00     2.9427E+011       3.2975E+011
+               2000.00     3.2648E+015       3.2051E+015
+               2500.00     2.8539E+018       2.4702E+018
+
+     ================================================================
+              Partition Functions Including All Structures
+        -----------------------------------------------------------
+                    Zero of energy is set to ZPE
+        -----------------------------------------------------------
+        T(K)             Con-rovib                Total
+                   MS-LH        MS-T       E+T+MS-LH    E+T+MS-T
+        250.00  2.7842E+005  3.0796E+005  4.6080E+012  5.0969E+012
+        300.00  5.2452E+005  6.0249E+005  1.3694E+013  1.5730E+013
+        350.00  9.4893E+005  1.1271E+006  3.6423E+013  4.3261E+013
+        400.00  1.6704E+006  2.0403E+006  8.9525E+013  1.0935E+014
+        450.00  2.8852E+006  3.6036E+006  2.0757E+014  2.5926E+014
+        500.00  4.9155E+006  6.2446E+006  4.6021E+014  5.8465E+014
+        700.00  3.7903E+007  4.9426E+007  8.2297E+015  1.0732E+016
+       1000.00  6.6782E+008  8.4278E+008  3.5369E+017  4.4636E+017
+       1500.00  4.9421E+010  5.5380E+010  7.2129E+019  8.0825E+019
+       2000.00  2.1347E+012  2.0957E+012  6.3956E+021  6.2787E+021
+       2500.00  5.8917E+013  5.0997E+013  3.0836E+023  2.6691E+023
+     ================================================================
+
+                     ==============================
+                          Thermodynamic Functions
+                      (Ideal gas at standard state)
+                     ==============================
+     T  - Temperature (Kelvin)        G  - Gibbs Free Energy (kcal/mol)
+     E  - Thermal Energy (kcal/mol)   H  - Enthalpy (kcal/mol)
+     S  - Entropy (cal/(mol-K))
+     Cp - Heat Capacity at Constant Pressure (cal/(mol-K))
+        -----------------------------------------------------------
+        Zero of energy is set to potential energy of global minimum
+        -----------------------------------------------------------
+
+               Contribution from electronic P.F. 
+     ================================================================
+                  T          G          E          S
+                250.00      -0.344      0.000      1.377
+                300.00      -0.413      0.000      1.377
+                350.00      -0.482      0.000      1.377
+                400.00      -0.551      0.000      1.377
+                450.00      -0.620      0.000      1.377
+                500.00      -0.689      0.000      1.377
+                700.00      -0.964      0.000      1.377
+               1000.00      -1.377      0.000      1.377
+               1500.00      -2.066      0.000      1.377
+               2000.00      -2.755      0.000      1.377
+               2500.00      -3.444      0.000      1.377
+
+               Contribution from translational P.F. 
+     ================================================================
+                  T          G          E          S
+                250.00      -7.913      0.745     36.622
+                300.00      -9.768      0.894     37.528
+                350.00     -11.664      1.043     38.294
+                400.00     -13.596      1.192     38.957
+                450.00     -15.558      1.341     39.542
+                500.00     -17.549      1.490     40.066
+                700.00     -25.738      2.087     41.737
+               1000.00     -38.541      2.981     43.509
+               1500.00     -60.833      4.471     45.524
+               2000.00     -83.969      5.962     46.953
+               2500.00    -107.733      7.452     48.061
+
+        Contribution from conformational-rovibrational P.F. (MS-LH)
+     ================================================================
+                  T          G          E          S
+                250.00      51.353     59.220     31.469
+                300.00      49.730     59.765     33.450
+                350.00      48.009     60.393     35.383
+                400.00      46.192     61.110     37.296
+                450.00      44.279     61.919     39.199
+                500.00      42.272     62.819     41.095
+                700.00      33.307     67.253     48.495
+               1000.00      17.202     75.860     58.658
+               1500.00     -15.818     93.533     72.900
+               2000.00     -55.250    113.649     84.450
+               2500.00     -99.941    135.146     94.035
+
+        Contribution from conformational-rovibrational P.F. (MS-T)
+     ================================================================
+                  T          G          E          S
+                250.00      51.303     59.317     32.059
+                300.00      49.647     59.893     34.154
+                350.00      47.889     60.543     36.154
+                400.00      46.033     61.270     38.093
+                450.00      44.080     62.076     39.991
+                500.00      42.034     62.963     41.858
+                700.00      32.937     67.255     49.025
+               1000.00      16.740     75.488     58.748
+               1500.00     -16.157     92.356     72.342
+               2000.00     -55.177    111.577     83.377
+               2500.00     -99.224    132.140     92.546
+
+     Total (Translational + Electronic + conformational-rovib.(MS-LH))
+     ======================================================================
+              T          G          E          H          S          Cp
+            250.00      43.095     59.965     60.462     69.468     15.068
+            300.00      39.548     60.659     61.255     72.355     16.672
+            350.00      35.863     61.436     62.132     75.054     18.407
+            400.00      32.045     62.302     63.097     77.630     20.228
+            450.00      28.101     63.260     64.155     80.119     22.066
+            500.00      24.034     64.310     65.303     82.538     23.866
+            700.00       6.604     69.340     70.731     91.609     30.130
+           1000.00     -22.717     78.841     80.828    103.545     36.714
+           1500.00     -78.717     98.004    100.985    119.801     43.238
+           2000.00    -141.975    119.611    123.585    132.780     46.828
+           2500.00    -211.118    142.598    147.566    143.474     48.917
+
+     Total (Translational + Electronic + conformational-rovib.(MS-T))
+     ======================================================================
+              T          G          E          H          S          Cp
+            250.00      43.045     60.063     60.559     70.058     15.756
+            300.00      39.466     60.787     61.384     73.059     17.211
+            350.00      35.743     61.586     62.282     75.825     18.724
+            400.00      31.886     62.462     63.257     78.427     20.300
+            450.00      27.902     63.418     64.312     80.911     21.904
+            500.00      23.797     64.454     65.447     83.301     23.491
+            700.00       6.235     69.341     70.732     92.139     29.142
+           1000.00     -23.179     78.469     80.456    103.635     35.274
+           1500.00     -79.056     96.827     99.808    119.243     41.509
+           2000.00    -141.902    117.539    121.513    131.707     44.989
+           2500.00    -210.401    139.592    144.560    141.984     47.026
+
+                        --------------------------------
+                         Zero of energy is set to ZPE
+                        --------------------------------
+
+     Total (Translational + Electronic + conformational-rovib.(MS-LH))
+     ======================================================================
+              T          G          E          H          S          Cp
+            250.00     -14.486      2.384      2.881     69.468     15.068
+            300.00     -18.033      3.078      3.674     72.355     16.672
+            350.00     -21.719      3.855      4.550     75.054     18.407
+            400.00     -25.536      4.721      5.516     77.630     20.228
+            450.00     -29.480      5.679      6.573     80.119     22.066
+            500.00     -33.547      6.728      7.722     82.538     23.866
+            700.00     -50.977     11.758     13.149     91.609     30.130
+           1000.00     -80.298     21.260     23.247    103.545     36.714
+           1500.00    -136.298     40.423     43.403    119.801     43.238
+           2000.00    -199.556     62.030     66.004    132.780     46.828
+           2500.00    -268.699     85.017     89.985    143.474     48.917
+
+     Total (Translational + Electronic + conformational-rovib.(MS-T))
+     ======================================================================
+              T          G          E          H          S          Cp
+            250.00     -14.536      2.481      2.978     70.058     15.756
+            300.00     -18.115      3.206      3.802     73.059     17.211
+            350.00     -21.838      4.005      4.700     75.825     18.724
+            400.00     -25.695      4.881      5.676     78.427     20.300
+            450.00     -29.679      5.837      6.731     80.911     21.904
+            500.00     -33.785      6.872      7.866     83.301     23.491
+            700.00     -51.346     11.760     13.151     92.139     29.142
+           1000.00     -80.760     20.888     22.875    103.635     35.274
+           1500.00    -136.638     39.246     42.227    119.243     41.509
+           2000.00    -199.483     59.958     63.932    131.707     44.989
+           2500.00    -267.982     82.011     86.979    141.984     47.026
+                   
+ F factor (ratio of ro-vib partition functions):
+     ================================================================
+           T(K)    QMS-T/QSS-HO1   QMS-LH/QSS-HO1
+             ---------------------------------------------
+            250.00       7.338      6.634
+            300.00       7.967      6.936
+            350.00       8.515      7.169
+            400.00       8.984      7.355
+            450.00       9.375      7.506
+            500.00       9.695      7.631
+            700.00      10.399      7.975
+           1000.00      10.418      8.256
+           1500.00       9.518      8.494
+           2000.00       8.465      8.622
+           2500.00       7.533      8.704
+
+ ==============================End of MSTor output==============================

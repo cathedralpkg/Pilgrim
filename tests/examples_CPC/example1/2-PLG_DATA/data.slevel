@@ -1,0 +1,740 @@
+#-------------------------#
+# Adding data for: gibbs1cm3 #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 molec/cc)
+start_gibbs1cm3 CH3CH2O.001
+    298.15  -151.53408922
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2O.msho
+    298.15  -151.53408922
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OD.001
+    298.15  -152.10976792
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OD.002
+    298.15  -152.10949757
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OD.msho
+    298.15  -152.11072341
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OH.001
+    298.15  -152.10574528
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OH.002
+    298.15  -152.10548046
+end_gibbs1cm3
+
+start_gibbs1cm3 CH3CH2OH.msho
+    298.15  -152.10670228
+end_gibbs1cm3
+
+start_gibbs1cm3 D.001
+    298.15  -0.52037445
+end_gibbs1cm3
+
+start_gibbs1cm3 D.msho
+    298.15  -0.52037445
+end_gibbs1cm3
+
+start_gibbs1cm3 D2.001
+    298.15  -1.16387280
+end_gibbs1cm3
+
+start_gibbs1cm3 D2.msho
+    298.15  -1.16387280
+end_gibbs1cm3
+
+start_gibbs1cm3 H.001
+    298.15  -0.51939385
+end_gibbs1cm3
+
+start_gibbs1cm3 H.msho
+    298.15  -0.51939385
+end_gibbs1cm3
+
+start_gibbs1cm3 H2.001
+    298.15  -1.15858443
+end_gibbs1cm3
+
+start_gibbs1cm3 H2.msho
+    298.15  -1.15858443
+end_gibbs1cm3
+
+start_gibbs1cm3 TSod.001
+    298.15  -152.56603838
+end_gibbs1cm3
+
+start_gibbs1cm3 TSod.002
+    298.15  -152.56615193
+end_gibbs1cm3
+
+start_gibbs1cm3 TSod.msho
+    298.15  -152.56711506
+end_gibbs1cm3
+
+start_gibbs1cm3 TSoh.001
+    298.15  -152.56249685
+end_gibbs1cm3
+
+start_gibbs1cm3 TSoh.002
+    298.15  -152.56261834
+end_gibbs1cm3
+
+start_gibbs1cm3 TSoh.msho
+    298.15  -152.56357640
+end_gibbs1cm3
+
+#-------------------------#
+# Adding data for: gibbs1bar #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 bar)
+start_gibbs1bar CH3CH2O.001
+    298.15  -151.49194386
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2O.msho
+    298.15  -151.49194386
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OD.001
+    298.15  -152.06762256
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OD.002
+    298.15  -152.06735221
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OD.msho
+    298.15  -152.06857805
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OH.001
+    298.15  -152.06359992
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OH.002
+    298.15  -152.06333511
+end_gibbs1bar
+
+start_gibbs1bar CH3CH2OH.msho
+    298.15  -152.06455692
+end_gibbs1bar
+
+start_gibbs1bar D.001
+    298.15  -0.47822909
+end_gibbs1bar
+
+start_gibbs1bar D.msho
+    298.15  -0.47822909
+end_gibbs1bar
+
+start_gibbs1bar D2.001
+    298.15  -1.12172744
+end_gibbs1bar
+
+start_gibbs1bar D2.msho
+    298.15  -1.12172744
+end_gibbs1bar
+
+start_gibbs1bar H.001
+    298.15  -0.47724849
+end_gibbs1bar
+
+start_gibbs1bar H.msho
+    298.15  -0.47724849
+end_gibbs1bar
+
+start_gibbs1bar H2.001
+    298.15  -1.11643907
+end_gibbs1bar
+
+start_gibbs1bar H2.msho
+    298.15  -1.11643907
+end_gibbs1bar
+
+start_gibbs1bar TSod.001
+    298.15  -152.52389302
+end_gibbs1bar
+
+start_gibbs1bar TSod.002
+    298.15  -152.52400657
+end_gibbs1bar
+
+start_gibbs1bar TSod.msho
+    298.15  -152.52496970
+end_gibbs1bar
+
+start_gibbs1bar TSoh.001
+    298.15  -152.52035149
+end_gibbs1bar
+
+start_gibbs1bar TSoh.002
+    298.15  -152.52047298
+end_gibbs1bar
+
+start_gibbs1bar TSoh.msho
+    298.15  -152.52143104
+end_gibbs1bar
+
+#-------------------------#
+# Adding data for:    pfn #
+#-------------------------#
+# V0, V0+zpe and partition functions
+start_pfn CH3CH2O.001
+   -151.54440390
+   -151.46607369
+    298.15  2.85568E+06
+end_pfn
+
+start_pfn CH3CH2O.msho
+   -151.54440390
+   -151.46607369
+    298.15  2.85568E+06
+end_pfn
+
+start_pfn CH3CH2OD.001
+   -152.13306610
+   -152.04207584
+    298.15  2.02738E+06
+end_pfn
+
+start_pfn CH3CH2OD.002
+   -152.13267490
+   -152.04177501
+    298.15  2.09391E+06
+end_pfn
+
+start_pfn CH3CH2OD.msho
+   -152.13306610
+   -152.04207584
+    298.15  5.57736E+06
+end_pfn
+
+start_pfn CH3CH2OH.001
+   -152.13306610
+   -152.03827812
+    298.15  1.59764E+06
+end_pfn
+
+start_pfn CH3CH2OH.002
+   -152.13267490
+   -152.03798126
+    298.15  1.65280E+06
+end_pfn
+
+start_pfn CH3CH2OH.msho
+   -152.13306610
+   -152.03827812
+    298.15  4.40218E+06
+end_pfn
+
+start_pfn D.001
+   -0.46658190
+   -0.46658190
+    298.15  8.19613E-01
+end_pfn
+
+start_pfn D.msho
+   -0.46658190
+   -0.46658190
+    298.15  8.19613E-01
+end_pfn
+
+start_pfn D2.001
+   -1.11750590
+   -1.10867271
+    298.15  3.63940E+00
+end_pfn
+
+start_pfn D2.msho
+   -1.11750590
+   -1.10867271
+    298.15  3.63940E+00
+end_pfn
+
+start_pfn H.001
+   -0.46658190
+   -0.46658190
+    298.15  2.90111E-01
+end_pfn
+
+start_pfn H.msho
+   -0.46658190
+   -0.46658190
+    298.15  2.90111E-01
+end_pfn
+
+start_pfn H2.001
+   -1.11750590
+   -1.10501868
+    298.15  6.44598E-01
+end_pfn
+
+start_pfn H2.msho
+   -1.11750590
+   -1.10501868
+    298.15  6.44598E-01
+end_pfn
+
+start_pfn TSod.001
+   -152.58566390
+   -152.49665819
+    298.15  1.21174E+07
+end_pfn
+
+start_pfn TSod.002
+   -152.58557070
+   -152.49666603
+    298.15  1.35530E+07
+end_pfn
+
+start_pfn TSod.msho
+   -152.58566390
+   -152.49666603
+    298.15  3.75876E+07
+end_pfn
+
+start_pfn TSoh.001
+   -152.58566390
+   -152.49364605
+    298.15  6.91691E+06
+end_pfn
+
+start_pfn TSoh.002
+   -152.58557070
+   -152.49366665
+    298.15  7.69689E+06
+end_pfn
+
+start_pfn TSoh.msho
+   -152.58566390
+   -152.49366665
+    298.15  2.12322E+07
+end_pfn
+
+#-------------------------#
+# Adding data for:    ctr #
+#-------------------------#
+# transl, rovib and elec partition functions
+start_ctr CH3CH2O
+    298.15  4.33279E+01  3.29543E+04  2.00000E+00
+end_ctr
+
+start_ctr CH3CH2O.001
+    298.15  4.33279E+01  3.29543E+04  2.00000E+00
+end_ctr
+
+start_ctr CH3CH2OD
+    298.15  4.62669E+01  1.20548E+05  1.00000E+00
+end_ctr
+
+start_ctr CH3CH2OD.001
+    298.15  4.62669E+01  4.38193E+04  1.00000E+00
+end_ctr
+
+start_ctr CH3CH2OD.002
+    298.15  4.62669E+01  4.52572E+04  1.00000E+00
+end_ctr
+
+start_ctr CH3CH2OH
+    298.15  4.47905E+01  9.82839E+04  1.00000E+00
+end_ctr
+
+start_ctr CH3CH2OH.001
+    298.15  4.47905E+01  3.56692E+04  1.00000E+00
+end_ctr
+
+start_ctr CH3CH2OH.002
+    298.15  4.47905E+01  3.69007E+04  1.00000E+00
+end_ctr
+
+start_ctr D
+    298.15  4.09806E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr D.001
+    298.15  4.09806E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr D2
+    298.15  1.15911E+00  3.13983E+00  1.00000E+00
+end_ctr
+
+start_ctr D2.001
+    298.15  1.15911E+00  3.13983E+00  1.00000E+00
+end_ctr
+
+start_ctr H
+    298.15  1.45056E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr H.001
+    298.15  1.45056E-01  1.00000E+00  2.00000E+00
+end_ctr
+
+start_ctr H2
+    298.15  4.10279E-01  1.57112E+00  1.00000E+00
+end_ctr
+
+start_ctr H2.001
+    298.15  4.10279E-01  1.57112E+00  1.00000E+00
+end_ctr
+
+start_ctr TSod
+    298.15  4.92694E+01  3.81449E+05  2.00000E+00
+end_ctr
+
+start_ctr TSod.001
+    298.15  4.92694E+01  1.22971E+05  2.00000E+00
+end_ctr
+
+start_ctr TSod.002
+    298.15  4.92694E+01  1.37540E+05  2.00000E+00
+end_ctr
+
+start_ctr TSoh
+    298.15  4.62692E+01  2.29442E+05  2.00000E+00
+end_ctr
+
+start_ctr TSoh.001
+    298.15  4.62692E+01  7.47465E+04  2.00000E+00
+end_ctr
+
+start_ctr TSoh.002
+    298.15  4.62692E+01  8.31752E+04  2.00000E+00
+end_ctr
+
+#-------------------------#
+# Adding data for:    anh #
+#-------------------------#
+# anharmonicity
+#-------------------------#
+# Adding data for:    zct #
+#-------------------------#
+# ZCT transmission coefficient
+start_zct TSod.001
+    298.15  3.41224E+00
+end_zct
+
+start_zct TSod.002
+    298.15  3.31134E+00
+end_zct
+
+start_zct TSoh.001
+    298.15  8.31988E+00
+end_zct
+
+start_zct TSoh.002
+    298.15  7.84976E+00
+end_zct
+
+#-------------------------#
+# Adding data for:    sct #
+#-------------------------#
+# SCT transmission coefficient
+start_sct TSod.001
+    298.15  9.40405E+00
+end_sct
+
+start_sct TSod.002
+    298.15  8.80158E+00
+end_sct
+
+start_sct TSoh.001
+    298.15  2.76820E+01
+end_sct
+
+start_sct TSoh.002
+    298.15  2.52936E+01
+end_sct
+
+#-------------------------#
+# Adding data for:    cvt #
+#-------------------------#
+# CVT coefficient
+start_cvt TSod.001
+    298.15  8.60709E-01
+end_cvt
+
+start_cvt TSod.002
+    298.15  8.71964E-01
+end_cvt
+
+start_cvt TSoh.001
+    298.15  5.79446E-01
+end_cvt
+
+start_cvt TSoh.002
+    298.15  6.00192E-01
+end_cvt
+
+#-------------------------#
+# Adding data for: cagtst #
+#-------------------------#
+# CAG/TST coefficient
+start_cagtst TSod.001
+    298.15  8.11963E-01
+end_cagtst
+
+start_cagtst TSod.002
+    298.15  8.25107E-01
+end_cagtst
+
+start_cagtst TSoh.001
+    298.15  5.18266E-01
+end_cagtst
+
+start_cagtst TSoh.002
+    298.15  5.32836E-01
+end_cagtst
+
+#-------------------------#
+# Adding data for: cagcvt #
+#-------------------------#
+# CAG/CVT coefficient
+start_cagcvt TSod.001
+    298.15  9.83847E-01
+end_cagcvt
+
+start_cagcvt TSod.002
+    298.15  9.86640E-01
+end_cagcvt
+
+start_cagcvt TSoh.001
+    298.15  9.94082E-01
+end_cagcvt
+
+start_cagcvt TSoh.002
+    298.15  9.92509E-01
+end_cagcvt
+
+#-------------------------#
+# Adding data for:    cfs #
+#-------------------------#
+# TST correction factors/coefficients
+start_cfs cvt.R1d
+    298.15  8.64763E-01
+end_cfs
+
+start_cfs cvt.R1h
+    298.15  5.86965E-01
+end_cfs
+
+start_cfs cvtsct.R1d
+    298.15  7.82228E+00
+end_cfs
+
+start_cfs cvtsct.R1h
+    298.15  1.56270E+01
+end_cfs
+
+start_cfs cvtzct.R1d
+    298.15  2.87481E+00
+end_cfs
+
+start_cfs cvtzct.R1h
+    298.15  4.75021E+00
+end_cfs
+
+start_cfs tstsct.R1d
+    298.15  7.50103E+00
+end_cfs
+
+start_cfs tstsct.R1h
+    298.15  1.40315E+01
+end_cfs
+
+start_cfs tstzct.R1d
+    298.15  2.75675E+00
+end_cfs
+
+start_cfs tstzct.R1h
+    298.15  4.26504E+00
+end_cfs
+
+#-------------------------#
+# Adding data for:  rcons #
+#-------------------------#
+# Rate constants (in au)
+start_rcons mpcvt.R1d.bw
+    298.15  5.72366E-40
+end_rcons
+
+start_rcons mpcvt.R1d.fw
+    298.15  3.25828E-09
+end_rcons
+
+start_rcons mpcvt.R1h.bw
+    298.15  2.47855E-39
+end_rcons
+
+start_rcons mpcvt.R1h.fw
+    298.15  1.04153E-08
+end_rcons
+
+start_rcons mpcvtsct.R1d.bw
+    298.15  5.17738E-39
+end_rcons
+
+start_rcons mpcvtsct.R1d.fw
+    298.15  2.94731E-08
+end_rcons
+
+start_rcons mpcvtsct.R1h.bw
+    298.15  6.59873E-38
+end_rcons
+
+start_rcons mpcvtsct.R1h.fw
+    298.15  2.77289E-07
+end_rcons
+
+start_rcons mpcvtzct.R1d.bw
+    298.15  1.90277E-39
+end_rcons
+
+start_rcons mpcvtzct.R1d.fw
+    298.15  1.08318E-08
+end_rcons
+
+start_rcons mpcvtzct.R1h.bw
+    298.15  2.00585E-38
+end_rcons
+
+start_rcons mpcvtzct.R1h.fw
+    298.15  8.42890E-08
+end_rcons
+
+start_rcons mptstsct.R1d.bw
+    298.15  4.96475E-39
+end_rcons
+
+start_rcons mptstsct.R1d.fw
+    298.15  2.82626E-08
+end_rcons
+
+start_rcons mptstsct.R1h.bw
+    298.15  5.92501E-38
+end_rcons
+
+start_rcons mptstsct.R1h.fw
+    298.15  2.48978E-07
+end_rcons
+
+start_rcons mptstzct.R1d.bw
+    298.15  1.82463E-39
+end_rcons
+
+start_rcons mptstzct.R1d.fw
+    298.15  1.03870E-08
+end_rcons
+
+start_rcons mptstzct.R1h.bw
+    298.15  1.80098E-38
+end_rcons
+
+start_rcons mptstzct.R1h.fw
+    298.15  7.56800E-08
+end_rcons
+
+start_rcons mscvt.R1d.bw
+    298.15  5.69683E-40
+end_rcons
+
+start_rcons mscvt.R1d.fw
+    298.15  3.24301E-09
+end_rcons
+
+start_rcons mscvt.R1h.bw
+    298.15  2.44680E-39
+end_rcons
+
+start_rcons mscvt.R1h.fw
+    298.15  1.02818E-08
+end_rcons
+
+start_rcons mscvtsct.R1d.bw
+    298.15  5.27079E-39
+end_rcons
+
+start_rcons mscvtsct.R1d.fw
+    298.15  3.00048E-08
+end_rcons
+
+start_rcons mscvtsct.R1h.bw
+    298.15  6.73315E-38
+end_rcons
+
+start_rcons mscvtsct.R1h.fw
+    298.15  2.82938E-07
+end_rcons
+
+start_rcons mscvtzct.R1d.bw
+    298.15  1.91249E-39
+end_rcons
+
+start_rcons mscvtzct.R1d.fw
+    298.15  1.08872E-08
+end_rcons
+
+start_rcons mscvtzct.R1h.bw
+    298.15  2.02366E-38
+end_rcons
+
+start_rcons mscvtzct.R1h.fw
+    298.15  8.50374E-08
+end_rcons
+
+start_rcons mststsct.R1d.bw
+    298.15  5.05391E-39
+end_rcons
+
+start_rcons mststsct.R1d.fw
+    298.15  2.87702E-08
+end_rcons
+
+start_rcons mststsct.R1h.bw
+    298.15  6.05809E-38
+end_rcons
+
+start_rcons mststsct.R1h.fw
+    298.15  2.54571E-07
+end_rcons
+
+start_rcons mststzct.R1d.bw
+    298.15  1.83380E-39
+end_rcons
+
+start_rcons mststzct.R1d.fw
+    298.15  1.04392E-08
+end_rcons
+
+start_rcons mststzct.R1h.bw
+    298.15  1.82077E-38
+end_rcons
+
+start_rcons mststzct.R1h.fw
+    298.15  7.65117E-08
+end_rcons
+
+start_rcons tst.R1d.bw
+    298.15  6.61876E-40
+end_rcons
+
+start_rcons tst.R1d.fw
+    298.15  3.76783E-09
+end_rcons
+
+start_rcons tst.R1h.bw
+    298.15  4.22265E-39
+end_rcons
+
+start_rcons tst.R1h.fw
+    298.15  1.77443E-08
+end_rcons
+

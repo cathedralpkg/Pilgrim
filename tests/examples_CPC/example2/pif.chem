@@ -1,0 +1,43 @@
+
+#-----------------------------------------------#
+# To define a reaction, just use the next
+# syntax:
+#      chemname : chemreac
+# where:
+#     * 'chemname' is the label of the chemical reaction
+#     * 'chemreac' is the chemical reaction
+#
+# The chemical reaction contains reactant(s),
+# transition state and product(s) of the
+# reaction, separated by arrows (-->).
+# If there are more than one reactant/product,
+# use the '+' symbol.
+#
+# Examples of valid lines:
+#     myreac1 : R     --> TS --> P
+#     myreac2 : R1+R2 --> TS --> P
+#     myreac3 : R     --> TS --> P1+P2
+#     myreac4 : R1+R2 --> TS --> P1+P2
+#
+#-----------------------------------------------#
+
+
+R01  : nPrOH_O10 --> ch01  --> OCH2 + CH2CH3
+R02  : nPrOH_C1  --> ch02  --> HOCHCH2 + CH3
+R03  : nPrOH_C1  --> ch03  --> H + OCHCH2CH3
+R04c : nPrOH_C1  --> ch04c --> H + HOCHCHCH3_cis
+R04t : nPrOH_C1  --> ch04t --> H + HOCHCHCH3_trans
+R05  : nPrOH_O10 --> ch05  --> H + OCHCH2CH3
+R06  : nPrOH_C4  --> ch06  --> HOCH2 + CH2CH2
+R07  : nPrOH_O10 --> ch07  --> nPrOH_C4
+R08c : nPrOH_C2  --> ch08c --> H + HOCHCHCH3_cis
+R08t : nPrOH_C2  --> ch08t --> H + HOCHCHCH3_trans
+R09  : nPrOH_O10 --> ch09  --> nPrOH_C1
+R10  : nPrOH_O10 --> ch10  --> nPrOH_C2
+R11  : nPrOH_C2  --> ch11  --> H + HOCH2CHCH2
+R12  : nPrOH_C1  --> ch12  --> nPrOH_C2
+R13  : nPrOH_C2  --> ch13  --> nPrOH_C4
+R14  : nPrOH_C1  --> ch14  --> nPrOH_C4
+R15  : nPrOH_C4  --> ch15  --> H + HOCH2CHCH2
+R16  : nPrOH_C2  -->       --> OH + CH2CHCH3
+

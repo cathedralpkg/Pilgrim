@@ -1,0 +1,109 @@
+
+start_mep TSA     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    8-10  -- 
+  scterr   0.500
+end_mep
+
+start_mep TSA_iso1     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    8-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSA_iso2     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    8-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSA_iso3     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    8-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSB     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    4-10  -- 
+  scterr   0.500
+end_mep
+
+start_mep TSB_iso1     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    4-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSB_iso2     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    4-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSB_iso3     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    4-10  --
+  scterr   0.500
+end_mep
+
+start_mep TSC     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  -- 
+  scterr   0.500
+end_mep
+
+start_mep TSC_iso1     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  -- 
+  scterr   0.500
+end_mep
+
+start_mep TSC_iso2     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  -- 
+  scterr   0.500
+end_mep
+
+start_mep TSC_iso3     
+  sbw      -2.5000  
+  sfw      +2.5000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    9-10  -- 
+  scterr   0.500
+end_mep
+

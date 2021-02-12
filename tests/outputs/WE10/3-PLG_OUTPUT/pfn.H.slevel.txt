@@ -1,0 +1,98 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-11
+  Current time (HH:MM:SS)   : 11:12:19
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   ----------------------
+    Analysis of STRUC: H 
+   ----------------------
+   
+       Pilgrim output file: 3-PLG_OUTPUT/pfn.H.slevel.txt
+   
+       Number of conformers: 1
+       
+          V0 = electronic energy
+          V1 = electronic energy + zero-point energy (ZPE)
+       
+          ZPE is calculated using scaled frequencies
+          Frequency scale factor: 1.00000
+       
+          min(V0) = -0.46658185 hartree
+          min(V1) = -0.46658185 hartree
+       
+          Relative energies (in kcal/mol):
+          ------------------------------------------------------------------------
+           name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  
+          ------------------------------------------------------------------------
+            001 |      0.00  |      0.00  |    0.00 |      1.01  |    1   |   K   
+          ------------------------------------------------------------------------
+          weight: equals 2 if the structure has a conformational enantiomer,
+                  equals 1 otherwise
+          PGS   : point group of symmetry
+       
+       ------------------
+       Conformation: 001
+       ------------------
+        | Molecular formula     : H
+        | Number of atoms       : 1
+        | Number of electrons   : 1
+        | Vibrational DOFs      : 0
+        | Charge                : 0
+        | Multiplicity          : 2
+        | Electronic energy (V0): -0.46658185 hartree
+        | Total mass [root]     : 1.0078 amu
+        | Total mass            : 1.0078 amu
+        | Point group symmetry  : K
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    H    +0.000000   +0.000000   +0.000000  [  1.008 amu]
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      250.00 |  1.114E-01 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  2.228E-01 
+        |      500.00 |  3.150E-01 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  6.300E-01 
+        |     1000.00 |  8.910E-01 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  1.782E+00 
+        |     1500.00 |  1.637E+00 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  3.274E+00 
+        |     2000.00 |  2.520E+00 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  5.040E+00 
+        |     2500.00 |  3.522E+00 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  7.044E+00 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   250.00 |    -0.51065571 |    -0.47517721 
+        |   500.00 |    -0.55637588 |    -0.48651640 
+        |  1000.00 |    -0.64946251 |    -0.51193863 
+        |  1500.00 |    -0.74379191 |    -0.53943214 
+        |  2000.00 |    -0.83892837 |    -0.56827075 
+        |  2500.00 |    -0.93466495 |    -0.59810956 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+   
+                                                            ----------------------------
+                                                            | Current date: 2021-02-11 |
+                                                            | Current time:   11:12:19 |
+                                                            | Elapsed time:  0.9 msecs |
+                                                            ----------------------------

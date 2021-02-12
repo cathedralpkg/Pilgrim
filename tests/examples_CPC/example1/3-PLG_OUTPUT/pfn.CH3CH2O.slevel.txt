@@ -1,0 +1,110 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetics Monte Carlo Simulator                
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2020-04-19
+  Current time (HH:MM:SS)   : 11:58:53
+  Python interpreter version: 3.6.9
+ -------------------------------------------------------------
+
+
+   ----------------------------
+    Analysis of STRUC: CH3CH2O 
+   ----------------------------
+   
+       Pilgrim output file: 3-PLG_OUTPUT/pfn.CH3CH2O.slevel.txt
+   
+       Number of conformers: 1
+       
+          V0 = electronic energy
+          V1 = electronic energy + zero-point energy (ZPE)
+       
+          ZPE is calculated using scaled frequencies
+          Frequency scale factor: 1.00000
+       
+          min(V0) = -151.54440390 hartree
+          min(V1) = -151.46607369 hartree
+       
+          Relative energies (in kcal/mol):
+          ------------------------------------------------------------------------
+           name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  
+          ------------------------------------------------------------------------
+            001 |      0.00  |      0.00  |   49.15 |     45.03  |    1   |   Cs  
+          ------------------------------------------------------------------------
+          weight: equals 2 if the structure has a conformational enantiomer,
+                  equals 1 otherwise
+          PGS   : point group of symmetry
+       
+       ------------------
+       Conformation: 001
+       ------------------
+        | Molecular formula     : C(2)H(5)O
+        | Number of atoms       : 8
+        | Number of electrons   : 25
+        | Vibrational DOFs      : 18
+        | Charge                : 0
+        | Multiplicity          : 2
+        | Electronic energy (V0): -151.54440390 hartree
+        | Total mass [root]     : 45.0340 amu
+        | Total mass            : 45.0340 amu
+        | Point group symmetry  : Cs
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    H    -1.224642   -0.387422   -1.305694  [  1.008 amu]
+        |    C    -1.224642   -0.387422   -0.219964  [ 12.000 amu]
+        |    C    +0.223124   -0.387422   +0.321907  [ 12.000 amu]
+        |    H    -1.759785   +0.492382   +0.124096  [  1.008 amu]
+        |    H    -1.752108   -1.271145   +0.126404  [  1.008 amu]
+        |    O    +0.988879   +0.761245   -0.098304  [ 15.995 amu]
+        |    H    +0.215548   -0.403995   +1.416966  [  1.008 amu]
+        |    H    +0.751660   -1.285392   -0.015414  [  1.008 amu]
+        | Moments and product of inertia (au):
+        |         +8.783E+04  +3.561E+05  +4.031E+05  [ 1.261E+16]
+        | Vibrational frequencies [1/cm] (scaled by 1.000):
+        |     209.93    448.45    469.60   1013.24   1065.51   1265.29
+        |    1295.27   1479.35   1659.39   1729.73   1771.06   1822.74
+        |    1832.55   3562.16   3571.34   3673.67   3755.64   3758.08
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.30      0.64      0.67      1.45      1.52      1.81
+        |       1.85      2.11      2.37      2.47      2.53      2.61
+        |       2.62      5.09      5.11      5.25      5.37      5.37
+        | Vibrational zero-point energy:    +0.07833021 hartree  = 
+        |                                        +49.15 kcal/mol = 
+        |                                         +2.13 eV       = 
+        |                                     +17191.49 cm^-1 
+        | V0 + zero-point energy (V1)  :  -151.46607369 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      298.15 |  4.333E+01 |  1.633E+04 |  2.018E+00 |  2.000E+00 |  2.856E+06 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   298.15 |  -151.53408922 |  -151.49194386 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+   
+                                                            ----------------------------
+                                                            | Current date: 2020-04-19 |
+                                                            | Current time:   11:58:54 |
+                                                            | Elapsed time:  4.1 msecs |
+                                                            ----------------------------

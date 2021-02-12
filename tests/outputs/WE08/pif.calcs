@@ -1,0 +1,108 @@
+#======================================#
+# INPUT FILE TEMPLATES FOR: GAUSSIAN   #
+#======================================#
+
+#-------------------------#
+# MEP POINT CALCULATIONS  #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSA gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g        
+scf=verytight
+NoSymm       
+[Pilgrim_gradhess]           
+
+Input file for MEP calculation
+
+0 2        
+[Pilgrim_geometry]           
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSB gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g        
+scf=verytight
+NoSymm       
+[Pilgrim_gradhess]           
+
+Input file for MEP calculation
+
+0 2        
+[Pilgrim_geometry]           
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSC gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g        
+scf=verytight
+NoSymm       
+[Pilgrim_gradhess]           
+
+Input file for MEP calculation
+
+0 2        
+[Pilgrim_geometry]           
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+
+#======================================#
+# INPUT FILE TEMPLATES FOR: ORCA       #
+#======================================#
+
+#-------------------------#
+# MEP POINT CALCULATIONS  #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSA orca
+%pal nprocs 1 end  
+! hf sto-3g TightSCF        
+[Pilgrim_gradhess]         
+* xyz 0 2
+[Pilgrim_geometry]         
+*
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSB orca
+%pal nprocs 1 end  
+! hf sto-3g TightSCF        
+[Pilgrim_gradhess]         
+* xyz 0 2
+[Pilgrim_geometry]         
+*
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+#- - - - - - - - - - - - - -#
+start_meppoint TSC orca
+%pal nprocs 1 end  
+! hf sto-3g TightSCF        
+[Pilgrim_gradhess]         
+* xyz 0 2
+[Pilgrim_geometry]         
+*
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+

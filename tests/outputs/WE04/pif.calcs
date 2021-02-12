@@ -1,0 +1,48 @@
+#======================================#
+# INPUT FILE TEMPLATES FOR: GAUSSIAN   #
+#======================================#
+
+#-------------------------#
+# MEP POINT CALCULATIONS  #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_meppoint ZE_TS gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g        
+scf=verytight
+NoSymm       
+[Pilgrim_gradhess]           
+
+Input file for MEP calculation
+
+0 1        
+[Pilgrim_geometry]           
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+
+#======================================#
+# INPUT FILE TEMPLATES FOR: ORCA       #
+#======================================#
+
+#-------------------------#
+# MEP POINT CALCULATIONS  #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_meppoint ZE_TS orca
+%pal nprocs 1 end  
+! hf sto-3g TightSCF        
+[Pilgrim_gradhess]         
+* xyz 0 1
+[Pilgrim_geometry]         
+*
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+

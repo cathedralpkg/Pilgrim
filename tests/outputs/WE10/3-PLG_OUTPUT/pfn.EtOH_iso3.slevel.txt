@@ -1,0 +1,268 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-11
+  Current time (HH:MM:SS)   : 11:12:17
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   ------------------------------
+    Analysis of STRUC: EtOH_iso3 
+   ------------------------------
+   
+       Pilgrim output file: 3-PLG_OUTPUT/pfn.EtOH_iso3.slevel.txt
+   
+       Number of conformers: 3
+       
+          V0 = electronic energy
+          V1 = electronic energy + zero-point energy (ZPE)
+       
+          ZPE is calculated using scaled frequencies
+          Frequency scale factor: 1.00000
+       
+          min(V0) = -152.13306611 hartree
+          min(V1) = -152.06143755 hartree
+       
+          Relative energies (in kcal/mol):
+          ------------------------------------------------------------------------
+           name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  
+          ------------------------------------------------------------------------
+            001 |      0.00  |      0.00  |   44.95 |     52.08  |    2   |   C1  
+            002 |      0.25  |      0.21  |   44.91 |     52.08  |    1   |   Cs  
+          ------------------------------------------------------------------------
+          weight: equals 2 if the structure has a conformational enantiomer,
+                  equals 1 otherwise
+          PGS   : point group of symmetry
+       
+       ------------------
+       Conformation: 001
+       ------------------
+        | Molecular formula     : C(2)H(6)O
+        | Number of atoms       : 9
+        | Number of electrons   : 26
+        | Vibrational DOFs      : 21
+        | Charge                : 0
+        | Multiplicity          : 1
+        | Electronic energy (V0): -152.13306611 hartree
+        | Total mass [root]     : 46.0419 amu
+        | Total mass            : 52.0795 amu
+        | Point group symmetry  : C1
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    C    +0.086695   +0.559042   +0.048013  [ 12.000 amu]
+        |    C    -1.227264   -0.254433   -0.018143  [ 12.000 amu]
+        |    H    -2.081680   +0.410453   +0.061913  [  2.014 amu]
+        |    H    -1.292908   -0.793083   -0.958404  [  2.014 amu]
+        |    H    -1.275893   -0.973613   +0.794761  [  2.014 amu]
+        |    H    +0.099455   +1.292836   -0.762805  [  2.014 amu]
+        |    H    +0.120835   +1.115155   +0.993412  [  2.014 amu]
+        |    O    +1.259716   -0.249404   -0.119184  [ 15.995 amu]
+        |    H    +1.221704   -0.885976   +0.639648  [  2.014 amu]
+        | Moments and product of inertia (au):
+        |         +1.553E+05  +4.515E+05  +5.108E+05  [ 3.581E+16]
+        | Vibrational frequencies [1/cm] (scaled by 1.000):
+        |     172.03    273.66    403.29    684.45    866.56    945.30
+        |    1042.59   1126.11   1150.25   1289.01   1318.10   1323.85
+        |    1345.28   1407.29   1527.14   2569.03   2601.30   2739.45
+        |    2785.65   2793.23   3077.71
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.25      0.39      0.58      0.98      1.24      1.35
+        |       1.49      1.61      1.64      1.84      1.88      1.89
+        |       1.92      2.01      2.18      3.67      3.72      3.92
+        |       3.98      3.99      4.40
+        | Vibrational zero-point energy:    +0.07162856 hartree  = 
+        |                                        +44.95 kcal/mol = 
+        |                                         +1.95 eV       = 
+        |                                     +15720.65 cm^-1 
+        | V0 + zero-point energy (V1)  :  -152.06143755 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      250.00 |  4.137E+01 |  2.113E+04 |  2.313E+00 |  1.000E+00 |  2.022E+06 
+        |      500.00 |  1.170E+02 |  5.977E+04 |  1.194E+01 |  1.000E+00 |  8.349E+07 
+        |     1000.00 |  3.310E+02 |  1.691E+05 |  5.312E+02 |  1.000E+00 |  2.972E+10 
+        |     1500.00 |  6.081E+02 |  3.106E+05 |  2.031E+04 |  1.000E+00 |  3.835E+12 
+        |     2000.00 |  9.362E+02 |  4.782E+05 |  5.310E+05 |  1.000E+00 |  2.377E+14 
+        |     2500.00 |  1.308E+03 |  6.683E+05 |  9.607E+06 |  1.000E+00 |  8.400E+15 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   250.00 |  -152.11819565 |  -152.08271715 
+        |   500.00 |  -152.18084484 |  -152.11098536 
+        |  1000.00 |  -152.31885686 |  -152.18133298 
+        |  1500.00 |  -152.47065313 |  -152.26629335 
+        |  2000.00 |  -152.63319610 |  -152.36253848 
+        |  2500.00 |  -152.80435912 |  -152.46780373 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+       ------------------
+       Conformation: 002
+       ------------------
+        | Molecular formula     : C(2)H(6)O
+        | Number of atoms       : 9
+        | Number of electrons   : 26
+        | Vibrational DOFs      : 21
+        | Charge                : 0
+        | Multiplicity          : 1
+        | Electronic energy (V0): -152.13267488 hartree
+        | Total mass [root]     : 46.0419 amu
+        | Total mass            : 52.0795 amu
+        | Point group symmetry  : Cs
+        | Rotational sym num    : 1
+        | Cartesian coordinates (Angstrom):
+        |    C    -0.011867   +0.554294   -0.000041  [ 12.000 amu]
+        |    C    +1.194542   -0.405456   -0.000046  [ 12.000 amu]
+        |    H    +2.122306   +0.158584   +0.000089  [  2.014 amu]
+        |    H    +1.171220   -1.039307   +0.880988  [  2.014 amu]
+        |    H    +1.171375   -1.039139   -0.881206  [  2.014 amu]
+        |    H    +0.037845   +1.203481   +0.883384  [  2.014 amu]
+        |    H    +0.037719   +1.203340   -0.883575  [  2.014 amu]
+        |    O    -1.214749   -0.229178   +0.000113  [ 15.995 amu]
+        |    H    -1.939956   +0.446280   -0.000057  [  2.014 amu]
+        | Moments and product of inertia (au):
+        |         +1.451E+05  +4.576E+05  +5.211E+05  [ 3.460E+16]
+        | Vibrational frequencies [1/cm] (scaled by 1.000):
+        |     166.24    261.53    385.42    696.55    873.89    988.07
+        |    1036.98   1068.03   1159.02   1280.00   1315.58   1318.75
+        |    1330.16   1443.39   1550.58   2570.47   2587.34   2714.07
+        |    2793.31   2794.70   3079.54
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.24      0.37      0.55      1.00      1.25      1.41
+        |       1.48      1.53      1.66      1.83      1.88      1.89
+        |       1.90      2.06      2.22      3.67      3.70      3.88
+        |       3.99      4.00      4.40
+        | Vibrational zero-point energy:    +0.07156550 hartree  = 
+        |                                        +44.91 kcal/mol = 
+        |                                         +1.95 eV       = 
+        |                                     +15706.81 cm^-1 
+        | V0 + zero-point energy (V1)  :  -152.06110938 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |      250.00 |  4.137E+01 |  2.077E+04 |  2.430E+00 |  1.000E+00 |  2.088E+06 
+        |      500.00 |  1.170E+02 |  5.876E+04 |  1.283E+01 |  1.000E+00 |  8.824E+07 
+        |     1000.00 |  3.310E+02 |  1.662E+05 |  5.780E+02 |  1.000E+00 |  3.179E+10 
+        |     1500.00 |  6.081E+02 |  3.053E+05 |  2.219E+04 |  1.000E+00 |  4.120E+12 
+        |     2000.00 |  9.362E+02 |  4.701E+05 |  5.815E+05 |  1.000E+00 |  2.559E+14 
+        |     2500.00 |  1.308E+03 |  6.569E+05 |  1.054E+07 |  1.000E+00 |  9.056E+15 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |   250.00 |  -152.11789288 |  -152.08241438 
+        |   500.00 |  -152.18060425 |  -152.11074477 
+        |  1000.00 |  -152.31874204 |  -152.18121816 
+        |  1500.00 |  -152.47066456 |  -152.26630479 
+        |  2000.00 |  -152.63333498 |  -152.36267735 
+        |  2500.00 |  -152.80462626 |  -152.46807087 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+   
+   
+       Total multi-structural HO pfn (QMS_HO) and Gibbs free energies (GFE):
+             ---------------------------------------------------------------------------
+                    T (K)      |      QMS_HO      | GFE [V = 1 cm^3] | GFE [V = kbT/p0] 
+             ---------------------------------------------------------------------------
+                     250.00    |     5.424E+06    |   -152.11897678  |   -152.08349827  
+                     500.00    |     2.387E+08    |   -152.18250818  |   -152.11264871  
+                    1000.00    |     8.811E+10    |   -152.32229815  |   -152.18477427  
+                    1500.00    |     1.152E+13    |   -152.47587559  |   -152.27151582  
+                    2000.00    |     7.184E+14    |   -152.64020094  |   -152.36954331  
+                    2500.00    |     2.549E+16    |   -152.81314693  |   -152.47659153  
+             ---------------------------------------------------------------------------
+                QMS_HO is calculated with regard to min(V1)
+             
+       Individual contributions to the partition function:
+             -------------------------
+               T (K)  |   001 |   002 
+             -------------------------
+               250.00 | 0.746 | 0.254 
+               500.00 | 0.700 | 0.300 
+              1000.00 | 0.675 | 0.325 
+              1500.00 | 0.666 | 0.334 
+              2000.00 | 0.662 | 0.338 
+              2500.00 | 0.659 | 0.341 
+             -------------------------
+             
+   
+       Anharmonicity file 'ANHAR/EtOH_iso3.mstor' FOUND!
+       
+         * Data in file:
+       
+             ZPE_MSHO: 0.07163238 hartree
+             ZPE_ANH : 0.07163238 hartree
+       
+         * checking list of temperatures
+           num_temps(pif.temp) = 6
+           num_temps(ANHAR/EtOH_iso3.mstor) = 11
+           in common --> 6
+           temperatures match! [OK]
+       
+             ------------------------------------
+               T  (K)  |   Q_MSHO   |   Q_ANH    
+             ------------------------------------
+                250.00 |  5.461E+06 |  6.150E+06 
+                500.00 |  2.406E+08 |  3.108E+08 
+               1000.00 |  8.890E+10 |  1.172E+11 
+               1500.00 |  1.162E+13 |  1.388E+13 
+               2000.00 |  7.253E+14 |  7.682E+14 
+               2500.00 |  2.573E+16 |  2.423E+16 
+             ------------------------------------
+       
+         * checking MSHO data...
+           abs. diff. in ZPE is 2.4E-03 kcal/mol [OK]
+           max. rel. diff in MSHO partition function is 9.7E-01% [OK]
+       
+         * Calculating anh. ratio = Q_ANH/Q_MSHO * exp(-(ZPE_ANH-ZPE_MSHO)*beta)
+       
+             -----------------------
+               T  (K)  | ANH. RATIO 
+             -----------------------
+                250.00 |  1.126E+00 
+                500.00 |  1.292E+00 
+               1000.00 |  1.319E+00 
+               1500.00 |  1.194E+00 
+               2000.00 |  1.059E+00 
+               2500.00 |  9.417E-01 
+             -----------------------
+       
+       
+                                                            ----------------------------
+                                                            | Current date: 2021-02-11 |
+                                                            | Current time:   11:12:19 |
+                                                            | Elapsed time:   1.6 secs |
+                                                            ----------------------------

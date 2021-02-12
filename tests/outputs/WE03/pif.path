@@ -1,0 +1,10 @@
+
+start_mep ZE_TS     
+  sbw      -2.0000  
+  sfw      +2.0000  
+  ds       0.01000   
+  hsteps   10     
+  fwdir    5-1-2-4  -- 
+  scterr   0.100
+end_mep
+

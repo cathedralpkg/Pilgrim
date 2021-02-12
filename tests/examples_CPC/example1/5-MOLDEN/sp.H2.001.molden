@@ -1,0 +1,10 @@
+[Molden Format]
+[FR-COORD] # Coordinates in bohr
+  H    -0.672959    +0.000000    +0.000000 
+  H    +0.672959    +0.000000    +0.000000 
+[FREQ] # Frequencies in cm^-1
+ 5481.2544
+[FR-NORM-COORD] # Displacements in bohr
+vibration  1
+      -0.707     +0.000     +0.000
+      +0.707     +0.000     +0.000

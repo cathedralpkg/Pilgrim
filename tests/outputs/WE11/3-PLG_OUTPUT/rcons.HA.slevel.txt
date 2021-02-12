@@ -1,0 +1,220 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-04
+  Current time (HH:MM:SS)   : 22:41:24
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   ---------------------------
+   | Reaction to analyze: HA |
+   ---------------------------
+   
+     Pilgrim output file: 3-PLG_OUTPUT/rcons.HA.slevel.txt
+   
+     Chemical equation: EtOH_6W + H --> TS_6W --> H2 + EtO_6W
+   
+        reactant(s)      ==> EtOH_6W + H
+        transition state ==> TS_6W
+        product(s)       ==> H2 + EtO_6W
+   
+   
+     Conservation of charge and mass:
+     
+        ----------------------------------------
+                          | charge | mass (amu) 
+        ----------------------------------------
+         reactant(s)      |    0   |    155.113 
+         transition state |    0   |    155.113 
+        ----------------------------------------
+     
+     Relative energies (kcal/mol):
+     
+        V0(i) is the electronic energy of the i-th conformer
+        V1(i) = V0(i)+ZPE(i)
+        ZPE(i) is the harmonic oscillator ZPE of the i-th conformer
+     
+        min{V0(i)} of reactants ==> V0 = -603.64548435 hartree
+        min{V1(i)} of reactants ==> V1 = -603.36907409 hartree
+     
+        --------------------------------------------------
+         SP                | V0(i)-V0 | V1(i)-V1 | weight 
+        --------------------------------------------------
+         EtOH_6W.001+H.001 |     0.00 |     0.00 |  1 
+         EtOH_6W.002+H.001 |     0.04 |     0.04 |  1 
+         EtOH_6W.003+H.001 |     0.37 |     0.42 |  1 
+        --------------------------------------------------
+         TS_6W.001         |    19.33 |    17.08 |  1 
+         TS_6W.002         |    19.48 |    17.29 |  1 
+        --------------------------------------------------
+        SP: stationary point
+     
+     ---------------------------------
+     CVT/SCT TRANSMISSION COEFFICIENTS
+     ---------------------------------
+     
+         * Gamma_CVT = k^CVT / k^TST
+         * kappa_CAG/CVT
+         * kappa_SCT
+         * kappa_CVT/SCT = kappa_CAG/CVT * kappa_SCT 
+         * gamma_CVT/SCT = Gamma_CVT * kappa_CVT/SCT
+     
+         ---------------------------------------------------------------------------------------
+           T  (K)  | Conf |    Gamma    |    kappa    |    kappa    |    kappa    |    gamma    
+                   |      |     CVT     |   CAG/CVT   |     SCT     |   CVT/SCT   |   CVT/SCT   
+         ---------------------------------------------------------------------------------------
+            250.00 |  001 |   9.961E-01 |   1.000E+00 |   1.906E+04 |   1.906E+04 |   1.898E+04 
+                   |  002 |   9.954E-01 |   9.997E-01 |   1.834E+04 |   1.833E+04 |   1.825E+04 
+         ---------------------------------------------------------------------------------------
+         
+     
+     -------------------------------
+     TOTAL TRANSMISSION COEFFICIENTS
+     -------------------------------
+     
+       The averaged transmission coefficient
+       for a given method (X) is:
+     
+            <gamma>^X = k^X / k^TST   
+     
+       where
+     
+            k^TST : rate constant calculated with MS-TST
+            k^X   : rate constant calculated with method X
+     
+       It can be also expressed as: 
+     
+            <gamma>^X = \sum_j chi_j^TST gamma_j^X  
+     
+       with
+     
+            chi_j^TST = w_j * (Q^{RR-HO}_j / Q^{MS-HO}) * exp(-U_j/kB/T)
+     
+       where
+     
+         gamma_j^X  : the transmission coefficient associated
+                      to the j-th transition state conformer
+         chi_j^TST  : the contribution of the j-th conformer
+                      to the MS-TST rate constant
+         w_j        : weight of j-th conformer (1 or 2)
+         Q^{RR-HO}_j: rigid-rotor harmonic-oscillator partition function
+         Q^{MS-HO}  : multi-structural harmonic-oscillator partition function
+         U_j        : relative energy with regard to the most stable conformer
+                      (considering the ZPE)
+     
+         ---------------------------------------------------------------------------------------
+           T  (K)  | Conf |    gamma    |    gamma    |    gamma    |    gamma    |    gamma    
+                   |      |   TST/ZCT   |   TST/SCT   |     CVT     |   CVT/ZCT   |   CVT/SCT   
+         ---------------------------------------------------------------------------------------
+            250.00 | all  |   3.442E+02 |   1.875E+04 |   9.959E-01 |   3.439E+02 |   1.873E+04 
+                   | 001  |   3.499E+02 |   1.899E+04 |   9.961E-01 |   3.499E+02 |   1.898E+04 
+                   | 002  |   3.330E+02 |   1.829E+04 |   9.954E-01 |   3.323E+02 |   1.825E+04 
+         ---------------------------------------------------------------------------------------
+         
+     
+     ----------------------------------
+     TRANSITION STRUCTURE CONTRIBUTIONS
+     ----------------------------------
+     
+       The contribution of the j-th transition state conformer
+       to the X rate constant (chi_j^X) is calculated as:
+     
+         chi_j^X = (gamma_j^X/<gamma>^X) * chi_j^TST
+     
+       where:
+     
+         gamma_j^X  : transmission coefficient of the j-th
+                      conformer for method X
+         <gamma>^X  : averaged transmission coefficient
+                      for method X
+         chi_j^TST  : contribution of the j-th conformer to
+                      the TST rate constant
+     
+         -----------------------------------------------------------------------------
+           T  (K)  | Conf |  chi_j  |  chi_j  |  chi_j  |  chi_j  |  chi_j  |  chi_j  
+                   |      |   TST   | TST/ZCT | TST/SCT |   CVT   | CVT/ZCT | CVT/SCT 
+         -----------------------------------------------------------------------------
+            250.00 |  001 | 0.66025 | 0.67125 | 0.66857 | 0.66042 | 0.67171 | 0.66904 
+                   |  002 | 0.33975 | 0.32875 | 0.33143 | 0.33958 | 0.32829 | 0.33096 
+         -----------------------------------------------------------------------------
+         
+     
+     -----------------------
+     FORWARD  RATE CONSTANTS
+     -----------------------
+     
+         - units: cm^3/molecule/s
+     
+         
+         -------------------------------------------------------------------------------------------------------
+           T (K)   |   TS   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT 
+         -------------------------------------------------------------------------------------------------------
+            250.00 | total  |   1.114E-26 |   3.899E-24 |   2.115E-22 |   1.110E-26 |   3.898E-24 |   2.115E-22
+                   | 001    |   7.356E-27 |   2.574E-24 |   1.397E-22 |   7.328E-27 |   2.574E-24 |   1.397E-22
+                   | 002    |   3.785E-27 |   1.325E-24 |   7.187E-23 |   3.771E-27 |   1.324E-24 |   7.186E-23
+         -------------------------------------------------------------------------------------------------------
+         
+         -------------------------------------------------------------------------------------------------------
+           T (K)   |   TS   |      MS-TST |  MP-TST/ZCT |  MP-TST/SCT |      MP-CVT |  MP-CVT/ZCT |  MP-CVT/SCT 
+         -------------------------------------------------------------------------------------------------------
+            250.00 | total  |   1.114E-26 |   3.835E-24 |   2.089E-22 |   1.110E-26 |   3.832E-24 |   2.087E-22
+                   | 001    |   7.356E-27 |   2.574E-24 |   1.397E-22 |   7.328E-27 |   2.574E-24 |   1.397E-22
+                   | 002    |   3.785E-27 |   1.261E-24 |   6.923E-23 |   3.768E-27 |   1.258E-24 |   6.908E-23
+         -------------------------------------------------------------------------------------------------------
+         
+         
+     
+     -------------------------------------------------
+     FORWARD  GIBBS FREE ENERGIES OF ACTIVATION (GFEA)
+     -------------------------------------------------
+     
+             * GFEA = -R T ln(h k V^-1 / kB T)
+             - units: kcal/mol
+             - reference volume: 1 cm^3 per molecule
+         
+         ---------------------------------------------------------------------------------------------
+           T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
+         ---------------------------------------------------------------------------------------------
+            250.00 |      44.235 |      41.325 |      39.341 |      44.237 |      41.325 |      39.341
+         ---------------------------------------------------------------------------------------------
+         
+         ---------------------------------------------------------------------------------------------
+           T (K)   |      MS-TST |  MP-TST/ZCT |  MP-TST/SCT |      MP-CVT |  MP-CVT/ZCT |  MP-CVT/SCT
+         ---------------------------------------------------------------------------------------------
+            250.00 |      44.235 |      41.334 |      39.347 |      44.238 |      41.334 |      39.348
+         ---------------------------------------------------------------------------------------------
+         
+         
+             * GFEA = -R T ln(h k V^-1 / kB T)
+             - units: kcal/mol
+             - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+         
+         ---------------------------------------------------------------------------------------------
+           T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
+         ---------------------------------------------------------------------------------------------
+            250.00 |      21.972 |      19.062 |      17.078 |      21.974 |      19.062 |      17.078
+         ---------------------------------------------------------------------------------------------
+         
+         ---------------------------------------------------------------------------------------------
+           T (K)   |      MS-TST |  MP-TST/ZCT |  MP-TST/SCT |      MP-CVT |  MP-CVT/ZCT |  MP-CVT/SCT
+         ---------------------------------------------------------------------------------------------
+            250.00 |      21.972 |      19.070 |      17.084 |      21.974 |      19.071 |      17.085
+         ---------------------------------------------------------------------------------------------
+         
+         
+     
+   Updating plot file: 6-PLOTFILES/plots.slevel.txt
+
+
+
+                                                            ----------------------------
+                                                            | Current date: 2021-02-04 |
+                                                            | Current time:   22:41:24 |
+                                                            | Elapsed time: 32.7 msecs |
+                                                            ----------------------------

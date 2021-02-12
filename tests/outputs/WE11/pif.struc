@@ -1,0 +1,121 @@
+#------------------------------------------#
+#    Definition of the isotopic masses     #
+#------------------------------------------#
+start_isomass
+   D     =    2.0141018
+   T     =    3.0160493
+   C13   =   13.0033550
+   C14   =   14.0032420
+   N15   =   15.0001090
+   O17   =   16.9991320
+   O18   =   17.9991600
+   Cl37  =   36.9659030
+end_isomass
+
+#------------------------------------------#
+# Cluster of torsional conformers:  MINIMA #
+#------------------------------------------#
+start_ctc EtOH_6W
+   root      EtOH_6W
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, C1
+   conformer 002  * 1 #  0.040 kcal/mol, C1
+   conformer 003  * 1 #  0.368 kcal/mol, C1
+   # basic data
+   mformu    C(2)H(18)O(7)
+   ch        0
+   mtp       1
+   type      0
+   freqscal  1.000
+   elestate  1  0.0000000000E+00
+end_ctc
+
+start_ctc H
+   root      H
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, K
+   # basic data
+   mformu    H
+   ch        0
+   mtp       2
+   type      0
+   freqscal  1.000
+   elestate  2  0.0000000000E+00
+end_ctc
+
+#------------------------------------------#
+# Cluster of torsional conformers: SADDLES #
+#------------------------------------------#
+start_ctc TS_6W
+   root      TS_6W
+   # conformers & anharmonicity
+   conformer 001  * 1 #  0.000 kcal/mol, C1
+   conformer 002  * 1 #  0.150 kcal/mol, C1
+   # basic data
+   mformu    C(2)H(19)O(7)
+   ch        0
+   mtp       2
+   type      1
+   freqscal  1.000
+   elestate  2  0.0000000000E+00
+   # internal coordinates
+   ics         1-2  1-4  1-12  1-19  2-3
+   ics         2-8  2-9  3-5  3-6  3-7
+   ics         4-23  9-10  11-12  11-13  11-27
+   ics         13-14  14-15  14-16  16-17  17-18
+   ics         17-19  18-20  20-21  20-22  22-26
+   ics         23-24  23-25  24-26  26-27  26-28
+   ics         1-2-8  1-2-9  1-4-23  1-12-11  1-19-17
+   ics         2-1-4  2-1-19  2-3-6  3-2-8  4-1-19
+   ics         4-23-24  4-23-25  5-3-6  5-3-7  11-13-14
+   ics         11-27-26  12-11-13  12-11-27  13-11-27  13-14-15
+   ics         13-14-16  14-16-17  15-14-16  16-17-18  16-17-19
+   ics         17-18-20  18-17-19  18-20-21  18-20-22  20-22-26
+   ics         21-20-22  22-26-24  22-26-27  22-26-28  23-24-26
+   ics         24-23-25
+   ics         2=9=10
+   ics         1_3_9_2  1_8_9_2  2_4_19_1  2_5_7_3  2_6_7_3
+   ics         4_12_19_1  4_24_25_23  12_13_27_11  13_15_16_14  16_18_19_17
+   ics         18_21_22_20  22_27_28_26  24_27_28_26
+   ics         13-11-12-1  12-1-19-17  4-23-24-26  12-11-13-14  17-18-20-21
+   ics         24-26-27-11  19-17-18-20  11-13-14-16  23-24-26-28  13-11-27-26
+   ics         16-17-19-1  14-16-17-19  18-20-22-26  19-1-4-23  15-14-16-17
+   ics         19-1-2-3  2-1-12-11  1-4-23-24  20-22-26-24  8-2-3-7
+end_ctc
+
+
+#----------------------------------------------------------------#
+# Info about variables                                           #
+#                                                                #
+#     * root     : points towards the spname file of the root    #
+#                  species defined by the user                   #
+#     * conformer idx * weight : the index of the conformer and  # 
+#                                its weight                      #
+#                                it may content, as comment,     #
+#                                the relative energy (kcal/mol)  #
+#                                and the point group symmetry    #
+#     * anharfile: anharmonicity file (Q2DTor/MSTor)             #
+#     * mformu   : the molecular formula                         #
+#     * ch       : the charge of the system                      #
+#     * mtp      : the multiplicity of the system                #
+#     * type     : 0 for minima, 1 for 1st order saddle points,  #
+#                  et cetera                                     #
+#     * freqcal  : scale factor for the vibrational frequencies  #
+#     * elestate : each line like this adds a electronic state   #
+#                  for the calculation of the eleectronic        #
+#                  partition function; this keyword is followed  #
+#                  by the multiplicity and the relative energy   #
+#                  of the state (with regards to the             #
+#                  ground-state). It is given in hartree.        #
+#     * ics      : each line with this keyword contains one (or  #
+#                  more) internal coordinates.                   #
+#                  Stretching, angular bendings and proper       #
+#                  torsions are indicated with '-':              #
+#                      example:   1-2-3                          #
+#                  linear bendings with '=':                     #
+#                      example:   1=2=3                          #
+#                  and improper torsions with '_' OR '-':        #
+#                      example:   1_2_3_4                        #
+#     * iso      : the isotopic modification                     #
+#                                                                #
+#----------------------------------------------------------------#

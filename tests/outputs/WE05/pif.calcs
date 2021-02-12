@@ -1,0 +1,64 @@
+#======================================#
+# INPUT FILE TEMPLATES FOR: GAUSSIAN   #
+#======================================#
+
+#-------------------------#
+# MEP POINT CALCULATIONS  #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_meppoint nh3_planar gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p pm6
+scf=verytight
+NoSymm       
+[Pilgrim_gradhess]           
+
+Input file for MEP calculation
+
+0 1        
+[Pilgrim_geometry]           
+
+end_meppoint
+#- - - - - - - - - - - - - -#
+
+#-------------------------#
+# HIGH-LEVEL CALCULATIONS #
+#-------------------------#
+
+#- - - - - - - - - - - - - -#
+start_highlevel nh3_planar gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g
+scf=verytight
+NoSymm       
+
+Input file for MEP calculation
+
+0 1        
+[Pilgrim_geometry]           
+
+end_highlevel
+#- - - - - - - - - - - - - -#
+
+#- - - - - - - - - - - - - -#
+start_highlevel nh3_pyram gaussian
+%nproc=1   
+%mem=1GB   
+%chk=[Pilgrim_name].chk 
+#p hf/sto-3g
+scf=verytight
+NoSymm       
+
+Input file for MEP calculation
+
+0 1        
+[Pilgrim_geometry]           
+
+end_highlevel
+#- - - - - - - - - - - - - -#
+

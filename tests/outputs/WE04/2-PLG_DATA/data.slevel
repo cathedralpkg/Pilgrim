@@ -1,0 +1,396 @@
+#-------------------------#
+# Adding data for: gibbs1cm3 #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 molec/cc)
+start_gibbs1cm3 E.001
+    300.00  -186.24413738
+    400.00  -186.26790264
+    500.00  -186.29210805
+end_gibbs1cm3
+
+start_gibbs1cm3 E.msho
+    300.00  -186.24413738
+    400.00  -186.26790264
+    500.00  -186.29210805
+end_gibbs1cm3
+
+start_gibbs1cm3 Z.001
+    300.00  -186.25055107
+    400.00  -186.27420415
+    500.00  -186.29828658
+end_gibbs1cm3
+
+start_gibbs1cm3 Z.msho
+    300.00  -186.25055107
+    400.00  -186.27420415
+    500.00  -186.29828658
+end_gibbs1cm3
+
+start_gibbs1cm3 ZE_TS.001
+    300.00  -186.23679903
+    400.00  -186.26029691
+    500.00  -186.28416599
+end_gibbs1cm3
+
+start_gibbs1cm3 ZE_TS.msho
+    300.00  -186.23679903
+    400.00  -186.26029691
+    500.00  -186.28416599
+end_gibbs1cm3
+
+#-------------------------#
+# Adding data for: gibbs1bar #
+#-------------------------#
+# Gibbs free energy in hartree (ref: 1 bar)
+start_gibbs1bar E.001
+    300.00  -186.20173639
+    400.00  -186.21173239
+    500.00  -186.22224858
+end_gibbs1bar
+
+start_gibbs1bar E.msho
+    300.00  -186.20173639
+    400.00  -186.21173239
+    500.00  -186.22224858
+end_gibbs1bar
+
+start_gibbs1bar Z.001
+    300.00  -186.20815008
+    400.00  -186.21803391
+    500.00  -186.22842710
+end_gibbs1bar
+
+start_gibbs1bar Z.msho
+    300.00  -186.20815008
+    400.00  -186.21803391
+    500.00  -186.22842710
+end_gibbs1bar
+
+start_gibbs1bar ZE_TS.001
+    300.00  -186.19439804
+    400.00  -186.20412666
+    500.00  -186.21430651
+end_gibbs1bar
+
+start_gibbs1bar ZE_TS.msho
+    300.00  -186.19439804
+    400.00  -186.20412666
+    500.00  -186.21430651
+end_gibbs1bar
+
+#-------------------------#
+# Adding data for:    pfn #
+#-------------------------#
+# V0, V0+zpe and partition functions
+start_pfn E.001
+   -186.21081462
+   -186.17707314
+    300.00  6.72863E+05
+    400.00  2.04888E+06
+    500.00  5.27712E+06
+end_pfn
+
+start_pfn E.msho
+   -186.21081462
+   -186.17707314
+    300.00  6.72863E+05
+    400.00  2.04888E+06
+    500.00  5.27712E+06
+end_pfn
+
+start_pfn Z.001
+   -186.21788420
+   -186.18361418
+    300.00  5.88452E+05
+    400.00  1.69589E+06
+    500.00  4.19728E+06
+end_pfn
+
+start_pfn Z.msho
+   -186.21788420
+   -186.18361418
+    300.00  5.88452E+05
+    400.00  1.69589E+06
+    500.00  4.19728E+06
+end_pfn
+
+start_pfn ZE_TS.001
+   -186.20271657
+   -186.16996603
+    300.00  5.27492E+05
+    400.00  1.38218E+06
+    500.00  3.11448E+06
+end_pfn
+
+start_pfn ZE_TS.msho
+   -186.20271657
+   -186.16996603
+    300.00  5.27492E+05
+    400.00  1.38218E+06
+    500.00  3.11448E+06
+end_pfn
+
+#-------------------------#
+# Adding data for:    ctr #
+#-------------------------#
+# transl, rovib and elec partition functions
+start_ctr E
+    300.00  4.66440E+01  1.44255E+04  1.00000E+00
+    400.00  7.18131E+01  2.85307E+04  1.00000E+00
+    500.00  1.00362E+02  5.25809E+04  1.00000E+00
+end_ctr
+
+start_ctr E.001
+    300.00  4.66440E+01  1.44255E+04  1.00000E+00
+    400.00  7.18131E+01  2.85307E+04  1.00000E+00
+    500.00  1.00362E+02  5.25809E+04  1.00000E+00
+end_ctr
+
+start_ctr Z
+    300.00  4.66440E+01  1.26158E+04  1.00000E+00
+    400.00  7.18131E+01  2.36153E+04  1.00000E+00
+    500.00  1.00362E+02  4.18214E+04  1.00000E+00
+end_ctr
+
+start_ctr Z.001
+    300.00  4.66440E+01  1.26158E+04  1.00000E+00
+    400.00  7.18131E+01  2.36153E+04  1.00000E+00
+    500.00  1.00362E+02  4.18214E+04  1.00000E+00
+end_ctr
+
+start_ctr ZE_TS
+    300.00  4.66440E+01  1.13089E+04  1.00000E+00
+    400.00  7.18131E+01  1.92469E+04  1.00000E+00
+    500.00  1.00362E+02  3.10325E+04  1.00000E+00
+end_ctr
+
+start_ctr ZE_TS.001
+    300.00  4.66440E+01  1.13089E+04  1.00000E+00
+    400.00  7.18131E+01  1.92469E+04  1.00000E+00
+    500.00  1.00362E+02  3.10325E+04  1.00000E+00
+end_ctr
+
+#-------------------------#
+# Adding data for:    anh #
+#-------------------------#
+# anharmonicity
+#-------------------------#
+# Adding data for:    zct #
+#-------------------------#
+# ZCT transmission coefficient
+start_zct ZE_TS.001
+    300.00  1.13654E+00
+    400.00  1.07422E+00
+    500.00  1.04677E+00
+end_zct
+
+#-------------------------#
+# Adding data for:    sct #
+#-------------------------#
+# SCT transmission coefficient
+start_sct ZE_TS.001
+    300.00  1.48692E+00
+    400.00  1.25354E+00
+    500.00  1.15671E+00
+end_sct
+
+#-------------------------#
+# Adding data for:    cvt #
+#-------------------------#
+# CVT coefficient
+start_cvt ZE_TS.001
+    300.00  9.99953E-01
+    400.00  9.99969E-01
+    500.00  9.99978E-01
+end_cvt
+
+#-------------------------#
+# Adding data for: cagtst #
+#-------------------------#
+# CAG/TST coefficient
+start_cagtst ZE_TS.001
+    300.00  9.99936E-01
+    400.00  9.99952E-01
+    500.00  9.99962E-01
+end_cagtst
+
+#-------------------------#
+# Adding data for: cagcvt #
+#-------------------------#
+# CAG/CVT coefficient
+start_cagcvt ZE_TS.001
+    300.00  9.99998E-01
+    400.00  9.99998E-01
+    500.00  9.99997E-01
+end_cagcvt
+
+#-------------------------#
+# Adding data for:    cfs #
+#-------------------------#
+# TST correction factors/coefficients
+start_cfs cvt.FA_ISO
+    300.00  9.99953E-01
+    400.00  9.99969E-01
+    500.00  9.99978E-01
+end_cfs
+
+start_cfs cvtsct.FA_ISO
+    300.00  1.48685E+00
+    400.00  1.25350E+00
+    500.00  1.15668E+00
+end_cfs
+
+start_cfs cvtzct.FA_ISO
+    300.00  1.13648E+00
+    400.00  1.07418E+00
+    500.00  1.04674E+00
+end_cfs
+
+start_cfs tstsct.FA_ISO
+    300.00  1.48682E+00
+    400.00  1.25348E+00
+    500.00  1.15667E+00
+end_cfs
+
+start_cfs tstzct.FA_ISO
+    300.00  1.13647E+00
+    400.00  1.07417E+00
+    500.00  1.04673E+00
+end_cfs
+
+#-------------------------#
+# Adding data for:  rcons #
+#-------------------------#
+# Rate constants (in au)
+start_rcons mpcvt.FA_ISO.bw
+    300.00  6.68274E-08
+    400.00  4.97598E-07
+    500.00  1.67134E-06
+end_rcons
+
+start_rcons mpcvt.FA_ISO.fw
+    300.00  7.81736E-11
+    400.00  3.43886E-09
+    500.00  3.37620E-08
+end_rcons
+
+start_rcons mpcvtsct.FA_ISO.bw
+    300.00  9.93668E-08
+    400.00  6.23758E-07
+    500.00  1.93325E-06
+end_rcons
+
+start_rcons mpcvtsct.FA_ISO.fw
+    300.00  1.16238E-10
+    400.00  4.31074E-09
+    500.00  3.90527E-08
+end_rcons
+
+start_rcons mpcvtzct.FA_ISO.bw
+    300.00  7.59519E-08
+    400.00  5.34529E-07
+    500.00  1.74950E-06
+end_rcons
+
+start_rcons mpcvtzct.FA_ISO.fw
+    300.00  8.88473E-11
+    400.00  3.69409E-09
+    500.00  3.53409E-08
+end_rcons
+
+start_rcons mptstsct.FA_ISO.bw
+    300.00  9.93653E-08
+    400.00  6.23749E-07
+    500.00  1.93323E-06
+end_rcons
+
+start_rcons mptstsct.FA_ISO.fw
+    300.00  1.16236E-10
+    400.00  4.31068E-09
+    500.00  3.90522E-08
+end_rcons
+
+start_rcons mptstzct.FA_ISO.bw
+    300.00  7.59507E-08
+    400.00  5.34521E-07
+    500.00  1.74948E-06
+end_rcons
+
+start_rcons mptstzct.FA_ISO.fw
+    300.00  8.88459E-11
+    400.00  3.69403E-09
+    500.00  3.53405E-08
+end_rcons
+
+start_rcons mscvt.FA_ISO.bw
+    300.00  6.68274E-08
+    400.00  4.97598E-07
+    500.00  1.67134E-06
+end_rcons
+
+start_rcons mscvt.FA_ISO.fw
+    300.00  7.81736E-11
+    400.00  3.43886E-09
+    500.00  3.37620E-08
+end_rcons
+
+start_rcons mscvtsct.FA_ISO.bw
+    300.00  9.93668E-08
+    400.00  6.23758E-07
+    500.00  1.93325E-06
+end_rcons
+
+start_rcons mscvtsct.FA_ISO.fw
+    300.00  1.16238E-10
+    400.00  4.31074E-09
+    500.00  3.90527E-08
+end_rcons
+
+start_rcons mscvtzct.FA_ISO.bw
+    300.00  7.59519E-08
+    400.00  5.34529E-07
+    500.00  1.74950E-06
+end_rcons
+
+start_rcons mscvtzct.FA_ISO.fw
+    300.00  8.88473E-11
+    400.00  3.69409E-09
+    500.00  3.53409E-08
+end_rcons
+
+start_rcons mststsct.FA_ISO.bw
+    300.00  9.93653E-08
+    400.00  6.23749E-07
+    500.00  1.93323E-06
+end_rcons
+
+start_rcons mststsct.FA_ISO.fw
+    300.00  1.16236E-10
+    400.00  4.31068E-09
+    500.00  3.90522E-08
+end_rcons
+
+start_rcons mststzct.FA_ISO.bw
+    300.00  7.59507E-08
+    400.00  5.34521E-07
+    500.00  1.74948E-06
+end_rcons
+
+start_rcons mststzct.FA_ISO.fw
+    300.00  8.88459E-11
+    400.00  3.69403E-09
+    500.00  3.53405E-08
+end_rcons
+
+start_rcons tst.FA_ISO.bw
+    300.00  6.68306E-08
+    400.00  4.97614E-07
+    500.00  1.67138E-06
+end_rcons
+
+start_rcons tst.FA_ISO.fw
+    300.00  7.81773E-11
+    400.00  3.43897E-09
+    500.00  3.37627E-08
+end_rcons
+

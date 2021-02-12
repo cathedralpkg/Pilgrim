@@ -1,0 +1,120 @@
+ -------------------------------------------------------------
+  Program version: Pilgrim v2020.2 (2020-04-18)
+ -------------------------------------------------------------
+                                                            
+          A Thermal Rate Constant Calculator and            
+              Kinetic Monte Carlo Simulator                 
+                                                            
+ -------------------------------------------------------------
+  Current date (YY-MM-DD)   : 2021-02-04
+  Current time (HH:MM:SS)   : 21:40:50
+  Python interpreter version: 3.8.5
+ -------------------------------------------------------------
+
+
+   -------------------------------
+    Analysis of STRUC: nd3_planar 
+   -------------------------------
+   
+       Pilgrim output file: 3-PLG_OUTPUT/pfn.nd3_planar.slevel.txt
+   
+       Number of conformers: 1
+       
+          V0 = electronic energy
+          V1 = electronic energy + zero-point energy (ZPE)
+       
+          ZPE is calculated using scaled frequencies
+          Frequency scale factor: 1.07800
+       
+          min(V0) = 0.00444368 hartree
+          min(V1) = 0.02578003 hartree
+       
+          Relative energies (in kcal/mol):
+          -------------------------------------------------------------------------------------
+           name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  | imag.freq. 
+          -------------------------------------------------------------------------------------
+            001 |      0.00  |      0.00  |   13.39 |     20.05  |    1   |  D3h  |   -795.61  
+          -------------------------------------------------------------------------------------
+          weight: equals 2 if the structure has a conformational enantiomer,
+                  equals 1 otherwise
+          PGS   : point group of symmetry
+       
+       ------------------
+       Conformation: 001
+       ------------------
+        | Molecular formula     : H(3)N
+        | Number of atoms       : 4
+        | Number of electrons   : 10
+        | Vibrational DOFs      : 6
+        | Charge                : 0
+        | Multiplicity          : 1
+        | Electronic energy (V0): 0.00444368 hartree
+        | Total mass [root]     : 17.0265 amu
+        | Total mass            : 20.0454 amu
+        | Point group symmetry  : D3h
+        | Rotational sym num    : 6
+        | Cartesian coordinates (Angstrom):
+        |    N    +0.000000   -0.000000   +0.000000  [ 14.003 amu]
+        |    H    +0.000000   +0.980756   +0.000000  [  2.014 amu]
+        |    H    +0.849360   -0.490378   -0.000000  [  2.014 amu]
+        |    H    -0.849360   -0.490378   +0.000000  [  2.014 amu]
+        | Moments and product of inertia (au):
+        |         +1.892E+04  +1.892E+04  +3.783E+04  [ 1.354E+13]
+        | Vibrational frequencies [1/cm] (scaled by 1.078):
+        |    -795.61   1258.61   1258.61   2206.79   2320.78   2320.78
+        | Vibrational zero-point energies [kcal/mol]:
+        |       0.00      1.80      1.80      3.15      3.32      3.32
+        | Vibrational zero-point energy:    +0.02133635 hartree  = 
+        |                                        +13.39 kcal/mol = 
+        |                                         +0.58 eV       = 
+        |                                      +4682.79 cm^-1 
+        | V0 + zero-point energy (V1)  :    +0.02578003 hartree
+        | 
+        | Partition functions (pfns):
+        | -----------------------------------------------------------------------------
+        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
+        | -----------------------------------------------------------------------------
+        |       50.00 |  8.837E-01 |  6.126E+00 |  1.000E+00 |  1.000E+00 |  5.413E+00 
+        |       75.00 |  1.623E+00 |  1.125E+01 |  1.000E+00 |  1.000E+00 |  1.827E+01 
+        |      100.00 |  2.499E+00 |  1.733E+01 |  1.000E+00 |  1.000E+00 |  4.330E+01 
+        |      150.00 |  4.592E+00 |  3.183E+01 |  1.000E+00 |  1.000E+00 |  1.462E+02 
+        |      200.00 |  7.069E+00 |  4.901E+01 |  1.000E+00 |  1.000E+00 |  3.465E+02 
+        |      250.00 |  9.880E+00 |  6.849E+01 |  1.001E+00 |  1.000E+00 |  6.776E+02 
+        |      300.00 |  1.299E+01 |  9.003E+01 |  1.005E+00 |  1.000E+00 |  1.175E+03 
+        |      350.00 |  1.637E+01 |  1.134E+02 |  1.012E+00 |  1.000E+00 |  1.878E+03 
+        |      400.00 |  1.999E+01 |  1.386E+02 |  1.023E+00 |  1.000E+00 |  2.835E+03 
+        | -----------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit (in au)
+        |   Qrot: rotational pfn (rigid-rotor)
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        |   Qel : electronic pfn
+        |   Qtot: total pfn per unit volume (in au)
+        |   
+        |   Both Qrot and Qtot include rotational symmetry number
+        | 
+        | Gibbs free energy (hartree):
+        | -------------------------------------------
+        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        | -------------------------------------------
+        |    50.00 |     0.01646008 |     0.02381062 
+        |    75.00 |     0.01151119 |     0.02244070 
+        |   100.00 |     0.00648160 |     0.02096317 
+        |   150.00 |    -0.00374544 |     0.01778432 
+        |   200.00 |    -0.01413402 |     0.01439011 
+        |   250.00 |    -0.02464348 |     0.01083503 
+        |   300.00 |    -0.03525106 |     0.00714993 
+        |   350.00 |    -0.04594299 |     0.00335398 
+        |   400.00 |    -0.05671046 |    -0.00054022 
+        | -------------------------------------------
+        |   V : volume per molecule
+        |   p0: 1bar
+        | 
+        | file 5-MOLDEN/sp.nd3_planar.001.molden was generated
+   
+   
+   
+                                                            ----------------------------
+                                                            | Current date: 2021-02-04 |
+                                                            | Current time:   21:40:50 |
+                                                            | Elapsed time:  5.3 msecs |
+                                                            ----------------------------
