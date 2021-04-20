@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optPLOT            |
-| Last Update:  2020/03/01 (Y/M/D) |
+| Last Update:  2021/04/20 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -69,6 +69,12 @@ SMENU = '''    -------------------------------------------------
     -------------------------------------------------'''
 
 
+TITLESIZE =15
+LEGENDSIZE=14
+XLABELSIZE=14
+YLABELSIZE=14
+XTICKSIZE =14
+YTICKSIZE =14
 #===============================================================#
 def main(case,pltcase="show"):
 
@@ -179,9 +185,11 @@ def main(case,pltcase="show"):
               mlabel = current[idx-1]
               ptype, xydata, title, xlabel, ylabel = plotdata[mlabel]
               print("      %s..."%mlabel)
-              plt.xlabel(xlabel)
-              plt.ylabel(ylabel)
-              plt.title(title)
+              plt.xlabel(xlabel,fontsize=XLABELSIZE)
+              plt.ylabel(ylabel,fontsize=YLABELSIZE)
+              plt.xticks(fontsize=XTICKSIZE)
+              plt.yticks(fontsize=YTICKSIZE)
+              plt.title(title,fontsize=TITLESIZE)
               for xx,yy,pformat,plabel in xydata:
                   case1 = (pformat == "") and (plabel == "")
                   case2 = (pformat != "") and (plabel == "")
@@ -194,7 +202,7 @@ def main(case,pltcase="show"):
                   elif case3 and ptype == "plot": plt.plot(xx,yy,label=plabel)
                   elif case4 and ptype == "plot": plt.plot(xx,yy,pformat,label=plabel)
                   elif           ptype == "bar" : plt.bar(range(len(xx)),yy,tick_label=xx)
-              if len(xydata) > 1: plt.legend(loc="best",framealpha=0.5)
+              if len(xydata) > 1: plt.legend(loc="best",framealpha=0.5,fontsize=LEGENDSIZE)
               if pltcase == "show": plt.show()
               if pltcase == "pdf": thepdf.savefig(bbox_inches='tight')
               plt.close()
@@ -203,8 +211,6 @@ def main(case,pltcase="show"):
        except KeyboardInterrupt:
           return
 #===============================================================#
-
-
 
 
 

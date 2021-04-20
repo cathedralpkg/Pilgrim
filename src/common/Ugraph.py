@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -105,6 +105,7 @@ class UGRAPH:
           self._nnodes = 0
           self._nedges = 0
           self._cnumber= 0 # cycle number
+          self._lapla  = None
 
       def __str__(self):
           return "(n,e)=(%i,%i)"%(self._nnodes,self._nedges)
@@ -441,15 +442,15 @@ class UGRAPH:
       # Get matrix representations #
       #----------------------------#
       def gen_laplacian(self):
-          laplacian = np.zeros((self._nnodes,self._nnodes))
+          self._lapla = np.zeros((self._nnodes,self._nnodes))
           for node in self._ugdict.keys():
               neighbors = self._ugdict[node]
               for neighbor in neighbors:
-                  laplacian[node,node] = laplacian[node,node] + 1
-                  laplacian[node,neighbor] = -1
+                  self._lapla[node,node] = self._lapla[node,node] + 1
+                  self._lapla[node,neighbor] = -1
 
           # Eigenvalues
-          vals, vecs = np.linalg.eigh(laplacian)
+          vals, vecs = np.linalg.eigh(self._lapla)
 
           # Degenerancies?
           degs = [0]*len(vals)
@@ -457,7 +458,7 @@ class UGRAPH:
               val_i = vals[i]
               for j in range(len(vals)):
                  val_j = vals[j]
-                 if abs(val_i-val_j) < 1e-3: degs[i] = degs[i]+1
+                 if abs(val_i-val_j) < 1e-3: degs[i] += 1
 
           # Data for each node
           dict_vecs = {}

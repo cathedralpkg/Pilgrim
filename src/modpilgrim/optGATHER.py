@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optGATHER          |
-| Last Update:  2020/03/01 (Y/M/D) |
+| Last Update:  2021/04/20 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -57,6 +57,8 @@ from   common.files      import read_gtsfile
 from   common.files      import write_gtsfile
 from   common.files      import write_molden
 from   common.fncs       import numimag
+from   common.fncs       import symbols_and_atonums
+from   common.fncs       import clean_dummies
 from   common.fncs       import is_string_valid
 from   common.fncs       import fill_string
 from   common.fncs       import print_string
@@ -98,6 +100,16 @@ def userfile_to_gtsfile(filename,gtsfile):
     for read_method in read_methods:
         try:
           xcc,atonums,ch,mtp,E,gcc,Fcc,masses,clevel = read_method(filename)[0:9]
+          # symbols and atonums
+          symbols,atonums = symbols_and_atonums(atonums)
+          # remove dummy atoms
+          symbols_wo,xcc = clean_dummies(symbols,xcc=xcc)
+          masses = clean_dummies(symbols,masses=masses)[1]
+          if gcc is not None: gcc = clean_dummies(symbols,gcc=gcc)[1]
+          if Fcc is not None: Fcc = clean_dummies(symbols,Fcc=Fcc)[1]
+          # update atonums to remove dummies
+          symbols,atonums = symbols_and_atonums(symbols_wo)
+          # clevel
           if read_method == read_gtsfile: clevel = ""
           # in case no data in masses
           if masses is None or len(masses) == 0 or sum(masses) == 0.0:

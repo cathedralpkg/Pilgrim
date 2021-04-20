@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -1217,39 +1217,42 @@ def get_projectionmatrix(xcc,masses,v0=None):
     using v0 (in mass-scaled)
     '''
     nat  = len(masses)
-    # translation
-    sqrtmasses = [np.sqrt(mass) for mass in masses]
-    b1 = [term if ii==0 else 0.0 for term in sqrtmasses for ii in range(3)]
-    b2 = [term if ii==1 else 0.0 for term in sqrtmasses for ii in range(3)]
-    b3 = [term if ii==2 else 0.0 for term in sqrtmasses for ii in range(3)]
-    norm1 = np.linalg.norm(b1)
-    norm2 = np.linalg.norm(b2)
-    norm3 = np.linalg.norm(b3)
-    b1 /= norm1
-    b2 /= norm2
-    b3 /= norm3
-    vecs = [b1,b2,b3]
-    # rotation
-    b4 = np.zeros(len(xcc))
-    b5 = np.zeros(len(xcc))
-    b6 = np.zeros(len(xcc))
-    for i in range(nat):
-        b4[3*i + 1] =   np.sqrt(masses[i]) * z(xcc,i)
-        b4[3*i + 2] = - np.sqrt(masses[i]) * y(xcc,i)
-        b5[3*i + 0] = - np.sqrt(masses[i]) * z(xcc,i)
-        b5[3*i + 2] =   np.sqrt(masses[i]) * x(xcc,i)
-        b6[3*i + 0] =   np.sqrt(masses[i]) * y(xcc,i)
-        b6[3*i + 1] = - np.sqrt(masses[i]) * x(xcc,i)
-    norm4 = np.linalg.norm(b4)
-    norm5 = np.linalg.norm(b5)
-    norm6 = np.linalg.norm(b6)
-    if norm4 > EPS_NORM: b4 /= norm4; vecs.append(b4)
-    if norm5 > EPS_NORM: b5 /= norm5; vecs.append(b5)
-    if norm6 > EPS_NORM: b6 /= norm6; vecs.append(b6)
-    # Gram Schmidt
-    X = np.matrix(vecs).transpose()
-    X_gs, R = np.linalg.qr(X)
-    projmatrix = X_gs * X_gs.H
+    if True:
+       # translation
+       sqrtmasses = [np.sqrt(mass) for mass in masses]
+       b1 = [term if ii==0 else 0.0 for term in sqrtmasses for ii in range(3)]
+       b2 = [term if ii==1 else 0.0 for term in sqrtmasses for ii in range(3)]
+       b3 = [term if ii==2 else 0.0 for term in sqrtmasses for ii in range(3)]
+       norm1 = np.linalg.norm(b1)
+       norm2 = np.linalg.norm(b2)
+       norm3 = np.linalg.norm(b3)
+       b1 /= norm1
+       b2 /= norm2
+       b3 /= norm3
+       vecs = [b1,b2,b3]
+       # rotation
+       b4 = np.zeros(len(xcc))
+       b5 = np.zeros(len(xcc))
+       b6 = np.zeros(len(xcc))
+       for i in range(nat):
+           b4[3*i + 1] =   np.sqrt(masses[i]) * z(xcc,i)
+           b4[3*i + 2] = - np.sqrt(masses[i]) * y(xcc,i)
+           b5[3*i + 0] = - np.sqrt(masses[i]) * z(xcc,i)
+           b5[3*i + 2] =   np.sqrt(masses[i]) * x(xcc,i)
+           b6[3*i + 0] =   np.sqrt(masses[i]) * y(xcc,i)
+           b6[3*i + 1] = - np.sqrt(masses[i]) * x(xcc,i)
+       norm4 = np.linalg.norm(b4)
+       norm5 = np.linalg.norm(b5)
+       norm6 = np.linalg.norm(b6)
+       if norm4 > EPS_NORM: b4 /= norm4; vecs.append(b4)
+       if norm5 > EPS_NORM: b5 /= norm5; vecs.append(b5)
+       if norm6 > EPS_NORM: b6 /= norm6; vecs.append(b6)
+       # Gram Schmidt
+       X = np.matrix(vecs).transpose()
+       X_gs, R = np.linalg.qr(X)
+       projmatrix = X_gs * X_gs.H
+    else:
+       projmatrix = np.zeros( (3*nat,3*nat) )
     if v0 is not None:
        normv0 = np.linalg.norm(v0)
        if normv0 > EPS_NORM:
@@ -1281,11 +1284,12 @@ def detect_frozen(Fcc,nat):
     '''
     frozen =  []
     if Fcc is None or len(Fcc) == 0: return frozen
+    Fcc = np.matrix(Fcc)
     for at in range(nat):
         # get columns (rows are equivalent; symmetric matrix)
-        colx = Fcc[:][3*at+0][0]
-        coly = Fcc[:][3*at+1][0]
-        colz = Fcc[:][3*at+2][0]
+        colx = Fcc[:][3*at+0].tolist()[0]
+        coly = Fcc[:][3*at+1].tolist()[0]
+        colz = Fcc[:][3*at+2].tolist()[0]
         # Get norm of column
         normx = np.linalg.norm(colx)
         normy = np.linalg.norm(coly)

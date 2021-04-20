@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -128,6 +128,26 @@ dpt_z2cr = {  0:-10.00 ,                                             \
              86:1.50 ,  87:2.60 ,  88:2.21 ,  89:2.15 ,  90:2.06 , \
              91:2.00 ,  92:1.96 ,  93:1.90 ,  94:1.87 ,  95:1.80 , \
              96:1.69 }
+
+# Colors for atoms (if needed)
+dpt_color = {s:(255,20,147) for s in dpt_z2s.values()}
+dpt_color["XX"] = ( 71,  5,  3)
+dpt_color["H" ] = (255,255,255)
+dpt_color["C" ] = ( 85, 87, 83)
+#dpt_color["N" ] = (143,143,255) 
+dpt_color["N" ] = ( 52,101,164)
+dpt_color["O" ] = (240,  0,  0)
+dpt_color["F" ] = ( 84,181,217)
+dpt_color["Na"] = (  0,  0,255)
+dpt_color["Mg"] = ( 42,128, 42)
+dpt_color["Si"] = (200,200,200)
+dpt_color["P" ] = (255,165,  0)
+dpt_color["S" ] = (255,200, 50)
+dpt_color["Cl"] = (  0,255,  0)
+dpt_color["Ca"] = (128,128,128)
+dpt_color["Fe"] = (255,165,  0)
+dpt_color["Br"] = (165, 42, 42)
+dpt_color["Se"] = (193,125, 17)
 
 # dict for isotopic elements
 dpt_im = {'C13 ': 13.00335500 , 'C14 ': 14.00324200 , 'Cl37': 36.96590300 , \

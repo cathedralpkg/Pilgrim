@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optSUMMARY         |
-| Last Update:  2021/02/01 (Y/M/D) |
+| Last Update:  2021/04/20 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -672,8 +672,13 @@ def summary_path(targets,ltemp,dpath,dctc,dlevel):
     for pof in pofs:
         itc = pof.split(".")[-3]
         print("       --> %s"%pof)
-        if len(pofs) == 1: data[itc] = readout_path(pof,mep=True )
-        else             : data[itc] = readout_path(pof,mep=False)
+        try:
+           if len(pofs) == 1: data_itc = readout_path(pof,mep=True )
+           else             : data_itc = readout_path(pof,mep=False)
+        except:
+           print("           problems reading file...")
+           continue
+        data[itc] = data_itc
     print("")
 
     #-----------------#

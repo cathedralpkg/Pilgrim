@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optPFN             |
-| Last Update:  2020/03/01 (Y/M/D) |
+| Last Update:  2021/04/20 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 

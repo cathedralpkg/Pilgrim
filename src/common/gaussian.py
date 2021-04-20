@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -50,9 +50,9 @@ import common.Exceptions as Exc
 from   common.fncs       import xyz
 from   common.fncs       import clean_lines
 from   common.fncs       import flatten_llist
-from   common.fncs       import symbols2atonums
 from   common.fncs       import atonums2masses
 from   common.fncs       import symbol_and_atonum
+from   common.fncs       import symbols_and_atonums
 from   common.fncs       import extract_string
 from   common.fncs       import get_atonums
 from   common.physcons   import ANGSTROM
@@ -486,6 +486,30 @@ def convert_zmat(lines):
 
 
 #=======================================================#
+def zmat_from_loginp(log):
+    '''
+    read Z-matrix from the input lines in the log file
+    '''
+    with open(log,'r') as asdf: lines = "".join(asdf.readlines())
+    if " Symbolic Z-matrix:" not in lines: return None
+    lines = lines.split("Symbolic Z-matrix:")[1].split("NAtoms= ")[0].strip()
+    zmat = []
+    sep = ","
+    for line in lines.split("\n"):
+        if "Charge" in line: continue
+        if ":" in line:
+            sep = "="
+            continue
+        line = line.strip()
+        line = sep.join(line.split())
+        zmat.append(line)
+    return zmat
+#=======================================================#
+
+
+
+
+#=======================================================#
 def get_fccards_string(gcc,Fcc):
     n1 = len(gcc)
     n2 = len(Fcc)
@@ -518,8 +542,8 @@ def read_gauout(filename):
     Fcc     = data_gaulog[7]
     V0      = data_gaulog[8]
     level   = data_gaulog[11]
-    # symbols to atomic numbers
-    atonums = symbols2atonums(symbols)
+    # symbols and atomic numbers
+    symbols,atonums = symbols_and_atonums(symbols)
     # atomic mass
     atomasses = atonums2masses(atonums)
     # return data

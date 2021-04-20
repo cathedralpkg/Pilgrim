@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  strings            |
-| Last Update:  2020/04/18 (Y/M/D) |
+| Last Update:  2021/04/20 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -106,7 +106,7 @@ PROGNAME += "                        \/      \/        \/             \/  \n"
 PROGNAME += "\n"
 
 
-VERSION   = "2020.2 (2020-04-18)"
+VERSION   = "2021.2 (2021-04-20)"
 
 PROGHEAD  = " -------------------------------------------------------------\n"
 PROGHEAD += "  Program version: Pilgrim v%s\n"%VERSION

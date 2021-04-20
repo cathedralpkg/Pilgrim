@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.1
+Version     : 2021.2
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -83,5 +83,8 @@ class UnableGenRandAng(Exception): pass
 class ErrorHConstraint(Exception): pass
 class ErrorSConstraint(Exception): pass
 class ErrorQRC(Exception)        : pass
+class ErrorTorsion1(Exception)   : pass
+class ErrorTorsionN(Exception)   : pass
+class ErrorTorsionRepe(Exception): pass
 #=============================================#
 
