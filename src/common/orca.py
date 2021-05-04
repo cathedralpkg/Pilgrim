@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -304,10 +304,10 @@ def read_orca(orca_out):
     orca_engrad = ".".join(orca_out.split(".")[:-1]) + ".engrad"
     orca_hess   = ".".join(orca_out.split(".")[:-1]) + ".hess"
     # Read them
-    gcc, dummy = read_orcaengrad(orca_engrad)
-    Fcc        = read_orcahess(orca_hess)
+    gcc    = read_orcaengrad(orca_engrad)[0]
+    Fcc    = read_orcahess(orca_hess)
     # Get masses
-    masses     = atonums2masses(atonums)
+    masses = atonums2masses(atonums)
     # return data
     return xcc, atonums, ch, mtp, E, gcc, Fcc, masses, calclevel
 #==========================================================#

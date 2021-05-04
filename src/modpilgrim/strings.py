@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -67,6 +67,8 @@ from   modpilgrim.fit2anarc  import activation4
 from   modpilgrim.fit2anarc  import activation5
 #---------------------------------------------------------------#
 
+VERSION   = "2021.3 (2021-05-04)"
+
 # methods
 KEYS_TC = "tst,tstzct,tstsct,cvt,cvtzct,cvtsct".split(",")
 KEYS_X  = ("tst,"+\
@@ -105,8 +107,6 @@ PROGNAME += "   |____|   |___|_______ \______  /|____|_  /___|_/     \  / \n"
 PROGNAME += "                        \/      \/        \/             \/  \n"
 PROGNAME += "\n"
 
-
-VERSION   = "2021.2 (2021-04-20)"
 
 PROGHEAD  = " -------------------------------------------------------------\n"
 PROGHEAD += "  Program version: Pilgrim v%s\n"%VERSION
@@ -282,8 +282,8 @@ def getstring_ctc(sptype,molecules,itcs,V0,V1):
     for molecule,itc in zip(molecules,itcs):
         name,weight = itc
         weight = "%i"%weight
-        V0i  = "%7.2f"%((molecule._V0  -V0)*KCALMOL)
-        V1i  = "%7.2f"%((molecule._ccV1-V1)*KCALMOL)
+        V0i  = "%7.3f"%((molecule._V0  -V0)*KCALMOL)
+        V1i  = "%7.3f"%((molecule._ccV1-V1)*KCALMOL)
         zpe  = "%7.2f"%((molecule._ccV1 - molecule._V0)*KCALMOL)
         mass = "%7.2f"%( molecule._mass*AMU)
         pg   = molecule._pgroup

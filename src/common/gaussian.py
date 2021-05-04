@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -55,9 +55,11 @@ from   common.fncs       import symbol_and_atonum
 from   common.fncs       import symbols_and_atonums
 from   common.fncs       import extract_string
 from   common.fncs       import get_atonums
+from   common.fncs       import clean_dummies
 from   common.physcons   import ANGSTROM
 from   common.files      import read_file
 from   common.pgs        import get_pgs
+from   common.internal   import zmat2xcc
 #=============================================#
 
 
@@ -74,6 +76,90 @@ KEYFCHK = "GauFchk"
 #  export GauFchk="/home/programs/G09_64david/g09/formchk" #
 #==========================================================#
 
+
+
+#==========================================================#
+def convert_zmat(lines):
+    '''
+    basically, a modification of read_xyz_zmat (common.files)
+    '''
+    lines_values  = [line.replace("="," ") for line in lines if "="     in line]
+    lines_zmatrix = [line.replace(","," ") for line in lines if "=" not in line]
+    # symbols from zmat
+    symbols = []
+    atonums = []
+    lzmat   = []
+    negkeys = []
+    for idx,line in enumerate(lines_zmatrix):
+        line = line.split()
+        # Expected number of columns in this line
+        if   idx == 0: expected_cols = 1
+        elif idx == 1: expected_cols = 3
+        elif idx == 2: expected_cols = 5
+        else         : expected_cols = 7
+        # Get symbol
+        symbol,atonum = symbol_and_atonum(line[0])
+        # Get other data
+        connections = tuple([int(at_i)-1 for at_i  in line[1:expected_cols:2]])
+        keys        = tuple([  key_i     for key_i in line[2:expected_cols:2]])
+        # add keys with negative sign
+        negkeys += [key_i for key_i in keys if key_i.startswith("-")]
+        # save data
+        symbols.append(symbol)
+        atonums.append(atonum)
+        lzmat.append( (symbol,connections,keys) )
+    # Get diccionary with values
+    zmatvals = {line.split()[0]:float(line.split()[1]) for line in lines_values}
+    # Generate another dict
+    zmatatoms = {}
+    for at1,(symbol,connections,keys) in enumerate(lzmat):
+        at2,at3,at4,k12,k123,k1234 = [None for dummy in range(6)]
+        if   len(connections) == 1: at2,k12  = connections[0], keys[0]
+        elif len(connections) == 2: at2,at3,k12,k123 = connections[0:2]+keys[0:2]
+        elif len(connections) == 3: at2,at3,at4,k12,k123,k1234 = connections[0:3]+keys[0:3]
+        else: continue
+        if k12   is not None: zmatatoms[k12]   = (at1,at2)
+        if k123  is not None: zmatatoms[k123]  = (at1,at2,at3)
+        if k1234 is not None: zmatatoms[k1234] = (at1,at2,at3,at4)
+    # any keyword with negative value
+    for key_i in negkeys:
+        key = key_i[1:]
+        if key in zmatvals.keys(): zmatvals[key_i] = -zmatvals[key]
+    # Return data
+    return (lzmat,zmatvals,zmatatoms), symbols
+#-------------------------------------------------------#
+def gen_zmatrix_string(lzmat,zmatvals,constants=[]):
+    string = ""
+    all_keys = []
+    for idx,zmatline in enumerate(lzmat):
+        symbol, connections, keys = zmatline
+        # Dummy atoms
+        if symbol.upper() in "XX,X,DA": symbol = "X"
+        # generate line
+        string += "%2s  "%symbol
+        for (at,key) in zip(connections,keys):
+            string += "%3i  %-7s"%(at+1,key)
+        string += "\n"
+        # avoid duplicates
+        all_keys += [key for key in keys if key not in all_keys]
+    # Exclude that keys that are, indeed, numbers
+    the_keys = []
+    for key in all_keys:
+        try   : key = float(key)
+        except: the_keys.append(key)
+    # Write variables and constants
+    string += "Variables:\n"
+    for key in the_keys:
+        if key.startswith("-") or key in constants: continue
+        try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
+        except: pass
+    if len(constants) != 0:
+       string += "Constants:\n"
+       for key in constants:
+           try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
+           except: pass
+    return string
+#=======================================================#
 
 
 #=======================================================#
@@ -219,7 +305,7 @@ def get_data_from_maintext(mtext):
     if   key_geom1 in mtext: geom = mtext.split(key_geom1)[-1]
     elif key_geom2 in mtext: geom = mtext.split(key_geom2)[-1]
     elif key_geom3 in mtext: geom = mtext.split(key_geom3)[-1]
-    else                   : geom,xcc = None, None
+    else                   : geom = None
     if geom is not None:
        # convert to list of lines and get the lines associated to geometry
        geom = "\n".join(geom.split("\n")[5:])
@@ -229,6 +315,7 @@ def get_data_from_maintext(mtext):
        geom = [line.split() for line in geom.split("\n") if line.strip() != ""]
        xcc  = [[float(x),float(y),float(z)] for (_,atnum,_,x,y,z) in geom]
        xcc  = flatten_llist(xcc)
+    else: xcc = None
     # (b) Find forces --> gradient
     if key_force in mtext:
        force = mtext.split(key_force)[-1]
@@ -365,6 +452,9 @@ def get_data_from_gaublock(gaublock):
     return commands,comment,ch,mtp,symbols,xcc,gcc,Fcc,energies,E_oniom,num_imag,zmat
 #-------------------------------------------------------#
 def read_gaussian_log(filename,target_level=None):
+    '''
+    xcc,gcc,Fcc and symbols --> returned without dummy atoms
+    '''
     if not os.path.exists(filename): return
     # split lines into blocks (in case of Link1)
     blocks = split_gaulog_into_gaublocks(filename)
@@ -381,6 +471,18 @@ def read_gaussian_log(filename,target_level=None):
            break
     # Return the best set of data (the last with the hessian or the last block)
     commands,comment,ch,mtp,symbols,xcc,gcc,Fcc,energies,E_oniom,num_imag,zmat = data[IDX]
+    # Recalculating xcc from z-matrix (do not trust the orientation read from output)
+    if zmat is not None:
+       (lzmat,zmatvals,zmatatoms),symbols = convert_zmat(zmat)
+       xcc = zmat2xcc(lzmat,zmatvals)
+    # Correct symbols (just in case)
+    symbols,atonums = symbols_and_atonums(symbols)
+    # Remove dummies from xcc, gcc and Fcc!
+    if xcc is not None: xcc = clean_dummies(symbols,xcc=xcc)[1]
+    if gcc is not None: gcc = clean_dummies(symbols,gcc=gcc)[1]
+    if Fcc is not None: Fcc = clean_dummies(symbols,Fcc=Fcc)[1]
+    symbols = clean_dummies(symbols)
+
     # If user does not ask for level, send one of lowest energy
     if target_level is None:
        energies.sort()
@@ -401,87 +503,6 @@ def read_gaussian_log(filename,target_level=None):
        level  = "ONIOM"
     # Return data
     return commands,comment,ch,mtp,symbols,xcc,gcc,Fcc,energy,num_imag,zmat,level
-#-------------------------------------------------------#
-def gen_zmatrix_string(lzmat,zmatvals,constants=[]):
-    string = ""
-    all_keys = []
-    for idx,zmatline in enumerate(lzmat):
-        symbol, connections, keys = zmatline
-        # Dummy atoms
-        if symbol.upper() in "XX,X,DA": symbol = "X"
-        # generate line
-        string += "%2s  "%symbol
-        for (at,key) in zip(connections,keys):
-            string += "%3i  %-7s"%(at+1,key)
-        string += "\n"
-        # avoid duplicates
-        all_keys += [key for key in keys if key not in all_keys]
-    # Exclude that keys that are, indeed, numbers
-    the_keys = []
-    for key in all_keys:
-        try   : key = float(key)
-        except: the_keys.append(key)
-    # Write variables and constants
-    string += "Variables:\n"
-    for key in the_keys:
-        if key.startswith("-") or key in constants: continue
-        try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
-        except: pass
-    if len(constants) != 0:
-       string += "Constants:\n"
-       for key in constants:
-           try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
-           except: pass
-    return string
-#-------------------------------------------------------#
-def convert_zmat(lines):
-    '''
-    basically, a modification of read_xyz_zmat (common.files)
-    '''
-    lines_values  = [line.replace("="," ") for line in lines if "="     in line]
-    lines_zmatrix = [line.replace(","," ") for line in lines if "=" not in line]
-    # symbols from zmat
-    symbols = []
-    atonums = []
-    lzmat   = []
-    negkeys = []
-    for idx,line in enumerate(lines_zmatrix):
-        line = line.split()
-        # Expected number of columns in this line
-        if   idx == 0: expected_cols = 1
-        elif idx == 1: expected_cols = 3
-        elif idx == 2: expected_cols = 5
-        else         : expected_cols = 7
-        # Get symbol
-        symbol,atonum = symbol_and_atonum(line[0])
-        # Get other data
-        connections = tuple([int(at_i)-1 for at_i  in line[1:expected_cols:2]])
-        keys        = tuple([  key_i     for key_i in line[2:expected_cols:2]])
-        # add keys with negative sign
-        negkeys += [key_i for key_i in keys if key_i.startswith("-")]
-        # save data
-        symbols.append(symbol)
-        atonums.append(atonum)
-        lzmat.append( (symbol,connections,keys) )
-    # Get diccionary with values
-    zmatvals = {line.split()[0]:float(line.split()[1]) for line in lines_values}
-    # Generate another dict
-    zmatatoms = {}
-    for at1,(symbol,connections,keys) in enumerate(lzmat):
-        at2,at3,at4,k12,k123,k1234 = [None for dummy in range(6)]
-        if   len(connections) == 1: at2,k12  = connections[0], keys[0]
-        elif len(connections) == 2: at2,at3,k12,k123 = connections[0:2]+keys[0:2]
-        elif len(connections) == 3: at2,at3,at4,k12,k123,k1234 = connections[0:3]+keys[0:3]
-        else: continue
-        if k12   is not None: zmatatoms[k12]   = (at1,at2)
-        if k123  is not None: zmatatoms[k123]  = (at1,at2,at3)
-        if k1234 is not None: zmatatoms[k1234] = (at1,at2,at3,at4)
-    # any keyword with negative value
-    for key_i in negkeys:
-        key = key_i[1:]
-        if key in zmatvals.keys(): zmatvals[key_i] = -zmatvals[key]
-    # Return data
-    return (lzmat,zmatvals,zmatatoms), symbols
 #=======================================================#
 
 
@@ -541,6 +562,7 @@ def read_gauout(filename):
     gcc     = data_gaulog[6]
     Fcc     = data_gaulog[7]
     V0      = data_gaulog[8]
+    zmat    = data_gaulog[10]
     level   = data_gaulog[11]
     # symbols and atomic numbers
     symbols,atonums = symbols_and_atonums(symbols)

@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -57,6 +57,7 @@ from   common.criteria import EPS_INERTIA
 from   common.criteria import EPS_NORM
 #==============================================#
 
+PROJECT_TRAROT = True
 
 #==============================================#
 alphUC   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"        #
@@ -697,6 +698,7 @@ def symbols_and_atonums(symbols_or_atonums):
     return symbols, atonums
 #---------------------------------------------#
 def correct_symbol(symbol):
+    symbol = symbol.strip()
     if symbol.upper() in "XX,X,DA": return "XX"
     return symbol[0].upper()+symbol[1:].lower()
 #---------------------------------------------#
@@ -1217,7 +1219,8 @@ def get_projectionmatrix(xcc,masses,v0=None):
     using v0 (in mass-scaled)
     '''
     nat  = len(masses)
-    if True:
+    # PROJECT TRA & ROT IN HESS FOR FREQS
+    if PROJECT_TRAROT:
        # translation
        sqrtmasses = [np.sqrt(mass) for mass in masses]
        b1 = [term if ii==0 else 0.0 for term in sqrtmasses for ii in range(3)]

@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -113,17 +113,18 @@ rate constants and simulates reaction mechanisms
            List of the targets allowed by the different options. The table 
            also shows the case when 'target' is omitted (default).
          
-               --option |      default      |  allowed 'target'
-               ================================================
-               --pfn    |    all ctcsp      |   'ctcsp'
-               --path   |    all ctcts      |   'ctcts[.idx]'
-               --rcons  |    all chemname   |   'chemname'
-               --kmc    |      ---          |      ---
+               --option  |      default      |  allowed 'target'
+               =================================================
+               --pfn     |    all ctcsp      |   'ctcsp'
+               --path    |    all ctcts      |   'ctcts[.idx]'
+               --rcons   |    all chemname   |   'chemname'
+               --kmc     |      ---          |      ---
 
-               --ics    |    all ctcts      |   'ctcts[.idx]'
-               --hlcalc |    all ctcsp      |   'ctcsp[.idx]
-               --fit    |    all chemname   |   'chemname'
-               --plot   |      ---          |      ---
+               --ics     |    all ctcts      |   'ctcts[.idx]'
+               --hlcalc  |    all ctcsp      |   'ctcsp[.idx]
+               --fit     |    all chemname   |   'chemname'
+               --plot    |      ---          |      ---
+               --summary |      ---          | pfn, path, rcons
 
 
 Let's find together how your system behaves!

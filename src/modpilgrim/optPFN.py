@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.2
+Version     : 2021.3
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -46,6 +46,8 @@ import os
 import sys
 import numpy   as np
 #--------------------------------------------------#
+import common.Exceptions as Exc
+#--------------------------------------------------#
 import modpilgrim.names   as PN
 import modpilgrim.pilrw    as RW
 import modpilgrim.strings as PS
@@ -61,15 +63,13 @@ from   common.Logger     import Logger
 from   common.Molecule   import Molecule
 from   common.criteria   import EPS_AMU
 from   common.criteria   import EPS_TEMP
-
-import common.Exceptions as Exc
 from   common.files      import read_file
 from   common.files      import read_q2dtorout
 from   common.files      import read_mstorout
 #--------------------------------------------------#
-from   modpilgrim.diverse         import ffchecking
-from   modpilgrim.diverse         import status_check
-from   modpilgrim.diverse         import get_input_data
+from   modpilgrim.diverse    import ffchecking
+from   modpilgrim.diverse    import status_check
+from   modpilgrim.diverse    import get_input_data
 #--------------------------------------------------#
 from   modpilgrim.plotting   import manage_data_for_plot_weights
 from   modpilgrim.plotting   import write_plotfile
