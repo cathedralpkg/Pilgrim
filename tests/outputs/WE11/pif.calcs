@@ -11,14 +11,19 @@ start_meppoint TS_6W gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p ONIOM(hf/3-21g:hf/sto-3g     )   
+#p ONIOM(hf/3-21g:hf/sto-3g)        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
-0 2       0 2
+0 2 0 2        
 [Pilgrim_geometry]           
 
 end_meppoint
@@ -36,9 +41,15 @@ end_meppoint
 #- - - - - - - - - - - - - -#
 start_meppoint TS_6W orca
 %pal nprocs 1 end  
-! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
-* xyz 0 2
+%maxcore 1000 
+! ONIOM(hf/3-21g:hf/sto-3g) TightSCF        
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
+* xyz 0 2 0 2
 [Pilgrim_geometry]         
 *
 

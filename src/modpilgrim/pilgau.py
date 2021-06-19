@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  pilgau             |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/06/18 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -53,13 +53,17 @@ import common.gaussian     as ITF
 key1 = "[Pilgrim_geometry]"
 key2 = "[Pilgrim_name]" 
 key3 = "[Pilgrim_gradhess]"
+key4a= "[Pilgrim_gradientcalc_start]"
+key4b= "[Pilgrim_gradientcalc_end]"
+key5a= "[Pilgrim_hessiancalc_start]"
+key5b= "[Pilgrim_hessiancalc_end]"
 #---------------------------------------------------------------#
 def pilgrim_template(ch=0,mtp=1,nproc=1,mem=1):
     '''
     Input for Gaussian software
     This calculation IS a single point calculation!
     '''
-    level   = "hf/sto-3g"
+    level   = "hf sto-3g"
    #level   = "mpwb95/6-31+G(d,p) IOp(3/76=0560004400) int=ultrafine"
 
     string  = "%%nproc=%i   \n"%nproc
@@ -68,7 +72,18 @@ def pilgrim_template(ch=0,mtp=1,nproc=1,mem=1):
     string += "#p %s        \n"%level
     string += "scf=verytight\n"
     string += "NoSymm       \n"
-    string += "%s           \n"%key3
+ #  string += "%s           \n"%key3
+
+    # gradient computation
+    string += "%s\n"%key4a
+    string += "force\n"
+    string += "%s\n"%key4b
+
+    # Hessian computation
+    string += "%s\n"%key5a
+    string += "freq=noraman\n"
+    string += "%s\n"%key5b
+
     string += "\n"
     string += "Input file for MEP calculation\n"
     string += "\n"
@@ -82,7 +97,7 @@ def pilgrim_templateHL(ch=0,mtp=1,nproc=1,mem=1):
     Input for Gaussian software
     This calculation IS a single point calculation!
     '''
-    level   = "hf/6-31G"
+    level   = "hf 6-31G"
 
     string  = "%%nproc=%i   \n"%nproc
     string += "%%mem=%iGB   \n"%mem
@@ -121,9 +136,22 @@ def pilgrim_spc(xcc,symbols,bhessian,mname,eargs):
     # create folder
     if folder is not None:
         if not os.path.exists(folder): os.mkdir(folder)
-    # Calculate gradient&hessian or just gradient
-    if bhessian: inkey3 = "freq=noraman "
-    else       : inkey3 = "force        "
+
+
+    # lines for GRADIENT (if any)
+    gradient_lines = None
+    if key4a in spc_template and key4b in spc_template:
+       gradient_lines = spc_template.split(key4a)[1].split(key4b)[0]
+       spc_template   = spc_template.replace(gradient_lines,"").replace(key4b,"")
+       gradient_lines = gradient_lines.strip()
+
+    # lines for HESSIAN (if any)
+    hessian_lines  = None
+    if key5a in spc_template and key5b in spc_template:
+       hessian_lines  = spc_template.split(key5a)[1].split(key5b)[0]
+       spc_template   = spc_template.replace(hessian_lines,"").replace(key5b,"")
+       hessian_lines  = hessian_lines.strip()
+
     # names of files
     wname, ifile, ofile, chk, fchk, err = ITF.iofiles(mname,folder)
     # Input
@@ -154,12 +182,29 @@ def pilgrim_spc(xcc,symbols,bhessian,mname,eargs):
         if key2 in line:
            pos  = line.find(key2)
            line = line[0:pos] + wname + line[pos+len(key2):]
+
+        #--------------------------------#
+        # Gradient & Hessian computation #
+        #--------------------------------#
+        # (a) via key3
         if key3 in line:
+           if bhessian: inkey3 = "freq=noraman "
+           else       : inkey3 = "force        "
            pos  = line.find(key3)
            line = line[0:pos] + inkey3 + line[pos+len(key3):]
+        # (b) via key4 & key5
+        if key4a in line:
+            if bhessian: continue
+            else       : line = line.replace(key4a,gradient_lines)
+        if key5a in line:
+            if bhessian: line = line.replace(key5a,hessian_lines)
+            else       : continue
+        #--------------------------------#
+
         # Add \n to line
         if not line.endswith("\n"): line += "\n"
         string_ifile += line
+
     with open(ifile,'w') as asdf: asdf.write(string_ifile)
     # Send calculation
     status = ITF.execute(ifile,ofile,err)

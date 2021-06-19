@@ -185,11 +185,11 @@ end_ctr
 #-------------------------#
 # ZCT transmission coefficient
 start_zct TS_6W.001
-    250.00  3.51230E+02
+    250.00  3.33254E+02
 end_zct
 
 start_zct TS_6W.002
-    250.00  3.33931E+02
+    250.00  3.29224E+02
 end_zct
 
 #-------------------------#
@@ -197,11 +197,11 @@ end_zct
 #-------------------------#
 # SCT transmission coefficient
 start_sct TS_6W.001
-    250.00  1.90575E+04
+    250.00  1.78166E+04
 end_sct
 
 start_sct TS_6W.002
-    250.00  1.83390E+04
+    250.00  1.78984E+04
 end_sct
 
 #-------------------------#
@@ -209,11 +209,11 @@ end_sct
 #-------------------------#
 # CVT coefficient
 start_cvt TS_6W.001
-    250.00  9.96120E-01
+    250.00  9.95644E-01
 end_cvt
 
 start_cvt TS_6W.002
-    250.00  9.95357E-01
+    250.00  9.93703E-01
 end_cvt
 
 #-------------------------#
@@ -221,11 +221,11 @@ end_cvt
 #-------------------------#
 # CAG/TST coefficient
 start_cagtst TS_6W.001
-    250.00  9.96215E-01
+    250.00  9.95723E-01
 end_cagtst
 
 start_cagtst TS_6W.002
-    250.00  9.97306E-01
+    250.00  9.96009E-01
 end_cagtst
 
 #-------------------------#
@@ -237,7 +237,7 @@ start_cagcvt TS_6W.001
 end_cagcvt
 
 start_cagcvt TS_6W.002
-    250.00  9.99743E-01
+    250.00  9.99759E-01
 end_cagcvt
 
 #-------------------------#
@@ -245,23 +245,23 @@ end_cagcvt
 #-------------------------#
 # TST correction factors/coefficients
 start_cfs cvt.HA
-    250.00  9.95863E-01
+    250.00  9.94987E-01
 end_cfs
 
 start_cfs cvtsct.HA
-    250.00  1.87341E+04
+    250.00  1.77534E+04
 end_cfs
 
 start_cfs cvtzct.HA
-    250.00  3.43898E+02
+    250.00  3.30196E+02
 end_cfs
 
 start_cfs tstsct.HA
-    250.00  1.87490E+04
+    250.00  1.77699E+04
 end_cfs
 
 start_cfs tstzct.HA
-    250.00  3.44170E+02
+    250.00  3.30498E+02
 end_cfs
 
 #-------------------------#
@@ -269,43 +269,43 @@ end_cfs
 #-------------------------#
 # Rate constants (in au)
 start_rcons mpcvt.HA.fw
-    250.00  1.81121E-18
+    250.00  1.80962E-18
 end_rcons
 
 start_rcons mpcvtsct.HA.fw
-    250.00  3.40724E-14
+    250.00  3.22888E-14
 end_rcons
 
 start_rcons mpcvtzct.HA.fw
-    250.00  6.25460E-16
+    250.00  6.00539E-16
 end_rcons
 
 start_rcons mptstsct.HA.fw
-    250.00  3.40995E-14
+    250.00  3.23187E-14
 end_rcons
 
 start_rcons mptstzct.HA.fw
-    250.00  6.25955E-16
+    250.00  6.01089E-16
 end_rcons
 
 start_rcons mscvt.HA.fw
-    250.00  1.81168E-18
+    250.00  1.81081E-18
 end_rcons
 
 start_rcons mscvtsct.HA.fw
-    250.00  3.45261E-14
+    250.00  3.22625E-14
 end_rcons
 
 start_rcons mscvtzct.HA.fw
-    250.00  6.36316E-16
+    250.00  6.03461E-16
 end_rcons
 
 start_rcons mststsct.HA.fw
-    250.00  3.45294E-14
+    250.00  3.22651E-14
 end_rcons
 
 start_rcons mststzct.HA.fw
-    250.00  6.36377E-16
+    250.00  6.03509E-16
 end_rcons
 
 start_rcons tst.HA.fw

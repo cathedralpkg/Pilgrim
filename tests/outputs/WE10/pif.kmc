@@ -10,8 +10,8 @@ start_kmc Habstr
 
    # Selection of the rate constant to use
    k(Ra)*2  mpcvtsct  
-   k(Rb)  mpcvtsct  
-   k(Rc)  mpcvtsct  
+   k(Rb)    mpcvtsct  
+   k(Rc)    mpcvtsct  
 end_kmc
 
 start_kmc Habstr_iso1
@@ -25,11 +25,11 @@ start_kmc Habstr_iso1
    pop0(H)            1.00e+06
 
    # Selection of the rate constant to use
-   k(Ra_iso1)*2  mpcvtsct
-   k(Rb_iso1)    mpcvtsct
-   k(Rc_iso1)    mpcvtsct
+   k(Ra_iso1)*2  mpcvtsct  
+   k(Rb_iso1)    mpcvtsct  
+   k(Rc_iso1)    mpcvtsct  
 end_kmc
-
+ 
 start_kmc Habstr_iso2
    # KMC Parameters
    psteps     1000       # print data each nstp steps
@@ -37,15 +37,15 @@ start_kmc Habstr_iso2
    timeunits  ps         # units for time variable
 
    # Initial (non-zero) populations (number of molecules)
-   pop0(EtOH_iso2)    1.00e+14
    pop0(D)            1.00e+06
+   pop0(EtOH_iso2)    1.00e+14
 
    # Selection of the rate constant to use
-   k(Ra_iso2)*2  mpcvtsct
-   k(Rb_iso2)    mpcvtsct
-   k(Rc_iso2)    mpcvtsct
+   k(Ra_iso2)*2  mpcvtsct  
+   k(Rb_iso2)    mpcvtsct  
+   k(Rc_iso2)    mpcvtsct  
 end_kmc
-
+ 
 start_kmc Habstr_iso3
    # KMC Parameters
    psteps     1000       # print data each nstp steps
@@ -53,12 +53,12 @@ start_kmc Habstr_iso3
    timeunits  ps         # units for time variable
 
    # Initial (non-zero) populations (number of molecules)
-   pop0(EtOH_iso3)    1.00e+14
    pop0(D)            1.00e+06
+   pop0(EtOH_iso3)    1.00e+14
 
    # Selection of the rate constant to use
-   k(Ra_iso3)*2  mpcvtsct
-   k(Rb_iso3)    mpcvtsct
-   k(Rc_iso3)    mpcvtsct
+   k(Ra_iso3)*2  mpcvtsct  
+   k(Rb_iso3)    mpcvtsct  
+   k(Rc_iso3)    mpcvtsct  
 end_kmc
-
+ 

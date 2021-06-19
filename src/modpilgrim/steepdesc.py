@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -408,6 +408,7 @@ def steepest(xcc0,s0,symbols,masses,pathdata,spc_fnc,spc_args,drst={},lFms=None,
         else:
             spc_data = spc_fnc(xcc_i,symbols,bhessian,point,spc_args)
             xcc_i, atnums, ch, mtp, E_i, gcc_i, Fcc_i, dummy = spc_data
+            if not bhessian: Fcc_i = []
             # Data in mass-scaled and correct format
             Fcc_i = fncs.lowt2matrix(Fcc_i)
             xms_i = fncs.cc2ms_x(xcc_i,masses,mu)

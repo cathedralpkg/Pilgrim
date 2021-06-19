@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2020.2 (2020-04-18)
+  Program version: Pilgrim v2021.4 (2021-June-18)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-02-04
-  Current time (HH:MM:SS)   : 18:14:11
-  Python interpreter version: 3.8.5
+  Current date (YY-MM-DD)   : 2021-06-19
+  Current time (HH:MM:SS)   : 09:45:37
+  Python interpreter version: 3.6.9
  -------------------------------------------------------------
 
 
@@ -67,9 +67,10 @@
          Keq(P2R)  = 1/Keq(R2P)
          GFER(P2R) = - GFER(R2P)
      
+       - The values listed below do not include torsional anharmonicity
      
         --------------------------------------------------
-                 |       for V=1cm^3 per molecule         
+                 |       for v=1cm^3 per molecule         
         --------------------------------------------------
           T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
         --------------------------------------------------
@@ -79,7 +80,7 @@
         --------------------------------------------------
      
         --------------------------------------------------
-                 |  for V=kB*T/p0 per molecule, p0=1bar   
+                 |  for v=kB*T/p0 per molecule, p0=1bar   
         --------------------------------------------------
           T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
         --------------------------------------------------
@@ -158,6 +159,7 @@
      -----------------------
      
          - units: sec^-1
+         - the rate constants listed below do not include torsional anharmonicity
      
          
          ----------------------------------------------------------------------------------------------
@@ -186,6 +188,7 @@
              - units: kcal/mol
              - reference volume: 1 cm^3 per molecule
          
+             - the free energies listed below do not include torsional anharmonicity
          ---------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
          ---------------------------------------------------------------------------------------------
@@ -206,6 +209,7 @@
              * GFEA = -R T ln(h k / kB T)
              - units: kcal/mol
              - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+             - the free energies listed below do not include torsional anharmonicity
          
          ---------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
@@ -230,22 +234,23 @@
      -----------------------
      
          - units: sec^-1
+         - the rate constants listed below do not include torsional anharmonicity
      
          
          ----------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT 
          ----------------------------------------------------------------------------------------------
-            300.00 |   4.236E+09 |   5.561E+09 |   1.135E+10 |   4.235E+09 |   5.561E+09 |   1.135E+10
+            300.00 |   4.236E+09 |   5.561E+09 |   1.134E+10 |   4.235E+09 |   5.561E+09 |   1.134E+10
             400.00 |   2.993E+10 |   3.490E+10 |   5.335E+10 |   2.992E+10 |   3.490E+10 |   5.335E+10
-            500.00 |   9.764E+10 |   1.078E+11 |   1.427E+11 |   9.763E+10 |   1.078E+11 |   1.427E+11
+            500.00 |   9.764E+10 |   1.078E+11 |   1.426E+11 |   9.763E+10 |   1.078E+11 |   1.426E+11
          ----------------------------------------------------------------------------------------------
          
          ----------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MP-TST/ZCT |  MP-TST/SCT |      MP-CVT |  MP-CVT/ZCT |  MP-CVT/SCT 
          ----------------------------------------------------------------------------------------------
-            300.00 |   4.236E+09 |   5.561E+09 |   1.135E+10 |   4.235E+09 |   5.561E+09 |   1.135E+10
+            300.00 |   4.236E+09 |   5.561E+09 |   1.134E+10 |   4.235E+09 |   5.561E+09 |   1.134E+10
             400.00 |   2.993E+10 |   3.490E+10 |   5.335E+10 |   2.992E+10 |   3.490E+10 |   5.335E+10
-            500.00 |   9.764E+10 |   1.078E+11 |   1.427E+11 |   9.763E+10 |   1.078E+11 |   1.427E+11
+            500.00 |   9.764E+10 |   1.078E+11 |   1.426E+11 |   9.763E+10 |   1.078E+11 |   1.426E+11
          ----------------------------------------------------------------------------------------------
          
          
@@ -258,6 +263,7 @@
              - units: kcal/mol
              - reference volume: 1 cm^3 per molecule
          
+             - the free energies listed below do not include torsional anharmonicity
          ---------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
          ---------------------------------------------------------------------------------------------
@@ -278,6 +284,7 @@
              * GFEA = -R T ln(h k / kB T)
              - units: kcal/mol
              - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+             - the free energies listed below do not include torsional anharmonicity
          
          ---------------------------------------------------------------------------------------------
            T (K)   |      MS-TST |  MS-TST/ZCT |  MS-TST/SCT |      MS-CVT |  MS-CVT/ZCT |  MS-CVT/SCT
@@ -302,7 +309,7 @@
 
 
                                                             ----------------------------
-                                                            | Current date: 2021-02-04 |
-                                                            | Current time:   18:14:11 |
-                                                            | Elapsed time: 15.4 msecs |
+                                                            | Current date: 2021-06-19 |
+                                                            | Current time:   09:45:37 |
+                                                            | Elapsed time: 20.2 msecs |
                                                             ----------------------------

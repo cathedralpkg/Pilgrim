@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -840,18 +840,18 @@ def deal_with_path(target,dlevel,software,ltemp,dctc,pathvars,dtes,dchem,dhighlv
 
     # 2. MEP expanded till SCT convergence
     elif pathvars.sct_convergence():
-         dcoefs, converged = get_path_sctconv(target,gtsTS,pathvars,tsoftw,ltemp,TMP,symmetry,plotfile)
-         # save convergence in file!
-         drstconv = RW.read_rstconv()
-         if converged: drstconv[target] = (min(ltemp),pathvars._useics,pathvars._scterr,"yes")
-         else        : drstconv[target] = (min(ltemp),pathvars._useics,pathvars._scterr,"no")
-         RW.write_rstconv(drstconv)
+       dcoefs, converged = get_path_sctconv(target,gtsTS,pathvars,tsoftw,ltemp,TMP,symmetry,plotfile)
+       # save convergence in file!
+       drstconv = RW.read_rstconv()
+       if converged: drstconv[target] = (min(ltemp),pathvars._useics,pathvars._scterr,"yes")
+       else        : drstconv[target] = (min(ltemp),pathvars._useics,pathvars._scterr,"no")
+       RW.write_rstconv(drstconv)
 
     # 3. Coefs with the current MEP extension
     else:
-         tcommon,drst,pathvars = calc_mep(target,gtsTS,pathvars,tsoftw,TMP)
-         dcoefs,pathvars,palpha,pomega = calc_coefs(target,tcommon,drst,pathvars,ltemp,symmetry,plotfile)
-         del drst
+       tcommon,drst,pathvars = calc_mep(target,gtsTS,pathvars,tsoftw,TMP)
+       dcoefs,pathvars,palpha,pomega = calc_coefs(target,tcommon,drst,pathvars,ltemp,symmetry,plotfile)
+       del drst
 
     # print summary with the coefficients
     fncs.print_string(PS.spath_allcoefs(ltemp,dcoefs),3)
@@ -978,6 +978,6 @@ def main(idata,status,case,targets="*",boolms=False):
     # print WARNINGS
     if len(WARNINGS) != 0:
        fncs.print_string("WARNINGS:",3)
-       for warning in WARNINGS: print_string("      *",warning)
+       for warning in WARNINGS: fncs.print_string("      *",warning)
        print("")
 #===============================================================#

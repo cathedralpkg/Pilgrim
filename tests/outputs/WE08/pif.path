@@ -4,7 +4,7 @@ start_mep TSA
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    8-10  --
+  fwdir    8-10  -- 
   scterr   0.500
 end_mep
 
@@ -13,7 +13,7 @@ start_mep TSB
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    4-10  --
+  fwdir    4-10  -- 
   scterr   0.500
 end_mep
 

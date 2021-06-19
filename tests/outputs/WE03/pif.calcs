@@ -11,10 +11,15 @@ start_meppoint ZE_TS gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -36,8 +41,14 @@ end_meppoint
 #- - - - - - - - - - - - - -#
 start_meppoint ZE_TS orca
 %pal nprocs 1 end  
+%maxcore 1000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 1
 [Pilgrim_geometry]         
 *

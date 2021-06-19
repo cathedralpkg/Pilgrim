@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  common             |
 | Sub-module :  internal           |
-| Last Update:  2020/02/03 (Y/M/D) |
+| Last Update:  2021/05/19 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -578,6 +578,7 @@ def zmat2xcc(zmat,zmatvals):
     symbol, (at2,at1), (dist,angle) = zmat[2]
     dist  = zmatvals[dist]/ANGSTROM
     angle = np.deg2rad(zmatvals[angle])
+    # position with regard atom 2
     x1 = np.array(fncs.xyz(xcc,at1))
     x2 = np.array(fncs.xyz(xcc,at2))
     # get vector 2 --> 1
@@ -593,10 +594,14 @@ def zmat2xcc(zmat,zmatvals):
     # Get old x2 and apply vec23
     x2 = np.array(fncs.xyz(xcc,at2))
     x3 = x2 + vec23
-    xcc[6:9] = x3.tolist()
+    # assert x3 is in positive part of X-axis
+    x3 = x3.tolist()
+    x3[0] = abs(x3[0])
+    # update xcc
+    xcc[6:9] = x3
     if len(zmat) == 3: return xcc
     # The rest of atoms
-    current = 4-1
+    current = 3
     for line in zmat[3:]:
         symbol, (at3,at2,at1), (dist,angle,dihedral) = line
         # Get values of distances and angles

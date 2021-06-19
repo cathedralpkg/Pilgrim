@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2020.2 (2020-04-18)
+  Program version: Pilgrim v2021.4 (2021-June-18)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-02-06
-  Current time (HH:MM:SS)   : 16:17:02
-  Python interpreter version: 3.8.5
+  Current date (YY-MM-DD)   : 2021-06-19
+  Current time (HH:MM:SS)   : 00:01:26
+  Python interpreter version: 3.6.9
  -------------------------------------------------------------
 
 
@@ -33,7 +33,7 @@
           ------------------------------------------------------------------------
            name | V0-min(V0) | V1-min(V1) |   ZPE   | mass (amu) | weight |  PGS  
           ------------------------------------------------------------------------
-            001 |      0.00  |      0.00  |    0.00 |      1.01  |    1   |   K   
+            001 |     0.000  |     0.000  |    0.00 |      1.01  |    1   |   K   
           ------------------------------------------------------------------------
           weight: equals 2 if the structure has a conformational enantiomer,
                   equals 1 otherwise
@@ -54,35 +54,45 @@
         | Point group symmetry  : K
         | Rotational sym num    : 1
         | Cartesian coordinates (Angstrom):
-        |    H    +0.000000   +0.000000   +0.000000  [  1.008 amu]
+        |    H    +0.00000000   +0.00000000   +0.00000000  [  1.008 amu]
         | 
         | Partition functions (pfns):
-        | -----------------------------------------------------------------------------
-        |     T (K)   |     Qtr    |    Qrot    |    Qvib    |     Qel    |    Qtot    
-        | -----------------------------------------------------------------------------
-        |      250.00 |  1.114E-01 |  1.000E+00 |  1.000E+00 |  2.000E+00 |  2.228E-01 
-        | -----------------------------------------------------------------------------
-        |   Qtr : translational pfn per volume unit (in au)
-        |   Qrot: rotational pfn (rigid-rotor)
-        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V1
+        | ------------------------------------------------------------------------------------------
+        |    T (K)   |  Qtr (au)  | Qtr (cm^-3) |    Qrot    |  Qvib [V0] |  Qvib [V1] |     Qel    
+        | ------------------------------------------------------------------------------------------
+        |     250.00 |  1.114E-01 |   7.516E+23 |  1.000E+00 |  1.000E+00 |  1.000E+00 |  2.000E+00 
+        | ------------------------------------------------------------------------------------------
+        |   Qtr : translational pfn per volume unit
+        |   Qrot: rotational pfn (rigid-rotor); includes rotational symmetry number
+        |   Qvib: vibrational pfn (harmonic-oscillator) relative to V0 and to V1
         |   Qel : electronic pfn
-        |   Qtot: total pfn per unit volume (in au)
+        | 
+        | ---------------------------------------------------------------
+        |    T (K)   | Qtot [V0]  | Qtot [V1]  | Qtot [V0]  | Qtot [V1]  
+        | ---------------------------------------------------------------
+        |     250.00 |  2.228E-01 |  2.228E-01 |  1.503E+24 |  1.503E+24 
+        | ---------------------------------------------------------------
+        |            |          in au          |        in cm^-3         
+        | ---------------------------------------------------------------
+        |   Qtot: total pfn per unit volume
+        |         * [V0] --> from the bottom of the potential (V0)
+        |         * [V1] --> from the zero-point energy (V1)
+        |         * includes rotational symmetry number
         |   
-        |   Both Qrot and Qtot include rotational symmetry number
         | 
         | Gibbs free energy (hartree):
         | -------------------------------------------
-        |   T (K)  |   V = 1 cm^3   |   V = kbT/p0   
+        |   T (K)  |   v = 1 cm^3   |   v = kbT/p0   
         | -------------------------------------------
         |   250.00 |    -0.54027246 |    -0.50479396 
         | -------------------------------------------
-        |   V : volume per molecule
+        |   v : volume per molecule
         |   p0: 1bar
         | 
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-02-06 |
-                                                            | Current time:   16:17:02 |
-                                                            | Elapsed time:  2.3 msecs |
+                                                            | Current date: 2021-06-19 |
+                                                            | Current time:   00:01:26 |
+                                                            | Elapsed time:  1.3 msecs |
                                                             ----------------------------

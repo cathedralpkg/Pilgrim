@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  common             |
 | Sub-module :  gaussian           |
-| Last Update:  2020/02/03 (Y/M/D) |
+| Last Update:  2021/05/19 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -151,12 +151,12 @@ def gen_zmatrix_string(lzmat,zmatvals,constants=[]):
     string += "Variables:\n"
     for key in the_keys:
         if key.startswith("-") or key in constants: continue
-        try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
+        try   : string += "%-7s %.8f\n"%(key,zmatvals[key])
         except: pass
     if len(constants) != 0:
        string += "Constants:\n"
        for key in constants:
-           try   : string += "%-7s %.5f\n"%(key,zmatvals[key])
+           try   : string += "%-7s %.8f\n"%(key,zmatvals[key])
            except: pass
     return string
 #=======================================================#

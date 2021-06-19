@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -345,20 +345,20 @@ def convert_udata_to_gts(ff,dtrack,dctc):
     if status == -1: inconsistence = (string,generated_gtsfiles)
     return dtrack, dctc, inconsistence
 #---------------------------------------------------------------#
-def gts2molecule(gtsfile):
-    # name of file (without path to folder)
-    gtsfile_name = gtsname(gtsfile,"name")
-    gtsfile_full = gtsname(gtsfile,"full")
-    # Get ctc and itc
-    ctc,itc,ext = gtsfile_name.split(".")
-    # read gts and prepare Molecule
-    if not os.path.exists(gtsfile_full): return None,(ctc,itc)
-    molecule = Molecule()
-    molecule.set_from_gts(gtsfile_full)
-    # setup
-    molecule.setup()
-    # return data
-    return molecule,(ctc,itc)
+##  def gts2molecule(gtsfile):
+##      # name of file (without path to folder)
+##      gtsfile_name = gtsname(gtsfile,"name")
+##      gtsfile_full = gtsname(gtsfile,"full")
+##      # Get ctc and itc
+##      ctc,itc,ext = gtsfile_name.split(".")
+##      # read gts and prepare Molecule
+##      if not os.path.exists(gtsfile_full): return None,(ctc,itc)
+##      molecule = Molecule()
+##      molecule.set_from_gts(gtsfile_full)
+##      # setup
+##      molecule.setup()
+##      # return data
+##      return molecule,(ctc,itc)
 #---------------------------------------------------------------#
 def molecule2molden(molecule,ctc,itc):
     # gn t name for molden file

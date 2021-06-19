@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -85,10 +85,10 @@ def get_templates(ch,mtp,case="LL"):
         module = dsoft[software]
         lib = __import__(module,fromlist=[''])
         globals()["mes"] = lib
-        if   case == "LL": string = mes.pilgrim_template(ch,mtp)
-        elif case == "HL": string = mes.pilgrim_templateHL(ch,mtp)
-        else             : string = ""
-        if string is None: string = software+"\n" # for asurf
+        if   case == "LL"    : string = mes.pilgrim_template(ch,mtp)
+        elif case == "HL"    : string = mes.pilgrim_templateHL(ch,mtp)
+        else                 : string = ""
+        if string is None    : string = software+"\n" # for asurf
         templates[software] = string
     return templates
 #---------------------------------------------------------------#

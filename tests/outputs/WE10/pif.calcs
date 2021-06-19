@@ -11,10 +11,15 @@ start_meppoint TSA gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -29,10 +34,15 @@ start_meppoint TSA_iso1 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -47,10 +57,15 @@ start_meppoint TSA_iso2 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -65,10 +80,15 @@ start_meppoint TSA_iso3 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -83,10 +103,15 @@ start_meppoint TSB gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -101,10 +126,15 @@ start_meppoint TSB_iso1 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -119,10 +149,15 @@ start_meppoint TSB_iso2 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -137,10 +172,15 @@ start_meppoint TSB_iso3 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -155,10 +195,15 @@ start_meppoint TSC gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -173,10 +218,15 @@ start_meppoint TSC_iso1 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -191,10 +241,15 @@ start_meppoint TSC_iso2 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -209,10 +264,15 @@ start_meppoint TSC_iso3 gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g        
+#p hf sto-3g        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -233,9 +293,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSA orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -245,9 +311,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSA_iso1 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -257,9 +329,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSA_iso2 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -269,9 +347,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSA_iso3 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -281,9 +365,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSB orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -293,9 +383,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSB_iso1 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -305,9 +401,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSB_iso2 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -317,9 +419,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSB_iso3 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -329,9 +437,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSC orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -341,9 +455,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSC_iso1 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -353,9 +473,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSC_iso2 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *
@@ -365,9 +491,15 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSC_iso3 orca
-%pal nprocs 1 end  
+%pal nprocs 4 end  
+%maxcore 4000 
 ! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 2
 [Pilgrim_geometry]         
 *

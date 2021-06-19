@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  common             |
 | Sub-module :  files              |
-| Last Update:  2020/02/03 (Y/M/D) |
+| Last Update:  2021/06/07 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -230,6 +230,17 @@ def read_xyz_zmat(xyzfile):
     # Return data
     return (lzmat,zmatvals,zmatatoms), symbols, masses
 #-----------------------------------------------#
+def string_xyz(xcc,symbs):
+    nat = len(symbs)
+    string = ""
+    for idx in range(nat):
+        symbol = symbs[idx]
+        xx = fncs.x(xcc,idx)*ANGSTROM
+        yy = fncs.y(xcc,idx)*ANGSTROM
+        zz = fncs.z(xcc,idx)*ANGSTROM
+        string += " %2s   %+13.8f   %+13.8f   %+13.8f\n"%(symbol,xx,yy,zz)
+    return string
+#-----------------------------------------------#
 def write_xyz(filename,xcc,symbs,comment="info line",mode="w",ext=".xyz"):
     '''
     Write standard .xyz file
@@ -246,16 +257,17 @@ def write_xyz(filename,xcc,symbs,comment="info line",mode="w",ext=".xyz"):
     string  = ""
     string += "%i\n"%nat
     string += "%s\n"%comment
-    for idx in range(nat):
-        symbol = symbs[idx]
-        xx = fncs.x(xcc,idx)*ANGSTROM
-        yy = fncs.y(xcc,idx)*ANGSTROM
-        zz = fncs.z(xcc,idx)*ANGSTROM
-        string += " %2s   %+10.5f   %+10.5f   %+10.5f\n"%(symbol,xx,yy,zz)
+    string += string_xyz(xcc,symbs)
+#   for idx in range(nat):
+#       symbol = symbs[idx]
+#       xx = fncs.x(xcc,idx)*ANGSTROM
+#       yy = fncs.y(xcc,idx)*ANGSTROM
+#       zz = fncs.z(xcc,idx)*ANGSTROM
+#       string += " %2s   %+13.8f   %+13.8f   %+13.8f\n"%(symbol,xx,yy,zz)
     # Write file
     with open(filename,mode) as asdf: asdf.write(string)
 #-----------------------------------------------#
-def write_zmat(fname, lzmat, zmatvals, zmatatoms):
+def string_zmat(lzmat, zmatvals):
     string = ""
     sorted_keys = [key for (symbol,conns,keys) in lzmat for key in keys]
     for symbol, connections, keys in lzmat: 
@@ -264,8 +276,11 @@ def write_zmat(fname, lzmat, zmatvals, zmatatoms):
     string += "\n"
     for key in sorted_keys:
         if key not in zmatvals: continue # for dummy, where the key is the float number
-        string += "%-6s   %9.4f\n"%(key,zmatvals[key])
-    string += "\n"
+        string += "%-6s   %13.8f\n"%(key,zmatvals[key])
+    return string
+#-----------------------------------------------#
+def write_zmat(fname, lzmat, zmatvals):
+    string = string_zmat(lzmat, zmatvals)+"\n"
     with open(fname,'w') as asdf: asdf.write(string)
 #===============================================#
 
@@ -698,7 +713,7 @@ def rst2xyz(rst,xyz,onlyhess=True,Eref=None):
             x *= ANGSTROM
             y *= ANGSTROM
             z *= ANGSTROM
-            string += " %2s   %+10.6f  %+10.6f  %+10.6f\n"%(symbol,x,y,z)
+            string += " %2s   %+12.8f  %+12.8f  %+12.8f\n"%(symbol,x,y,z)
     with open(xyz,'w') as asdf: asdf.write(string)
 #===============================================#
 

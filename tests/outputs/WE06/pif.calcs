@@ -11,10 +11,15 @@ start_meppoint nd3_planar gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p pm6
+#p pm6        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -29,10 +34,15 @@ start_meppoint nh3_planar gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p pm6
+#p pm6        
 scf=verytight
 NoSymm       
-[Pilgrim_gradhess]           
+[Pilgrim_gradientcalc_start]
+force
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+freq=noraman
+[Pilgrim_hessiancalc_end]
 
 Input file for MEP calculation
 
@@ -51,7 +61,7 @@ start_highlevel nd3_planar gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g
+#p hf sto-3g        
 scf=verytight
 NoSymm       
 
@@ -68,7 +78,7 @@ start_highlevel nd3_pyram gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g
+#p hf sto-3g        
 scf=verytight
 NoSymm       
 
@@ -85,7 +95,7 @@ start_highlevel nh3_planar gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g
+#p hf sto-3g        
 scf=verytight
 NoSymm       
 
@@ -102,7 +112,7 @@ start_highlevel nh3_pyram gaussian
 %nproc=1   
 %mem=1GB   
 %chk=[Pilgrim_name].chk 
-#p hf/sto-3g
+#p hf sto-3g        
 scf=verytight
 NoSymm       
 
@@ -126,8 +136,14 @@ end_highlevel
 #- - - - - - - - - - - - - -#
 start_meppoint nd3_planar orca
 %pal nprocs 1 end  
-! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+%maxcore 1000 
+! pm6 TightSCF        
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 1
 [Pilgrim_geometry]         
 *
@@ -138,8 +154,14 @@ end_meppoint
 #- - - - - - - - - - - - - -#
 start_meppoint nh3_planar orca
 %pal nprocs 1 end  
-! hf sto-3g TightSCF        
-[Pilgrim_gradhess]         
+%maxcore 1000 
+! pm6 TightSCF        
+[Pilgrim_gradientcalc_start]
+! EnGrad
+[Pilgrim_gradientcalc_end]
+[Pilgrim_hessiancalc_start]
+! Freq
+[Pilgrim_hessiancalc_end]
 * xyz 0 1
 [Pilgrim_geometry]         
 *
@@ -154,7 +176,7 @@ end_meppoint
 #- - - - - - - - - - - - - -#
 start_highlevel nd3_planar orca
 %pal nprocs 1 end  
-! hf 6-31G TightSCF        
+! hf sto-3g TightSCF        
 * xyz 0 1
 [Pilgrim_geometry]         
 *
@@ -165,7 +187,7 @@ end_highlevel
 #- - - - - - - - - - - - - -#
 start_highlevel nd3_pyram orca
 %pal nprocs 1 end  
-! hf 6-31G TightSCF        
+! hf sto-3g TightSCF        
 * xyz 0 1
 [Pilgrim_geometry]         
 *
@@ -176,7 +198,7 @@ end_highlevel
 #- - - - - - - - - - - - - -#
 start_highlevel nh3_planar orca
 %pal nprocs 1 end  
-! hf 6-31G TightSCF        
+! hf sto-3g TightSCF        
 * xyz 0 1
 [Pilgrim_geometry]         
 *
@@ -187,7 +209,7 @@ end_highlevel
 #- - - - - - - - - - - - - -#
 start_highlevel nh3_pyram orca
 %pal nprocs 1 end  
-! hf 6-31G TightSCF        
+! hf sto-3g TightSCF        
 * xyz 0 1
 [Pilgrim_geometry]         
 *

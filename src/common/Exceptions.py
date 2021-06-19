@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  common             |
 | Sub-module :  Exceptions         |
-| Last Update:  2020/02/03 (Y/M/D) |
+| Last Update:  2021/06/06 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -46,6 +46,7 @@ class ABORTED(Exception)         : pass
 class FileType(Exception)        : pass
 class ReadProblem(Exception)     : pass
 class UnknownSoft(Exception)     : pass
+class UnknownKey(Exception)      : pass
 class ExeNotDef(Exception)       : pass
 class ExeNotFound(Exception)     : pass
 class CalcFails(Exception)       : pass

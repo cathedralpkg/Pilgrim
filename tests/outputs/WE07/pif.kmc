@@ -14,7 +14,7 @@ start_kmc Habstr
 
    # Selection of the rate constant to use
    k(Ra)*2  tst  
-   k(Rb)  tst  
-   k(Rc)  tst  
+   k(Rb)    tst  
+   k(Rc)    tst  
 end_kmc
 

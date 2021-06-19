@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -66,7 +66,7 @@ from   modpilgrim.diverse            import status_check
 from   modpilgrim.diverse            import ffchecking
 from   modpilgrim.diverse            import calc_fwdir
 #--------------------------------------------------#
-from   modpilgrim.pilesso                import get_templates
+from   modpilgrim.pilesso            import get_templates
 #--------------------------------------------------#
 from   modpilgrim.PathVars           import PathVars
 #--------------------------------------------------#

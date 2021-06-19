@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -46,6 +46,7 @@ import os
 import numpy as np
 #--------------------------------------------------#
 from   common.physcons    import KCALMOL,KB
+from   common.fncs        import eformat
 from   common.fncs        import exp128
 #--------------------------------------------------#
 from   modpilgrim.diverse import status_check
@@ -94,18 +95,25 @@ def readout_pfn(pof):
             idx2  = idx+4
             while True:
                 if "------" in lines[idx2]: break
-                T,Qtr,Qrot,Qvib,Qel,Qtot = lines[idx2].replace("|"," ").split()
+                the_line = lines[idx2].replace("|"," ")
+                T,Qtr,Qtr_ml,Qrot,Qvib_V0,Qvib_V1,Qel = the_line.split()
                 data[itc]["T"  ].append(T)
                 data[itc]["Qtr"  ].append(Qtr )
                 data[itc]["Qrot" ].append(Qrot)
-                data[itc]["Qvib(V1)" ].append(Qvib)
+                data[itc]["Qvib(V1)" ].append(Qvib_V1)
                 data[itc]["Qel"  ].append(Qel )
-                data[itc]["Qtot(V1)" ].append(Qtot)
+                #data[itc]["Qtot(V1)" ].append(Qtot)
+                idx2 += 1
+            idx2 += 9
+            while True:
+                if "------" in lines[idx2]: break
+                the_line = lines[idx2].replace("|"," ")
+                T,Qtot_V0_au,Qtot_V1_au,Qtot_V0_ml,Qtot_V1_ml = the_line.split()
+                data[itc]["Qtot(V1)" ].append(Qtot_V1_au)
                 idx2 += 1
         # Gibbs
         if "| Gibbs free energy (hartree):" in line:
-            data[itc]["T"   ] = []
-            data[itc]["G(V)"] = []
+            data[itc]["G(v)"] = []
             data[itc]["G(p)"] = []
             idx2  = idx+4
             while True:
@@ -113,8 +121,7 @@ def readout_pfn(pof):
                 T,GV0,Gp0 = lines[idx2].replace("|"," ").split()
                 GV0 = "%.3f"%((float(GV0)-float(data[itc]["V0"]))*KCALMOL)
                 Gp0 = "%.3f"%((float(Gp0)-float(data[itc]["V0"]))*KCALMOL)
-                data[itc]["T"   ].append(T)
-                data[itc]["G(V)"].append(GV0)
+                data[itc]["G(v)"].append(GV0)
                 data[itc]["G(p)"].append(Gp0)
                 idx2 += 1
         # min(V0), min(V1)
@@ -124,17 +131,27 @@ def readout_pfn(pof):
         if "Total multi-structural HO" in line:
             data["all"]["T"   ] = []
             data["all"]["Qtot(V1)" ] = []
-            data["all"]["G(V)"] = []
+            idx2  = idx+4
+            while True:
+                if "------" in lines[idx2]: break
+                the_line = lines[idx2].replace("|"," ")
+                T,QMSHO_V0_au,QMSHO_V1_au,QMSHO_V0_ml,QMSHO_V1_ml = the_line.split()
+                data["all"]["T"   ].append(T)
+                print(QMSHO_V1_au)
+                data["all"]["Qtot(V1)" ].append(QMSHO_V1_au)
+                idx2 += 1
+        # total Gibbs free energies
+        if "Total HO Gibbs free energies" in line:
+            data["all"]["G(v)"] = []
             data["all"]["G(p)"] = []
             idx2  = idx+4
             while True:
                 if "------" in lines[idx2]: break
-                T,QMSHO,GV0,Gp0 = lines[idx2].replace("|"," ").split()
+                the_line = lines[idx2].replace("|"," ")
+                T,GV0,Gp0 = the_line.split()
                 GV0 = "%.3f"%((float(GV0)-float(data["all"]["V0"]))*KCALMOL)
                 Gp0 = "%.3f"%((float(Gp0)-float(data["all"]["V0"]))*KCALMOL)
-                data["all"]["T"   ].append(T)
-                data["all"]["Qtot(V1)" ].append(QMSHO)
-                data["all"]["G(V)"].append(GV0)
+                data["all"]["G(v)"].append(GV0)
                 data["all"]["G(p)"].append(Gp0)
                 idx2 += 1
         # Anharmonicity
@@ -151,13 +168,13 @@ def readout_pfn(pof):
     # Rovibrational itc
     for itc in data.keys():
         if itc == "all": continue
-        Qrot = np.array([float(v) for v in data[itc]["Qrot"]])
-        Qvib = np.array([float(v) for v in data[itc]["Qvib(V1)"]])
+        Qrot = np.array([np.float128(v) for v in data[itc]["Qrot"]])
+        Qvib = np.array([np.float128(v) for v in data[itc]["Qvib(V1)"]])
         Qrv  = ["%.3E"%v for v in Qrot*Qvib]
         data[itc]["Qrv(V1)" ] = Qrv
     # Rovibrational all
     try:
-        Qtot = np.array([float(v) for v in data["all"]["Qtot(V1)"]])
+        Qtot = np.array([np.float128(v) for v in data["all"]["Qtot(V1)"]])
         Qtr  = np.array([float(v) for v in data[itc]["Qtr"]])
         Qel  = np.array([float(v) for v in data[itc]["Qel"]])
         Qrv  = ["%.3E"%v for v in Qtot/(Qtr*Qel)]
@@ -174,25 +191,25 @@ def readout_pfn(pof):
                               for T in data[itc]["T"]])
            # correct Qvib
            if itc != "all":
-              Qvib = np.array([float(v) for v in data[itc]["Qvib(V1)"]])
-              data[itc]["Qvib"] = ["%.3E"%v for v in Qvib * V1toV0]
+              Qvib = np.array([np.float128(v) for v in data[itc]["Qvib(V1)"]])
+              data[itc]["Qvib"] = [eformat(v,3) for v in Qvib * V1toV0]
            # correct Qrv
-           Qrv  = np.array([float(v) for v in data[itc]["Qrv(V1)"]])
-           data[itc]["Qrv" ] = ["%.3E"%v for v in Qrv * V1toV0]
+           Qrv  = np.array([np.float128(v) for v in data[itc]["Qrv(V1)"]])
+           data[itc]["Qrv" ] = [eformat(v,3) for v in Qrv * V1toV0]
            # correct Qtot
-           Qtot = np.array([float(v) for v in data[itc]["Qtot(V1)"]])
-           data[itc]["Qtot" ] = ["%.3E"%v for v in Qtot * V1toV0]
+           Qtot = np.array([np.float128(v) for v in data[itc]["Qtot(V1)"]])
+           data[itc]["Qtot" ] = [eformat(v,3) for v in Qtot * V1toV0]
         except: pass
     # ANH partition function
     try:
        Qar  = np.array([float(v) for v in data["all"]["ANH. RATIO"]])
-       Qtot = np.array([float(v) for v in data["all"]["Qtot"]])
+       Qtot = np.array([np.float128(v) for v in data["all"]["Qtot"]])
        T    = np.array([float(v) for v in data["all"]["T"]])
        Gcor = - (np.log(Qar)*T*KB)*KCALMOL
-       GV   = np.array([float(v) for v in data["all"]["G(V)"]])
+       GV   = np.array([float(v) for v in data["all"]["G(v)"]])
        Gp   = np.array([float(v) for v in data["all"]["G(p)"]])
-       data["all"]["Qanh"   ] = ["%.3E"%v for v in Qar*Qtot]
-       data["all"]["Ganh(V)"] = ["%.3f"%v for v in GV+Gcor]
+       data["all"]["Qanh"   ] = [eformat(v,3) for v in Qar*Qtot]
+       data["all"]["Ganh(v)"] = ["%.3f"%v for v in GV+Gcor]
        data["all"]["Ganh(p)"] = ["%.3f"%v for v in Gp+Gcor]
     except: pass
     # return all
@@ -234,13 +251,13 @@ def genpfntable2(data,itcs,stemps):
     head = frow%tuple(props.split(","))
     sinfo  = "="*len(head)+"\n"
     sinfo += "Columns (pf stands for partition function):\n"
-    sinfo += "     - Qtr  : traslational     pf (per unit volume)\n"
+    sinfo += "     - Qtr  : traslational     pf (per unit volume, in au)\n"
     sinfo += "     - Qel  : electronic       pf\n"
     sinfo += "     - Qrot : rotational       pf\n"
     sinfo += "     - Qvib : vibrational      pf\n"
     sinfo += "     - Qrv  : rovibrational    pf\n"
-    sinfo += "     - Qtot : total MS-HO      pf (per unit volume)\n"
-    sinfo += "     - Qanh : total anharmonic pf (per unit volume)\n"
+    sinfo += "     - Qtot : total MS-HO      pf (per unit volume, in au)\n"
+    sinfo += "     - Qanh : total anharmonic pf (per unit volume, in au)\n"
     sinfo += "\n"
     sinfo += "     * Qvib, Qrv, Qtot and Qanh --> relative to V0\n"
     sinfo += "\n"
@@ -278,7 +295,7 @@ def genpfntable3(data,itcs,stemps):
     if len(itcs) == 1: case, props, frow = 1, "T (K),"," %7s |"
     else             : case, props, frow = 2, "conf," ," %7s |"
     if case == 2: itcs = itcs + ["all"]
-    props += "G(V),G(p),Ganh(V),Ganh(p)"
+    props += "G(v),G(p),Ganh(v),Ganh(p)"
     frow  += " %10s | %10s | %10s | %10s "
     head = frow%tuple(props.split(","))
     sinfo  = "="*len(head)+"\n"
@@ -287,8 +304,8 @@ def genpfntable3(data,itcs,stemps):
     sinfo += "     - Ganh : anharmonic Gibbs free energy [kcal/mol]\n"
     sinfo += "\n"
     sinfo += "     * Values are relative to V0\n"
-    sinfo += "     * (V)  --> for a volume per molecule of V = 1cm^3\n"
-    sinfo += "     * (p)  --> for a volume per molecule of V = kB*T/p0\n"
+    sinfo += "     * (v)  --> for a volume per molecule of v = 1cm^3\n"
+    sinfo += "     * (p)  --> for a volume per molecule of v = kB*T/p0\n"
     sinfo += "                with p0=1 bar\n"
     sinfo += "\n"
     for line in sinfo.split("\n"): print("     %s"%line)
@@ -906,16 +923,16 @@ def summary_rcons(targets,ltemp,dchem,dlevel):
          props,ml = "reaction,", 8
 
     frow   = " %%%is | %%7s | %%7s | %%9s | %%9s | %%14s "%ml
-    props1 = props + "V0_dir,V1_dir,G_dir(V),G_dir(p),k_dir"
-    props2 = props + "V0_inv,V1_inv,G_inv(V),G_inv(p),k_inv"
+    props1 = props + "V0_dir,V1_dir,G_dir(v),G_dir(p),k_dir"
+    props2 = props + "V0_inv,V1_inv,G_inv(v),G_inv(p),k_inv"
     string  = "Columns:\n"
     string += "     - V0       : difference in electronic energy between the transition\n"
     string += "                  state and the reactant(s) [kcal/mol]\n"
     string += "     - V1       : V0 corrected with vibrational zero-point energy [kcal/mol]\n"
-    string += "     - G(V)     : Gibbs free energy of activation [kcal/mol] calculated\n"
-    string += "                  for a volume per molecule of V = 1cm^3\n"
+    string += "     - G(v)     : Gibbs free energy of activation [kcal/mol] calculated\n"
+    string += "                  for a volume per molecule of v = 1cm^3\n"
     string += "     - G(p)     : Gibbs free energy of activation [kcal/mol] calculated\n"
-    string += "                  for a volume per molecule of V = kB*T/p0 with p0=1 bar\n"
+    string += "                  for a volume per molecule of v = kB*T/p0 with p0=1 bar\n"
     string += "     - k        : reaction rate constant\n"
     string += "                  * unimolecular reaction (u) --> [1/s]\n"
     string += "                  * bimolecular  reaction (b) --> [cm^3/molecule/s]\n"

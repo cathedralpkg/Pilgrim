@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -174,6 +174,7 @@ class Molecule():
           if calculate: self._pgroup,self._rotsigma = get_pgs(self._atnums,self._masses,self._xcc)
 
       def remove_frozen(self):
+          if self._natoms == 1: return [],[]
           frozen = fncs.detect_frozen(self._Fcc,self._natoms)
           if len(frozen) == 0: return [],[]
           # coordinates and symbols of frozen moiety
@@ -432,7 +433,7 @@ class Molecule():
               x *= ANGSTROM
               y *= ANGSTROM
               z *= ANGSTROM
-              string += "  %2s   %+10.6f  %+10.6f  %+10.6f  [%7.3f amu]\n"%(symbol,x,y,z,mass)
+              string += "  %2s   %+12.8f  %+12.8f  %+12.8f  [%7.3f amu]\n"%(symbol,x,y,z,mass)
 
           try:
               str2  = "Moments and product of inertia (au):\n"

@@ -13,7 +13,7 @@ start_mep TSA_iso1
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    8-10  --
+  fwdir    8-10  -- 
   scterr   0.500
 end_mep
 
@@ -22,7 +22,7 @@ start_mep TSA_iso2
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    8-10  --
+  fwdir    8-10  -- 
   scterr   0.500
 end_mep
 
@@ -31,7 +31,7 @@ start_mep TSA_iso3
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    8-10  --
+  fwdir    8-10  -- 
   scterr   0.500
 end_mep
 
@@ -49,7 +49,7 @@ start_mep TSB_iso1
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    4-10  --
+  fwdir    4-10  -- 
   scterr   0.500
 end_mep
 
@@ -58,7 +58,7 @@ start_mep TSB_iso2
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    4-10  --
+  fwdir    4-10  -- 
   scterr   0.500
 end_mep
 
@@ -67,7 +67,7 @@ start_mep TSB_iso3
   sfw      +2.5000  
   ds       0.01000   
   hsteps   10     
-  fwdir    4-10  --
+  fwdir    4-10  -- 
   scterr   0.500
 end_mep
 

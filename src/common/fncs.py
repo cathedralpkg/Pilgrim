@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  common             |
 | Sub-module :  fncs               |
-| Last Update:  2020/02/03 (Y/M/D) |
+| Last Update:  2021/05/19 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -57,7 +57,8 @@ from   common.criteria import EPS_INERTIA
 from   common.criteria import EPS_NORM
 #==============================================#
 
-PROJECT_TRAROT = True
+PROJECT_TRA = True
+PROJECT_ROT = True
 
 #==============================================#
 alphUC   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"        #
@@ -1041,13 +1042,20 @@ def gen_rotmatrix(axis,theta):
     return rot_matrix
 #-----------------------------------------------#
 def rotate_point(xyz,RotMat):
+    RotMat = np.matrix(RotMat)
+    # assert right orientation of new coordinate system
+    if np.linalg.det(RotMat) < 0.0: RotMat = - RotMat
     # Rotate atoms in fragment
     rotated_xyz = []
-    xyz = np.matrix(RotMat) * np.matrix(xyz).transpose()
+    xyz = RotMat * np.matrix(xyz).transpose()
     xyz = np.array((xyz.transpose()).tolist()[0])
     return xyz
 #-----------------------------------------------#
 def rotate_molecule(xcc,RotMat):
+    # assert right orientation of new coordinate system
+    RotMat = np.matrix(RotMat)
+    if np.linalg.det(RotMat) < 0.0: RotMat = - RotMat
+    # rotate atom by atom
     natoms = len(xcc)//3
     final_xcc = []
     for atom in range(natoms):
@@ -1218,9 +1226,10 @@ def get_projectionmatrix(xcc,masses,v0=None):
     Other coordinate can be projected by introducing it
     using v0 (in mass-scaled)
     '''
+    vecs = []
     nat  = len(masses)
-    # PROJECT TRA & ROT IN HESS FOR FREQS
-    if PROJECT_TRAROT:
+    # PROJECT TRA IN HESS FOR FREQS
+    if PROJECT_TRA:
        # translation
        sqrtmasses = [np.sqrt(mass) for mass in masses]
        b1 = [term if ii==0 else 0.0 for term in sqrtmasses for ii in range(3)]
@@ -1232,7 +1241,9 @@ def get_projectionmatrix(xcc,masses,v0=None):
        b1 /= norm1
        b2 /= norm2
        b3 /= norm3
-       vecs = [b1,b2,b3]
+       vecs += [b1,b2,b3]
+    # PROJECT ROT IN HESS FOR FREQS
+    if PROJECT_ROT:
        # rotation
        b4 = np.zeros(len(xcc))
        b5 = np.zeros(len(xcc))
@@ -1250,12 +1261,14 @@ def get_projectionmatrix(xcc,masses,v0=None):
        if norm4 > EPS_NORM: b4 /= norm4; vecs.append(b4)
        if norm5 > EPS_NORM: b5 /= norm5; vecs.append(b5)
        if norm6 > EPS_NORM: b6 /= norm6; vecs.append(b6)
-       # Gram Schmidt
+    # Gram Schmidt
+    if len(vecs) != 0:
        X = np.matrix(vecs).transpose()
        X_gs, R = np.linalg.qr(X)
        projmatrix = X_gs * X_gs.H
     else:
        projmatrix = np.zeros( (3*nat,3*nat) )
+    # PROJECT GRADIENT
     if v0 is not None:
        normv0 = np.linalg.norm(v0)
        if normv0 > EPS_NORM:

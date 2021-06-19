@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -175,10 +175,10 @@ def ispe(tcommon,drst,ispe_xy,tension):
            drst[point] = tuple(drst[point])
     # more than one point
     else:
-       # reduce points of drst to those for DLEVEL
        s1, l1, E1_hl = ispe_xy[0]
        sn, ln, En_hl = ispe_xy[-1]
-       drst   = {point:drst[point] for point in points if in_interval(drst[point][0],s1,sn)}
+       # reduce points of drst to those for DLEVEL
+ #     drst   = {point:drst[point] for point in points if in_interval(drst[point][0],s1,sn)}
        points = sd.sorted_points(drst,hess=False)
 
        # get s0 and L from lower level

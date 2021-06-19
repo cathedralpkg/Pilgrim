@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -304,7 +304,7 @@ class ChemReaction():
           self._ANHkbw = self._ANHTS / self._ANHP
 
       def calculate_eqconstant(self):
-          # calculate eq constant for V=1cm^3/molecule
+          # calculate eq constant for v=1cm^3/molecule
           self._Keq = partfns.Qs2Kc(self._ltemp,self._QtR,self._QtP,self._V1R,self._V1P,self._nR,self._nP)
           self._Keq = float(self._wfw)/float(self._wbw) * np.array(self._Keq)
           # include anharmonicity

@@ -1,11 +1,10 @@
 
 start_mep nh3_planar     
-  sbw      -0.9000  
-  sfw      +0.9000  
+  sbw      -1.0000  
+  sfw      +1.0000  
   ds       0.00500   
+  qrc
   hsteps   10     
   fwdir    2_3_4_1  ++ 
-  scterr   0.010
-  qrc
 end_mep
 

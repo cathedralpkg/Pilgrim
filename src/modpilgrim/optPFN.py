@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -251,7 +251,9 @@ def calculate_QMSHO_for_ctc(Cluster,ltemp,dimasses={},tupleHL=None):
             string += "     | "+line+"\n"
         #string += add_iblank(molecule.info_string(),5)
         string += "     | Partition functions (pfns):\n"
-        for line in PS.getstring_pfn1(ltemp,pf_i,pf_PIB,pf_RR,pf_HO,pf_ele).split("\n"):
+        table_1a = PS.getstring_pfn1a(ltemp,pf_PIB,pf_RR,pf_HO,pf_ele,V0_i,V1_i)
+        table_1b = PS.getstring_pfn1b(ltemp,pf_i,V0_i,V1_i)
+        for line in table_1a.split("\n")+table_1b.split("\n"):
             string += "     | "+line+"\n"
        #string += add_iblank(PS.getstring_pfn1(ltemp,pf_i,pf_PIB,pf_RR,pf_HO,pf_ele),7)
         string += "     | Gibbs free energy (hartree):\n"
@@ -282,11 +284,12 @@ def calculate_QMSHO_for_ctc(Cluster,ltemp,dimasses={},tupleHL=None):
     if nconfs > 1:
        dchi = conformer_contributions(ltemp,dpfn,ctc,itcs)
        string += "\n"
-       string += "    Total multi-structural HO pfn (QMS_HO) and Gibbs free energies (GFE):\n"
-      #string += "    Total multi-structural HO pfn (QMS_HO) relative to min(V1):\n"
-       string += add_iblank(PS.getstring_pfn2(ltemp,pfn_tot,gibbs1cm3_tot,gibbs1bar_tot),10)
+       string += "    Total multi-structural HO pfn (QMS_HO):\n"
+       string += add_iblank(PS.getstring_pfn2a(ltemp,pfn_tot,V0,V1),5)
+       string += "    Total HO Gibbs free energies (GFE):\n"
+       string += add_iblank(PS.getstring_pfn2b(ltemp,gibbs1cm3_tot,gibbs1bar_tot),5)
        string += "    Individual contributions to the partition function:\n"
-       string += add_iblank(PS.string_contributions(itcs,ltemp,dchi),10)
+       string += add_iblank(PS.string_contributions(itcs,ltemp,dchi),5)
     else:
        dchi = {}
     return dpfn, dgibbs1cm3, dgibbs1bar, string, dchi, dctr

@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -67,7 +67,7 @@ from   modpilgrim.fit2anarc  import activation4
 from   modpilgrim.fit2anarc  import activation5
 #---------------------------------------------------------------#
 
-VERSION   = "2021.3 (2021-05-04)"
+VERSION   = "2021.4 (2021-June-19)"
 
 # methods
 KEYS_TC = "tst,tstzct,tstsct,cvt,cvtzct,cvtsct".split(",")
@@ -204,7 +204,77 @@ def title_pfn(ctc,pof):
     string += "    Pilgrim output file: %s\n"%pof
     return string
 #---------------------------------------------------------------#
-def getstring_pfn1(ltemp,pf_tot,pf_PIB,pf_RR,pf_HO,pf_ele):
+def getstring_pfn1a(ltemp,pf_PIB,pf_RR,pf_HO,pf_ele,V0,V1):
+    # correction factor from V1 to V0
+    V1toV0 = np.array([fncs.exp128((V0-V1)/KB/float(T)) for T in ltemp])
+    # Table 1 --> individual contributions
+    cols  = [fncs.fill_string("T (K)",11)]
+    cols += [fncs.fill_string("Qtr (au)"    ,12)]
+    cols += [fncs.fill_string("Qtr (cm^-3)" ,13)]
+    cols += [fncs.fill_string("Qrot"        ,12)]
+    cols += [fncs.fill_string("Qvib [V0]"   ,12)]
+    cols += [fncs.fill_string("Qvib [V1]"   ,12)]
+    cols += [fncs.fill_string("Qel"         ,12)]
+    cols = "|".join(cols)
+    # generate table 1
+    string  = ""
+    string += "-"*len(cols)+"\n"
+    string +=         cols +"\n"
+    string += "-"*len(cols)+"\n"
+    for idx,T in enumerate(ltemp):
+        row  = [" %9.2f "%T]
+        row += [" %10.3E "%pf_PIB[idx]]
+        row += [" %11.3E "%(pf_PIB[idx]/ML)]
+        row += [" %10.3E "%pf_RR[idx]]
+        row += [" %10s "%fncs.eformat(pf_HO[idx]*V1toV0[idx],3)]
+        row += [" %10.3E "%pf_HO[idx]]
+        row += [" %10.3E "%pf_ele[idx]]
+    #   row += [" %10.3E // %10.3E "%(pf_tot[idx],pf_tot[idx]/ML)]
+        string += "|".join(row)+"\n"
+    string += "-"*len(cols)+"\n"
+    string += "  Qtr : translational pfn per volume unit\n"
+    string += "  Qrot: rotational pfn (rigid-rotor); includes rotational symmetry number\n"
+    string += "  Qvib: vibrational pfn (harmonic-oscillator) relative to V0 and to V1\n"
+    string += "  Qel : electronic pfn\n"
+    return string
+#---------------------------------------------------------------#
+def getstring_pfn1b(ltemp,pf_tot,V0,V1):
+    # correction factor from V1 to V0
+    V1toV0 = np.array([fncs.exp128((V0-V1)/KB/float(T)) for T in ltemp])
+    # Table 1 --> individual contributions
+    cols  = [fncs.fill_string("T (K)",11)]
+    cols += [fncs.fill_string("Qtot [V0] "  ,12)]
+    cols += [fncs.fill_string("Qtot [V1] "  ,12)]
+    cols += [fncs.fill_string("Qtot [V0] "  ,12)]
+    cols += [fncs.fill_string("Qtot [V1] "  ,12)]
+    cols = "|".join(cols)
+    # generate table 1
+    string  = ""
+    string += "-"*len(cols)+"\n"
+    string +=         cols +"\n"
+    string += "-"*len(cols)+"\n"
+    for idx,T in enumerate(ltemp):
+        row  = [" %9.2f "%T]
+        tot_V1_au = pf_tot[idx]
+        tot_V1_ml = tot_V1_au / ML
+        tot_V0_au = tot_V1_au * V1toV0[idx]
+        tot_V0_ml = tot_V0_au / ML
+        row += [" %10s "%fncs.eformat(tot_V0_au,3)]
+        row += [" %10.3E "%tot_V1_au]
+        row += [" %10s "%fncs.eformat(tot_V0_ml,3)]
+        row += [" %10.3E "%tot_V1_ml]
+        string += "|".join(row)+"\n"
+    string += "-"*len(cols)+"\n"
+    string += " "*11+"|%s|%s \n"%(fncs.fill_string("in au",25),fncs.fill_string("in cm^-3",24))
+    string += "-"*len(cols)+"\n"
+    string += "  Qtot: total pfn per unit volume\n"
+    string += "        * [V0] --> from the bottom of the potential (V0)\n"
+    string += "        * [V1] --> from the zero-point energy (V1)\n"
+    string += "        * includes rotational symmetry number\n"
+    string += "  \n"
+    return string
+#---------------------------------------------------------------#
+def old_getstring_pfn1(ltemp,pf_tot,pf_PIB,pf_RR,pf_HO,pf_ele):
     cols = ["T (K)","Qtr","Qrot","Qvib","Qel","Qtot"]
     string  = ""
     string += "-".join(["-"*12     for col in cols])+"\n"
@@ -226,19 +296,73 @@ def getstring_pfn1(ltemp,pf_tot,pf_PIB,pf_RR,pf_HO,pf_ele):
 #---------------------------------------------------------------#
 def spfn_igibbs(ltemp,gibbs1cm3,gibbs1bar):
     string  = "-------------------------------------------\n"
-    string += "  T (K)  |   V = 1 cm^3   |   V = kbT/p0   \n"
+    string += "  T (K)  |   v = 1 cm^3   |   v = kbT/p0   \n"
     string += "-------------------------------------------\n"
     for idx,T in enumerate(ltemp):
         g1cm3 = gibbs1cm3[idx]
         g1bar = gibbs1bar[idx]
         string += " %7.2f | %14.8f | %14.8f \n"%(T,g1cm3,g1bar)
     string += "-------------------------------------------\n"
-    string += "  V : volume per molecule\n"
+    string += "  v : volume per molecule\n"
     string += "  p0: 1bar\n"
     return string
 #---------------------------------------------------------------#
-def getstring_pfn2(ltemp,pf_tot,gibbs1cm3,gibbs1bar):
-    cols = ["T (K)","QMS_HO","GFE [V = 1 cm^3]","GFE [V = kbT/p0]"]
+def getstring_pfn2a(ltemp,pf_tot,V0,V1):
+    # correction factor from V1 to V0
+    V1toV0 = np.array([fncs.exp128((V0-V1)/KB/float(T)) for T in ltemp])
+    # table
+    cols  = [fncs.fill_string("T (K)",11)]
+    cols += [fncs.fill_string("QMS_HO [V0]"  ,14)]
+    cols += [fncs.fill_string("QMS_HO [V1]"  ,14)]
+    cols += [fncs.fill_string("QMS_HO [V0]"  ,14)]
+    cols += [fncs.fill_string("QMS_HO [V1]"  ,14)]
+    cols = "|".join(cols)
+
+    string  = ""
+    string += "-"*len(cols)+"\n"
+    string +=         cols +"\n"
+    string += "-"*len(cols)+"\n"
+#   string += " "*11+"-"*(len(cols)-11)+"\n"
+    for idx,T in enumerate(ltemp):
+        tot_V1_au = pf_tot[idx]
+        tot_V1_ml = tot_V1_au/ML
+        tot_V0_au = tot_V1_au*V1toV0[idx]
+        tot_V0_ml = tot_V0_au/ML
+        row  = [" %9.2f "%T]
+        row += [" %12s "%fncs.eformat(tot_V0_au,3)]
+        row += [" %12.3E "%tot_V1_au]
+        row += [" %12s "%fncs.eformat(tot_V0_ml,3)]
+        row += [" %12.3E "%tot_V1_ml]
+        string += "|".join(row)+"\n"
+    string += "-"*len(cols)+"\n"
+    string += " "*11+"|%s|%s \n"%(fncs.fill_string("in au",29),fncs.fill_string("in cm^-3",28))
+    string += "-"*len(cols)+"\n"
+    string += "   [V0] : calculated from the bottom of the potential, min(V0)\n"
+    string += "   [V1] : calculated from the zero-point energy, min(V1)\n"
+    return string
+#---------------------------------------------------------------#
+def getstring_pfn2b(ltemp,gibbs1cm3,gibbs1bar):
+    # table
+    cols  = [fncs.fill_string("T (K)",11)]
+    cols += [fncs.fill_string("GFE [v = 1 cm^3]",18)]
+    cols += [fncs.fill_string("GFE [v = kbT/p0]",18)]
+    cols = "|".join(cols)
+
+    string  = ""
+    string += "-"*len(cols)+"\n"
+    string +=         cols +"\n"
+    string += "-"*len(cols)+"\n"
+
+    for idx,T in enumerate(ltemp):
+        row  = [" %9.2f "%T]
+        row += [" %16.8f "%gibbs1cm3[idx]]
+        row += [" %16.8f "%gibbs1bar[idx]]
+        string += "|".join(row)+"\n"
+    string += "-"*len(cols)+"\n"
+    return string
+#---------------------------------------------------------------#
+def old_getstring_pfn2(ltemp,pf_tot,gibbs1cm3,gibbs1bar):
+    cols = ["T (K)","QMS_HO","GFE [v = 1 cm^3]","GFE [v = kbT/p0]"]
     string  = ""
     string += "-".join(["-"*18     for col in cols])+"\n"
     string += "|".join([fncs.fill_string(col,18) for col in cols])+"\n"
@@ -1219,14 +1343,14 @@ def srcons_keq(chemreac):
     string += "\n"
 
     table_1cm3  = "   --------------------------------------------------\n"
-    table_1cm3 += "            |       for V=1cm^3 per molecule         \n"
+    table_1cm3 += "            |       for v=1cm^3 per molecule         \n"
     table_1cm3 += "   --------------------------------------------------\n"
     table_1cm3 += "     T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) \n"
     table_1cm3 += "   --------------------------------------------------\n"
 
     table_1bar  = "\n"
     table_1bar += "   --------------------------------------------------\n"
-    table_1bar += "            |  for V=kB*T/p0 per molecule, p0=1bar   \n"
+    table_1bar += "            |  for v=kB*T/p0 per molecule, p0=1bar   \n"
     table_1bar += "   --------------------------------------------------\n"
     table_1bar += "     T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) \n"
     table_1bar += "   --------------------------------------------------\n"

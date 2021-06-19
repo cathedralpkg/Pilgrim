@@ -4,10 +4,8 @@ start_mep TS_6W
   sfw      +2.0000  
   ds       0.01000   
   hsteps   10     
-  fwdir    9-10  --
+  fwdir    9-10  -- 
   oniomh   1-10
   onioml   11-28
-  paral        yes
-  keeptmp
 end_mep
 

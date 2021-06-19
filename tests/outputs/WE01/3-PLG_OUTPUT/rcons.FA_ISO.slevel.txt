@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2020.2 (2020-04-18)
+  Program version: Pilgrim v2021.4 (2021-June-18)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-02-04
-  Current time (HH:MM:SS)   : 17:40:31
-  Python interpreter version: 3.8.5
+  Current date (YY-MM-DD)   : 2021-06-18
+  Current time (HH:MM:SS)   : 21:06:48
+  Python interpreter version: 3.6.9
  -------------------------------------------------------------
 
 
@@ -67,9 +67,10 @@
          Keq(P2R)  = 1/Keq(R2P)
          GFER(P2R) = - GFER(R2P)
      
+       - The values listed below do not include torsional anharmonicity
      
         --------------------------------------------------
-                 |       for V=1cm^3 per molecule         
+                 |       for v=1cm^3 per molecule         
         --------------------------------------------------
           T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
         --------------------------------------------------
@@ -79,7 +80,7 @@
         --------------------------------------------------
      
         --------------------------------------------------
-                 |  for V=kB*T/p0 per molecule, p0=1bar   
+                 |  for v=kB*T/p0 per molecule, p0=1bar   
         --------------------------------------------------
           T (K)  |  Keq (R2P)  |  Keq (P2R)  | GFER (R2P) 
         --------------------------------------------------
@@ -94,6 +95,7 @@
      -----------------------
      
          - units: sec^-1
+         - the rate constants listed below do not include torsional anharmonicity
      
          
          ------------------------
@@ -114,6 +116,7 @@
              - units: kcal/mol
              - reference volume: 1 cm^3 per molecule
          
+             - the free energies listed below do not include torsional anharmonicity
          -----------------------
            T (K)   |      MS-TST
          -----------------------
@@ -126,6 +129,7 @@
              * GFEA = -R T ln(h k / kB T)
              - units: kcal/mol
              - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+             - the free energies listed below do not include torsional anharmonicity
          
          -----------------------
            T (K)   |      MS-TST
@@ -142,6 +146,7 @@
      -----------------------
      
          - units: sec^-1
+         - the rate constants listed below do not include torsional anharmonicity
      
          
          ------------------------
@@ -162,6 +167,7 @@
              - units: kcal/mol
              - reference volume: 1 cm^3 per molecule
          
+             - the free energies listed below do not include torsional anharmonicity
          -----------------------
            T (K)   |      MS-TST
          -----------------------
@@ -174,6 +180,7 @@
              * GFEA = -R T ln(h k / kB T)
              - units: kcal/mol
              - reference volume: kB*T/p0 per molecule, with p0 = 1 bar
+             - the free energies listed below do not include torsional anharmonicity
          
          -----------------------
            T (K)   |      MS-TST
@@ -190,7 +197,7 @@
 
 
                                                             ----------------------------
-                                                            | Current date: 2021-02-04 |
-                                                            | Current time:   17:40:31 |
-                                                            | Elapsed time:  3.0 msecs |
+                                                            | Current date: 2021-06-18 |
+                                                            | Current time:   21:06:48 |
+                                                            | Elapsed time:  3.5 msecs |
                                                             ----------------------------

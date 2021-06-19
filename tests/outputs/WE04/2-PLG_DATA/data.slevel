@@ -179,7 +179,7 @@ end_ctr
 #-------------------------#
 # ZCT transmission coefficient
 start_zct ZE_TS.001
-    300.00  1.13654E+00
+    300.00  1.13653E+00
     400.00  1.07422E+00
     500.00  1.04677E+00
 end_zct
@@ -189,9 +189,9 @@ end_zct
 #-------------------------#
 # SCT transmission coefficient
 start_sct ZE_TS.001
-    300.00  1.48692E+00
-    400.00  1.25354E+00
-    500.00  1.15671E+00
+    300.00  1.48682E+00
+    400.00  1.25350E+00
+    500.00  1.15669E+00
 end_sct
 
 #-------------------------#
@@ -235,25 +235,25 @@ start_cfs cvt.FA_ISO
 end_cfs
 
 start_cfs cvtsct.FA_ISO
-    300.00  1.48685E+00
-    400.00  1.25350E+00
-    500.00  1.15668E+00
+    300.00  1.48675E+00
+    400.00  1.25346E+00
+    500.00  1.15666E+00
 end_cfs
 
 start_cfs cvtzct.FA_ISO
-    300.00  1.13648E+00
+    300.00  1.13647E+00
     400.00  1.07418E+00
     500.00  1.04674E+00
 end_cfs
 
 start_cfs tstsct.FA_ISO
-    300.00  1.48682E+00
-    400.00  1.25348E+00
-    500.00  1.15667E+00
+    300.00  1.48672E+00
+    400.00  1.25344E+00
+    500.00  1.15665E+00
 end_cfs
 
 start_cfs tstzct.FA_ISO
-    300.00  1.13647E+00
+    300.00  1.13646E+00
     400.00  1.07417E+00
     500.00  1.04673E+00
 end_cfs
@@ -275,49 +275,49 @@ start_rcons mpcvt.FA_ISO.fw
 end_rcons
 
 start_rcons mpcvtsct.FA_ISO.bw
-    300.00  9.93668E-08
-    400.00  6.23758E-07
-    500.00  1.93325E-06
+    300.00  9.93602E-08
+    400.00  6.23738E-07
+    500.00  1.93322E-06
 end_rcons
 
 start_rcons mpcvtsct.FA_ISO.fw
-    300.00  1.16238E-10
-    400.00  4.31074E-09
-    500.00  3.90527E-08
+    300.00  1.16230E-10
+    400.00  4.31061E-09
+    500.00  3.90520E-08
 end_rcons
 
 start_rcons mpcvtzct.FA_ISO.bw
-    300.00  7.59519E-08
+    300.00  7.59512E-08
     400.00  5.34529E-07
     500.00  1.74950E-06
 end_rcons
 
 start_rcons mpcvtzct.FA_ISO.fw
-    300.00  8.88473E-11
+    300.00  8.88465E-11
     400.00  3.69409E-09
     500.00  3.53409E-08
 end_rcons
 
 start_rcons mptstsct.FA_ISO.bw
-    300.00  9.93653E-08
-    400.00  6.23749E-07
-    500.00  1.93323E-06
+    300.00  9.93587E-08
+    400.00  6.23729E-07
+    500.00  1.93319E-06
 end_rcons
 
 start_rcons mptstsct.FA_ISO.fw
-    300.00  1.16236E-10
-    400.00  4.31068E-09
-    500.00  3.90522E-08
+    300.00  1.16228E-10
+    400.00  4.31054E-09
+    500.00  3.90515E-08
 end_rcons
 
 start_rcons mptstzct.FA_ISO.bw
-    300.00  7.59507E-08
+    300.00  7.59501E-08
     400.00  5.34521E-07
     500.00  1.74948E-06
 end_rcons
 
 start_rcons mptstzct.FA_ISO.fw
-    300.00  8.88459E-11
+    300.00  8.88451E-11
     400.00  3.69403E-09
     500.00  3.53405E-08
 end_rcons
@@ -335,49 +335,49 @@ start_rcons mscvt.FA_ISO.fw
 end_rcons
 
 start_rcons mscvtsct.FA_ISO.bw
-    300.00  9.93668E-08
-    400.00  6.23758E-07
-    500.00  1.93325E-06
+    300.00  9.93602E-08
+    400.00  6.23738E-07
+    500.00  1.93322E-06
 end_rcons
 
 start_rcons mscvtsct.FA_ISO.fw
-    300.00  1.16238E-10
-    400.00  4.31074E-09
-    500.00  3.90527E-08
+    300.00  1.16230E-10
+    400.00  4.31061E-09
+    500.00  3.90520E-08
 end_rcons
 
 start_rcons mscvtzct.FA_ISO.bw
-    300.00  7.59519E-08
+    300.00  7.59512E-08
     400.00  5.34529E-07
     500.00  1.74950E-06
 end_rcons
 
 start_rcons mscvtzct.FA_ISO.fw
-    300.00  8.88473E-11
+    300.00  8.88465E-11
     400.00  3.69409E-09
     500.00  3.53409E-08
 end_rcons
 
 start_rcons mststsct.FA_ISO.bw
-    300.00  9.93653E-08
-    400.00  6.23749E-07
-    500.00  1.93323E-06
+    300.00  9.93587E-08
+    400.00  6.23729E-07
+    500.00  1.93319E-06
 end_rcons
 
 start_rcons mststsct.FA_ISO.fw
-    300.00  1.16236E-10
-    400.00  4.31068E-09
-    500.00  3.90522E-08
+    300.00  1.16228E-10
+    400.00  4.31054E-09
+    500.00  3.90515E-08
 end_rcons
 
 start_rcons mststzct.FA_ISO.bw
-    300.00  7.59507E-08
+    300.00  7.59501E-08
     400.00  5.34521E-07
     500.00  1.74948E-06
 end_rcons
 
 start_rcons mststzct.FA_ISO.fw
-    300.00  8.88459E-11
+    300.00  8.88451E-11
     400.00  3.69403E-09
     500.00  3.53405E-08
 end_rcons

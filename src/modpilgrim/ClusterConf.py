@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.3
+Version     : 2021.4
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -149,6 +149,7 @@ class ClusterConf():
           self._lV0  = []
           if len(gtsfiles) == 0: return 0, None
           # save lists
+          bool_imagfreqsOK = True
           for gts in gtsfiles:
               ctc, itc, ext = gts.split("/")[-1].split(".")
               self._root = ctc
@@ -167,12 +168,13 @@ class ClusterConf():
               lmtp.append( int(molecule._mtp) )
               limag.append( int(numimag(molecule._ccfreqs)) )
               lmformu.append( str(molecule._mform) )
+              if int(numimag(molecule._ccfreqs)) not in [0,1]: bool_imagfreqsOK = False
           # check
           len1 = len(list(set(lch    )))
           len2 = len(list(set(lmtp   )))
           len3 = len(list(set(limag  )))
           len4 = len(list(set(lmformu)))
-          if len1*len2*len3*len4 != 1:
+          if len1*len2*len3*len4 != 1 or not bool_imagfreqsOK:
              # table head and division
              ml1 = max([len(name) for name in lmformu ]+[7])
              ml2 = max([len(name) for name in gtsfiles]+[10])

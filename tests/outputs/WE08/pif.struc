@@ -67,7 +67,7 @@ start_ctc TSA
    ics         5-1-6  7-2-8
    ics         2=8=10
    ics         1_3_7_2  2_4_5_1  2_4_6_1  3_7_8_2
-   ics         6-1-2-3  7-2-3-9
+   ics         3-2-1-6  7-2-3-9
 end_ctc
 
 start_ctc TSB
@@ -93,7 +93,7 @@ start_ctc TSB
    ics         5-1-6  7-2-8
    ics         1=4=10
    ics         1_3_7_2  1_7_8_2  2_4_6_1  2_5_6_1
-   ics         7-2-3-9  6-1-2-3
+   ics         7-2-3-9  3-2-1-6
 end_ctc
 
 start_ctc TSC
