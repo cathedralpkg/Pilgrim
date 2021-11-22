@@ -17,7 +17,7 @@ end_isomass
 #------------------------------------------#
 start_ctc EtOH_6W
    root      EtOH_6W
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C1
    conformer 002  * 1 #  0.040 kcal/mol, C1
    conformer 003  * 1 #  0.368 kcal/mol, C1
@@ -32,7 +32,7 @@ end_ctc
 
 start_ctc H
    root      H
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, K
    # basic data
    mformu    H
@@ -48,7 +48,7 @@ end_ctc
 #------------------------------------------#
 start_ctc TS_6W
    root      TS_6W
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C1
    conformer 002  * 1 #  0.150 kcal/mol, C1
    # basic data
@@ -77,10 +77,10 @@ start_ctc TS_6W
    ics         1_3_9_2  2_4_12_1  2_4_19_1  2_5_6_3  3_8_9_2
    ics         4_24_25_23  5_6_7_3  12_13_27_11  13_15_16_14  16_18_19_17
    ics         18_21_22_20  22_24_27_26  24_27_28_26
-   ics         23-24-26-27  12-11-27-26  1-4-23-24  1-12-11-13  12-1-19-17
-   ics         4-1-2-8  14-16-17-18  16-17-18-20  20-22-26-27  11-12-1-19
-   ics         14-13-11-27  12-1-4-23  11-13-14-15  18-20-22-26  13-14-16-17
-   ics         1-19-17-16  5-3-2-9  11-27-26-24  4-23-24-26  17-18-20-22
+   ics         14-16-17-18  11-27-26-24  11-12-1-19  18-20-22-26  11-13-14-15
+   ics         13-14-16-17  1-12-11-13  12-11-27-26  17-18-20-22  1-19-17-16
+   ics         12-1-19-17  1-4-23-24  4-23-24-26  20-22-26-27  14-13-11-27
+   ics         4-1-2-8  16-17-18-20  5-3-2-9  23-24-26-27  12-1-4-23
 end_ctc
 
 

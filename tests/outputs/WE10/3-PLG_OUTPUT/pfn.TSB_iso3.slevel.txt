@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 03:11:40
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 09:25:58
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -152,7 +152,7 @@
         | Point group symmetry  : C1
         | Rotational sym num    : 1
         | Cartesian coordinates (Angstrom):
-        |    C    +1.16625727   -0.03896483   -0.25450864  [ 12.000 amu]
+        |    C    +1.16625727   -0.03896482   -0.25450864  [ 12.000 amu]
         |    C    -0.20078845   -0.56578773   +0.22081262  [ 12.000 amu]
         |    O    -1.29467235   +0.29152857   -0.13444521  [ 15.995 amu]
         |    H    +1.42424545   +1.06137240   +0.36988078  [  2.014 amu]
@@ -598,7 +598,7 @@
        
        
                                                             -----------------------------
-                                                            | Current date:  2021-06-19 |
-                                                            | Current time:    03:11:40 |
-                                                            | Elapsed time: 517.1 msecs |
+                                                            | Current date:  2021-11-20 |
+                                                            | Current time:    09:25:58 |
+                                                            | Elapsed time: 529.9 msecs |
                                                             -----------------------------

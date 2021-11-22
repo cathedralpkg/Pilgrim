@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 05:58:25
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 11:46:40
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -27,7 +27,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -52,14 +52,10 @@
        rst file: 4-PLG_RST/TSB.002.rst
        xyz file: 5-MOLDEN/path.TSB.002.xyz
     
-    Restart file (rst) found!
-       first point (bw160):  -1.600 bohr (-152.596638 hartree)
-       last  point (fw150):  +1.500 bohr (-152.598429 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.002.gts
+       File with info        : 1-GTS/TSB.002.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -100,6 +96,25 @@
                                            +20139.89 cm^-1 
        V0 + zero-point energy (V1)  :  -152.47247920 hartree
        
+    Restart file (rst) found!
+       first point (bw160):  -1.600 bohr (-152.596638 hartree)
+       last  point (fw150):  +1.500 bohr (-152.598429 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw150): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -143,7 +158,22 @@
          |E(s=+1.500)-E(s=+1.490)| = 1.10E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.500)|          = 1.71E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB.002.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw150): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB.002.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -653,10 +683,10 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.600 |   +61.808 | +1.37E-01 |   0.31737 | 1695.2076 |  0.9300  
-            -1.500 |   +62.243 | +1.44E-01 |   0.33008 | 1660.0564 |  0.9107  
+            -1.600 |   +61.808 | +1.37E-01 |   0.31737 | 1695.2055 |  0.9300  
+            -1.500 |   +62.243 | +1.44E-01 |   0.33008 | 1660.0562 |  0.9107  
             -1.400 |   +62.750 | +1.48E-01 |   0.32914 | 1653.9438 |  0.9073  
-            -1.300 |   +63.337 | +1.46E-01 |   0.32046 | 1668.4630 |  0.9153  
+            -1.300 |   +63.337 | +1.46E-01 |   0.32046 | 1668.4629 |  0.9153  
             -1.200 |   +64.016 | +1.40E-01 |   0.31191 | 1697.2771 |  0.9311  
             -1.100 |   +64.798 | +1.37E-01 |   0.29359 | 1728.1979 |  0.9481  
             -1.000 |   +65.693 | +1.40E-01 |   0.27814 | 1729.1217 |  0.9486  
@@ -676,15 +706,15 @@
             +0.400 |   +74.932 | +1.47E+00 |   0.16767 | 1049.5940 |  0.5758  
             +0.500 |   +73.090 | +5.14E-01 |   0.16943 | 1534.5316 |  0.8418  
             +0.600 |   +71.241 | +3.20E-01 |   0.18732 | 1684.7062 |  0.9242  
-            +0.700 |   +69.470 | +2.73E-01 |   0.21177 | 1714.9227 |  0.9408  
-            +0.800 |   +67.803 | +2.54E-01 |   0.23539 | 1723.8002 |  0.9456  
-            +0.900 |   +66.249 | +2.40E-01 |   0.26357 | 1686.1196 |  0.9250  
-            +1.000 |   +64.810 | +2.29E-01 |   0.28130 | 1687.8204 |  0.9259  
-            +1.100 |   +63.485 | +2.16E-01 |   0.31099 | 1654.8186 |  0.9078  
-            +1.200 |   +62.270 | +2.06E-01 |   0.32221 | 1649.9195 |  0.9051  
+            +0.700 |   +69.470 | +2.73E-01 |   0.21177 | 1714.9226 |  0.9408  
+            +0.800 |   +67.803 | +2.54E-01 |   0.23539 | 1723.8004 |  0.9456  
+            +0.900 |   +66.249 | +2.40E-01 |   0.26357 | 1686.1197 |  0.9250  
+            +1.000 |   +64.810 | +2.29E-01 |   0.28130 | 1687.8203 |  0.9259  
+            +1.100 |   +63.485 | +2.16E-01 |   0.31099 | 1654.8184 |  0.9078  
+            +1.200 |   +62.270 | +2.06E-01 |   0.32221 | 1649.9196 |  0.9051  
             +1.300 |   +61.161 | +1.99E-01 |   0.34981 | 1678.2638 |  0.9207  
-            +1.400 |   +60.151 | +1.97E-01 |   0.37182 | 1567.1405 |  0.8597  
-            +1.500 |   +59.235 | +2.03E-01 |   0.35635 | 1606.6958 |  0.8814  
+            +1.400 |   +60.151 | +1.97E-01 |   0.37182 | 1567.1404 |  0.8597  
+            +1.500 |   +59.235 | +2.03E-01 |   0.35635 | 1606.6963 |  0.8814  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
         
@@ -857,7 +887,7 @@
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-19 |
-                                                            | Current time:   05:58:38 |
-                                                            | Elapsed time:  12.4 secs |
+                                                            | Current date: 2021-11-20 |
+                                                            | Current time:   11:46:53 |
+                                                            | Elapsed time:  12.2 secs |
                                                             ----------------------------

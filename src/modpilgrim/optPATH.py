@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optPATH            |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -52,11 +52,9 @@ import modpilgrim.names      as PN
 import modpilgrim.strings    as PS
 import modpilgrim.pilrw      as RW
 import modpilgrim.ispe       as ispe
-import modpilgrim.sct        as sct
 import modpilgrim.steepdesc  as sd
 import modpilgrim.adipot     as ap
-import modpilgrim.cvtst      as cv
-import modpilgrim.cag        as cag
+import modpilgrim.cvtsct     as cvtsct
 #--------------------------------------------------#
 from   modpilgrim.pilesso        import get_spc_fnc
 from   modpilgrim.diverse    import get_input_data
@@ -79,7 +77,8 @@ import common.Exceptions as Exc
 #--------------------------------------------------#
 from   common.Logger     import Logger
 from   common.Molecule   import Molecule
-from   common.criteria   import EPS_MEPS
+from   common.criteria   import EPS_MEPS, CONNECTSCAL, ZERO_LAPLA
+from   common.Ugraph     import UGRAPH
 #--------------------------------------------------#
 
 WARNINGS = []
@@ -108,7 +107,7 @@ def get_itargets(targets,dpath,dctc,boolms=False):
            continue
         # itc with smallest V0
         if boolms and ctc not in itcmin.keys():
-           dctc[ctc].get_min_V0()
+           dctc[ctc].get_minV0()
            itcmin[ctc] = dctc[ctc]._itcminV0
         # list of itcs for the ctc
         itclist  = [itc_i for itc_i,weight_i in dctc[ctc]._itcs]
@@ -171,6 +170,195 @@ def compare_tcommon(tcommon,tcommon2,rstfile,eps=0.01):
             if abs(ii-jj) > eps: raise exception
 #===============================================================#
 
+
+
+#===============================================================#
+def invert_mep(rstfile):
+    fncs.print_string("* MEP DIRECTION WILL BE MODIFIED",8)
+    # read rst file
+    try:
+        tpath, tcommon, drst = ff.read_rst(rstfile)
+    except:
+        exception = Exc.RstReadProblem(Exception)
+        exception._var = rstfile
+        raise exception
+    # invert it
+    new_drst = {}
+    fncs.print_string("  changing MEP direction...",8)
+    for key in drst.keys():
+        ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t = drst[key]
+        ii_s = -ii_s
+        if ii_v0 is not None: ii_v0 = [-ii for ii in ii_v0]
+        if ii_v1 is not None: ii_v1 = [-ii for ii in ii_v1]
+        if "bw" in key: newkey = key.replace("bw","fw")
+        else          : newkey = key.replace("fw","bw")
+        new_drst[newkey] = (ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t)
+    # rewrite
+    fncs.print_string("  rewriting rst file...\n",8)
+    ff.write_rst(rstfile,tpath,tcommon,new_drst)
+    return new_drst
+#---------------------------------------------------------------#
+def compare_graph_evals(evals1,evals2):
+    evals1a,evals2a = evals1[0],evals2[0]
+    evals1b,evals2b = evals1[1],evals2[1]
+    if len(evals1a) != len(evals2a): return False
+    if len(evals1b) != len(evals2b): return False
+    # first set of eigenvalues (laplacian)
+    evals1a = np.array(evals1a)
+    evals2a = np.array(evals2a)
+    diff_a  = np.linalg.norm(evals1a-evals2a)
+    if diff_a > ZERO_LAPLA: return False
+    # second set of eigenvalues (laplacian with atonums instead of connections)
+    evals1b = np.array(evals1b)
+    evals2b = np.array(evals2b)
+    diff_b  = np.linalg.norm(evals1b-evals2b)
+    if diff_b > ZERO_LAPLA: return False
+    # they are the same
+    return True
+#---------------------------------------------------------------#
+def compare_mep_dir_with_reactant_product(tcommon,drst):
+    fncs.print_string("Analyzing MEP direction:\n",4)
+    # initialize returned variables
+    b_identified = False
+    invert       = False
+    # data from tcommon
+    atonums = tcommon[2]
+    masses  = tcommon[3]
+    mu      = tcommon[4]
+    symbols = fncs.atonums2symbols(atonums)
+    # get last points
+    lbw,lfw,sbw,sfw,V0bw,V0fw = sd.rstlimits(drst)
+    if None in (lbw,lfw): return invert, b_identified
+
+    # GRAPH THEORY TO GET PROPER MEP DIRECTION
+    for label in lbw,lfw:
+        xcc     = fncs.ms2cc_x(drst[label][2],masses,mu)
+        amatrix = np.matrix(intl.get_adjmatrix(xcc,symbols,CONNECTSCAL,"int")[0])
+        graph   = UGRAPH()
+        graph.set_from_amatrix(amatrix)
+        fragments    = graph.get_fragments()
+        evals_lapla  = list(graph.evals_laplacian()       )
+        evals_consym = list(graph.evals_connsymbs(atonums))
+        evals_m3     = list(graph.evals_matrix3(atonums,xcc))
+
+        mformu = [fncs.get_molformula([symbols[ii] for ii in frag]) for frag in fragments]
+        mformu = " + ".join(sorted(mformu))
+
+        if   "bw" in label: evals_bw,evals3BW,mformu_bw = (evals_lapla,evals_consym),evals_m3,mformu
+        elif "fw" in label: evals_fw,evals3FW,mformu_fw = (evals_lapla,evals_consym),evals_m3,mformu
+
+    # print info
+    ml = max(len(lbw),len(lfw))
+    fncs.print_string("* in backward direction (%%-%is): %%s"%ml%(lbw,mformu_bw),8)
+    fncs.print_string("* in forward  direction (%%-%is): %%s"%ml%(lfw,mformu_fw),8)
+    fncs.print_string("  ",8)
+
+    # bw and fw side of MEP are equivalent?
+    same_bw_fw = compare_graph_evals(evals_bw,evals_fw)
+
+    bools = [False,False,False,False]
+    # (a) BOTH SIDES OF MEP ARE NOT EQUIVALENT ACCORDING TO GRAPH THEORY
+    if not same_bw_fw:
+       evals_reactants, evals_products = graphevals_rp
+       if evals_reactants is not None and evals_reactants[0] is not None:
+          bools[0] = compare_graph_evals(evals_reactants,evals_bw)  # reactant <--> bw
+          bools[1] = compare_graph_evals(evals_reactants,evals_fw)  # reactant <--> fw
+       if evals_products is not None and evals_products[0] is not None:
+          bools[2] = compare_graph_evals(evals_products,evals_bw)   # product  <--> bw
+          bools[3] = compare_graph_evals(evals_products,evals_fw)   # product  <--> fw
+    # (b) BOTH SIDES ARE EQUIVALENT ACCORDING TO GRAPH THEORY
+    #     and we are dealing with unimolecular reaction
+    #     e.g. reaction from conformer to conformer
+    #     in this case, compare evals of matrix3 (kind of distance matrix)
+    elif evals3R is not None:
+       dist_R_BW = np.linalg.norm(np.array(evals3R) - np.array(evals3BW))
+       dist_R_FW = np.linalg.norm(np.array(evals3R) - np.array(evals3FW))
+       if dist_R_BW < dist_R_FW: bools[0] = True
+       else                    : bools[1] = True
+       # check also products, if possible
+       if evals3P is not None:
+          dist_P_BW = np.linalg.norm(np.array(evals3P) - np.array(evals3BW))
+          dist_P_FW = np.linalg.norm(np.array(evals3P) - np.array(evals3FW))
+          if dist_P_BW < dist_P_FW: bools[2] = True
+          else                    : bools[3] = True
+    # (c) WE CANNOT COMPARE WITH REACTANT/PRODUCT
+    else: pass
+
+
+    # Check bools
+    # (a) assert we do not correlate the both sides to reactants (or to products)
+    #     (a.1) reactant <--> bw and reactant <--> fw
+    if   bools[0] and bools[1]: bools = [False,False,False,False]
+    #     (a.2) product  <--> bw and product  <--> fw
+    elif bools[2] and bools[3]: bools = [False,False,False,False]
+    #     (a.3) reactant <--> bw and product  <--> bw
+    elif bools[0] and bools[2]: bools = [False,False,False,False]
+    #     (a.4) reactant <--> fw and product  <--> fw
+    elif bools[1] and bools[3]: bools = [False,False,False,False]
+    # (b) now, see if we were able to associate properly
+    if True not in bools: invert,b_identified = False,False
+    elif bools[0]       : invert,b_identified = False,True
+    elif bools[1]       : invert,b_identified = True ,True
+    else                : invert,b_identified = False,False
+
+    # Return
+    return invert, b_identified
+#---------------------------------------------------------------#
+def mepcheck_graph_fwdir(drst,TSLABEL,pathvars,tcommon,rstfile):
+    # Nothing done yet, inverting
+    if drst == {}: return drst
+
+    # Compare MEP with reactants/products
+    try:
+       invert, b_identified = compare_mep_dir_with_reactant_product(tcommon,drst)
+    except:
+       invert, b_identified = False, False
+
+    # Print if it was properly identified
+    if b_identified:
+       fncs.print_string("* MEP size towards reactant(s) seems to be properly identified",8)
+       if invert: fncs.print_string("  - forward direction correlates to reactant(s)",8)
+       else     : fncs.print_string("  - backward direction correlates to reactant(s)",8)
+    else:
+       fncs.print_string("* MEP size towards reactant(s) was NOT properly identified",8)
+       fncs.print_string("  - MEP direction may NOT correspond to the involved reaction",8)
+    fncs.print_string(" ",8)
+
+    # fwdir activated??
+    if (TSLABEL in drst.keys()) and (pathvars._fwdir is not None):
+       fncs.print_string("* MEP direction is defined by the user through 'fwdir'!",8)
+       fncs.print_string("  [this prevails over automatic identification of MEP direction]",8)
+       fncs.print_string("  checking it...",8)
+       ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t = drst[TSLABEL]
+       ii_ic, ii_sign = pathvars._fwdir
+       if not intl.ics_correctdir(ii_x,ii_v0,ii_ic,ii_sign,tcommon[3],tcommon[4]):
+          fncs.print_string("  MEP direction does not correspond with that of 'fwdir'",8)
+          if b_identified and not invert:
+             fncs.print_string("\n  WARNING! Direction defined by 'fwdir' seems to disagree",8)
+             fncs.print_string("  with the definition of the reaction this TS is",8)
+             fncs.print_string("  involved in...",8)
+          invert = True
+       else:
+          fncs.print_string("  MEP direction corresponds with that of 'fwdir'",8)
+          if b_identified and invert:
+             fncs.print_string("\n  WARNING! Direction defined by 'fwdir' seems to disagree",8)
+             fncs.print_string("  with the definition of the reaction this TS is",8)
+             fncs.print_string("  involved in...",8)
+          invert = False
+       fncs.print_string(" ",8)
+
+    # Invert MEP
+    if invert:
+        drst = invert_mep(rstfile)
+    else:
+        fncs.print_string("* MEP DIRECTION WILL NOT BE MODIFIED\n",8)
+
+    # Return drst
+    return drst
+#===============================================================#
+
+
+
 #===============================================================#
 def calc_mep(itarget,gtsTS,pathvars,tsoftware,TMP):
     # data in name
@@ -208,6 +396,7 @@ def calc_mep(itarget,gtsTS,pathvars,tsoftware,TMP):
        tdleveldata = (points,xx,yyll,yyhl)
        # table new values
        fncs.print_string(PS.smep_tableDLEVEL(drst,tdleveldata,pathvars._eref),4)
+    # return data
     return tcommon, drst, pathvars
 #---------------------------------------------------------------#
 def onesidemep(ivars,rstfile,drst):
@@ -266,42 +455,7 @@ def obtain_mep(target,gtsTS,pathvars,tsoftware,TMP):
                  pathvars.tuple_sdbw(),pathvars.tuple_sdfw()),4)
     fncs.print_string(PS.smep_ff(TMP,PN.DIR4,PN.DIR5,rstfile,xyzfile),4)
 
-    # read rst
-    try: tpath2, tcommon2, drst = ff.read_rst(rstfile)
-    except:
-        exception = Exc.RstReadProblem(Exception)
-        exception._var = rstfile
-        raise exception
-    fncs.print_string(PS.smep_rst(rstfile,drst),4)
-    
-    # correct MEP direction?
-    if TSLABEL in drst.keys():
-       ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t = drst[TSLABEL]
-       ii_ic, ii_sign = pathvars._fwdir
-       if not intl.ics_correctdir(ii_x,ii_v0,ii_ic,ii_sign,tcommon2[3],tcommon2[4]):
-           fncs.print_string("'fwdir' variable differs from MEP direction in rst file!",4)
-           fncs.print_string("* modifying rst internal dictionary...",8)
-           new_drst = {}
-           for key in drst.keys():
-               ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t = drst[key]
-               ii_s = -ii_s
-               if ii_v0 is not None: ii_v0 = [-ii for ii in ii_v0]
-               if ii_v1 is not None: ii_v1 = [-ii for ii in ii_v1]
-               if "bw" in key: newkey = key.replace("bw","fw")
-               else          : newkey = key.replace("fw","bw")
-               new_drst[newkey] = (ii_s, ii_V, ii_x, ii_g, ii_F, ii_v0, ii_v1, ii_t)
-           drst = new_drst
-           del new_drst
-           fncs.print_string("* rewriting rst file...",8)
-           ff.write_rst(rstfile,tpath2,tcommon2,drst)
-
-    # Extension of MEP in rst is bigger
-    if drst != {}:
-       lbw,lfw,sbw,sfw,V0bw,V0fw = sd.rstlimits(drst)
-       pathvars._sbw = min(pathvars._sbw,sbw)
-       pathvars._sfw = max(pathvars._sfw,sfw)
-
-    # Read gts
+    # Read gts of TS
     ts = Molecule()
     ts.set_from_gts(gtsTS)
     # scaling of frequencies
@@ -311,10 +465,27 @@ def obtain_mep(target,gtsTS,pathvars,tsoftware,TMP):
     # setup
     ts.setup(mu=pathvars._mu)
     ts.ana_freqs(case="cc")
+    tcommon = (ts._ch,ts._mtp,ts._atnums,ts._masses,ts._mu)
 
     fncs.print_string(PS.smep_ts(ts),4)
 
-    tcommon = (ts._ch,ts._mtp,ts._atnums,ts._masses,ts._mu)
+    # read rst
+    try: tpath2, tcommon2, drst = ff.read_rst(rstfile)
+    except:
+        exception = Exc.RstReadProblem(Exception)
+        exception._var = rstfile
+        raise exception
+    fncs.print_string(PS.smep_rst(rstfile,drst),4)
+    
+    # TODO: correct MEP direction
+    drst = mepcheck_graph_fwdir(drst,TSLABEL,pathvars,tcommon2,rstfile)
+
+    # Extension of MEP in rst is bigger
+    if drst != {}:
+       lbw,lfw,sbw,sfw,V0bw,V0fw = sd.rstlimits(drst)
+       pathvars._sbw = min(pathvars._sbw,sbw)
+       pathvars._sfw = max(pathvars._sfw,sfw)
+
     compare_tpath(pathvars.tuple_rst(),tpath2,rstfile)
     compare_tcommon(tcommon,tcommon2,rstfile)
 
@@ -417,10 +588,15 @@ def obtain_mep(target,gtsTS,pathvars,tsoftware,TMP):
            fncs.print_string("CRITERIA FULFILLED in forward dir.!",9)
            fncs.print_string("path stopped at sfw = %+8.4f bohr"%sfw,9)
            print("")
+
+    # TODO: correct MEP direction
+    drst = mepcheck_graph_fwdir(drst,TSLABEL,pathvars,tcommon,rstfile)
+
     # write molden file
-    fncs.print_string("* writing file: %s"%xyzfile,7)
+    fncs.print_string("Writing file: %s"%xyzfile,4)
     ff.rst2xyz(rstfile,xyzfile,onlyhess=True)
     print("")
+
     # reference energy
     if pathvars._eref is None: pathvars._eref = V0bw
     # return data
@@ -446,7 +622,7 @@ def calc_coefs(itarget,tcommon,drst,pathvars,ltemp,symmetry=None,plotfile=None):
     # Calculate SCT correction factor
     if pathvars._sct == "yes":
        # v1 vector along MEP
-       if   pathvars._v1mode == "grad": dv1 = sct.get_numv1(drst)
+       if   pathvars._v1mode == "grad": dv1 = cvtsct.get_numv1(drst)
        elif pathvars._v1mode == "hess": dv1 = {}
        # calculate SCT coefficient
        dcfs, tplot_sct, E0, VAG = obtain_sct(dMols,points,Vadi,ltemp,dv1,pathvars,dcfs=dcfs)
@@ -527,7 +703,7 @@ def obtain_cvt(dMols,points,VadiSpl,temps,pathvars,si=-float("inf"),sj=+float("i
     if len(temps) == 0: raise Exc.NoTemps(Exception)
     # Only points between si and sj
     points = [pp for pp in points if si <= dMols[pp][0] <= sj]
-    lcvt_s, lcvt_gamma, gibbs_matrix, gibbsTS, lnew = cv.get_cvt(dMols,points,VadiSpl,temps,useics)
+    lcvt_s, lcvt_gamma, gibbs_matrix, gibbsTS, lnew = cvtsct.get_cvt(dMols,points,VadiSpl,temps,useics)
     # print gibbs
     svals = [dMols[point][0] for point in points]
     fncs.print_string(PS.scvt_gibbs(svals,temps,gibbs_matrix.copy(),pathvars,gibbsTS),8)
@@ -542,9 +718,9 @@ def obtain_cag(Vadi,ltemp,E0,VAG,lscvt=None,dcfs={}):
     fncs.print_string("Calculating CAG coefficient...",4)
     print("")
     # calculate CAGTST
-    dE_cagtst, cagtst = cag.calc_cag(ltemp,Vadi)
+    dE_cagtst, cagtst = cvtsct.calc_cag(ltemp,Vadi)
     # calculate CAGCVT
-    if lscvt is not None: dE_cagcvt, cagcvt = cag.calc_cag(ltemp,Vadi,lscvt)
+    if lscvt is not None: dE_cagcvt, cagcvt = cvtsct.calc_cag(ltemp,Vadi,lscvt)
     else                : dE_cagcvt, cagcvt = None, None
     # In case E0 > VAG
     if E0 >= VAG:
@@ -582,12 +758,12 @@ def obtain_sct(dMols,points,VadiSpl,temps,dv1,pathvars,dcfs={}):
     # MEP LIMITS
     sbw,sfw = VadiSpl.get_alpha()[0],VadiSpl.get_omega()[0]
     # Part I - Get E0 and VAG
-    E0      = sct.get_sct_part1(points,VadiSpl,E0)
+    E0      = cvtsct.get_sct_part1(points,VadiSpl,E0)
     sAG,VAG = VadiSpl.get_max()
     fncs.print_string(PS.ssct_init(E0,VadiSpl,pathvars,v1mode),8)
     # Part II - Calculate tbar, bmfs and mueff
     tuple_part2 = (dMols,points,dv1,case,pathvars._muintrpl)
-    svals, lkappa, ltbar, ldtbar, mu, lmueff, toignore = sct.get_sct_part2(*tuple_part2)
+    svals, lkappa, ltbar, ldtbar, mu, lmueff, toignore = cvtsct.get_sct_part2(*tuple_part2)
     fncs.print_string(PS.ssct_mueff(svals,VadiSpl,lkappa,ltbar,lmueff,mu,toignore),8)
     #----------#
     # E0 < VAG #
@@ -602,8 +778,8 @@ def obtain_sct(dMols,points,VadiSpl,temps,dv1,pathvars,dcfs={}):
           fncs.print_string(string_qrc,8)
           if not allok: raise Exc.ErrorQRC(Exception)
           if pathvars._qrccase != 0: return dcfs, None, E0, VAG
-          qrc_ZCT = sct.get_sct_part3(svals, mu   ,VadiSpl,afreq,lEquant,E0,VAG,temps)
-          qrc_SCT = sct.get_sct_part3(svals,lmueff,VadiSpl,afreq,lEquant,E0,VAG,temps)
+          qrc_ZCT = cvtsct.get_sct_part3(svals, mu   ,VadiSpl,afreq,lEquant,E0,VAG,temps)
+          qrc_SCT = cvtsct.get_sct_part3(svals,lmueff,VadiSpl,afreq,lEquant,E0,VAG,temps)
           fncs.print_string(PS.ssct_probs(qrc_SCT[1],qrc_ZCT[2],qrc_SCT[2],qrc_SCT[3],sbw,sfw),12)
           kappaI1_zct = qrc_ZCT[0]
           kappaI1_sct = qrc_SCT[0]
@@ -617,8 +793,8 @@ def obtain_sct(dMols,points,VadiSpl,temps,dv1,pathvars,dcfs={}):
        # Part IV - calculate thetas and probs
        fncs.print_string("Transmission probabilities for Kappa^SAG calculation:",8)
        print("")
-       outZCT = sct.get_sct_part4(svals,mu    ,VadiSpl,E0)
-       outSCT = sct.get_sct_part4(svals,lmueff,VadiSpl,E0)
+       outZCT = cvtsct.get_sct_part4(svals,mu    ,VadiSpl,E0)
+       outSCT = cvtsct.get_sct_part4(svals,lmueff,VadiSpl,E0)
        weights_ZCT,lE_ZCT,probs_ZCT,rpoints_ZCT,diffs_ZCT,(pZCT0,rpZCT0) = outZCT
        weights_SCT,lE_SCT,probs_SCT,rpoints_SCT,diffs_SCT,(pSCT0,rpSCT0) = outSCT
        # include also prob at E=E0 (pZCT0 and pSCT0)
@@ -628,8 +804,8 @@ def obtain_sct(dMols,points,VadiSpl,temps,dv1,pathvars,dcfs={}):
                                        [rpSCT0]+rpoints_SCT,sbw,sfw),8)
        fncs.print_string(PS.ssct_diffs(lE_SCT,diffs_SCT),8)
        # Part V - calculate coefficients
-       ZCTdata = sct.get_sct_part5(lE_ZCT,probs_ZCT,weights_ZCT,E0,VAG,temps,kappaI1_zct,qrc_Elim)
-       SCTdata = sct.get_sct_part5(lE_SCT,probs_SCT,weights_SCT,E0,VAG,temps,kappaI1_sct,qrc_Elim)
+       ZCTdata = cvtsct.get_sct_part5(lE_ZCT,probs_ZCT,weights_ZCT,E0,VAG,temps,kappaI1_zct,qrc_Elim)
+       SCTdata = cvtsct.get_sct_part5(lE_SCT,probs_SCT,weights_SCT,E0,VAG,temps,kappaI1_sct,qrc_Elim)
        ZCT,lIi_ZCT, RTE_ZCT, INTG_ZCT, bqrcZCT = ZCTdata
        SCT,lIi_SCT, RTE_SCT, INTG_SCT, bqrcSCT = SCTdata
        fncs.print_string(PS.ssct_kappa(temps,ZCT,lIi_ZCT,RTE_ZCT,E0,bqrcZCT,case="zct"),8)
@@ -782,7 +958,12 @@ def deal_with_path(target,dlevel,software,ltemp,dctc,pathvars,dtes,dchem,dhighlv
     pathvars.setup2()
     pathvars.setup3()
     # Set Eref (from reaction)
-    pathvars.set_eref_from_reaction(target,dchem,dof)
+    rcname = pathvars.set_eref_from_reaction(target,dchem,dof)
+    # TODO: Get Laplacian eigenvalues for reactants and products
+    global graphevals_rp
+    global evals3R
+    global evals3P
+    graphevals_rp , (evals3R,evals3P) = get_graph_evalues_for_reaction(rcname,dchem,dctc)
     # Quantum reaction coordinate qrc
     pathvars.prepare_qrc(dchem,dctc,dimasses)
     # frequency scaling factor
@@ -857,6 +1038,67 @@ def deal_with_path(target,dlevel,software,ltemp,dctc,pathvars,dtes,dchem,dhighlv
     fncs.print_string(PS.spath_allcoefs(ltemp,dcoefs),3)
     # return data
     return dcoefs, pathvars
+#---------------------------------------------------------------#
+def get_graph_evalues(system,dctc):
+    # look for gts
+    ctc, itc = PN.name2data(system)
+    if ctc not in dctc: return None,None,None
+    if itc is None: itc = dctc[ctc]._itcs[0][0]
+    # gts file
+    gtsfile = dctc[ctc].gtsfile(itc)
+    # read gts file
+    xcc, atonums = ff.read_gtsfile(gtsfile)[0:2]
+    symbols      = fncs.atonums2symbols(atonums)
+    # Prepare graph
+    graph        = UGRAPH()
+    amatrix      = intl.get_adjmatrix(xcc,symbols,CONNECTSCAL,"int")[0]
+    graph.set_from_amatrix(np.matrix(amatrix))
+    # Eigenvalues
+    evals_lapla  = graph.evals_laplacian()
+    evals_consym = graph.evals_connsymbs(atonums)
+    # matrix 3 (distance matrix with atonums in diagonal)
+    evals_m3     = graph.evals_matrix3(atonums,xcc)
+    return list(evals_lapla),list(evals_consym),list(evals_m3)
+#---------------------------------------------------------------#
+def get_graph_evalues_for_reaction(rcname,dchem,dctc):
+    graphevals_rp = None
+    if rcname in dchem:
+       reactants, ts, products = dchem[rcname]
+       # reactants
+       evals1_reactants = []
+       evals2_reactants = []
+       evals3_reactants = None
+       for reactant in reactants:
+           evals_lapla,evals_consym,evals_m3 = get_graph_evalues(reactant,dctc)
+           if evals_lapla is None:
+              evals1_reactants = None
+              evals2_reactants = None
+              break
+           evals1_reactants += evals_lapla
+           evals2_reactants += evals_consym
+       if evals1_reactants is not None:
+          evals1_reactants = sorted(list(evals1_reactants))
+          evals2_reactants = sorted(list(evals2_reactants))
+          if len(reactants) == 1: evals3_reactants = evals_m3
+       # products
+       evals1_products = []
+       evals2_products = []
+       evals3_products = None
+       for product in products:
+           evals_lapla,evals_consym,evals_m3 = get_graph_evalues(product,dctc)
+           if evals_lapla is None:
+              evals1_products = None
+              evals2_products = None
+              break
+           evals1_products += evals_lapla
+           evals2_products += evals_consym
+       if evals1_products is not None:
+          evals1_products = sorted(list(evals1_products))
+          evals2_products = sorted(list(evals2_products))
+          if len(products) == 1: evals3_products = evals_m3
+       # Save data
+       graphevals_rp = [(evals1_reactants,evals2_reactants),(evals1_products,evals2_products)]
+    return graphevals_rp , (evals3_reactants,evals3_products)
 #===============================================================#
 
 #===============================================================#

@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 03:11:35
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 09:25:53
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -63,7 +63,7 @@
         |    H    +0.12352559   +1.27537950   -0.75020241  [  2.014 amu]
         |    H    +0.14490540   +1.09769872   +1.00601451  [  2.014 amu]
         |    O    +1.28378684   -0.26685986   -0.10658110  [ 15.995 amu]
-        |    H    +1.24577498   -0.90343200   +0.65225055  [  1.008 amu]
+        |    H    +1.24577498   -0.90343199   +0.65225055  [  1.008 amu]
         | Moments and product of inertia (au):
         |         +1.469E+05  +4.388E+05  +4.960E+05  [ 3.196E+16]
         | Vibrational frequencies [1/cm] (scaled by 1.000):
@@ -149,7 +149,7 @@
         | Rotational sym num    : 1
         | Cartesian coordinates (Angstrom):
         |    C    -0.05008877   +0.56308676   -0.00004211  [ 12.000 amu]
-        |    C    +1.15631991   -0.39666343   -0.00004740  [ 12.000 amu]
+        |    C    +1.15631990   -0.39666343   -0.00004740  [ 12.000 amu]
         |    H    +2.08408345   +0.16737651   +0.00008754  [  2.014 amu]
         |    H    +1.13299801   -1.03051401   +0.88098714  [  2.014 amu]
         |    H    +1.13315253   -1.03034573   -0.88120736  [  2.014 amu]
@@ -311,7 +311,7 @@
        
        
                                                             -----------------------------
-                                                            | Current date:  2021-06-19 |
-                                                            | Current time:    03:11:35 |
-                                                            | Elapsed time: 456.3 msecs |
+                                                            | Current date:  2021-11-20 |
+                                                            | Current time:    09:25:54 |
+                                                            | Elapsed time: 432.0 msecs |
                                                             -----------------------------

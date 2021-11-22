@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -358,6 +358,20 @@ def write_molden(filename,xcc,symbs,freqs,evecs):
 #===============================================#
 # Function(s) to deal with: GTS file(s)         #
 #===============================================#
+def findingts_energy_pg(gtsfile):
+    V0 = None
+    nn = 0
+    with open(gtsfile, "r") as asdf:
+      for line in asdf:
+          if '   energy   ' in line:
+              V0 = float(line.split("#")[0].split()[1])
+              nn += 1
+          if ' pointgroup ' in line:
+              pg =       line.split("#")[0].split()[1]
+              nn += 2
+          if nn == 2: break
+    return V0, pg
+#-----------------------------------------------#
 def read_gtsfile(gtsfile):
     lines = read_file(gtsfile)
     # check extension
@@ -415,15 +429,8 @@ def write_gtsfile(xcc,atonums,ch,mtp,E,pgroup,rotsigma,gcc,Fcc,gtsfile,freqs=Non
     if freqs is None: freqs = []
     nat      = len(atonums)
     str_gts  = ""
-    # Write atomic numbers and cartesian coordinates
+    # write level of calculation
     if level != "": str_gts += "# level: %s\n"%level
-    str_gts += "# Atomic number and non-scaled cartesian coordinates [bohr]\n"
-    str_gts += "start_cc\n"
-    for at in range(nat):
-        atonum = atonums[at]
-        xx,yy,zz = fncs.xyz(xcc,at)
-        str_gts += "   %03i   %+15.8E  %+15.8E  %+15.8E\n"%(atonum,xx,yy,zz)
-    str_gts += "end_cc\n\n"
     # Write basic data
     str_gts += "# Charge, multiplicity, energy [hartree],\n"
     str_gts += "# point group and rotational symmetry number\n"
@@ -434,6 +441,14 @@ def write_gtsfile(xcc,atonums,ch,mtp,E,pgroup,rotsigma,gcc,Fcc,gtsfile,freqs=Non
     str_gts += "   pointgroup    %-5s           # Point group\n"%pgroup
     str_gts += "   rotsigma      %-5i           # Rotational sigma\n"%rotsigma
     str_gts += "end_basic\n\n"
+    # Write atomic numbers and cartesian coordinates
+    str_gts += "# Atomic number and non-scaled cartesian coordinates [bohr]\n"
+    str_gts += "start_cc\n"
+    for at in range(nat):
+        atonum = atonums[at]
+        xx,yy,zz = fncs.xyz(xcc,at)
+        str_gts += "   %03i   %+15.8E  %+15.8E  %+15.8E\n"%(atonum,xx,yy,zz)
+    str_gts += "end_cc\n\n"
     # Write cartesian gradiend
     if len(gcc) != 0:
        str_gts += "# Non-scaled cartesian gradient [hartree/bohr]\n"

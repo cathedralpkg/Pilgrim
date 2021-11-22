@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-18
-  Current time (HH:MM:SS)   : 21:06:48
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-19
+  Current time (HH:MM:SS)   : 13:21:15
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -56,8 +56,8 @@
         | Cartesian coordinates (Angstrom):
         |    C    -0.04887480   +0.42776324   +0.00000000  [ 12.000 amu]
         |    O    -0.96015581   -0.62520927   +0.00000000  [ 15.995 amu]
-        |    O    +1.14586816   +0.22689055   +0.00000000  [ 15.995 amu]
-        |    H    -1.85491186   -0.20629458   -0.00000000  [  1.008 amu]
+        |    O    +1.14586817   +0.22689055   +0.00000000  [ 15.995 amu]
+        |    H    -1.85491185   -0.20629458   -0.00000000  [  1.008 amu]
         |    H    -0.51053340   +1.43459632   -0.00000000  [  1.008 amu]
         | Moments and product of inertia (au):
         |         +4.031E+04  +2.910E+05  +3.313E+05  [ 3.886E+15]
@@ -112,10 +112,12 @@
         |   v : volume per molecule
         |   p0: 1bar
         | 
+        | file 5-MOLDEN/sp.E.001.molden was generated
+   
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-18 |
-                                                            | Current time:   21:06:48 |
-                                                            | Elapsed time:  3.3 msecs |
+                                                            | Current date: 2021-11-19 |
+                                                            | Current time:   13:21:15 |
+                                                            | Elapsed time: 15.7 msecs |
                                                             ----------------------------

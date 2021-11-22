@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  pilesso            |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -62,9 +62,8 @@ def get_dsoft():
        dsoft['gaussian'] = 'modpilgrim.pilgau'
        dsoft['orca'    ] = 'modpilgrim.pilorca'
       #dsoft['clhbrpot'] = 'modpilgrim.pilasurf'
-
     # read from file
-    if False:
+    else:
        TXTFILE = os.path.dirname(os.path.realpath(__file__))+"/mesc.txt"
        # read file
        lines = read_file(TXTFILE)

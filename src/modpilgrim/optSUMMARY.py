@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optSUMMARY         |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -137,7 +137,6 @@ def readout_pfn(pof):
                 the_line = lines[idx2].replace("|"," ")
                 T,QMSHO_V0_au,QMSHO_V1_au,QMSHO_V0_ml,QMSHO_V1_ml = the_line.split()
                 data["all"]["T"   ].append(T)
-                print(QMSHO_V1_au)
                 data["all"]["Qtot(V1)" ].append(QMSHO_V1_au)
                 idx2 += 1
         # total Gibbs free energies
@@ -408,6 +407,9 @@ def readout_path(pof,mep=False):
         # Imag freqs along MEP
         if "Fine! There are no ima" in line: data["iMEP"] = False
         if "WARNING! There are ima" in line: data["iMEP"] = True
+        # proper direction of MEP
+        if "* MEP size towards reactant(s) seems to be prop" in line: data["unknowndir"] = False
+        if "* MEP size towards reactant(s) was NOT properly" in line: data["unknowndir"] = True
         # CVT
         if "s_CVT" in line and "Gamma^CVT" in line:
             data["T"] = []
@@ -532,18 +534,22 @@ def genpathtable1(data):
     string += "-"*len(head)+"\n"
     string +=         head +"\n"
     string += "-"*len(head)+"\n"
-    any_imep = False
+    any_imep       = False
+    any_unknowndir = False
     for itc,data_i in data.items():
         vals = [itc]
-        imep = data_i.get("iMEP",False)
         for prop in props.split(",")[1:]: vals.append( data_i.get(prop," - ") )
         string += frow%tuple(vals)
         if data_i.get("iMEP",False):
            any_imep = True
            string += "[*]"
+        if data_i.get("unknowndir",False):
+           any_unknowndir = True
+           string += "[+]"
         string += "\n"
     string += "-"*len(head)+"\n"
-    if any_imep: string += "  [*] There are imaginary frequencies along this MEP\n"
+    if any_imep      : string += "  [*] There are imaginary frequencies along this MEP\n"
+    if any_unknowndir: string += "  [+] Automatic algorithm did not determine MEP direction properly\n"
     string += "\n"
     string += "="*len(head)+"\n"
     # print table

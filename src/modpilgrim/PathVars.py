@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  PathVars           |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -433,7 +433,7 @@ class PathVars():
              raise Exc.NoICS(Exception)
 
           # path variables (via input) - advanced
-          if self._fwdir    == "default"     : self._fwdir    = ("1-2","++")
+          if self._fwdir    == "default"     : self._fwdir    = None # ("1-2","++")
           if self._cvt      == "default"     : self._cvt      = "yes"
           if self._sct      == "default"     : self._sct      = "yes"
           if self._mtype    == "default"     : self._mtype    = "pm"
@@ -556,6 +556,7 @@ class PathVars():
               Rs,TS,Ps = dchem[self._reaction]
               self._reactioneq = '%s --> %s --> %s'%("+".join(Rs),TS,"+".join(Ps))
           except: self._reactioneq = None
+          return rname
 
 
       def get_layers(self):

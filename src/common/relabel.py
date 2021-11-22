@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -562,8 +562,8 @@ def correlate_amatrices(amatrix_t,amatrix_0,symbols_t,symbols_0,\
 
     if not onlyconn and (xcc_t is None or xcc_0 is None): raise Exception
     # Graphs
-    graph_0 = UGRAPH(); graph_0.set_from_amatrix(amatrix_0); graph_0.gen_laplacian()
-    graph_t = UGRAPH(); graph_t.set_from_amatrix(amatrix_t); graph_t.gen_laplacian()
+    graph_0 = UGRAPH(); graph_0.set_from_amatrix(amatrix_0)
+    graph_t = UGRAPH(); graph_t.set_from_amatrix(amatrix_t)
 
     
     # Correlations

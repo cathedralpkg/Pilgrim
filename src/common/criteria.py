@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -63,6 +63,9 @@ EPS_INERTIA = 1e-7
 
 # the norm of a vector is ZERO
 EPS_NORM = 1e-7
+
+# Zero for eigenvalue of Laplacian matrix (graph theory)
+ZERO_LAPLA = 1e-10
 
 # step for numerical calculation of hessian matrix in analitic surfaces
 EPS_HESSDX = 1e-4

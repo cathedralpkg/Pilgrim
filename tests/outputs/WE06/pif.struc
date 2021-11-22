@@ -17,7 +17,7 @@ end_isomass
 #------------------------------------------#
 start_ctc nd3_pyram
    root      nh3_pyram
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C3v
    # basic data
    mformu    H(3)N
@@ -32,7 +32,7 @@ end_ctc
 
 start_ctc nh3_pyram
    root      nh3_pyram
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C3v
    # basic data
    mformu    H(3)N
@@ -48,7 +48,7 @@ end_ctc
 #------------------------------------------#
 start_ctc nd3_planar
    root      nh3_planar
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, D3h
    # basic data
    mformu    H(3)N
@@ -67,7 +67,7 @@ end_ctc
 
 start_ctc nh3_planar
    root      nh3_planar
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, D3h
    # basic data
    mformu    H(3)N

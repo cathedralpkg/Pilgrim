@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -69,8 +69,10 @@ numbers  = "0123456789"                        #
 
 #===============================================#
 def exp128(arg):
-    if arg < -700 or arg > 700: return np.exp(np.float128(arg))
-    return np.exp(arg)
+    try   :
+        if arg < -700 or arg > 700: return np.exp(np.float128(arg))
+        return np.exp(arg)
+    except: return np.exp(arg)
 #---------------------------------------------#
 def eformat(value,ndec):
     try:

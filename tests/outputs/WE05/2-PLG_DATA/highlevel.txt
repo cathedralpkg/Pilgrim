@@ -1,11 +1,11 @@
-nh3_planar.001       sp      -55.43554651  
-nh3_pyram.001        sp      -55.45294604  
+nh3_planar.001       sp      -55.43554650  
+nh3_pyram.001        sp      -55.45294600  
 
-nh3_planar.001.path  bw133   -55.44452596  
-nh3_planar.001.path  bw200   -55.45155821  
+nh3_planar.001.path  bw133   -55.44452600  
+nh3_planar.001.path  bw200   -55.45155820  
 nh3_planar.001.path  bw67    -55.43811940  
-nh3_planar.001.path  fw133   -55.44452596  
-nh3_planar.001.path  fw200   -55.45155821  
+nh3_planar.001.path  fw133   -55.44452600  
+nh3_planar.001.path  fw200   -55.45155820  
 nh3_planar.001.path  fw67    -55.43811940  
-nh3_planar.001.path  saddle  -55.43554651  
+nh3_planar.001.path  saddle  -55.43554650  
 

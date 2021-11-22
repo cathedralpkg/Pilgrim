@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 03:11:40
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 09:25:58
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -155,7 +155,7 @@
         |    H    +1.46008848   -0.78606454   -0.88105767  [  1.008 amu]
         |    H    -0.07666119   +1.20479591   +0.88261271  [  1.008 amu]
         |    H    -0.07735441   +1.20246489   -0.88564934  [  1.008 amu]
-        |    H    -1.93910409   +0.11557935   +0.00006101  [  1.008 amu]
+        |    H    -1.93910409   +0.11557934   +0.00006101  [  1.008 amu]
         |    H    -2.82040534   +0.77423246   -0.00091267  [  1.008 amu]
         | Moments and product of inertia (au):
         |         +1.006E+05  +4.125E+05  +4.722E+05  [ 1.959E+16]
@@ -309,7 +309,7 @@
        
        
                                                             -----------------------------
-                                                            | Current date:  2021-06-19 |
-                                                            | Current time:    03:11:41 |
-                                                            | Elapsed time: 433.2 msecs |
+                                                            | Current date:  2021-11-20 |
+                                                            | Current time:    09:25:59 |
+                                                            | Elapsed time: 397.3 msecs |
                                                             -----------------------------

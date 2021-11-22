@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optRCONS           |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -50,14 +50,14 @@ import common.partfns    as partfns
 from   common.fncs       import time2human
 from   common.fncs       import prod_list
 from   common.fncs       import print_string
-import common.physcons as pc
+import common.physcons   as pc
 from   common.physcons   import KB, ML, H, AMU
 from   common.Logger     import Logger
 from   common.Molecule   import Molecule
 #--------------------------------------------------#
 from modpilgrim.ChemReaction import ChemReaction
 import modpilgrim.names   as PN
-import modpilgrim.pilrw    as RW
+import modpilgrim.pilrw   as RW
 import modpilgrim.strings as PS
 #--------------------------------------------------#
 from   modpilgrim.fit2anarc         import fit2anarc
@@ -145,13 +145,10 @@ def main(idata,status,case,targets="*"):
         print_string(PS.srcons_init(rcname,pof,Rs,TS,Ps),3)
 
         # Create instante of ChemReaction
-        chemreac = ChemReaction(rcname,ltemp,dctc,dimasses)
+        chemreac = ChemReaction(rcname,Rs,TS,Ps,ltemp,dctc)
         chemreac.external_data(dall)
-        chemreac.add_reactant(Rs)
-        chemreac.add_products(Ps)
-        chemreac.add_ts(TS)
-        chemreac.read_gtsfiles()
         # conservation of mass and charge
+        chemreac.get_masses_charges(dimasses)
         chemreac.check_conservation()
         print_string(PS.srcons_conservation(chemreac),5)
         if chemreac._problem:
@@ -204,11 +201,13 @@ def main(idata,status,case,targets="*"):
         RW.write_alldata(dof,ltemp,dall)
 
         # Prepare plotdata
-        plotdata = prepare_plot_data(chemreac)
-        if plotfile is not None and plotdata != {}:
-            print_string("Updating plot file: %s"%plotfile,3)
-            print("")
-            write_plotfile(plotfile,plotdata)
+        if True:
+           plotdata = prepare_plot_data(chemreac)
+           if plotfile is not None and plotdata != {}:
+               print_string("Updating plot file: %s"%plotfile,3)
+               print("")
+               write_plotfile(plotfile,plotdata)
+        else: print("ACTIVATE PLOT!")
 
 
         # Print special case, when Rs == Ps

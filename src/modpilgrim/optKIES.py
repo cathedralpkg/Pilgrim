@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optKIES            |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -298,22 +298,15 @@ def kies_from_pair_of_reactions(reactionH,reactionD,ltemp,dchem,dctc,dall):
     # a) Deal with reaction without isotopes
     rcnameH, dirH = reactionH.split(".")[0:2]
     RsH,TSH,PsH = dchem[rcnameH]
-    chemreacH = ChemReaction(rcnameH,ltemp,dctc)
+    chemreacH = ChemReaction(rcnameH,RsH,TSH,PsH,ltemp,dctc)
     chemreacH.external_data(dall)
-    chemreacH.add_reactant(RsH)
-    chemreacH.add_products(PsH)
-    chemreacH.add_ts(TSH)
 
 
     # b) Deal with reaction with isotopes
     rcnameD, dirD = reactionD.split(".")[0:2]
     RsD,TSD,PsD = dchem[rcnameD]
-    chemreacD = ChemReaction(rcnameD,ltemp,dctc)
+    chemreacD = ChemReaction(rcnameD,RsD,TSD,PsD,ltemp,dctc)
     chemreacD.external_data(dall)
-    chemreacD.external_data(dall)
-    chemreacD.add_reactant(RsD)
-    chemreacD.add_products(PsD)
-    chemreacD.add_ts(TSD)
 
     # c) chi_i's, transmission coefficients, anharmonicity, rate constants
     chemreacH.obtain_pfns()

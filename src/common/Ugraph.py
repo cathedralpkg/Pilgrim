@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -41,6 +41,7 @@ This module contains the Ugraph class
 
 #=============================================#
 import numpy as np
+from   common.criteria import ZERO_LAPLA
 #=============================================#
 
 
@@ -273,7 +274,7 @@ class UGRAPH:
               # update visited nodes
               visited_nodes = visited_nodes.union(fragment)
               # store fragment
-              fragments.append(fragment)
+              fragments.append(sorted(fragment))
           return fragments
 
       def bfsearch1d(self,idx1,idx2):
@@ -441,7 +442,7 @@ class UGRAPH:
       #----------------------------#
       # Get matrix representations #
       #----------------------------#
-      def gen_laplacian(self):
+      def evals_laplacian(self):
           self._lapla = np.zeros((self._nnodes,self._nnodes))
           for node in self._ugdict.keys():
               neighbors = self._ugdict[node]
@@ -451,21 +452,38 @@ class UGRAPH:
 
           # Eigenvalues
           vals, vecs = np.linalg.eigh(self._lapla)
+          return vals
 
-          # Degenerancies?
-          degs = [0]*len(vals)
-          for i in range(len(vals)):
-              val_i = vals[i]
-              for j in range(len(vals)):
-                 val_j = vals[j]
-                 if abs(val_i-val_j) < 1e-3: degs[i] += 1
-
-          # Data for each node
-          dict_vecs = {}
+      def evals_connsymbs(self,atonums):
+          matrix = np.zeros((self._nnodes,self._nnodes))
           for node in self._ugdict.keys():
-              vector = [ abs(float(vecs[node,idx])) for idx in range(len(vals)) if degs[idx] == 1]
-              dict_vecs[node] = vector
-          return dict_vecs
+              neighbors = self._ugdict[node]
+              atonum    = atonums[node]
+              matrix[node,node] = atonum
+              for neighbor in neighbors: matrix[node,neighbor] = -1
+
+          # Eigenvalues
+          vals, vecs = np.linalg.eigh(matrix)
+          return vals
+
+      def evals_matrix3(self,atonums,xcc):
+          matrix = np.zeros((self._nnodes,self._nnodes))
+          nodes  = self.get_nodes()
+
+          for idx1,node1 in enumerate(nodes):
+              matrix[node1,node1] = atonums[node1]
+              x1 = np.array(xcc[3*node1:3*node1+3])
+              for idx2 in range(idx1+1,len(nodes)):
+                  node2 = nodes[idx2]
+                  x2 = np.array(xcc[3*node2:3*node2+3])
+                  # calculate distance
+                  d  = np.linalg.norm(x2-x1)
+                  matrix[node1,node2] = d
+                  matrix[node2,node1] = d
+
+          # Eigenvalues
+          vals, vecs = np.linalg.eigh(matrix)
+          return vals
 
 
 if __name__ == "__main__":

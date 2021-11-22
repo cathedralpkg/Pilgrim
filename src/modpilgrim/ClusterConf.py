@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  ClusterConf        |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -41,9 +41,9 @@ This module contains the ClusterConf class
 
 #====================================================#
 import os
-import modpilgrim.names             as     PN
+import modpilgrim.names  as     PN
 import common.Exceptions as     Exc
-from   common.files      import read_gtsfile
+from   common.files      import findingts_energy_pg
 from   common.internal   import unmerge_ics
 from   common.internal   import string2ic
 from   common.physcons   import KCALMOL
@@ -80,6 +80,15 @@ class ClusterConf():
 
       def gtsfiles(self):
           return sorted([self.gtsfile(itc) for itc,weight in self._itcs])
+
+      def setvar(self,key,val,vtype="int"):
+          variables  = "ctc,root,mformu,itcs,ch,mtp,es,type,fscal,dics,"
+          variables += "dicsbw,dicsfw,diso,anh,lV0,lpg,V0,itcminV0,molecules"
+          if key not in variables.split(","): return
+          if   vtype == "str": update_string = "self._%s='%s'"%(key,val)
+          elif vtype == "int": update_string = "self._%s=int(%s)"%(key,val)
+          else               : update_string = "self._%s=%s"%(key,val)
+          exec(update_string)
 
       def set_from_piflines(self,lines):
           if type(lines) == str: lines = lines.split("\n")
@@ -132,81 +141,122 @@ class ClusterConf():
           # sort itcs
           self._itcs.sort()
    
-      def set_from_gtsfiles(self,gtsfiles):
-          '''
-          returns status, string
-          status = -1 ==> inconsistences between conformers
-          status =  0 ==> one or several gts files do not exist
-          status =  1 ==> everything is ok
-          string is "" except for status = -1
-          '''
-          self._itcs = []
-          self._lpg  = []
-          lch        = []
-          lmtp       = []
-          limag      = []
-          lmformu    = []
-          self._lV0  = []
-          if len(gtsfiles) == 0: return 0, None
-          # save lists
-          bool_imagfreqsOK = True
-          for gts in gtsfiles:
-              ctc, itc, ext = gts.split("/")[-1].split(".")
-              self._root = ctc
-              if not os.path.exists(gts): return 0, ""
-              molecule = Molecule()
-              molecule.set_from_gts(gts)
-              molecule.setup()
-              # save molecule
-              self._molecules.append(molecule)
-              # complete CTC data
-              self._lV0.append(float(molecule._V0))
-              self._lpg.append(str(molecule._pgroup))
-              self._itcs.append( (itc,1) )
-              # save some special data of this gts
-              lch.append( int(molecule._ch) )
-              lmtp.append( int(molecule._mtp) )
-              limag.append( int(numimag(molecule._ccfreqs)) )
-              lmformu.append( str(molecule._mform) )
-              if int(numimag(molecule._ccfreqs)) not in [0,1]: bool_imagfreqsOK = False
-          # check
-          len1 = len(list(set(lch    )))
-          len2 = len(list(set(lmtp   )))
-          len3 = len(list(set(limag  )))
-          len4 = len(list(set(lmformu)))
-          if len1*len2*len3*len4 != 1 or not bool_imagfreqsOK:
-             # table head and division
-             ml1 = max([len(name) for name in lmformu ]+[7])
-             ml2 = max([len(name) for name in gtsfiles]+[10])
-             line_format = " %%-%is | %%-%is | %%-%is | %%-%is | %%-%is | %%-%is "%(5,6,3,7,ml1,ml2)
-             thead = line_format%("itc","charge","mtp","n.imag.","m.form.","gts file")
-             tdivi = "-"*len(thead)
-             # start string
-             string  = "Main properties of each conformer in '%s'\n"%self._ctc
-             string += "   "+tdivi+"\n"
-             string += "   "+thead+"\n"
-             string += "   "+tdivi+"\n"
-             for idx,(itc,weight) in enumerate(self._itcs):
-                 col1 = itc
-                 col2 = "%i"%lch[idx]
-                 col3 = "%i"%lmtp[idx]
-                 col4 = "%i"%limag[idx]
-                 col5 = lmformu[idx]
-                 col6 = gtsfiles[idx]
-                 ldata = (col1,col2,col3,col4,col5,col6)
-                 string += "   "+line_format%ldata+"\n"
-             string += "   "+tdivi+"\n"
-             return -1,string
-          else:
-             self._mformu = lmformu[0]
-             self._ch     = lch[0]
-             self._mtp    = lmtp[0]
-             self._type   = limag[0]
-             self._V0     = min(self._lV0)
-             self._es     = [(self._mtp,0.0)]
-             return 1,""
+      def get_weight(self,itc):
+          if type(itc) == int: itc = "%003i"%itc
+          for itc_i,weight_i in self._itcs:
+              if itc == itc_i: return weight_i
+          return 0
 
-      def get_min_V0(self):
+      def add_itc(self,itc,V0,pg,weight=1):
+          if type(itc) == int: itc = "%003i"%itc
+          self._lV0.append(V0)
+          self._lpg.append(pg)
+          self._itcs.append( (itc,weight) )
+
+      def remove_itc(self,itc):
+          itcs = [itc for (itc,weight) in self._itcs]
+          if itc not in itcs: return
+          # index of this itc
+          idx = itcs.index(itc)
+          # remove it
+          self._itcs.pop(idx)
+          if self._lV0 != []: self._lV0.pop(idx)
+          if self._lV0 != []: self._lpg.pop(idx)
+          # remove only if exists
+          if self._molecules != []: self._molecules.pop(idx)
+          if itc in self._dics    : self._dics.pop(itc)
+          if itc in self._dicsbw  : self._dicsbw.pop(itc)
+          if itc in self._dicsfw  : self._dicsfw.pop(itc)
+
+
+     #def set_from_gtsfiles(self,gtsfiles):
+     #    '''
+     #    returns status, string
+     #    status = -1 ==> inconsistences between conformers
+     #    status =  0 ==> one or several gts files do not exist
+     #    status =  1 ==> everything is ok
+     #    string is "" except for status = -1
+     #    '''
+     #    self._itcs = []
+     #    self._lpg  = []
+     #    lch        = []
+     #    lmtp       = []
+     #    limag      = []
+     #    lmformu    = []
+     #    self._lV0  = []
+     #    if len(gtsfiles) == 0: return 0, None
+     #    # save lists
+     #    bool_imagfreqsOK = True
+     #    for gts in gtsfiles:
+     #        ctc, itc, ext = gts.split("/")[-1].split(".")
+     #        self._root = ctc
+     #        if not os.path.exists(gts): return 0, ""
+     #        molecule = Molecule()
+     #        molecule.set_from_gts(gts)
+     #        molecule.setup()
+     #        # save molecule
+     #        self._molecules.append(molecule)
+     #        # complete CTC data
+     #        self._lV0.append(float(molecule._V0))
+     #        self._lpg.append(str(molecule._pgroup))
+     #        self._itcs.append( (itc,1) )
+     #        # save some special data of this gts
+     #        lch.append( int(molecule._ch) )
+     #        lmtp.append( int(molecule._mtp) )
+     #        limag.append( int(numimag(molecule._ccfreqs)) )
+     #        lmformu.append( str(molecule._mform) )
+     #        if int(numimag(molecule._ccfreqs)) not in [0,1]: bool_imagfreqsOK = False
+     #    # check
+     #    len1 = len(list(set(lch    )))
+     #    len2 = len(list(set(lmtp   )))
+     #    len3 = len(list(set(limag  )))
+     #    len4 = len(list(set(lmformu)))
+     #    if len1*len2*len3*len4 != 1 or not bool_imagfreqsOK:
+     #       # table head and division
+     #       ml1 = max([len(name) for name in lmformu ]+[7])
+     #       ml2 = max([len(name) for name in gtsfiles]+[10])
+     #       line_format = " %%-%is | %%-%is | %%-%is | %%-%is | %%-%is | %%-%is "%(5,6,3,7,ml1,ml2)
+     #       thead = line_format%("itc","charge","mtp","n.imag.","m.form.","gts file")
+     #       tdivi = "-"*len(thead)
+     #       # start string
+     #       string  = "Main properties of each conformer in '%s'\n"%self._ctc
+     #       string += "   "+tdivi+"\n"
+     #       string += "   "+thead+"\n"
+     #       string += "   "+tdivi+"\n"
+     #       for idx,(itc,weight) in enumerate(self._itcs):
+     #           col1 = itc
+     #           col2 = "%i"%lch[idx]
+     #           col3 = "%i"%lmtp[idx]
+     #           col4 = "%i"%limag[idx]
+     #           col5 = lmformu[idx]
+     #           col6 = gtsfiles[idx]
+     #           ldata = (col1,col2,col3,col4,col5,col6)
+     #           string += "   "+line_format%ldata+"\n"
+     #       string += "   "+tdivi+"\n"
+     #       return -1,string
+     #    else:
+     #       self._mformu = lmformu[0]
+     #       self._ch     = lch[0]
+     #       self._mtp    = lmtp[0]
+     #       self._type   = limag[0]
+     #       self._V0     = min(self._lV0)
+     #       self._es     = [(self._mtp,0.0)]
+     #       return 1,""
+
+      def find_minV0(self):
+          if self._lV0 == []: return
+          for idx,(itc,weight) in enumerate(self._itcs):
+              V0 = self._lV0[idx]
+              # if first, set V0 and itcminV0
+              if idx == 0:
+                 self._V0       = V0
+                 self._itcminV0 = itc
+              # compare
+              if V0 >= self._V0: continue
+              self._V0       = V0
+              self._itcminV0 = itc
+
+      def get_minV0(self):
           self._lV0 = []
           self._lpg = []
           min_V0    = float("inf")
@@ -219,14 +269,13 @@ class ClusterConf():
                 #exception = Exc.NoGTSfile(Exception)
                 #exception._var = gts
                 #raise exception
-              gtsdata = read_gtsfile(gts)
-              V0      = gtsdata[4]
-              pg      = gtsdata[8]
-              # minimum?
-              if V0 < min_V0: min_V0, min_itc = V0, itc
-              # save energy and point group
+              # read energy and point group
+              V0,pg = findingts_energy_pg(gts)
+              # save data
               self._lV0.append( V0 )
               self._lpg.append( pg )
+              # conformer of minimum V0?
+              if V0 < min_V0: min_V0, min_itc = V0, itc
           if min_itc is not None:
              self._V0       = min_V0
              self._itcminV0 = min_itc
@@ -266,10 +315,10 @@ class ClusterConf():
       def get_piflines(self):
           string = ""
           # get min(V0)
-          if self._V0 is None: self.get_min_V0()
+          if self._V0 is None: self.get_minV0()
           # write itcs in CTC
           string += "root      %s\n"%self._root
-          string += "# conformers & anharmonicity\n"
+          string += "# conformers\n"
           for idx,(itc,weight) in enumerate(self._itcs):
               if weight > 2: weight = 1
               if weight < 1: weight = 1
@@ -281,6 +330,7 @@ class ClusterConf():
                  string += "conformer %-4s * %i \n"%(itc,weight)
           # anharmonicity file
           if self._anh is not None:
+             string += "# anharmonicity\n"
              string += "anharfile %s\n"%self._anh
           elif os.path.exists(PN.ANHDIR):
              anhfiles = []

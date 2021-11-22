@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 06:50:08
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 12:29:41
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -28,7 +28,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -56,7 +56,7 @@
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -70,7 +70,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -107,7 +107,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -140,7 +140,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 2.62E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 5.37E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw50): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -608,7 +623,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -633,14 +648,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw50):  -0.500 bohr (-152.578381 hartree)
-       last  point (fw50):  +0.500 bohr (-152.574523 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -654,7 +665,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -681,6 +692,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw50):  -0.500 bohr (-152.578381 hartree)
+       last  point (fw50):  +0.500 bohr (-152.574523 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw50): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -691,7 +721,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -724,7 +754,22 @@
          |E(s=+0.600)-E(s=+0.590)| = 2.52E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.600)|          = 5.12E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw60): C(2)H(6)O + H
+        * in forward  direction (fw60): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -1207,7 +1252,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -1232,14 +1277,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw60):  -0.600 bohr (-152.581600 hartree)
-       last  point (fw60):  +0.600 bohr (-152.577092 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -1253,7 +1294,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -1280,6 +1321,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw60):  -0.600 bohr (-152.581600 hartree)
+       last  point (fw60):  +0.600 bohr (-152.577092 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw60): C(2)H(6)O + H
+        * in forward  direction (fw60): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -1290,7 +1350,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -1323,7 +1383,22 @@
          |E(s=+0.700)-E(s=+0.690)| = 2.40E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.700)|          = 4.81E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw70): C(2)H(6)O + H
+        * in forward  direction (fw70): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -1821,7 +1896,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -1846,14 +1921,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw70):  -0.700 bohr (-152.584235 hartree)
-       last  point (fw70):  +0.700 bohr (-152.579547 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -1867,7 +1938,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -1894,6 +1965,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw70):  -0.700 bohr (-152.584235 hartree)
+       last  point (fw70):  +0.700 bohr (-152.579547 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw70): C(2)H(6)O + H
+        * in forward  direction (fw70): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -1904,7 +1994,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -1937,7 +2027,22 @@
          |E(s=+0.800)-E(s=+0.790)| = 2.26E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.800)|          = 4.48E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw80): C(2)H(6)O + H
+        * in forward  direction (fw80): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -2477,7 +2582,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -2502,14 +2607,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw80):  -0.800 bohr (-152.586445 hartree)
-       last  point (fw80):  +0.800 bohr (-152.581869 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -2523,7 +2624,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -2550,6 +2651,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw80):  -0.800 bohr (-152.586445 hartree)
+       last  point (fw80):  +0.800 bohr (-152.581869 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw80): C(2)H(6)O + H
+        * in forward  direction (fw80): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -2560,7 +2680,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -2593,7 +2713,22 @@
          |E(s=+0.900)-E(s=+0.890)| = 2.11E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.900)|          = 4.14E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw90): C(2)H(6)O + H
+        * in forward  direction (fw90): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -3148,7 +3283,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -3173,14 +3308,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw90):  -0.900 bohr (-152.588353 hartree)
-       last  point (fw90):  +0.900 bohr (-152.584045 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -3194,7 +3325,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -3221,6 +3352,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw90):  -0.900 bohr (-152.588353 hartree)
+       last  point (fw90):  +0.900 bohr (-152.584045 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw90): C(2)H(6)O + H
+        * in forward  direction (fw90): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -3231,7 +3381,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -3264,7 +3414,22 @@
          |E(s=+1.000)-E(s=+0.990)| = 1.96E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.000)|          = 3.81E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw100): C(2)H(6)O + H
+        * in forward  direction (fw100): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -3861,7 +4026,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -3886,14 +4051,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw100):  -1.000 bohr (-152.590014 hartree)
-       last  point (fw100):  +1.000 bohr (-152.586073 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -3907,7 +4068,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -3934,6 +4095,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw100):  -1.000 bohr (-152.590014 hartree)
+       last  point (fw100):  +1.000 bohr (-152.586073 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw100): C(2)H(6)O + H
+        * in forward  direction (fw100): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -3944,7 +4124,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -3977,7 +4157,22 @@
          |E(s=+1.100)-E(s=+1.090)| = 1.81E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.100)|          = 3.48E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw110): C(2)H(6)O + H
+        * in forward  direction (fw110): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -4400,7 +4595,7 @@
             +0.600 |   +62.981 | +4.61E-01 |   0.18579 | 1532.4975 |  0.8407  
             +0.700 |   +61.465 | +3.33E-01 |   0.19725 | 1626.6304 |  0.8923  
             +0.800 |   +59.984 | +2.81E-01 |   0.21542 | 1664.8181 |  0.9133  
-            +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1587 |  0.9201  
+            +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1588 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1607.5797 |  0.8819  
             +1.100 |   +55.936 | +2.43E-01 |   0.24545 | 1631.1459 |  0.8948  
           ----------------------------------------------------------------------
@@ -4589,7 +4784,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -4614,14 +4809,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw110):  -1.100 bohr (-152.591458 hartree)
-       last  point (fw110):  +1.100 bohr (-152.587953 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -4635,7 +4826,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -4662,6 +4853,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw110):  -1.100 bohr (-152.591458 hartree)
+       last  point (fw110):  +1.100 bohr (-152.587953 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw110): C(2)H(6)O + H
+        * in forward  direction (fw110): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -4672,7 +4882,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -4705,7 +4915,22 @@
          |E(s=+1.200)-E(s=+1.190)| = 1.67E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.200)|          = 3.18E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw120): C(2)H(6)O + H
+        * in forward  direction (fw120): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -5142,7 +5367,7 @@
             +0.700 |   +61.465 | +3.33E-01 |   0.19725 | 1626.6304 |  0.8923  
             +0.800 |   +59.984 | +2.81E-01 |   0.21542 | 1664.8181 |  0.9133  
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
-            +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1273 |  0.9189  
+            +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1272 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1598.7835 |  0.8771  
             +1.200 |   +54.740 | +2.27E-01 |   0.26206 | 1645.0681 |  0.9025  
           ----------------------------------------------------------------------
@@ -5332,7 +5557,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -5357,14 +5582,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw120):  -1.200 bohr (-152.592709 hartree)
-       last  point (fw120):  +1.200 bohr (-152.589688 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -5378,7 +5599,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -5405,6 +5626,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw120):  -1.200 bohr (-152.592709 hartree)
+       last  point (fw120):  +1.200 bohr (-152.589688 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw120): C(2)H(6)O + H
+        * in forward  direction (fw120): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -5415,7 +5655,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -5448,7 +5688,22 @@
          |E(s=+1.300)-E(s=+1.290)| = 1.54E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.300)|          = 2.89E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw130): C(2)H(6)O + H
+        * in forward  direction (fw130): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -5928,7 +6183,7 @@
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8390 |  0.9056  
             +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1601.0765 |  0.8783  
-            +1.300 |   +53.622 | +2.16E-01 |   0.26524 | 1746.1304 |  0.9579  
+            +1.300 |   +53.622 | +2.16E-01 |   0.26524 | 1746.1306 |  0.9579  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
         
@@ -6117,7 +6372,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -6142,14 +6397,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw130):  -1.300 bohr (-152.593790 hartree)
-       last  point (fw130):  +1.300 bohr (-152.591284 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -6163,7 +6414,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -6190,6 +6441,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw130):  -1.300 bohr (-152.593790 hartree)
+       last  point (fw130):  +1.300 bohr (-152.591284 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw130): C(2)H(6)O + H
+        * in forward  direction (fw130): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -6200,7 +6470,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -6233,7 +6503,22 @@
          |E(s=+1.400)-E(s=+1.390)| = 1.41E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.400)|          = 2.63E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw140): C(2)H(6)O + H
+        * in forward  direction (fw140): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -6699,9 +6984,9 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.400 |   +50.944 | +1.07E-01 |   0.32252 | 1714.0450 |  0.9403  
-            -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1682.2739 |  0.9229  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1998 |  0.9497  
+            -1.400 |   +50.944 | +1.07E-01 |   0.32252 | 1714.0451 |  0.9403  
+            -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1682.2738 |  0.9229  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -6725,9 +7010,9 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3022 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1600.0827 |  0.8778  
-            +1.400 |   +52.581 | +2.01E-01 |   0.28314 | 1760.0909 |  0.9656  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3024 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1600.0826 |  0.8778  
+            +1.400 |   +52.581 | +2.01E-01 |   0.28314 | 1760.0915 |  0.9656  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
         
@@ -6917,7 +7202,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -6942,14 +7227,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw140):  -1.400 bohr (-152.594721 hartree)
-       last  point (fw140):  +1.400 bohr (-152.592749 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -6963,7 +7244,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -6990,6 +7271,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw140):  -1.400 bohr (-152.594721 hartree)
+       last  point (fw140):  +1.400 bohr (-152.592749 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw140): C(2)H(6)O + H
+        * in forward  direction (fw140): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -7000,7 +7300,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -7033,7 +7333,22 @@
          |E(s=+1.500)-E(s=+1.490)| = 1.29E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.500)|          = 2.38E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw150): C(2)H(6)O + H
+        * in forward  direction (fw150): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -7538,10 +7853,10 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.500 |   +50.390 | +1.04E-01 |   0.31989 | 1720.8811 |  0.9440  
-            -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1703.8939 |  0.9347  
+            -1.500 |   +50.390 | +1.04E-01 |   0.31989 | 1720.8810 |  0.9440  
+            -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1703.8940 |  0.9347  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -7565,9 +7880,9 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4150 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1615.4170 |  0.8862  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4149 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1615.4171 |  0.8862  
             +1.500 |   +51.615 | +1.86E-01 |   0.29143 | 1822.8885 |  1.0000  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
@@ -7759,7 +8074,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -7784,14 +8099,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw150):  -1.500 bohr (-152.595519 hartree)
-       last  point (fw150):  +1.500 bohr (-152.594089 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -7805,7 +8116,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -7832,6 +8143,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw150):  -1.500 bohr (-152.595519 hartree)
+       last  point (fw150):  +1.500 bohr (-152.594089 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw150): C(2)H(6)O + H
+        * in forward  direction (fw150): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -7842,7 +8172,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -7875,7 +8205,22 @@
          |E(s=+1.600)-E(s=+1.590)| = 1.17E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.600)|          = 2.15E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw160): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -8392,11 +8737,11 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.600 |   +49.914 | +1.11E-01 |   0.31421 | 1733.1771 |  0.9508  
+            -1.600 |   +49.914 | +1.11E-01 |   0.31421 | 1733.1770 |  0.9508  
             -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1712.2017 |  0.9393  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -8420,9 +8765,9 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6751 |  0.9170  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6749 |  0.9170  
             +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1637.0032 |  0.8980  
             +1.600 |   +50.721 | +1.76E-01 |   0.29689 | 1822.8885 |  1.0000  
           ----------------------------------------------------------------------
@@ -8616,7 +8961,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -8641,14 +8986,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw160):  -1.600 bohr (-152.596200 hartree)
-       last  point (fw160):  +1.600 bohr (-152.595312 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -8662,7 +9003,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -8689,6 +9030,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw160):  -1.600 bohr (-152.596200 hartree)
+       last  point (fw160):  +1.600 bohr (-152.595312 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw160): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -8699,7 +9059,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -8732,7 +9092,22 @@
          |E(s=+1.700)-E(s=+1.690)| = 1.07E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.700)|          = 1.94E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw170): C(2)H(6)O + H
+        * in forward  direction (fw170): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -9261,12 +9636,12 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.700 |   +49.506 | +1.21E-01 |   0.31214 | 1718.4256 |  0.9427  
+            -1.700 |   +49.506 | +1.21E-01 |   0.31214 | 1718.4255 |  0.9427  
             -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1707.8000 |  0.9369  
-            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6099 |  0.9340  
+            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6100 |  0.9340  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -9290,12 +9665,12 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6758 |  0.9170  
-            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3475 |  0.9300  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6755 |  0.9170  
+            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3476 |  0.9300  
             +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1599.1541 |  0.8773  
-            +1.700 |   +49.897 | +1.67E-01 |   0.34518 | 1787.7675 |  0.9807  
+            +1.700 |   +49.897 | +1.67E-01 |   0.34518 | 1787.7674 |  0.9807  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
         
@@ -9488,7 +9863,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -9513,14 +9888,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw170):  -1.700 bohr (-152.596779 hartree)
-       last  point (fw170):  +1.700 bohr (-152.596425 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -9534,7 +9905,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -9561,6 +9932,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw170):  -1.700 bohr (-152.596779 hartree)
+       last  point (fw170):  +1.700 bohr (-152.596425 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw170): C(2)H(6)O + H
+        * in forward  direction (fw170): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -9571,7 +9961,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -9604,7 +9994,22 @@
          |E(s=+1.800)-E(s=+1.790)| = 9.68E-05 hartree      > 1.00E-08  NO
          |grad(s=+1.800)|          = 1.75E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw180): C(2)H(6)O + H
+        * in forward  direction (fw180): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -10173,12 +10578,12 @@
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
             -1.800 |   +49.157 | +1.28E-01 |   0.34691 | 1667.1202 |  0.9145  
-            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1698.1596 |  0.9316  
-            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8556 |  0.9358  
-            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6099 |  0.9340  
+            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1698.1598 |  0.9316  
+            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8557 |  0.9358  
+            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6100 |  0.9340  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -10202,10 +10607,10 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6758 |  0.9170  
-            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3487 |  0.9300  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6755 |  0.9170  
+            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3488 |  0.9300  
             +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3690 |  0.9081  
             +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1646.4474 |  0.9032  
             +1.800 |   +49.137 | +1.68E-01 |   0.34073 | 1822.8885 |  1.0000  
@@ -10402,7 +10807,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -10427,14 +10832,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw180):  -1.800 bohr (-152.597270 hartree)
-       last  point (fw180):  +1.800 bohr (-152.597437 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -10448,7 +10849,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -10475,6 +10876,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw180):  -1.800 bohr (-152.597270 hartree)
+       last  point (fw180):  +1.800 bohr (-152.597437 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw180): C(2)H(6)O + H
+        * in forward  direction (fw180): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -10485,7 +10905,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -10518,7 +10938,22 @@
          |E(s=+1.900)-E(s=+1.890)| = 8.77E-05 hartree      > 1.00E-08  NO
          |grad(s=+1.900)|          = 1.58E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw190): C(2)H(6)O + H
+        * in forward  direction (fw190): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -11099,13 +11534,13 @@
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
             -1.900 |   +48.861 | +1.36E-01 |   0.31796 | 1822.8885 |  1.0000  
-            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1689.1583 |  0.9266  
-            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3707 |  0.9498  
-            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8556 |  0.9358  
-            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6099 |  0.9340  
+            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1689.1581 |  0.9266  
+            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3710 |  0.9498  
+            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8557 |  0.9358  
+            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6100 |  0.9340  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -11129,13 +11564,13 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6758 |  0.9170  
-            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3487 |  0.9300  
-            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3685 |  0.9081  
-            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8264 |  0.9259  
-            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1593.3768 |  0.8741  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6755 |  0.9170  
+            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3488 |  0.9300  
+            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3687 |  0.9081  
+            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8263 |  0.9259  
+            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1593.3769 |  0.8741  
             +1.900 |   +48.440 | +1.71E-01 |   0.37179 | 1822.8885 |  1.0000  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
@@ -11331,7 +11766,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -11356,14 +11791,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw190):  -1.900 bohr (-152.597684 hartree)
-       last  point (fw190):  +1.900 bohr (-152.598353 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -11377,7 +11808,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -11404,6 +11835,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw190):  -1.900 bohr (-152.597684 hartree)
+       last  point (fw190):  +1.900 bohr (-152.598353 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw190): C(2)H(6)O + H
+        * in forward  direction (fw190): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -11414,7 +11864,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -11447,7 +11897,22 @@
          |E(s=+2.000)-E(s=+1.990)| = 7.92E-05 hartree      > 1.00E-08  NO
          |grad(s=+2.000)|          = 1.42E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw200): C(2)H(6)O + H
+        * in forward  direction (fw200): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -12066,15 +12531,15 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -2.000 |   +48.609 | +1.38E-01 |   0.34967 | 1740.5951 |  0.9549  
-            -1.900 |   +48.861 | +1.31E-01 |   0.37268 | 1653.8151 |  0.9072  
-            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1698.6430 |  0.9318  
-            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3710 |  0.9498  
-            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8556 |  0.9358  
-            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6099 |  0.9340  
+            -2.000 |   +48.609 | +1.38E-01 |   0.34967 | 1740.5943 |  0.9549  
+            -1.900 |   +48.861 | +1.31E-01 |   0.37268 | 1653.8150 |  0.9072  
+            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1698.6428 |  0.9318  
+            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3711 |  0.9498  
+            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8557 |  0.9358  
+            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6100 |  0.9340  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -12098,13 +12563,13 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6758 |  0.9170  
-            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3487 |  0.9300  
-            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3685 |  0.9081  
-            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8262 |  0.9259  
-            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1660.0920 |  0.9107  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6755 |  0.9170  
+            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3488 |  0.9300  
+            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3687 |  0.9081  
+            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8261 |  0.9259  
+            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1660.0918 |  0.9107  
             +1.900 |   +48.440 | +1.70E-01 |   0.43749 | 1822.8885 |  1.0000  
             +2.000 |   +47.800 | +1.80E-01 |   0.33283 | 1822.8885 |  1.0000  
           ----------------------------------------------------------------------
@@ -12302,7 +12767,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      4-10 --
+       fwdir     4-10 --
     
     Variables for steepest descent
        method    pm
@@ -12327,14 +12792,10 @@
        rst file: 4-PLG_RST/TSB_iso1.003.rst
        xyz file: 5-MOLDEN/path.TSB_iso1.003.xyz
     
-    Restart file (rst) found!
-       first point (bw200):  -2.000 bohr (-152.598032 hartree)
-       last  point (fw200):  +2.000 bohr (-152.599183 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSB.003.gts
+       File with info        : 1-GTS/TSB.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -12348,7 +12809,7 @@
        Rotational sym num    : 1
        Cartesian coordinates (Angstrom):
           C    -1.17804488   +0.02130757   -0.22785098  [ 12.000 amu]
-          C    +0.19090799   -0.51579302   +0.22912265  [ 12.000 amu]
+          C    +0.19090798   -0.51579302   +0.22912265  [ 12.000 amu]
           O    +1.27202232   +0.39487704   -0.01550486  [ 15.995 amu]
           H    -1.40564188   +1.13684805   +0.38709633  [  2.014 amu]
           H    -1.99599092   -0.63807264   +0.04579608  [  2.014 amu]
@@ -12375,6 +12836,25 @@
                                            +16363.54 cm^-1 
        V0 + zero-point energy (V1)  :  -152.48935501 hartree
        
+    Restart file (rst) found!
+       first point (bw200):  -2.000 bohr (-152.598032 hartree)
+       last  point (fw200):  +2.000 bohr (-152.599183 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw200): C(2)H(6)O + H
+        * in forward  direction (fw200): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -12385,7 +12865,7 @@
            H    -3.769765   +3.048892   +1.038146 
            H    -5.353011   -1.711235   +0.122820 
            H    -3.248316   +0.698494   -3.452329 
-           H    +0.457131   -1.850822   +3.509995 
+           H    +0.457131   -1.850823   +3.509995 
            H    +1.007737   -3.984956   -0.679232 
            H    +2.399358   +0.980876   -1.895595 
            H    -2.982197   +3.671107   +1.571162 
@@ -12418,7 +12898,22 @@
          |E(s=+2.100)-E(s=+2.090)| = 7.15E-05 hartree      > 1.00E-08  NO
          |grad(s=+2.100)|          = 1.27E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw210): C(2)H(6)O + H
+        * in forward  direction (fw210): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSB_iso1.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -13049,16 +13544,16 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -2.100 |   +48.396 | +1.29E-01 |   0.33940 | 1773.1593 |  0.9727  
-            -2.000 |   +48.609 | +1.34E-01 |   0.36429 | 1695.9255 |  0.9304  
-            -1.900 |   +48.861 | +1.31E-01 |   0.37268 | 1649.4305 |  0.9048  
-            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1698.6430 |  0.9318  
-            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3710 |  0.9498  
-            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8556 |  0.9358  
-            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6099 |  0.9340  
+            -2.100 |   +48.396 | +1.29E-01 |   0.33940 | 1773.1597 |  0.9727  
+            -2.000 |   +48.609 | +1.34E-01 |   0.36429 | 1695.9253 |  0.9304  
+            -1.900 |   +48.861 | +1.31E-01 |   0.37268 | 1649.4304 |  0.9048  
+            -1.800 |   +49.157 | +1.25E-01 |   0.36061 | 1698.6427 |  0.9318  
+            -1.700 |   +49.506 | +1.18E-01 |   0.34328 | 1731.3711 |  0.9498  
+            -1.600 |   +49.914 | +1.08E-01 |   0.32549 | 1705.8557 |  0.9358  
+            -1.500 |   +50.390 | +1.03E-01 |   0.32844 | 1702.6100 |  0.9340  
             -1.400 |   +50.944 | +1.06E-01 |   0.32981 | 1698.2023 |  0.9316  
             -1.300 |   +51.584 | +1.19E-01 |   0.33199 | 1685.8903 |  0.9248  
-            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.1999 |  0.9497  
+            -1.200 |   +52.321 | +1.43E-01 |   0.32027 | 1731.2000 |  0.9497  
             -1.100 |   +53.164 | +1.79E-01 |   0.29109 | 1822.8885 |  1.0000  
             -1.000 |   +54.126 | +2.64E-01 |   0.24688 | 1800.2697 |  0.9876  
             -0.900 |   +55.209 | +5.29E-01 |   0.22120 | 1456.6435 |  0.7991  
@@ -13082,15 +13577,15 @@
             +0.900 |   +58.563 | +2.59E-01 |   0.23413 | 1677.1602 |  0.9201  
             +1.000 |   +57.212 | +2.44E-01 |   0.25632 | 1675.1245 |  0.9189  
             +1.100 |   +55.936 | +2.32E-01 |   0.27625 | 1650.8378 |  0.9056  
-            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3021 |  0.9037  
-            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4146 |  0.9037  
-            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6758 |  0.9170  
-            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3487 |  0.9300  
-            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3685 |  0.9081  
-            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8262 |  0.9259  
-            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1660.0920 |  0.9107  
-            +1.900 |   +48.440 | +1.70E-01 |   0.43749 | 1600.9050 |  0.8782  
-            +2.000 |   +47.800 | +1.77E-01 |   0.45562 | 1615.5487 |  0.8863  
+            +1.200 |   +54.740 | +2.20E-01 |   0.29258 | 1647.3023 |  0.9037  
+            +1.300 |   +53.622 | +2.06E-01 |   0.31175 | 1647.4145 |  0.9037  
+            +1.400 |   +52.581 | +1.94E-01 |   0.32800 | 1671.6755 |  0.9170  
+            +1.500 |   +51.615 | +1.80E-01 |   0.35396 | 1695.3488 |  0.9300  
+            +1.600 |   +50.721 | +1.71E-01 |   0.37668 | 1655.3687 |  0.9081  
+            +1.700 |   +49.897 | +1.66E-01 |   0.39215 | 1687.8261 |  0.9259  
+            +1.800 |   +49.137 | +1.65E-01 |   0.42448 | 1660.0919 |  0.9107  
+            +1.900 |   +48.440 | +1.70E-01 |   0.43749 | 1600.9049 |  0.8782  
+            +2.000 |   +47.800 | +1.77E-01 |   0.45562 | 1615.5488 |  0.8863  
             +2.100 |   +47.215 | +1.86E-01 |   0.39413 | 1822.8885 |  1.0000  
           ----------------------------------------------------------------------
            ** kappa, turnpoint and mueff were interpolated
@@ -13296,7 +13791,7 @@
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-19 |
-                                                            | Current time:   07:15:39 |
-                                                            | Elapsed time:  25.5 mins |
+                                                            | Current date: 2021-11-20 |
+                                                            | Current time:   12:50:43 |
+                                                            | Elapsed time:  21.0 mins |
                                                             ----------------------------

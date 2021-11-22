@@ -1,12 +1,4 @@
 # level: RPM6 ZDO
-# Atomic number and non-scaled cartesian coordinates [bohr]
-start_cc
-   007   +0.00000000E+00  +0.00000000E+00  +0.00000000E+00
-   001   +5.36279900E-63  +1.85336108E+00  +8.75811540E-47
-   001   +1.60505777E+00  -9.26680538E-01  -4.93038066E-32
-   001   -1.60505777E+00  -9.26680538E-01  +0.00000000E+00
-end_cc
-
 # Charge, multiplicity, energy [hartree],
 # point group and rotational symmetry number
 start_basic
@@ -16,6 +8,14 @@ start_basic
    pointgroup    D3h             # Point group
    rotsigma      6               # Rotational sigma
 end_basic
+
+# Atomic number and non-scaled cartesian coordinates [bohr]
+start_cc
+   007   +0.00000000E+00  -2.36765545E-10  +2.91836064E-33
+   001   +5.36279900E-63  +1.85336108E+00  +2.91836064E-33
+   001   +1.60505777E+00  -9.26680538E-01  -4.63854460E-32
+   001   -1.60505777E+00  -9.26680538E-01  +2.91836064E-33
+end_cc
 
 # Non-scaled cartesian gradient [hartree/bohr]
 start_grad

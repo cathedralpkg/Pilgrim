@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 11:23:55
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 16:15:55
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -27,7 +27,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -52,14 +52,10 @@
        rst file: 4-PLG_RST/TSC.002.rst
        xyz file: 5-MOLDEN/path.TSC.002.xyz
     
-    Restart file (rst) found!
-       first point (bw190):  -1.900 bohr (-152.598730 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.621850 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.002.gts
+       File with info        : 1-GTS/TSC.002.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -80,7 +76,7 @@
           H    +1.46008848   -0.78606454   -0.88105767  [  1.008 amu]
           H    -0.07666119   +1.20479591   +0.88261271  [  1.008 amu]
           H    -0.07735441   +1.20246489   -0.88564934  [  1.008 amu]
-          H    -1.93910409   +0.11557935   +0.00006101  [  1.008 amu]
+          H    -1.93910409   +0.11557934   +0.00006101  [  1.008 amu]
           H    -2.82040534   +0.77423246   -0.00091267  [  1.008 amu]
        Moments and product of inertia (au):
                +1.006E+05  +4.125E+05  +4.722E+05  [ 1.959E+16]
@@ -100,6 +96,25 @@
                                            +20170.29 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49366677 hartree
        
+    Restart file (rst) found!
+       first point (bw190):  -1.900 bohr (-152.598730 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.621850 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw190): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -143,7 +158,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.38E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 9.37E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC.002.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw190): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC.002.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -558,17 +588,17 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.900 |   +60.175 | +1.70E-01 |   0.22146 | 1762.0066 |  0.9666  
-            -1.800 |   +60.283 | +9.60E-02 |   0.20083 | 1802.1841 |  0.9886  
+            -1.900 |   +60.175 | +1.70E-01 |   0.22146 | 1762.0088 |  0.9666  
+            -1.800 |   +60.283 | +9.60E-02 |   0.20083 | 1802.1803 |  0.9886  
             -1.700 |   +60.411 | +4.45E-02 |   0.18830 | 1822.8885 |  1.0000  
             -1.600 |   +60.562 | +9.86E-02 |   0.24874 | 1822.8885 |  1.0000  
             -1.500 |   +60.741 | +1.52E-01 |   0.34754 | 1822.8885 |  1.0000  
             -1.400 |   +60.950 | +1.93E-01 |   0.43501 | 1822.8885 |  1.0000  
-            -1.300 |   +61.194 | +2.18E-01 |   0.46377 | 1476.8142 |  0.8102  
-            -1.200 |   +61.477 | +2.29E-01 |   0.44416 | 1564.5268 |  0.8583  
-            -1.100 |   +61.804 | +2.27E-01 |   0.41427 | 1500.5517 |  0.8232  
-            -1.000 |   +62.180 | +2.14E-01 |   0.43469 | 1556.5235 |  0.8539  
-            -0.900 |   +62.611 | +1.99E-01 |   0.45265 | 1510.7845 |  0.8288  
+            -1.300 |   +61.194 | +2.18E-01 |   0.46377 | 1476.8140 |  0.8102  
+            -1.200 |   +61.477 | +2.29E-01 |   0.44416 | 1564.5266 |  0.8583  
+            -1.100 |   +61.804 | +2.27E-01 |   0.41427 | 1500.5518 |  0.8232  
+            -1.000 |   +62.180 | +2.14E-01 |   0.43469 | 1556.5233 |  0.8539  
+            -0.900 |   +62.611 | +1.99E-01 |   0.45265 | 1510.7846 |  0.8288  
             -0.800 |   +63.099 | +1.87E-01 |   0.43411 | 1822.8885 |  1.0000  
             -0.700 |   +63.648 | +1.81E-01 |   0.35906 | 1822.8885 |  1.0000  
             -0.600 |   +64.253 | +1.93E-01 |   0.27659 | 1822.8885 |  1.0000  
@@ -710,7 +740,7 @@
         ----------------------------------------------------
            T (K)   |  %I1   |  %I2   |  Kappa^SCT  |   RTE   
         ----------------------------------------------------
-            250.00 |  99.36 |   0.64 |   9.398E+01 |  62.772 
+            250.00 |  99.36 |   0.64 |   9.398E+01 |  62.771 
             500.00 |  78.94 |  21.06 |   3.273E+00 |  65.433 
            1000.00 |  41.90 |  58.10 |   1.355E+00 |  66.533 
            1500.00 |  26.72 |  73.28 |   1.146E+00 |  67.762 
@@ -755,7 +785,7 @@
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-19 |
-                                                            | Current time:   11:24:06 |
-                                                            | Elapsed time:  10.7 secs |
+                                                            | Current date: 2021-11-20 |
+                                                            | Current time:   16:16:05 |
+                                                            | Elapsed time:   9.8 secs |
                                                             ----------------------------

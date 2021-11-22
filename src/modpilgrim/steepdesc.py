@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  steepdesc          |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -268,6 +268,7 @@ def get_imagfreq(freqs,evecs):
 #-----------------------------------------------#
 def correctdir_v0(xms,v0,idir,masses,mu):
     # Check direction of v0
+    if idir is None: return v0
     ic, sign = idir
     changedir = not intl.ics_correctdir(xms,v0,ic,sign,masses,mu)
     if changedir: v0 = -v0

@@ -86,8 +86,8 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSA orca
-%pal nprocs 4 end  
-%maxcore 4000 
+%pal nprocs 1 end  
+%maxcore 1000 
 ! hf sto-3g TightSCF        
 [Pilgrim_gradientcalc_start]
 ! EnGrad
@@ -104,8 +104,8 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSB orca
-%pal nprocs 4 end  
-%maxcore 4000 
+%pal nprocs 1 end  
+%maxcore 1000 
 ! hf sto-3g TightSCF        
 [Pilgrim_gradientcalc_start]
 ! EnGrad
@@ -122,8 +122,8 @@ end_meppoint
 
 #- - - - - - - - - - - - - -#
 start_meppoint TSC orca
-%pal nprocs 4 end  
-%maxcore 4000 
+%pal nprocs 1 end  
+%maxcore 1000 
 ! hf sto-3g TightSCF        
 [Pilgrim_gradientcalc_start]
 ! EnGrad

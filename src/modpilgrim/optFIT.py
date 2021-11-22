@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optFIT             |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -52,7 +52,6 @@ import modpilgrim.pilrw    as RW
 import modpilgrim.strings as PS
 #--------------------------------------------------#
 from   modpilgrim.fit2anarc         import fit2anarc
-from   modpilgrim.ChemReaction      import ChemReaction
 from   modpilgrim.diverse           import ffchecking
 from   modpilgrim.diverse           import status_check
 from   modpilgrim.plotting          import manage_data_for_plot_rcons

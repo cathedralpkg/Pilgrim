@@ -5,7 +5,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -58,7 +58,7 @@ from   common.fncs             import classify_args         #
 from   common.fncs             import print_string          #
 from   common.fncs             import time2human            #
 #-----------------------------------------------------------#
-import modpilgrim.names       as PN                         #
+import modpilgrim.names          as PN                      #
 #-----------------------------------------------------------#
 import modpilgrim.optGATHER      as gather                  #
 import modpilgrim.optINPUT       as inpmenu                 #
@@ -71,7 +71,6 @@ import modpilgrim.optFIT         as fit                     #
 import modpilgrim.optPLOT        as plot                    #
 import modpilgrim.optHLCALC      as hlcalc                  #
 import modpilgrim.optKIES        as kies                    #
-#import modpilgrim.optHARVEST     as harvest                 #
 import modpilgrim.optSUMMARY     as summary                 #
 from   modpilgrim.exceptions     import deal_with_exception #
 from   modpilgrim.diverse        import get_input_data      #
@@ -88,7 +87,6 @@ from   modpilgrim.helps          import HELP_rcons          #
 from   modpilgrim.helps          import HELP_fit            #
 from   modpilgrim.helps          import HELP_kmc            #
 from   modpilgrim.helps          import HELP_summary        #
-#from   modpilgrim.helps          import HELP_harvest       #
 from   modpilgrim.helps          import HELP_plot           #
 from   modpilgrim.helps          import HELP_kies           #
 #===========================================================#
@@ -174,7 +172,6 @@ def main():
        if "kmc"     in dargs["help"]: print_string(HELP_kmc    ,1)
        if "plot"    in dargs["help"]: print_string(HELP_plot   ,1)
        if "kies"    in dargs["help"]: print_string(HELP_kies   ,1)
-      #if "harvest" in dargs["help"]: print_string(HELP_harvest,1)
        if "summary" in dargs["help"]: print_string(HELP_summary,1)
        return
 
@@ -226,7 +223,6 @@ def main():
         elif option == "kies"   :    kies.main(idata,status,case                )
         elif option == "fit"    :     fit.main(idata,status,case,dargs["fit"   ])
         elif option == "plot"   :    plot.main(             case,dargs["plot"  ])
-       #elif option == "harvest": harvest.main(idata,status,case,dargs["harvest"])
         elif option == "summary": summary.main(idata,status,case,dargs["summary"])
         print("")
         print(" ===========================================================")

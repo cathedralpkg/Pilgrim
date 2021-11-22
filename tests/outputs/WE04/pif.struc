@@ -17,7 +17,7 @@ end_isomass
 #------------------------------------------#
 start_ctc E
    root      E
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, Cs
    # basic data
    mformu    CH(2)O(2)
@@ -32,7 +32,7 @@ end_ctc
 
 start_ctc Z
    root      Z
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, Cs
    # basic data
    mformu    CH(2)O(2)
@@ -50,7 +50,7 @@ end_ctc
 #------------------------------------------#
 start_ctc ZE_TS
    root      ZE_TS
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C1
    # basic data
    mformu    CH(2)O(2)
@@ -65,7 +65,7 @@ start_ctc ZE_TS
    ics         1-2  1-3  1-5  2-4
    ics         1-2-4  2-1-3  2-1-5  3-1-5
    ics         2_3_5_1
-   ics         3-1-2-4
+   ics         4-2-1-5
 end_ctc
 
 

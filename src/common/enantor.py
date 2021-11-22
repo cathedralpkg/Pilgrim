@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -367,8 +367,8 @@ def assign_print(dcorr):
 #---------------------------------------------------#
 def equivalent_atoms_in_graphs(amatrix1,amatrix2,symbols):
     # Graphs
-    graph1 = UGRAPH(); graph1.set_from_amatrix(amatrix1); graph1.gen_laplacian()
-    graph2 = UGRAPH(); graph2.set_from_amatrix(amatrix2); graph2.gen_laplacian()
+    graph1 = UGRAPH(); graph1.set_from_amatrix(amatrix1)
+    graph2 = UGRAPH(); graph2.set_from_amatrix(amatrix2)
     
     # Correlations
     dcorr,na_0 = assign_initialize(symbols)
@@ -425,8 +425,8 @@ def correlate_enantio(xcc1,xcc2,symbols,fconnect=1.3,pp=False):
     amatrix2 = np.matrix(intl.link_fragments(xcc2,amatrix2.tolist(),1)[0])
 
     # Graphs
-    graph1 = UGRAPH(); graph1.set_from_amatrix(amatrix1); graph1.gen_laplacian()
-    graph2 = UGRAPH(); graph2.set_from_amatrix(amatrix2); graph2.gen_laplacian()
+    graph1 = UGRAPH(); graph1.set_from_amatrix(amatrix1)
+    graph2 = UGRAPH(); graph2.set_from_amatrix(amatrix2)
 
     
     # Correlations

@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optPFN             |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 
@@ -129,10 +129,10 @@ def conformer_contributions(ltemp,dpfn,ctc,itcs):
         dchi[itc] = chi
     return dchi
 #---------------------------------------------------------------#
-def get_V0HL_list(ctc,itcs,dhighlvl):
+def get_V0HL_list(Cluster,dhighlvl):
     list_V0HL = []
-    for itc,weight in itcs:
-        key  = PN.struckey(ctc,itc)
+    for itc,weight in Cluster._itcs:
+        key  = PN.struckey(Cluster._root,itc)
         V0HL = dhighlvl.get(key,None)
         list_V0HL.append(V0HL)
     return list_V0HL
@@ -155,9 +155,7 @@ def calculate_QMSHO_for_ctc(Cluster,ltemp,dimasses={},tupleHL=None):
         if not os.path.exists(gts):
            exception._var = gts
            raise exception
-    # DLEVEL
-    if dlevel: V0HLs = get_V0HL_list(Cluster._root,itcs,dhighlvl)
-    else     : V0HLs = [None for itc,weight in itcs]
+
     # Generate Molecule instances
     molecules = []
     mass = None
@@ -174,18 +172,30 @@ def calculate_QMSHO_for_ctc(Cluster,ltemp,dimasses={},tupleHL=None):
         molecule = molecule_prep(gts,eslist,tiso,fscal)
         # save low-level
         V0LLs.append( float(molecule._V0) )
-        # apply dlevel
-        if V0HLs[idx] is not None:
-           molecule._V0 = V0HLs[idx]
-           molecule._ccV1 = molecule._V0 + molecule._cczpe
         # save molecule
         molecules.append(molecule)
-    # Get min of V0 and V1
-    V0 = min([molecule._V0   for molecule in molecules])
-    V1 = min([molecule._ccV1 for molecule in molecules])
+
     # String
     string = ""
+
+    #----------------------------------------------------#
+    #             APPLY DUAL LEVEL  (DLEVEL)             #
+    #----------------------------------------------------#
     if dlevel:
+       # get HL energies
+       V0HLs = get_V0HL_list(Cluster,dhighlvl)
+
+       # only one conformer?? Keep LL relative energy
+       num_nones = V0HLs.count(None)
+       if len(V0HLs) == num_nones+1:
+          dlevel_ok = True
+          IDX       = [idx for idx,V0HL_i in enumerate(V0HLs) if V0HL_i is not None][0]
+          deltaE    = V0HLs[IDX] - V0LLs[IDX]
+          V0HLs     = [V0LL_i + deltaE for V0LL_i in V0LLs]
+       elif num_nones == 0: dlevel_ok,IDX = True ,None
+       else               : dlevel_ok,IDX = False,None
+
+       # add to string
        string += "    keyword --dlevel activated: applying High-Level energies to this STRUC\n"
        string += "\n"
        string += "        * Low-level (LL) and high-level (HL) energies (in hartree):\n"
@@ -196,13 +206,31 @@ def calculate_QMSHO_for_ctc(Cluster,ltemp,dimasses={},tupleHL=None):
        for idx,(itc,weight) in enumerate(itcs):
            if V0HLs[idx] is None: V0HL = "        -        "
            else                 : V0HL = "%+17.8f"%V0HLs[idx]
-           string += "           %-9s | %+17.8f | %s \n"%(itc,V0LLs[idx],V0HL)
+           string += "           %-9s | %+17.8f | %s "%(itc,V0LLs[idx],V0HL)
+           if idx == IDX: string += "*"
+           string += "\n"
        string += "          ---------------------------------------------------\n"
+       if IDX is not None:
+           string += "           * conformer for which the HL energy was found\n"
        string += "\n"
-       if None in V0HLs:
+
+       # apply HL to each conformer
+       if dlevel_ok:
+          for idx,molecule in enumerate(molecules):
+              molecule._V0   = float(V0HLs[idx])
+              molecule._ccV1 = molecule._V0 + float(molecule._cczpe)
+       else:
           string += "        * FAIL!! Not enough data... DUAL-LEVEL will be omitted!\n"
           string += "\n"
           WARNINGS.append("Dual-level was not applied to %s..."%ctc)
+    #----------------------------------------------------#
+
+
+
+    # Get min of V0 and V1
+    V0 = min([molecule._V0   for molecule in molecules])
+    V1 = min([molecule._ccV1 for molecule in molecules])
+
     string += add_iblank(PS.getstring_ctc(sptype,molecules,itcs,V0,V1),4)
     # Compare masses
     for molecule in molecules:

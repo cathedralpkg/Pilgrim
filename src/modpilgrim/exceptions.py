@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  exceptions         |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -90,7 +90,9 @@ def deal_with_exception(exception):
          serr += "  * User asked for the adiabatic potential in internal coordinates.\n"
          serr += "    However, these coordinates are not defined in '%s'\n"%PN.IFILE1
     elif exctype == Exc.IncompData:
-         serr += "  * Inconsistences with the list of temperatures: '%s'\n"%exception._var
+         serr += "  * Inconsistences with the list of temperatures!\n"
+         serr += "    If you have modified the list of temperatures,\n"
+         serr += "    please remove the following file: '%s'\n"%exception._var
     elif exctype == Exc.NoRateCons:
          rctype, rcname = exception._var
          serr += "  WARNING: Unable to find '%s' rate constant for '%s'\n"%(rctype,rcname)

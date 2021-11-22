@@ -17,9 +17,10 @@ end_isomass
 #------------------------------------------#
 start_ctc EtOH
    root      EtOH
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 2 #  0.000 kcal/mol, C1
    conformer 002  * 1 #  0.246 kcal/mol, Cs
+   # anharmonicity
    anharfile EtOH.q2dtor
    # basic data
    mformu    C(2)H(6)O
@@ -32,7 +33,7 @@ end_ctc
 
 start_ctc H
    root      H
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, K
    # basic data
    mformu    H
@@ -48,10 +49,11 @@ end_ctc
 #------------------------------------------#
 start_ctc TSA
    root      TSA
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 1 #  0.000 kcal/mol, C1
    conformer 002  * 1 #  0.207 kcal/mol, C1
    conformer 003  * 1 #  2.011 kcal/mol, C1
+   # anharmonicity
    anharfile TSA.q2dtor
    # basic data
    mformu    C(2)H(7)O
@@ -72,12 +74,13 @@ end_ctc
 
 start_ctc TSB
    root      TSB
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 2 #  0.000 kcal/mol, C1
    conformer 002  * 2 #  0.058 kcal/mol, C1
    conformer 003  * 2 #  0.265 kcal/mol, C1
    conformer 004  * 1 #  0.371 kcal/mol, Cs
    conformer 005  * 2 #  0.447 kcal/mol, C1
+   # anharmonicity
    anharfile TSB.q2dtor
    # basic data
    mformu    C(2)H(7)O
@@ -98,9 +101,10 @@ end_ctc
 
 start_ctc TSC
    root      TSC
-   # conformers & anharmonicity
+   # conformers
    conformer 001  * 2 #  0.000 kcal/mol, C1
    conformer 002  * 1 #  0.059 kcal/mol, Cs
+   # anharmonicity
    anharfile TSC.q2dtor
    # basic data
    mformu    C(2)H(7)O

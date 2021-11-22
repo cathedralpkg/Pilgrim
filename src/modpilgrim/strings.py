@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  strings            |
-| Last Update:  2021/04/20 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
@@ -67,7 +67,7 @@ from   modpilgrim.fit2anarc  import activation4
 from   modpilgrim.fit2anarc  import activation5
 #---------------------------------------------------------------#
 
-VERSION   = "2021.4 (2021-June-19)"
+VERSION   = "2021.5 (2021-Nov-22)"
 
 # methods
 KEYS_TC = "tst,tstzct,tstsct,cvt,cvtzct,cvtsct".split(",")
@@ -77,12 +77,22 @@ KEYS_X  = ("tst,"+\
 
 # Nice string
 KEYNICE = {}
+KEYNICE["sstst"   ] = "SS-TST"
+KEYNICE["sststzct"] = "SS-TST/ZCT"
+KEYNICE["sststsct"] = "SS-TST/SCT"
+KEYNICE["sscvt"   ] = "SS-CVT"
+KEYNICE["sscvtzct"] = "SS-CVT/ZCT"
+KEYNICE["sscvtsct"] = "SS-CVT/SCT"
+
 KEYNICE["tst"     ] = "MS-TST"
+KEYNICE["mstst"   ] = "MS-TST"
 KEYNICE["mststzct"] = "MS-TST/ZCT"
 KEYNICE["mststsct"] = "MS-TST/SCT"
 KEYNICE["mscvt"   ] = "MS-CVT"
 KEYNICE["mscvtzct"] = "MS-CVT/ZCT"
 KEYNICE["mscvtsct"] = "MS-CVT/SCT"
+
+KEYNICE["mptst"   ] = "MS-TST"
 KEYNICE["mptstzct"] = "MP-TST/ZCT"
 KEYNICE["mptstsct"] = "MP-TST/SCT"
 KEYNICE["mpcvt"   ] = "MP-CVT"
@@ -491,7 +501,7 @@ def smep_init(target,software,PARALLEL,var_first,var_sdbw,var_sdfw):
     string += "   mu        %.4f amu\n"%(mu*AMU)
     if d3 in [None,False,"no"]: string += "   cubic     no\n"
     else                      : string += "   cubic     %s \n"%d3
-    string += "   idir      %s %s\n"%idir
+    if idir is not None: string += "   fwdir     %s %s\n"%idir
     string += "\n"
     # variables MEP
     method,mu,ds,sbw,hsteps,epse,epsg = var_sdbw
@@ -545,7 +555,7 @@ def smep_ts(ts):
     string  = "\n"
     string += "Information about transition structure:\n"
     string += "\n"
-    string += "   File with info    : %s\n"%ts._gts
+    string += "   File with info        : %s\n"%ts._gts
     string += ts.info_string(3)
     return string
 #---------------------------------------------------------------#
@@ -1191,13 +1201,6 @@ def srcons_conservation(chemreac):
        string += "    charge and/or mass NOT conserved!!\n"
     return string
 #---------------------------------------------------------------#
-def weights_as_dict(dctc):
-    dweights = {}
-    for ctc,cluster in dctc.items():
-        for itc,weight in cluster._itcs:
-            dweights[ (ctc,itc) ] = weight
-    return dweights
-#---------------------------------------------------------------#
 def srcons_relenergies(chemreac):
 
     string  = "Relative energies (kcal/mol):\n"
@@ -1209,8 +1212,6 @@ def srcons_relenergies(chemreac):
     string += "   "+"min{V0(i)} of reactants ==> V0 = %.8f hartree\n"%chemreac._V0R
     string += "   "+"min{V1(i)} of reactants ==> V1 = %.8f hartree\n"%chemreac._V1R
     string += "\n"
-
-    dweights = weights_as_dict(chemreac._dctc)
 
     # table lines
     tlines = []
@@ -1238,7 +1239,7 @@ def srcons_relenergies(chemreac):
                 V0, V1 = chemreac.return_V0V1(ctc,itc)
                 V0_comb += V0
                 V1_comb += V1
-                tot_weight *= dweights[(ctc,itc)]
+                tot_weight *= chemreac._weight[(ctc,itc)]
             V0_comb -= chemreac._V0R
             V1_comb -= chemreac._V1R
             row  = (combination,V0_comb*KCALMOL,V1_comb*KCALMOL,tot_weight)
@@ -1295,19 +1296,19 @@ def srcons_anhtable(chemreac):
     string += "    * for rate constant (forward ): ANHC(k,fw)\n"
     string += "    * for rate constant (backward): ANHC(k,bw)\n"
     string += "\n"
-    thead = "  T  (K)  |  ANHC(Keq)  |  ANHC(k,fw)  |  ANHC(k,bw)  "
+    thead = "  T  (K)  |  ANHC(Keq)   |  ANHC(k,fw)  |  ANHC(k,bw)  "
     tdivi = "-"*len(thead)
     string += iblank+tdivi+"\n"
     string += iblank+thead+"\n"
     string += iblank+tdivi+"\n"
     for idx,T in enumerate(chemreac._ltemp):
-        col1 = "     -    "
-        col2 = "     -    "
-        col3 = "     -    "
-        if chemreac._nR*chemreac._nP != 0: col1 = "%11.3E"%chemreac._ANHKeq[idx]
+        col1 = "      -     "
+        col2 = "      -     "
+        col3 = "      -     "
+        if chemreac._nR*chemreac._nP != 0: col1 = "%12.3E"%chemreac._ANHKeq[idx]
         if chemreac._ts is not None:
-           if chemreac._nR != 0: col2 = "%11.3E"%chemreac._ANHkfw[idx]
-           if chemreac._nP != 0: col3 = "%11.3E"%chemreac._ANHkbw[idx]
+           if chemreac._nR != 0: col2 = "%12.3E"%chemreac._ANHkfw[idx]
+           if chemreac._nP != 0: col3 = "%12.3E"%chemreac._ANHkbw[idx]
         tline = " %8.2f | %s | %s | %s "%(T,col1,col2,col3)
         string += iblank+tline+"\n"
     string += iblank+tdivi+"\n"
@@ -1645,11 +1646,15 @@ def srcons_rateconstants(chemreac,direction="fw"):
     tables += "\n"
     keys1 = "tst,mststzct,mststsct,mscvt,mscvtzct,mscvtsct".split(",")
     keys2 = "tst,mptstzct,mptstsct,mpcvt,mpcvtzct,mpcvtsct".split(",")
+    keys3 = "sstst,sststzct,sststsct,sscvt,sscvtzct,sscvtsct".split(",")
     keys1 = clean_keys_rcons(keys1,dks)
     keys2 = clean_keys_rcons(keys2,dks)
-    # (a) table with multi-structural
+    keys3 = clean_keys_rcons(keys3,dks)
+#   # (a) table with single-structure
+#   tables += table_rcons_ss(chemreac,dks,keys3,nR)
+    # (b) table with multi-structural
     if ms and keys1 != keys2: tables += table_rcons(chemreac,dks,keys1,nR)
-    # (b) table with multi-path
+    # (c) table with multi-path
     tables += table_rcons(chemreac,dks,keys2,nR)
     for line in tables.split("\n"): string += "    "+line+"\n"
     return string
@@ -1673,6 +1678,29 @@ def clean_keys_rcons(keys,dks):
         KEYS.append(X)
     return KEYS
 #----------------------------------------------------------#
+def table_rcons_ss(chemreac,dks,keys,nR):
+    ctc,itcs,ms = chemreac._itcs[chemreac._ts]
+    human_units = ML**(nR-1.0) / SECOND
+    oneconf = (len(itcs) == 1)
+
+    thead = ["  T (K)  "]+["%11s"%KEYNICE[X] for X in keys]
+    thead = " | ".join(thead)+" "
+    division   = len(thead)*"-"
+    string  = division  +"\n"
+    string += thead+"\n"
+    string += division  +"\n"
+
+    for idx,T in enumerate(chemreac._ltemp):
+        values = ["%9.2f"%T]
+        # (a) THE TOTAL ONE
+        for X in keys:
+            try   : values += ["%11s"%fncs.eformat(dks[X][idx]*human_units,3)]
+            except: values += ["     -     "]
+        string += " | ".join(values)+"\n"
+    string += division+"\n"
+    string += "\n"
+    return string
+#----------------------------------------------------------#
 def table_rcons(chemreac,dks,keys,nR):
     ctc,itcs,ms = chemreac._itcs[chemreac._ts]
     human_units = ML**(nR-1.0) / SECOND
@@ -1692,7 +1720,6 @@ def table_rcons(chemreac,dks,keys,nR):
         # (a) THE TOTAL ONE
         for X in keys:
             try   : values += ["%11s"%fncs.eformat(dks[X][idx]*human_units,3)]
-           #try   : values += ["%11.3E"%(dks[X][idx]*human_units)]
             except: values += ["     -     "]
         string += " | ".join(values)+"\n"
         # (b) MORE THAN ONE CONFORMER
@@ -1707,7 +1734,6 @@ def table_rcons(chemreac,dks,keys,nR):
                    chi_i = chemreac._tschi[key2][itc][idx]
                    k_i = dks[X][idx] * chi_i
                    values += ["%11s"%fncs.eformat(k_i*human_units,3)]
-                  #values += ["%11.3E"%(k_i*human_units)]
                 except: values += ["     -     "]
             string += " | ".join(values)+"\n"
         string += division+"\n"

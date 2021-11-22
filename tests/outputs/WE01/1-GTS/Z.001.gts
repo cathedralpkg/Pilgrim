@@ -1,13 +1,4 @@
 # level: RHF STO-3G
-# Atomic number and non-scaled cartesian coordinates [bohr]
-start_cc
-   006   +8.06498178E-33  +8.35562584E-01  +6.16297582E-33
-   008   -1.97675111E+00  -8.81882740E-01  +1.97215226E-31
-   008   +2.21225657E+00  +2.26888436E-01  -9.86076132E-32
-   001   -1.14984946E+00  -2.56085572E+00  +9.86076132E-32
-   001   -7.34194234E-01  +2.78743465E+00  +2.46519033E-32
-end_cc
-
 # Charge, multiplicity, energy [hartree],
 # point group and rotational symmetry number
 start_basic
@@ -17,6 +8,15 @@ start_basic
    pointgroup    Cs              # Point group
    rotsigma      1               # Rotational sigma
 end_basic
+
+# Atomic number and non-scaled cartesian coordinates [bohr]
+start_cc
+   006   -4.06061047E-02  +8.40376685E-01  -3.24280814E-32
+   008   -2.01735721E+00  -8.77068639E-01  +1.58624169E-31
+   008   +2.17165047E+00  +2.31702537E-01  -1.37198670E-31
+   001   -1.19045556E+00  -2.55604162E+00  +6.00165560E-32
+   001   -7.74800339E-01  +2.79224875E+00  -1.39391539E-32
+end_cc
 
 # Non-scaled cartesian gradient [hartree/bohr]
 start_grad

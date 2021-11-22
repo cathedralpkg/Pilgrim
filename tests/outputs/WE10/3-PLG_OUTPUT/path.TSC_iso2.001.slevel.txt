@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 11:54:36
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 16:41:07
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -28,7 +28,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -56,7 +56,7 @@
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -140,7 +140,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw50): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -609,7 +624,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -634,14 +649,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw50):  -0.500 bohr (-152.590163 hartree)
-       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -682,6 +693,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw50):  -0.500 bohr (-152.590163 hartree)
+       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw50): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -725,7 +755,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw60): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -1202,7 +1247,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -1227,14 +1272,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw60):  -0.600 bohr (-152.591107 hartree)
-       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -1275,6 +1316,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw60):  -0.600 bohr (-152.591107 hartree)
+       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw60): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -1318,7 +1378,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw70): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -1803,7 +1878,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -1828,14 +1903,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw70):  -0.700 bohr (-152.591985 hartree)
-       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -1876,6 +1947,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw70):  -0.700 bohr (-152.591985 hartree)
+       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw70): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -1919,7 +2009,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw80): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -2215,7 +2320,7 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -0.800 |   +61.862 | +1.68E-01 |   0.23354 | 1694.3399 |  0.9295  
+            -0.800 |   +61.862 | +1.68E-01 |   0.23354 | 1694.3398 |  0.9295  
             -0.700 |   +62.356 | +1.76E-01 |   0.24187 | 1671.4243 |  0.9169  
             -0.600 |   +62.873 | +2.45E-01 |   0.23041 | 1636.1996 |  0.8976  
             -0.500 |   +63.401 | +3.68E-01 |   0.22391 | 1538.7168 |  0.8441  
@@ -2412,7 +2517,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -2437,14 +2542,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw80):  -0.800 bohr (-152.592795 hartree)
-       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -2485,6 +2586,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw80):  -0.800 bohr (-152.592795 hartree)
+       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw80): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -2528,7 +2648,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw90): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -3029,7 +3164,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -3054,14 +3189,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw90):  -0.900 bohr (-152.593538 hartree)
-       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -3102,6 +3233,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw90):  -0.900 bohr (-152.593538 hartree)
+       last  point (fw50):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw90): C(2)H(6)O + H
+        * in forward  direction (fw50): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -3145,7 +3295,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw100): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -3681,7 +3846,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -3706,14 +3871,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw100):  -1.000 bohr (-152.594215 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -3754,6 +3915,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw100):  -1.000 bohr (-152.594215 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw100): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -3797,7 +3977,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw110): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -4341,7 +4536,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -4366,14 +4561,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw110):  -1.100 bohr (-152.594832 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -4414,6 +4605,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw110):  -1.100 bohr (-152.594832 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw110): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -4457,7 +4667,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw120): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -5009,7 +5234,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -5034,14 +5259,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw120):  -1.200 bohr (-152.595388 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -5082,6 +5303,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw120):  -1.200 bohr (-152.595388 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw120): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -5125,7 +5365,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw130): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -5685,7 +5940,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -5710,14 +5965,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw130):  -1.300 bohr (-152.595890 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -5758,6 +6009,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw130):  -1.300 bohr (-152.595890 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw130): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -5801,7 +6071,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw140): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -6369,7 +6654,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -6394,14 +6679,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw140):  -1.400 bohr (-152.596340 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -6442,6 +6723,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw140):  -1.400 bohr (-152.596340 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw140): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -6485,7 +6785,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw150): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -7088,7 +7403,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -7113,14 +7428,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw150):  -1.500 bohr (-152.596744 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -7161,6 +7472,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw150):  -1.500 bohr (-152.596744 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw150): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -7204,7 +7534,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -7602,7 +7947,7 @@
           ----------------------------------------------------------------------
               s    |    VaG    |   kappa   | turnpoint |   mueff   |  mueff/mu  
           ----------------------------------------------------------------------
-            -1.600 |   +59.031 | +1.16E-01 |   0.38166 | 1665.9545 |  0.9139  
+            -1.600 |   +59.031 | +1.16E-01 |   0.38166 | 1665.9544 |  0.9139  
             -1.500 |   +59.280 | +1.18E-01 |   0.38300 | 1822.8885 |  1.0000  
             -1.400 |   +59.556 | +1.17E-01 |   0.48514 | 1822.8885 |  1.0000  
             -1.300 |   +59.861 | +1.16E-01 |   0.48578 | 1822.8885 |  1.0000  
@@ -7815,7 +8160,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -7840,14 +8185,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw160):  -1.600 bohr (-152.597105 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -7888,6 +8229,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw160):  -1.600 bohr (-152.597105 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw160): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -7931,7 +8291,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw170): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -8550,7 +8925,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      9-10 --
+       fwdir     9-10 --
     
     Variables for steepest descent
        method    pm
@@ -8575,14 +8950,10 @@
        rst file: 4-PLG_RST/TSC_iso2.001.rst
        xyz file: 5-MOLDEN/path.TSC_iso2.001.xyz
     
-    Restart file (rst) found!
-       first point (bw170):  -1.700 bohr (-152.597427 hartree)
-       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSC.001.gts
+       File with info        : 1-GTS/TSC.001.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -8623,6 +8994,25 @@
                                            +19534.55 cm^-1 
        V0 + zero-point energy (V1)  :  -152.49665788 hartree
        
+    Restart file (rst) found!
+       first point (bw170):  -1.700 bohr (-152.597427 hartree)
+       last  point (fw50 ):  +0.500 bohr (-152.608687 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw170): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -8666,7 +9056,22 @@
          |E(s=+0.500)-E(s=+0.490)| = 7.78E-04 hartree      > 1.00E-08  NO
          |grad(s=+0.500)|          = 1.22E-01 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw180): C(2)H(6)O + H
+        * in forward  direction (fw50 ): C(2)H(6)O + H
+          
+        * MEP size towards reactant(s) was NOT properly identified
+          - MEP direction may NOT correspond to the involved reaction
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSC_iso2.001.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -9078,7 +9483,7 @@
           ----------------------------------------------------------------------
             -1.800 |   +58.606 | +1.18E-01 |   0.25259 | 1822.8885 |  1.0000  
             -1.700 |   +58.807 | +1.12E-01 |   0.33469 | 1822.8885 |  1.0000  
-            -1.600 |   +59.031 | +1.15E-01 |   0.39128 | 1762.4102 |  0.9668  
+            -1.600 |   +59.031 | +1.15E-01 |   0.39128 | 1762.4099 |  0.9668  
             -1.500 |   +59.280 | +1.18E-01 |   0.38300 | 1822.8885 |  1.0000  
             -1.400 |   +59.556 | +1.17E-01 |   0.48514 | 1822.8885 |  1.0000  
             -1.300 |   +59.861 | +1.16E-01 |   0.48578 | 1822.8885 |  1.0000  
@@ -9301,7 +9706,7 @@
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-19 |
-                                                            | Current time:   12:09:59 |
-                                                            | Elapsed time:  15.4 mins |
+                                                            | Current date: 2021-11-20 |
+                                                            | Current time:   16:53:49 |
+                                                            | Elapsed time:  12.7 mins |
                                                             ----------------------------

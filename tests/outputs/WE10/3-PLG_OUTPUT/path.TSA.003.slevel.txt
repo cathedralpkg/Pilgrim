@@ -1,14 +1,14 @@
  -------------------------------------------------------------
-  Program version: Pilgrim v2021.4 (2021-June-18)
+  Program version: Pilgrim v2021.5a (2021-September-17)
  -------------------------------------------------------------
                                                             
           A Thermal Rate Constant Calculator and            
               Kinetic Monte Carlo Simulator                 
                                                             
  -------------------------------------------------------------
-  Current date (YY-MM-DD)   : 2021-06-19
-  Current time (HH:MM:SS)   : 03:12:06
-  Python interpreter version: 3.6.9
+  Current date (YY-MM-DD)   : 2021-11-20
+  Current time (HH:MM:SS)   : 09:26:22
+  Python interpreter version: 3.8.10
  -------------------------------------------------------------
 
 
@@ -27,7 +27,7 @@
        ds        0.0100 bohr
        mu        1.0000 amu
        cubic     no
-       idir      8-10 --
+       fwdir     8-10 --
     
     Variables for steepest descent
        method    pm
@@ -52,14 +52,10 @@
        rst file: 4-PLG_RST/TSA.003.rst
        xyz file: 5-MOLDEN/path.TSA.003.xyz
     
-    Restart file (rst) found!
-       first point (bw180):  -1.800 bohr (-152.597710 hartree)
-       last  point (fw110):  +1.100 bohr (-152.600993 hartree)
-    
     
     Information about transition structure:
     
-       File with info    : 1-GTS/TSA.003.gts
+       File with info        : 1-GTS/TSA.003.gts
        Molecular formula     : C(2)H(7)O
        Number of atoms       : 10
        Number of electrons   : 27
@@ -79,9 +75,9 @@
           H    +2.13871376   +0.38447988   +0.23477801  [  1.008 amu]
           H    +1.42495636   -1.22129725   +0.35692428  [  1.008 amu]
           H    -0.07357190   +0.59050180   +1.39444870  [  1.008 amu]
-          H    -0.07511657   +1.56352004   -0.22030540  [  1.008 amu]
+          H    -0.07511656   +1.56352004   -0.22030540  [  1.008 amu]
           H    -1.15507729   -1.15866331   +0.25024268  [  1.008 amu]
-          H    -0.11452281   +2.42874489   -0.62573981  [  1.008 amu]
+          H    -0.11452280   +2.42874489   -0.62573981  [  1.008 amu]
        Moments and product of inertia (au):
                +1.396E+05  +3.825E+05  +4.483E+05  [ 2.393E+16]
        Vibrational frequencies [1/cm] (scaled by 1.000):
@@ -100,6 +96,25 @@
                                            +20057.64 cm^-1 
        V0 + zero-point energy (V1)  :  -152.47654506 hartree
        
+    Restart file (rst) found!
+       first point (bw180):  -1.800 bohr (-152.597710 hartree)
+       last  point (fw110):  +1.100 bohr (-152.600993 hartree)
+    
+    Analyzing MEP direction:
+    
+        * in backward direction (bw180): C(2)H(6)O + H
+        * in forward  direction (fw110): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
 
     Performing first step of MEP...
 
@@ -143,7 +158,22 @@
          |E(s=+1.100)-E(s=+1.090)| = 1.97E-04 hartree      > 1.00E-08  NO
          |grad(s=+1.100)|          = 3.25E-02 hartree/bohr > 1.00E-04  NO
 
-       * writing file: 5-MOLDEN/path.TSA.003.xyz
+    Analyzing MEP direction:
+    
+        * in backward direction (bw180): C(2)H(6)O + H
+        * in forward  direction (fw110): C(2)H(5)O + H(2)
+          
+        * MEP size towards reactant(s) seems to be properly identified
+          - backward direction correlates to reactant(s)
+         
+        * MEP direction is defined by the user through 'fwdir'!
+          [this prevails over automatic identification of MEP direction]
+          checking it...
+          MEP direction corresponds with that of 'fwdir'
+         
+        * MEP DIRECTION WILL NOT BE MODIFIED
+        
+    Writing file: 5-MOLDEN/path.TSA.003.xyz
 
     Reference energy (Eref) set to: -152.599648 hartree
     
@@ -621,9 +651,9 @@
             -1.800 |   +61.008 | +2.05E-01 |   0.26667 | 1822.8885 |  1.0000  
             -1.700 |   +61.299 | +2.08E-01 |   0.39913 | 1822.8885 |  1.0000  
             -1.600 |   +61.641 | +2.22E-01 |   0.40328 | 1516.6977 |  0.8320  
-            -1.500 |   +62.039 | +2.26E-01 |   0.38717 | 1523.2628 |  0.8356  
+            -1.500 |   +62.039 | +2.26E-01 |   0.38717 | 1523.2629 |  0.8356  
             -1.400 |   +62.502 | +2.20E-01 |   0.39148 | 1524.4524 |  0.8363  
-            -1.300 |   +63.038 | +2.05E-01 |   0.38028 | 1556.6580 |  0.8540  
+            -1.300 |   +63.038 | +2.05E-01 |   0.38028 | 1556.6579 |  0.8540  
             -1.200 |   +63.657 | +1.85E-01 |   0.37866 | 1580.3352 |  0.8669  
             -1.100 |   +64.368 | +1.65E-01 |   0.37151 | 1676.9751 |  0.9200  
             -1.000 |   +65.179 | +1.55E-01 |   0.33729 | 1822.8885 |  1.0000  
@@ -643,7 +673,7 @@
             +0.400 |   +70.855 | +2.50E+00 |   0.16819 |  666.6754 |  0.3657  
             +0.500 |   +68.868 | +7.62E-01 |   0.16624 | 1405.6053 |  0.7711  
             +0.600 |   +66.804 | +3.79E-01 |   0.18776 | 1667.5582 |  0.9148  
-            +0.700 |   +64.831 | +3.08E-01 |   0.21456 | 1684.1678 |  0.9239  
+            +0.700 |   +64.831 | +3.08E-01 |   0.21456 | 1684.1677 |  0.9239  
             +0.800 |   +62.979 | +2.78E-01 |   0.23564 | 1664.6230 |  0.9132  
             +0.900 |   +61.255 | +2.54E-01 |   0.25669 | 1644.8999 |  0.9024  
             +1.000 |   +59.663 | +2.33E-01 |   0.27147 | 1599.7879 |  0.8776  
@@ -820,7 +850,7 @@
    
    
                                                             ----------------------------
-                                                            | Current date: 2021-06-19 |
-                                                            | Current time:   03:12:19 |
-                                                            | Elapsed time:  12.9 secs |
+                                                            | Current date: 2021-11-20 |
+                                                            | Current time:   09:26:34 |
+                                                            | Elapsed time:  11.2 secs |
                                                             ----------------------------

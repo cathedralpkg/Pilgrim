@@ -4,7 +4,7 @@
 ---------------------------
 
 Program name: Pilgrim
-Version     : 2021.4
+Version     : 2021.5
 License     : MIT/x11
 
 Copyright (c) 2021, David Ferro Costas (david.ferro@usc.es) and
@@ -32,359 +32,575 @@ OTHER DEALINGS IN THE SOFTWARE.
 *----------------------------------*
 | Module     :  modpilgrim         |
 | Sub-module :  optGATHER          |
-| Last Update:  2021/05/04 (Y/M/D) |
+| Last Update:  2021/11/22 (Y/M/D) |
 | Main Author:  David Ferro-Costas |
 *----------------------------------*
 '''
 
 #===============================================================#
 import os
-import sys
-#---------------------------------------------------------------#
-import modpilgrim.names as PN
-import modpilgrim.pilrw  as RW
-#---------------------------------------------------------------#
-from   modpilgrim.ClusterConf       import ClusterConf
 #---------------------------------------------------------------#
 import common.Exceptions as     Exc
+import common.fncs       as     fncs
 #---------------------------------------------------------------#
 from   common.dicts      import dpt_im
-from   common.orca       import read_orca
+from   common.files      import write_gtsfile
+from   common.files      import write_molden
+from   common.Molecule   import Molecule
+from   common.pgs        import get_pgs
+#---------------------------------------------------------------#
+from   common.files      import read_gtsfile
 from   common.gaussian   import read_fchk
 from   common.gaussian   import read_gauout     as read_gauout_v1
 from   common.gaussian   import read_gauout_old as read_gauout_v2
-from   common.files      import read_gtsfile
-from   common.files      import write_gtsfile
-from   common.files      import write_molden
-from   common.fncs       import symbols_and_atonums
-from   common.fncs       import clean_dummies
-from   common.fncs       import is_string_valid
-from   common.fncs       import fill_string
-from   common.fncs       import print_string
-from   common.Molecule   import Molecule
-from   common.pgs        import get_pgs
+from   common.orca       import read_orca
+#---------------------------------------------------------------#
+READ_METHODS = [read_gtsfile,read_fchk,read_gauout_v1,read_gauout_v2,read_orca]
+EXTENSIONS   = ["gts","fchk","log","out"]
+#---------------------------------------------------------------#
+import modpilgrim.names       as     PN
+import modpilgrim.pilrw       as     RW
+from   modpilgrim.ClusterConf import ClusterConf
+#===============================================================#
+
+# WRONG: 1 (invalid name)
+#        2 (folder without valid files)
+#        3 (reading failed)
+#        4 (Fcc not found)
+#        5 (inconsistences CTC)
+#        6 (unexpected number of imag. freqs)
+WRONG = {i+1:False for i in range(6)}
+
+
+
+#===============================================================#
+def get_ufiles_ufolders():
+    '''
+    lists files in UDATA/ folder;
+    returns a list with the folders [ufolder],
+            a list with the files that are not inside a folder [ufiles],
+            and a list with all files (i.e. files inside each folder + ufiles) [all_ufiles]
+    + 
+    '''
+    # list files and folders
+    ufiles   = [ff     for ff in os.listdir(PN.UFOLDER) if not os.path.isdir(PN.UFOLDER+ff)]
+    ufolders = [ff+"/" for ff in os.listdir(PN.UFOLDER) if     os.path.isdir(PN.UFOLDER+ff)]
+    # only files with correct extension
+    ufiles   = [ifile for ifile in ufiles if ifile.split(".")[-1].lower() in EXTENSIONS]
+    # sort
+    ufiles.sort()
+    ufolders.sort()
+    # all the files (including those in folders)
+    all_ufiles = list(ufiles)
+    for ufolder in ufolders:
+        all_ufiles += sorted([ufolder+esfile for esfile in os.listdir(PN.UFOLDER+ufolder) \
+                              if  esfile.split(".")[-1].lower() in EXTENSIONS])
+    return ufiles,ufolders,all_ufiles
+#---------------------------------------------------------------#
+def remove_definitive(lgts):
+    '''
+    Given a list of gts files, remove each file and the corresponding files associated
+    (i.e. the molden file and the frozen file, in case any of them exists)
+    * molden files can be where the gts files are or they can be at 5-MOLDEN
+    * frozen files can only be at the same directory as the gts file
+    '''
+    toremove  = [PN.DIR1+gts                           for gts in lgts if gts is not None]
+    toremove += [PN.DIR1+gts+".frozen"                 for gts in lgts if gts is not None]
+    toremove += [PN.DIR1+gts+".molden"                 for gts in lgts if gts is not None]
+    toremove += [PN.DIR5+gts.replace(".gts",".molden") for gts in lgts if gts is not None]
+    for fname in toremove:
+        if os.path.exists(fname): os.remove(fname)
+#---------------------------------------------------------------#
+def deal_removed_ufiles(all_ufiles,dtrack,dctc):
+    '''
+    compares files in UDATA with those listed in tracking.
+    If any file in tracking is not in UDATA/, this function is in charge of
+    remove the corresponding associated information (its line in tracking,
+    gts file, the conformer in pif.struc)
+    '''
+    # any file removed by user?
+    removed = []
+    for file_in_tracking in dtrack.keys():
+        if file_in_tracking not in all_ufiles:
+            removed.append(file_in_tracking)
+    # deal with removed files
+    if len(removed) != 0:
+       print("   --> The following files were removed from %s by user:"%PN.UFOLDER)
+       print("")
+       ii = len(str(len(removed)))
+       for idx,fname in enumerate(removed):
+           idx = "%%%ii"%ii%idx
+           print("       [%s] %s"%(idx,fname))
+       print("")
+       print("       To continue, the corresponding gts files (in %s) must be removed"%PN.DIR1)
+       answer = input("       remove (y/N)? ").strip().lower()
+       print("")
+       # if no permission to remove, abort execution
+       if answer not in ("yes","y"): raise Exc.ABORTED
+       # deal with one file at a time
+       for idx,fname in enumerate(removed):
+           # remove from dtrack
+           gts = dtrack.pop(fname)
+           # ctc and itc from gts name
+           ctc,itc,ext= gts.split(".")
+           # remove from dctc
+           if ctc in dctc.keys():
+              dctc[ctc].remove_itc(itc)
+              # update referene energy for this CTC
+              dctc[ctc].find_minV0()
+           # remove gts
+           idx = "%%%ii"%ii%idx
+           print("       [%s] %s"%(idx,PN.DIR1+gts))
+           remove_definitive([gts])
+       print("")
+    # return new dicts
+    return dtrack,dctc
+#---------------------------------------------------------------#
+def deal_nonlisted_gts(dtrack):
+    '''
+    remove all gts files (and associated files) that exist
+    but that are not listed in tracking
+    '''
+    # gts files
+    gtsfiles = []
+    if os.path.exists(PN.DIR1):
+       gtsfiles = [gts for gts in os.listdir(PN.DIR1) if gts.endswith(".gts")]
+    # check which ones are non-listed (nl) in dtrack
+    nl_gtsfiles = []
+    for gts in gtsfiles:
+        if gts not in dtrack.values(): nl_gtsfiles.append(gts)
+    # remove files
+    if len(nl_gtsfiles) != 0:
+       print("   --> The following files are not listed in %s"%PN.IFILE0)
+       print("")
+       for gts in nl_gtsfiles: print("       * %s"%gts)
+       print("")
+       print("       To continue, these files must be removed")
+       answer = input("       remove (y/N)? ").strip().lower()
+       print("")
+       if answer in ("yes","y"): remove_definitive(nl_gtsfiles)
+       else: raise Exc.ABORTED
+#---------------------------------------------------------------#
+def cleanup_dctc(dctc):
+    '''
+    removes conformers in dctc whose gts file does not exist
+    '''
+    for ctc in dctc.keys():
+        remove = []
+        for itc,weight in dctc[ctc]._itcs:
+            # the corresponding gts file
+            gts = "%s.%s.gts"%(ctc,itc)
+            if not os.path.exists(PN.DIR1+gts): remove.append(itc)
+        # remove conformers
+        for itc in remove: dctc[ctc].remove_itc(itc)
+        # redefine minimum energy using conformers we kept
+        if remove != []  : dctc[ctc].find_minV0()
+    # remove CTCs without conformers
+    dctc = {ctc:CTC for ctc,CTC in dctc.items() if len(CTC._itcs) != 0}
+    return dctc
 #===============================================================#
 
 
 #===============================================================#
-def gtsname(gtsfile,case="full"):
-    # name without path
-    gtsfile_name = gtsfile.split("/")[-1]
-    gtsfile_full = PN.DIR1+gtsfile.split("/")[-1]
-    if   case == "full": return gtsfile_full
-    elif case == "name": return gtsfile_name
-    else               : return None
-#---------------------------------------------------------------#
-def known_files(files):
-    allowed_ext = ["log","out","fchk","gts"]
-    files = [ifile for ifile in files if ifile.split(".")[-1].lower() in allowed_ext]
-    return files
-#---------------------------------------------------------------#
-def get_gtsfiles_from_dir(ctc):
-    return sorted([PN.DIR1+gts for gts in os.listdir(PN.DIR1) \
-                   if gts.startswith(ctc+".") and gts.endswith(".gts")])
-#---------------------------------------------------------------#
-def userfile_to_gtsfile(filename,gtsfile):
+def temporal_gtsname(ctc,count=0):
     '''
-    Read a file given by the user and generate gts file
-    if possible
+    gives a temporary name for the gts file in such a way
+    that the gts file does not exist yet
     '''
-    gtsfile = gtsname(gtsfile,"full")
-    read_methods = []
-    read_methods.append(read_gtsfile   ) #(a) a gts file
-    read_methods.append(read_fchk      ) #(b) a fchk file
-    read_methods.append(read_gauout_v1 ) #(c.1) a Gaussian output file
-    read_methods.append(read_gauout_v2 ) #(c.2) a Gaussian output file
-    read_methods.append(read_orca      ) #(d) an Orca output file
-    for read_method in read_methods:
-        try:
-          xcc,atonums,ch,mtp,E,gcc,Fcc,masses,clevel = read_method(filename)[0:9]
-          # symbols and atonums
-          symbols,atonums = symbols_and_atonums(atonums)
-          # clevel
-          if read_method == read_gtsfile: clevel = ""
-          # in case no data in masses
-          if masses is None or len(masses) == 0 or sum(masses) == 0.0:
-             masses = atonums2masses(atonums)
-          # Some checking
-          if len(atonums) != 1 and Fcc in ([],None):
-             #raise Exc.FccNotFound
-             return -1, None
-          # Generate Molecule instance
-          molecule = Molecule()
-          molecule.setvar(xcc=xcc,gcc=gcc,Fcc=Fcc)
-          molecule.setvar(atonums=atonums,masses=masses)
-          molecule.setvar(ch=ch,mtp=mtp,V0=E)
-          molecule.prepare()
-          # Deal with frozen atoms
-          ffrozen = gtsfile+".frozen"
-          frozen_xcc, frozen_symbols = molecule.remove_frozen()
-          RW.write_frozen(ffrozen,frozen_xcc,frozen_symbols)
-          # write gts
-          molecule.calc_pgroup(force=True)
-          molecule.genfile_gts(gtsfile,level=clevel)
-          return 1, E
-        except Exc.FileType:
-          continue
-        except:
-          continue
+    while True:
+      prov_gts = "%s.prov%i.gts"%(ctc,count)
+      count   +=1
+      if os.path.exists(PN.DIR1+prov_gts): continue
+      return prov_gts,count
+#---------------------------------------------------------------#
+def print_ctc_info(CTC,iblank="      "):
+    '''
+    print main information of the given CTC
+    '''
+    string  = "ctc name         : %s\n"%CTC._ctc
+    string += "charge           : %i\n"%CTC._ch
+    string += "spin multiplicity: %i\n"%CTC._mtp
+    string += "molecular formula: %s\n"%CTC._mformu
+    string += "num. imag. freqs.: %i\n"%CTC._type
+    string += "num. conformers  : %i\n"%len(CTC._itcs)
+    for line in string.split("\n"): print(iblank+line)
+#---------------------------------------------------------------#
+def generate_gts_file(esfile,gtsfile,read_method):
+    '''
+    Generate gts file (and molden & frozen files)
+    from given electronic structure (ES) file;
+    The ES file is read using read_method
+    '''
+    # Extra files that (maybe) will be generated
+    file_frozen = gtsfile+".frozen"       # only if any frozen atom
+    file_molden = gtsfile+".molden"       # molden file
+    # read file
+    xcc,atonums,ch,mtp,E,gcc,Fcc,masses,clevel = read_method(PN.UFOLDER+esfile)[0:9]
+    # clevel is not really clevel when using read_gtsfile as read_method
+    if read_method == read_gtsfile: clevel = ""
+    # symbols and atonums
+    symbols,atonums = fncs.symbols_and_atonums(atonums)
+    # is masses available?
+    if masses is None or len(masses) == 0 or sum(masses) == 0.0:
+       masses = atonums2masses(atonums)
+    # is Fcc available?
+    if len(atonums) != 1 and (Fcc is None or len(Fcc) == 0):
+       status   = -1
+       cache    = None
+       molec    = None
+    else:
+       # Generate Molecule instance
+       molec = Molecule()
+       molec.setvar(xcc=xcc,gcc=gcc,Fcc=Fcc)
+       molec.setvar(atonums=atonums,masses=masses)
+       molec.setvar(ch=ch,mtp=mtp,V0=E)
+       molec.prepare()
+       # Deal with frozen atoms [atom i is frozen if Fij=0 forall j)
+       frozen_xcc, frozen_symbols = molec.remove_frozen()
+       # Calculate point group (must be done after remove frozen)
+       molec.calc_pgroup(force=True)
+       # Deal with Hessian
+       molec.setup()
+       # write gts file
+       molec.genfile_gts(PN.DIR1+gtsfile,level=clevel)
+       status = 1
+       # write frozen (if there are frozen atoms)
+       RW.write_frozen(PN.DIR1+file_frozen,frozen_xcc,frozen_symbols)
+       # write molden file
+       idata = (PN.DIR1+file_molden,molec._xcc,molec._symbols,molec._ccfreqs,molec._ccFevecs)
+       write_molden(*idata)
+       # save to cache
+       nimag  = int(fncs.numimag(molec._ccfreqs))
+       pgroup = str(molec._pgroup)
+       mform  = str(molec._mform)
+       cache = [esfile,gtsfile,E,ch,mtp,nimag,mform,pgroup]
+    # delete variable, just in case
+    del xcc, gcc, Fcc
+    del symbols, atonums, masses
+    del molec
+    # return
+    return status, cache
+#---------------------------------------------------------------#
+def userfile_to_gtsfile(esfile,gtsfile):
+    '''
+    Read the electronic structure (ES) file given by
+    the user and generate the corresponding gts file;
+    This function try with different methods to read the ES file
+
+    returns
+        * status: -1 (Fcc not found), 0 (not read) or 1 (all ok)
+        * cache : a tuple with data if status == 1, else None
+    '''
+    for read_method in READ_METHODS:
+        try                : return generate_gts_file(esfile,gtsfile,read_method)
+        except Exc.FileType: continue
+        except             : continue
     return 0, None
 #---------------------------------------------------------------#
-def deal_with_tracking():
-    dtrack,(fname,status) = RW.read_track()
-    if status == 1: print("  - File '%s' exists and is not empty\n"%fname)
-    topop = []
-    ml1 = max([len(k) for k in dtrack.keys()  ]+[1])
-    ml2 = max([len(v) for v in dtrack.values()]+[1])
-    for outfile,gtsfile in sorted(dtrack.items()):
-        gtsfile_full = gtsname(gtsfile,"full")
-        gtsfile_name = gtsname(gtsfile,"name")
-        exist1 = os.path.exists(PN.UFOLDER+outfile)
-        exist2 = os.path.exists(gtsfile_full)
-        if not exist1 and exist2:
-           print("       * File '%s' does not exists, but '%s' does"%(outfile,gtsfile_name))
-           answer = input("         remove gts file '%s' (y/N)? "%(gtsfile_full))
-           if answer.strip().lower() in ["y","yes"]:
-              os.remove(gtsfile_full)
-        elif exist1 and not exist2:
-           print("       * File '%s' exists, but '%s' does not..."%(outfile,gtsfile_name))
-           answer = input("         Should Pilgrim create the gts file (y/N)? ")
-           if answer.strip().lower() in ["y","yes"]:
-              status,E = userfile_to_gtsfile(PN.UFOLDER+outfile,gtsfile_full)
-              if   status ==  1: print("         Created!")
-              else             : print("         Creation failed!")
-        elif not exist1 and not exist2:
-           print("       * Neither '%s' nor '%s' exist! Removing from '%s'"%(outfile,gtsfile_name,fname))
-           topop.append(outfile)
-        else:
-           print("       * %s ==> %s"%(PN.UFOLDER+"%%-%is"%ml1%outfile,PN.DIR1+"%%-%is"%ml2%gtsfile_name))
-    print("")
-    # remove lines in tracking
-    for key in topop:
-        if key in dtrack.keys(): dtrack.pop(key)
-    # return dictionary
-    return dtrack
+def print_table_ufiles(cache):
+    '''
+    print table with basic info about each electronic structure file
+    associated to a given CTC;
+    useful to see if there is any incompatibility between conformers
+    (e.g. conformers with different charge, or different spin multiplicity)
+    '''
+    # table head and division
+    ml1 = max([len(cache_i[6]) for cache_i in cache]+[ 7])
+    ml2 = 21
+    line_format = " %%-%is | %%-%is | %%-%is | %%-%is | %%-%is "%(6,3,7,ml1,ml2)
+    thead = line_format%("charge","mtp","n.imag.","m.form.","user file")
+    tdivi = "-"*len(thead)
+    # start string
+    string  = "\n"
+    string += tdivi+"\n"
+    string += thead+"\n"
+    string += tdivi+"\n"
+    for idx,cache_i in enumerate(cache):
+        col1 = "%i"%cache_i[3] # charge
+        col2 = "%i"%cache_i[4] # spin multiplicity
+        col3 = "%i"%cache_i[5] # number of imaginary frequencies
+        col4 = cache_i[6]      # molecular formula
+        col5 = cache_i[0]      # name of ES file
+        # format col5
+        col5 = col5.split("/")[-1]
+        if len(col5) > ml2: col5 = col5[:(ml2-3)//2]+"..."+col5[-(ml2-3)//2:]
+        # add to table
+        ldata = (col1,col2,col3,col4,col5)
+        string += line_format%ldata+"\n"
+    string += tdivi+"\n"
+    # print string in prompt
+    for line in string.split("\n"): print("    "+line)
 #---------------------------------------------------------------#
-def deal_with_pif():
-    (dctc,dimasses),(fname,status) = RW.read_ctc()
-    if status == 1 and dctc !={}:
-       print("  - File '%s' exists and is not empty"%fname)
-       ls_struc(dctc)
-       print("       Checking existency of gts files...")
-       print("")
-       notexist  = {}
-       notlisted = {}
-       for ctc in sorted(dctc.keys()):
-           gtsfilesA = [gtsname(gts,"name") for gts in dctc[ctc].gtsfiles()]
-           gtsfilesB = [gtsname(gts,"name") for gts in get_gtsfiles_from_dir(dctc[ctc]._root)]
-           set_notexist  = set(gtsfilesA).difference(gtsfilesB)
-           set_notlisted = set(gtsfilesB).difference(gtsfilesA)
-           if len(set_notexist)  != 0: notexist[ctc]  = set_notexist
-           if len(set_notlisted) != 0: notlisted[ctc] = set_notlisted
-       if notexist != {}:
-          print("          * Some files should exist according to '%s', but they do not."%PN.IFILE1)
-          print("            Actions:")
-          print("              (0) do nothing [default]")
-          print("              (1) remove from %s"%PN.IFILE1)
-          print("            Files:")
-          for ctc,gtslist in notexist.items():
-              for gts in gtslist:
-                  answer = input("            - %s (%s); action? "%(gts,ctc)).strip().lower()
-                  if answer == "1":
-                     target_itc = gts.split(".")[1]
-                     itcs = dctc[ctc]._itcs
-                     itcs = [(itc,weight) for (itc,weight) in itcs if itc != target_itc]
-                     dctc[ctc]._itcs = itcs
-                     print("              removed!")
-       else:
-          print("          * All gts files listed in '%s' exist in '%s'"%(PN.IFILE1,PN.DIR1))
-       print("")
-       if notlisted != {}:
-          print("          * Some gts files are not listed in '%s' but they exist."%PN.IFILE1)
-          print("            Actions:")
-          print("              (0) do nothing [default]")
-          print("              (1) add to %s"%PN.IFILE1)
-          print("              (2) remove file")
-          print("            Files:")
-          for ctc,gtslist in notlisted.items():
-              for gts in gtslist:
-                  answer = input("              - %s ; action? "%gts).strip().lower()
-                  if answer == "1":
-                     itc = gts.split("/")[-1].split(".")[1]
-                     dctc[ctc]._itcs.append( (itc,1) )
-                     print("                added!")
-                  if answer == "2":
-                     os.remove(gtsname(gts,"full"))
-                     print("                removed!")
-       else: 
-          print("          * All gts files in '%s' are listed in '%s'"%(PN.DIR1,PN.IFILE1))
-       print("")
-    # return data
-    return dctc, dimasses
-#---------------------------------------------------------------#
-def dctc_from_DIR1(gtsfiles):
-    # list of gts files
-    print("  - File '%s' does not exist but '%s' is not empty!"%(PN.IFILE1,PN.DIR1))
-    print("")
-    # classify gts files according to ctc
-    dctc = {}
-    for gtsfile in gtsfiles:
-        gts_name = gtsname(gtsfile,"name")
-        gts_full = gtsname(gtsfile,"full")
-        ctc, itc = gts_name.split(".")[0:2]
-        dctc[ctc] = dctc.get(ctc,[]) + [gts_full]
-    # generate real dctc
-    print("     number of structures: %i"%len(dctc.keys()))
-    print("")
-    ml = max([len(key) for key in dctc.keys()]+[1])
-    for ctc,gtsfiles in dctc.items():
-        print("       * %%-%is (num gts files: %%2i)"%ml%(ctc,len(gtsfiles)))
-        CTC = ClusterConf(ctc)
-        status, string = CTC.set_from_gtsfiles(gtsfiles)
-        if status == -1:
-           print("         INCONSISTENCES!")
-           print_string(string,9)
-           answer = input("         Remove gts files (y/N)?")
-           if answer.strip().lower() in ["y","yes"]:
-              for gts in gtsfiles: os.remove(gts)
-           else: raise Exc.ABORTED
-        dctc[ctc] = CTC
-    print("")
-    return dctc
-#---------------------------------------------------------------#
-def convert_udata_to_gts(ff,dtrack,dctc):
-    global wrong1
-    global wrong2
-    global wrong5
-    inconsistence = None
-    print(   "         |--> %s"%ff)
-    iblank = "         |    "
-    # Is ff a folder or a file?
-    if os.path.isdir(PN.UFOLDER+ff):
-        # Get CTC name & list of files
-        ctc = ff[:-1]
-        files = sorted([ff+filename for filename in os.listdir(PN.UFOLDER+ff)])
+def rename_files(ctc,prov_gts,iitc=0,gts=None):
+    '''
+    rename provisional gts files (also molden and frozen files)
+    to definitive name
+    '''
+    assert iitc >= 0
+    # decide new name for gts file
+    if gts is None:
+       itc = int(iitc)
+       while True:
+           itc += 1
+           new_gts = "%s.%003i.gts"%(ctc,itc)
+           if not os.path.exists(PN.DIR1+new_gts): break
     else:
-        # Get CTC name & list of files
-        ctc = ff.split(".")[0]
-        files = [ff]
-
-    # valid name??
-    if not is_string_valid(ctc,extra="_"):
-        print(iblank+"invalid name!")
-        print(iblank)
-        wrong1   = True
-        return dtrack, dctc, inconsistence
-
-    # only files with known extension
-    files = known_files(files)
-    if len(files) == 0:
-       print(iblank+"no valid file(s) or empty folder")
-       print(iblank)
-       wrong5 = True
-       return dtrack, dctc, inconsistence
-
-    in_dtrack = [ff in dtrack.keys() for ff in files].count(False) == 0
-    if ctc in dctc.keys() and in_dtrack:
-       print(iblank+"already registered")
-       print(iblank)
-       return dtrack, dctc, inconsistence
-
-    # Convert to gts (provisional name)
-    count = 1
-    gtslist = []
-    for ifile in files:
-        # already in dtrack
-        if ifile in dtrack.keys():
-           print(iblank+"|--> %s (already in %s)"%(ifile.split("/")[-1],PN.IFILE0))
-           continue
-        # provisional gts name
-        while True:
-              #prov_gts = PN.DIR1+"%s.gts_%i"%(ctc,count)
-              prov_gts = PN.DIR1+"%s.prov%i.gts"%(ctc,count)
-              if not os.path.exists(prov_gts): break
-              count +=1
-        # read file and create gts
-        status,E = userfile_to_gtsfile(PN.UFOLDER+ifile,prov_gts)
-        if status == 0:
-           print(iblank+"|--> %s (sth failed!)"%(ifile.split("/")[-1]))
-           wrong2 = True
-        elif status == -1:
-           print(iblank+"|--> %s (Force Constant Matrix NOT FOUND!)"%(ifile.split("/")[-1]))
-           wrong2 = True
-        else: 
-           print(iblank+"|--> %s (new)"%(ifile.split("/")[-1]))
-        if E is not None: gtslist.append( (E,ifile,prov_gts) )
-    print(iblank)
-
-    # sort by energy (only those created)
-    if len(gtslist) == 0: return dtrack, dctc, inconsistence
-    gtslist.sort()
-
-    # Rename gts files and update dtrack
-    info, idx = [], 1
-    generated_gtsfiles = []
-    for E,ifile,prov_gts in gtslist:
-        while True:
-              gtsfile = ctc+".%003i.gts"%(idx)
-              idx += 1
-              if gtsfile in dtrack.values(): continue
-              if not os.path.exists(PN.DIR1+gtsfile): break 
-        os.rename(prov_gts,PN.DIR1+gtsfile)
-        if os.path.exists(prov_gts+".frozen"):
-           os.rename(prov_gts+".frozen",PN.DIR1+gtsfile+".frozen")
-        info.append( (E,ifile,gtsfile) )
-        dtrack[ifile] = gtsfile
-        generated_gtsfiles.append(gtsfile)
-
-    # consider all gts files and prepare CTC
-    CTC,status,string,gtsfiles = gen_and_check_ctc(ctc,dtrack)
-    # save ctc in dctc
-    if status == 1: dctc[ctc] = CTC
-    # save inconsistence
-    if status == -1: inconsistence = (string,generated_gtsfiles)
-    return dtrack, dctc, inconsistence
+       new_gts = gts
+       itc     = int(gts.split(".")[-2])
+    # assert file does not exists
+    if os.path.exists(PN.DIR1+new_gts):
+       print("    * File '%s' already exists!"%(PN.DIR1+new_gts))
+       raise Exc.ABORTED
+    # provisional files
+    prov_frozen = prov_gts+".frozen"       # only if any frozen atom
+    prov_molden = prov_gts+".molden"       # molden file
+    # other files
+    new_frozen = "%s.%003i.gts.frozen"%(ctc,itc)
+    new_molden = "%s.%003i.molden"%(ctc,itc)
+    # Rename files
+    if os.path.exists(PN.DIR1+prov_gts   ): os.rename(PN.DIR1+prov_gts   ,PN.DIR1+new_gts   )
+    if os.path.exists(PN.DIR1+prov_frozen): os.rename(PN.DIR1+prov_frozen,PN.DIR1+new_frozen)
+    if os.path.exists(PN.DIR1+prov_molden): os.rename(PN.DIR1+prov_molden,PN.DIR5+new_molden)
+    return new_gts, itc
 #---------------------------------------------------------------#
-##  def gts2molecule(gtsfile):
-##      # name of file (without path to folder)
-##      gtsfile_name = gtsname(gtsfile,"name")
-##      gtsfile_full = gtsname(gtsfile,"full")
-##      # Get ctc and itc
-##      ctc,itc,ext = gtsfile_name.split(".")
-##      # read gts and prepare Molecule
-##      if not os.path.exists(gtsfile_full): return None,(ctc,itc)
-##      molecule = Molecule()
-##      molecule.set_from_gts(gtsfile_full)
-##      # setup
-##      molecule.setup()
-##      # return data
-##      return molecule,(ctc,itc)
+def is_provisional(gts):
+    return "prov" in gts.split(".")[-2]
 #---------------------------------------------------------------#
-def molecule2molden(molecule,ctc,itc):
-    # gn t name for molden file
-    molden  = PN.get_gtsmolden(ctc,itc)
-   ## does molden file exist?
-   #if os.path.exists(molden): return
-    # create molden file
-    idata = (molden,molecule._xcc,molecule._symbols,molecule._ccfreqs,molecule._ccFevecs)
-    write_molden(*idata)
+def remove_provisionals(lgts):
+    '''
+    uses remove_definitive to remove gts files BUT this function
+    only passes those that are provisional
+    '''
+    prov_gts = [gts for gts in lgts if is_provisional(gts)]
+    remove_definitive(prov_gts)
 #---------------------------------------------------------------#
-def gen_and_check_ctc(ctc,dtrack,gtsfiles=None):
-    #--------------------#
-    # Read all gts files #
-    #--------------------#
-    # if gtsfiles not given, get them from folder
-    if gtsfiles is None: gtsfiles = get_gtsfiles_from_dir(ctc)
-    # initialize
-    created_molden = []
-    # generate cluster
+def print_warnings():
+    '''
+    print warnings according to values of WRONG global variable
+    '''
+    #----------------#
+    # Print warnings #
+    #----------------#
+    if True in WRONG.values():
+       print("")
+       print("  - WARNING!! It seems that something did not go well")
+       if WRONG[1]: print("    * invalid name for some file/folder(s)!")
+       if WRONG[2]: print("    * some folder(s) in %s does(do) NOT contain valid files!"%PN.UFOLDER)
+       if WRONG[3]: print("    * reading process failed for a/some file(s) in %s!"%PN.UFOLDER)
+       if WRONG[4]: print("    * file(s) without Hessian matrix!")
+       if WRONG[5]: print("    * inconsistences in conformational cluster(s)!")
+       if WRONG[6]: print("    * unexpected number of imaginary frequencies!")
+    else:
+       print("")
+       print("  - Everything seems to be OK! :)")
+#===============================================================#
+
+
+#===============================================================#
+def deal_with_file(esfile,dtrack,dctc):
+    '''
+    deal with an electronic structure (es) file inside UDATA/
+    that is not inside a subfolder (i.e. a system with a single conformer)
+    '''
+    # Return data
+    print("  - Reading file: %s"%(PN.UFOLDER+esfile))
+    # Get CTC
+    ctc = ".".join(esfile.split(".")[:-1])
+    # Check CTC name
+    if not fncs.is_string_valid(ctc,extra="_"):
+       print("    '%s' is an invalid name for a CTC!\n"%ctc)
+       WRONG[1] = True
+       return dtrack,dctc
+
+    # previously assignated?
+    if esfile in dtrack:
+       gtsfile = dtrack[esfile]
+       print("    * gts file already assignated in %s! (%s)"%(PN.IFILE0,PN.DIR1+gtsfile))
+       if os.path.exists(PN.DIR1+gtsfile):
+          print("      - gts file already exists! Skipping generation\n")
+          return dtrack,dctc
+    else: gtsfile = None
+
+    # GTS generation
+    prov_gts, __   = temporal_gtsname(ctc)
+    status  ,cache = userfile_to_gtsfile(esfile,prov_gts)
+    remove = False
+    if status ==  0:
+       print("    * [reading failed]")
+       remove,WRONG[3] = True,True
+    elif status == -1:
+       print("    * [Fcc NOT found] ")
+       remove,WRONG[4] = True,True
+    elif cache[5] not in (0,1):
+       print("    * Incorrect number of imaginary frequencies in this CTC!")
+       print("      n.imag. = %i"%cache[5])
+       remove,WRONG[6] = True,True
+    print()
+    # Remove generated files
+    if remove:
+       remove_provisionals([prov_gts])
+       return dtrack,dctc
+    # rename files
+    new_gts,itc = rename_files(ctc,prov_gts,0,gtsfile)
+    # Create CTC instance
     CTC = ClusterConf(ctc)
-    status, string = CTC.set_from_gtsfiles(gtsfiles)
-    for idx,molecule in enumerate(CTC._molecules):
-        itc,weigh = CTC._itcs[idx]
-        molecule2molden(molecule,ctc,itc)
-    return CTC, status, string, gtsfiles
+    V0,ch,mtp,nifreq,mformu,pg = cache[2:]
+    CTC.setvar("ch"    ,ch         ,"int")
+    CTC.setvar("mtp"   ,mtp        ,"int")
+    CTC.setvar("type"  ,nifreq     ,"int")
+    CTC.setvar("mformu",mformu     ,"str")
+    CTC._es = [(mtp,0.0)]
+    CTC.add_itc(itc,V0,pg)
+    # update dictionaries
+    dtrack[esfile] = new_gts
+    dctc[ctc] = CTC
+    print_ctc_info(CTC)
+    return dtrack,dctc
 #---------------------------------------------------------------#
+def deal_with_folder(folder,dtrack,dctc):
+    '''
+    deal with an electronic structure (es) file of a subfolder inside UDATA/
+    '''
+
+    print("  - Reading files in: %s"%(PN.UFOLDER+folder))
+
+    # Get CTC
+    ctc = folder[:-1]
+
+    # Check CTC name
+    if not fncs.is_string_valid(ctc,extra="_"):
+       print("    '%s' is an invalid name for a CTC!\n"%ctc)
+       WRONG[1] = True
+       return dtrack,dctc
+
+    # Files for each conformer of the CTC
+    esfiles = sorted([folder+esfile for esfile in os.listdir(PN.UFOLDER+folder) \
+                                    if  esfile.split(".")[-1].lower() in EXTENSIONS])
+    if len(esfiles) == 0:
+       print("    empty folder...\n")
+       WRONG[2] = True
+       return dtrack,dctc
+
+    # initialize CTC
+    CTC      = ClusterConf(ctc)
+    ctc_vars = None
+
+    # GTS generation
+    count  = 0
+    cache  = []
+    remove = False
+    for idx,esfile in enumerate(esfiles):
+
+        # previously assignated?
+        gtsfile = dtrack.get(esfile,None)
+        if gtsfile is not None and os.path.exists(PN.DIR1+gtsfile):
+           # read file
+           print("    %s [gts exists: %s]"%(esfile,PN.DIR1+gtsfile))
+           molecule = Molecule()
+           molecule.set_from_gts(PN.DIR1+gtsfile)
+           molecule.setup()
+           status = 2
+           # add data to cache
+           V0      = molecule._V0
+           ch      = molecule._ch
+           mtp     = molecule._mtp
+           nimag   = int(fncs.numimag(molecule._ccfreqs))
+           mform   = molecule._mform
+           pgroup  = molecule._pgroup
+           cache_i = [esfile,gtsfile,V0,ch,mtp,nimag,mform,pgroup]
+        else:
+           prov_gts,count = temporal_gtsname(ctc,count)
+           status,cache_i = userfile_to_gtsfile(esfile,prov_gts)
+        # save cache_i
+        cache.append(cache_i)
+
+        # use first conformer to update ctc_vars
+        if ctc_vars is None: ctc_vars = cache_i[3:7] 
+
+        # Check reading and consistence within CTC
+        if status ==  0:
+           print("    %s [reading failed]"%esfile)
+           print("    -- STOPPED --")
+           WRONG[3],remove = True,True
+        elif status == -1:
+           print("    %s [Fcc NOT found] "%esfile)
+           print("    -- STOPPED --")
+           WRONG[4],remove = True,True
+        elif ctc_vars != cache_i[3:7]:
+           print("    %s [inconsistence found] "%esfile)
+           print("    -- STOPPED --")
+           WRONG[5],remove = True,True
+           print_table_ufiles(cache)
+        elif ctc_vars[2] not in (0,1):
+           print("    %s [unexpected number of imag. freqs.] "%esfile)
+           print("    -- STOPPED --")
+           WRONG[6],remove = True,True
+           print_table_ufiles(cache)
+        elif status == 1:
+           print("    %s [ok]            "%esfile)
+        # sth wrong so we have to remove?
+        if remove: break
+    print()
+
+    # Remove files if sth wrong
+    if remove:
+       remove_provisionals([cache_i[1] for cache_i in cache])
+       return dtrack, dctc
+
+    # sort cache by energy
+    cache.sort(key = lambda x: x[2])
+    # already in dctc
+    if ctc in dctc: CTC0 = dctc.pop(ctc)
+    else          : CTC0 = None
+    # Update CTC instance
+    CTC.setvar("ch"    ,ctc_vars[0],"int")
+    CTC.setvar("mtp"   ,ctc_vars[1],"int")
+    CTC.setvar("type"  ,ctc_vars[2],"int")
+    CTC.setvar("mformu",ctc_vars[3],"str")
+    CTC._es = [(ctc_vars[1],0.0)]
+    # Rename gtsfiles
+    itc = 0
+    for idx,cache_i in enumerate(cache):
+        prov_gts = cache_i[1]
+        if is_provisional(prov_gts):
+           new_gts,itc = rename_files(ctc,prov_gts,itc)
+           itc_i = itc
+           # update dtrack
+           dtrack[cache_i[0]] = new_gts
+           # update gtsfile in cache
+           cache[idx][1] = new_gts
+        else:
+           itc_i = prov_gts.split(".")[-2]
+        # weight
+        weight = 1
+        if CTC0 is not None: weight = max(CTC0.get_weight(itc_i),weight)
+        # update CTC
+        CTC.add_itc(itc_i,cache_i[2],cache_i[7],weight)
+    CTC.find_minV0()
+    # update with info of CTC0
+    if CTC0 is not None:
+       CTC._es     = CTC0._es
+       CTC._fscal  = CTC0._fscal
+       CTC._dics   = CTC0._dics
+       CTC._dicsfw = CTC0._dicsfw
+       CTC._dicsbw = CTC0._dicsbw
+       CTC._diso   = CTC0._diso
+       CTC._anh    = CTC0._anh
+
+    # update dctc
+    dctc[ctc] = CTC
+    # Print info of this CTC
+    print_ctc_info(CTC)
+    # Delete cache
+    del cache
+    # Return data
+    return dtrack,dctc
+#===============================================================#
+
+
+#===============================================================#
+from   common.fncs       import fill_string
+
 def ls_struc(dctc):
     '''
     extra option to show what's in .ctc file
@@ -411,7 +627,7 @@ def ls_struc(dctc):
     ctc_isoX_min = sorted([ctc for ctc in dctc.keys() if dctc[ctc]._type == 0 and dctc[ctc]._diso!={}])
     ctc_isoX_ts  = sorted([ctc for ctc in dctc.keys() if dctc[ctc]._type == 1 and dctc[ctc]._diso!={}])
     ctc_xx  = sorted([ctc for ctc in dctc.keys() if dctc[ctc]._type not in [0,1]])
-    
+
     numSP0, numSP0all = 0, 0
     numSP1, numSP1all = 0, 0
     numSPX, numSPXall = 0, 0
@@ -454,205 +670,64 @@ def ls_struc(dctc):
 
 
 
+
+
+
 #===============================================================#
-def main(idata,status):
+def main(_,__):
 
-    global wrong1
-    global wrong2
-    global wrong3
-    global wrong4
-    global wrong5
-    wrong1      = False
-    wrong2      = False
-    wrong3      = False
-    wrong4      = False
-    wrong5      = False
-
-    #-------------------#
-    # Deal with folders #
-    #-------------------#
-    print("  - Folders of interest:")
-    print("")
-    print("       * %-9s ==> folder of user's input data"%PN.UFOLDER)
-    print("       * %-9s ==> folder with gts files"%PN.DIR1)
-    print("       * %-9s ==> folder with molden files"%PN.DIR5)
-    print("")
-    print("  - Existence of folders of interest:")
-    print("")
-    if os.path.exists(PN.UFOLDER): print("       * %-9s exists"%PN.UFOLDER)
-    else                         : print("       * %-9s does not exist"%PN.UFOLDER)
-    if os.path.exists(PN.DIR1   ): print("       * %-9s exists"%PN.DIR1)
-    else                         : print("       * %-9s does not exist"%PN.DIR1)
-    if os.path.exists(PN.DIR5   ): print("       * %-9s exists"%PN.DIR5)
-    else                         : print("       * %-9s does not exist"%PN.DIR5)
-    print("")
-
-    # Data in folders
-    if os.path.exists(PN.UFOLDER):
-       files   = [ff     for ff in os.listdir(PN.UFOLDER) if not os.path.isdir(PN.UFOLDER+ff)]
-       folders = [ff+"/" for ff in os.listdir(PN.UFOLDER) if     os.path.isdir(PN.UFOLDER+ff)]
-       files   = known_files(files) # only those with known extensions
-    else:
-       files   = []
-       folders = []
-
-    if os.path.exists(PN.DIR1):
-       gtsfiles = [gts for gts in os.listdir(PN.DIR1) if gts.endswith(".gts")]
-    else:
-       gtsfiles = []
-
-
-    #--------------------------------#
-    # Basic cases to abort execution #
-    #--------------------------------#
-
-    # NO UFOLDER, NO DIR1
-    if not os.path.exists(PN.UFOLDER) and not os.path.exists(PN.DIR1):
-       print("  - Neither %s nor %s exist!"%(PN.UFOLDER,PN.DIR1))
-       raise Exc.ABORTED
-    # NO UFOLDER, EMPTY DIR1
-    if not os.path.exists(PN.UFOLDER) and len(gtsfiles) == 0:
-       print("  - %s does not exist and %s contains no data!"%(PN.UFOLDER,PN.DIR1))
+    # Assert folder with electronic-structure files exists!
+    if not os.path.exists(PN.UFOLDER):
+       print("   - %s: folder NOT found!"%PN.UFOLDER)
        print("")
-       raise Exc.ABORTED
-    # EMPTY UFOLDER, NO DIR1
-    if len(files+folders) == 0 and not os.path.exists(PN.DIR1):
-       print("  - %s contains no data and %s does not exist!"%(PN.UFOLDER,PN.DIR1))
-       print("")
-       raise Exc.ABORTED
-    # EMPTY UFOLDER, EMPTY DIR1
-    if len(files+folders) == 0 and len(gtsfiles) == 0:
-      print("  - %s contains no data and %s contains no data either!"%(PN.UFOLDER,PN.DIR1))
-      print("")
-      raise Exc.ABORTED
+       return
 
+    # list user files
+    ufiles,ufolders,all_ufiles = get_ufiles_ufolders()
 
-    #----------------#
-    # Create folders #
-    #----------------#
-    if not os.path.exists(PN.DIR1   ): os.mkdir(PN.DIR1   )
-    if not os.path.exists(PN.DIR5   ): os.mkdir(PN.DIR5   )
+    # Read tracking & pif.struc
+    dtrack          = RW.read_track()[0]
+    (dctc,dimasses) = RW.read_ctc()[0]
 
-
-    #--------------------#
-    # DEAL WITH tracking #
-    #--------------------#
-    dtrack = deal_with_tracking()
-    # All removed except UDATA and tracking --> gtsfiles need to be listed again
-    if os.path.exists(PN.DIR1):
-       gtsfiles = [gts for gts in os.listdir(PN.DIR1) if gts.endswith(".gts")]
-
-    #---------------------------------#
-    # DEAL WITH pif.struc or 1-GTS/   #
-    #---------------------------------#
-    if os.path.exists(PN.IFILE1):
-       dctc, dimasses = deal_with_pif()
-    elif len(gtsfiles) != 0:
-       dctc     = dctc_from_DIR1(gtsfiles)
-       dimasses = {}
-    else:
-       dctc, dimasses = {},  {}
-    # isotopic masses
+    # dictionary with isotopic masses
     if dimasses == {}: dimasses = dpt_im
 
-    #-----------------------#
-    # User data is analyzed #
-    #-----------------------#
-    if files+folders != []:
-       print("  - Going through user's input data (%s) to create gts files"%PN.UFOLDER)
-       print("")
-       print("      number of folders = %i "%(len(folders)))
-       print("      number of files   = %i (outside folders)"%(len(files)))
-       print("")
+    # deal with removed files (if any) - this may happen when executed more than once
+    dtrack,dctc = deal_removed_ufiles(all_ufiles,dtrack,dctc)
 
-       print("      %s"%(PN.UFOLDER))
-       inconsistences = []
-       for ff in sorted(folders)+sorted(files):
-           dtrack,dctc,inconsistence = convert_udata_to_gts(ff,dtrack,dctc)
-           if inconsistence is not None: inconsistences.append(inconsistence)
-       print("")
-    else:
-       print("  - No data inside '%s'"%PN.UFOLDER)
-       print("")
-       inconsistences = []
+    # remove non-listed gts files
+    deal_nonlisted_gts(dtrack)
 
+    # clean-up dctc
+    dctc = cleanup_dctc(dctc)
 
-    #-------------------------------#
-    # Conformational inconsistences #
-    #-------------------------------#
-    if len(inconsistences) != 0:
-       print("  - There are some inconsistences!")
-       print("")
-       wrong4 = True
-       dtrack2 = {v:k for k,v in dtrack.items()}
-       for string,gtsfiles in inconsistences:
-           print_string(string,7)
-           for gts in gtsfiles:
-               gts_name = gtsname(gts,"name")
-               gts_full = gtsname(gts,"full")
-               ifile    = dtrack2[gts_name]
-               print("          removing '%s' (from %s)..."%(gts_full,dtrack2[gts_name]))
-               dtrack.pop(ifile)
-               os.remove(gts_full)
-           print("")
-       print("")
+    # Folder creation
+    for folder in [PN.DIR1,PN.DIR5]:
+        if not os.path.exists(folder): os.mkdir(folder)
 
+    # Deal with CTCs defined through single files
+    for esfile in ufiles:
+        dtrack,dctc = deal_with_file(esfile,dtrack,dctc)
 
-    #------------------------#
-    # Final checking of dctc #
-    #------------------------#
-    print("  - Checking final data for %s"%PN.IFILE1)
+    # Deal with CTCs defined through folders
+    for folder in ufolders:
+        dtrack,dctc = deal_with_folder(folder,dtrack,dctc)
+
+    # print summary
+    print("  - SUMMARY")
     ls_struc(dctc)
-    for ctc,CTC in sorted(dctc.items()):
-        gtsfiles = CTC.gtsfiles()
-        CTC, status, string, gtsfiles = gen_and_check_ctc(ctc,dtrack,gtsfiles)
-        if status == -1:
-           wrong4 = True
-           print_string(string,7)
-           print("          Inconsistence found!")
-           answer = input("          Remove gts files (y/N)? ")
-           if answer.strip().lower() == "y":
-               for gts in gtsfiles:
-                   print("             removing %s"%gts)
-                   os.remove(gts)
-           print("")
-        if status == 0:
-           print("       ERROR: Unable to find the following gts file(s):")
-           print("")
-           wrong3 = True
-           for gts in gtsfiles:
-               if os.path.exists(gts): continue
-               print("         * %s (%s)"%(gts,ctc))
-           print("")
 
-
-    #----------------------------------#
-    # (Re)Write tracking and pif files #
-    #----------------------------------#
+    # (re)write file: tracking
     if dtrack != {}:
        print("  - Writing/Updating information in '%s'"%PN.IFILE0)
        RW.write_track(dtrack)
+
+    # (re)write file: pif.struc
     if dctc != {}:
        print("  - Writing/Updating information in '%s'"%PN.IFILE1)
        RW.write_ctc(dctc,dimasses)
 
-
-    #----------------#
-    # Print warnings #
-    #----------------#
-    if wrong1 or wrong2 or wrong3 or wrong4 or wrong5:
-       print("")
-       print("  - WARNING!! It seems that something did not go well")
-       if wrong1: print("       * invalid name for some file/folder(s)!")
-       if wrong2: print("       * reading process failed for a/some file(s) in %s!"%PN.UFOLDER)
-       if wrong3: print("       * gts file(s) not found!")
-       if wrong4: print("       * inconsistences in conformational cluster(s)!")
-       if wrong5: print("       * some folder(s) in %s is(are) empty!"%PN.UFOLDER)
-    else:
-       print("")
-       print("  - Everything seems to be OK")
+    print_warnings()
 #===============================================================#
-
-
 
 
